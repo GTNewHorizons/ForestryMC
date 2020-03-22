@@ -12,6 +12,7 @@ package forestry.core.utils;
 
 import cofh.api.energy.IEnergyConnection;
 import cofh.api.energy.IEnergyReceiver;
+import cpw.mods.fml.common.Loader;
 import forestry.core.config.Constants;
 import forestry.core.tiles.TileEngine;
 import forestry.core.utils.vect.Vect;
@@ -232,15 +233,16 @@ public abstract class BlockUtil {
 	private static Class<? extends Block> BW_MetaGenerated_WerkstoffBlocksClass;
 	private static Method getDamage;
 	private static Block BWBlocks;
-
+	private static boolean bw = Loader.isModLoaded("bartworks");
 	static {
-		try {
-			BW_MetaGenerated_WerkstoffBlocksClass = (Class<? extends Block>) Class.forName("com.github.bartimaeusnek.bartworks.system.material.BW_MetaGenerated_WerkstoffBlocks");
-			getDamage = BW_MetaGenerated_WerkstoffBlocksClass.getMethod("getDamageValue", World.class, int.class, int.class, int.class);
-			BWBlocks = (Block) Class.forName("com.github.bartimaeusnek.bartworks.system.material.WerkstoffLoader").getField("BWBlocks").get(null);
-		} catch (ClassNotFoundException | NoSuchFieldException | IllegalAccessException | NoSuchMethodException e) {
-			e.printStackTrace();
-		}
+		if (bw)
+			try {
+				BW_MetaGenerated_WerkstoffBlocksClass = (Class<? extends Block>) Class.forName("com.github.bartimaeusnek.bartworks.system.material.BW_MetaGenerated_WerkstoffBlocks");
+				getDamage = BW_MetaGenerated_WerkstoffBlocksClass.getMethod("getDamageValue", World.class, int.class, int.class, int.class);
+				BWBlocks = (Block) Class.forName("com.github.bartimaeusnek.bartworks.system.material.WerkstoffLoader").getField("BWBlocks").get(null);
+			} catch (ClassNotFoundException | NoSuchFieldException | IllegalAccessException | NoSuchMethodException e) {
+				e.printStackTrace();
+			}
 	}
 
 	public static ItemStack getItemStackFromBlockBelow(World world, int x, int y, int z, Predicate<TileEntity> stillInside) {
@@ -254,7 +256,7 @@ public abstract class BlockUtil {
 		} while (stillInside.test(tile));
 		block = world.getBlock(x, y - depth, z);
 
-		if (BW_MetaGenerated_WerkstoffBlocksClass.isInstance(block)) {
+		if (bw && BW_MetaGenerated_WerkstoffBlocksClass.isInstance(block)) {
 			try {
 				return new ItemStack(BWBlocks, 1, (Integer) getDamage.invoke(block, x, y - depth, z));
 			} catch (IllegalAccessException | InvocationTargetException e) {
