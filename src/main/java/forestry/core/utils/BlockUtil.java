@@ -258,7 +258,7 @@ public abstract class BlockUtil {
 
 		if (bw && BW_MetaGenerated_WerkstoffBlocksClass.isInstance(block)) {
 			try {
-				return new ItemStack(BWBlocks, 1, (Integer) getDamage.invoke(block, x, y - depth, z));
+				return new ItemStack(BWBlocks, 1, (Integer) getDamage.invoke(block, world, x, y - depth, z));
 			} catch (IllegalAccessException | InvocationTargetException e) {
 				e.printStackTrace();
 				return null;
