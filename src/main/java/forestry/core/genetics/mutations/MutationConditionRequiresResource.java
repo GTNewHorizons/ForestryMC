@@ -10,18 +10,18 @@
  ******************************************************************************/
 package forestry.core.genetics.mutations;
 
-import net.minecraft.block.Block;
-import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.World;
-
 import forestry.api.apiculture.IBeeHousing;
 import forestry.api.genetics.IAllele;
 import forestry.api.genetics.IGenome;
 import forestry.api.genetics.IMutationCondition;
 import forestry.core.utils.BlockUtil;
-//import forestry.core.utils.ItemStackUtil;
 import forestry.core.utils.StringUtil;
+import net.minecraft.block.Block;
+import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
+
+//import forestry.core.utils.ItemStackUtil;
 
 public class MutationConditionRequiresResource implements IMutationCondition {
 
@@ -48,10 +48,10 @@ public class MutationConditionRequiresResource implements IMutationCondition {
 		return ItemStackUtil.equals(block, meta, blockRequired) ? 1 : 0;
 */
 		ItemStack stk = BlockUtil.getItemStackFromBlockBelow(world, x, y, z,
-			(TileEntity tile) -> (tile instanceof IBeeHousing)
+				(TileEntity tile) -> (tile instanceof IBeeHousing)
 		);
 
-		return stk.equals(blockRequired) ? 1 : 0;
+		return blockRequired.equals(stk) ? 1f : 0f;
 	}
 
 	@Override

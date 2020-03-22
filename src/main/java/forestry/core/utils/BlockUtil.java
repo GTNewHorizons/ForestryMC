@@ -10,13 +10,11 @@
  ******************************************************************************/
 package forestry.core.utils;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.function.Function;
-
+import cofh.api.energy.IEnergyConnection;
+import cofh.api.energy.IEnergyReceiver;
+import forestry.core.config.Constants;
+import forestry.core.tiles.TileEngine;
+import forestry.core.utils.vect.Vect;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockCocoa;
 import net.minecraft.block.BlockLog;
@@ -27,17 +25,13 @@ import net.minecraft.util.Direction;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
-
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.oredict.OreDictionary;
 
-import forestry.core.config.Constants;
-import forestry.core.tiles.TileEngine;
-import forestry.core.utils.Log;
-import forestry.core.utils.vect.Vect;
-
-import cofh.api.energy.IEnergyConnection;
-import cofh.api.energy.IEnergyReceiver;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.function.Predicate;
 
 public abstract class BlockUtil {
 
@@ -235,69 +229,40 @@ public abstract class BlockUtil {
 		return vec != null && (vec.xCoord >= minX && vec.xCoord <= maxX && vec.yCoord >= minY && vec.yCoord <= maxY);
 	}
 
-	private enum BlockPickerStyle {
-		VANILLA,
-		BARTWORKS
-	}
-	private final static Map<Class,BlockPickerStyle> pickerForClass = new HashMap<Class,BlockPickerStyle>();
+	private static Class<? extends Block> BW_MetaGenerated_WerkstoffBlocksClass;
+	private static Method getDamage;
+	private static Block BWBlocks;
 
-	private static Class cl_BW_MetaGenerated_Blocks;
-	private static Method mthd_BW_GetProperBlock;
-	private static Field fld_BW_mMetaData;
-
-	private static boolean searchedForeignClasses = false;
-	private static void grabForeignClasses() {
-		if (searchedForeignClasses) {
-			return;
-		}
+	static {
 		try {
-			cl_BW_MetaGenerated_Blocks = Class.forName("com.github.bartimaeusnek.bartworks.system.material.BW_MetaGenerated_Blocks");
-			Class cl_BW_MetaGenerated_Block_TE = Class.forName("com.github.bartimaeusnek.bartworks.system.material.BW_MetaGenerated_Block_TE");
-			for (Method mt : cl_BW_MetaGenerated_Block_TE.getDeclaredMethods()) {
-				if ((mt.getName().equals("GetProperBlock")) && (mt.getParameterCount() == 0)) {
-					mthd_BW_GetProperBlock = mt;
-					Log.info("Found GetProperBlock method");
-					break;
-				}
-			}
-			mthd_BW_GetProperBlock.setAccessible(true);
-			fld_BW_mMetaData = cl_BW_MetaGenerated_Block_TE.getField("mMetaData");
-		} catch (Exception e) {
-			Log.severe("Incompatible BartWorks stuff : {0}", e, e);
-			cl_BW_MetaGenerated_Blocks = null;
+			BW_MetaGenerated_WerkstoffBlocksClass = (Class<? extends Block>) Class.forName("com.github.bartimaeusnek.bartworks.system.material.BW_MetaGenerated_WerkstoffBlocks");
+			getDamage = BW_MetaGenerated_WerkstoffBlocksClass.getMethod("getDamageValue", World.class, int.class, int.class, int.class);
+			BWBlocks = (Block) Class.forName("com.github.bartimaeusnek.bartworks.system.material.WerkstoffLoader").getField("BWBlocks").get(null);
+		} catch (ClassNotFoundException | NoSuchFieldException | IllegalAccessException | NoSuchMethodException e) {
+			e.printStackTrace();
 		}
-		searchedForeignClasses = true;
 	}
 
-	public static ItemStack getItemStackFromBlockBelow(World world, int x, int y, int z, Function<TileEntity,Boolean> stillInside) {
+	public static ItemStack getItemStackFromBlockBelow(World world, int x, int y, int z, Predicate<TileEntity> stillInside) {
 		TileEntity tile;
 		Block block;
 		int depth = 0;
 
-		grabForeignClasses();
-
 		do {
 			++depth;
 			tile = world.getTileEntity(x, y - depth, z);
-		} while (stillInside.apply(tile));
+		} while (stillInside.test(tile));
 		block = world.getBlock(x, y - depth, z);
 
-		BlockPickerStyle style = pickerForClass.get(block.getClass());
-		if (style == null) {
-			style = BlockPickerStyle.VANILLA;
-			if ((cl_BW_MetaGenerated_Blocks != null) && (cl_BW_MetaGenerated_Blocks.isInstance(block))) {
-				style = BlockPickerStyle.BARTWORKS;
+		if (BW_MetaGenerated_WerkstoffBlocksClass.isInstance(block)) {
+			try {
+				return new ItemStack(BWBlocks, 1, (Integer) getDamage.invoke(block, x, y - depth, z));
+			} catch (IllegalAccessException | InvocationTargetException e) {
+				e.printStackTrace();
+				return null;
 			}
-			pickerForClass.put(block.getClass(), style);
 		}
-		switch (style) {
-			case BARTWORKS:
-				try {
-					return new ItemStack((Block) mthd_BW_GetProperBlock.invoke(tile), 1, fld_BW_mMetaData.getShort(tile));
-				} catch (Exception e) {
-					Log.severe("Exception while picking block of BartWorks' type {0}", e, e);
-				}
-		}
+
 		return new ItemStack(block, 1, world.getBlockMetadata(x, y - depth, z));
 	}
 }
