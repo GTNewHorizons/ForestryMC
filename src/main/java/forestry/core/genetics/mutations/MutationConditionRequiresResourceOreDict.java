@@ -23,6 +23,7 @@ import forestry.api.apiculture.IBeeHousing;
 import forestry.api.genetics.IAllele;
 import forestry.api.genetics.IGenome;
 import forestry.api.genetics.IMutationCondition;
+import forestry.core.utils.BlockUtil;
 import forestry.core.utils.StringUtil;
 
 public class MutationConditionRequiresResourceOreDict implements IMutationCondition {
@@ -43,6 +44,7 @@ public class MutationConditionRequiresResourceOreDict implements IMutationCondit
 
 	@Override
 	public float getChance(World world, int x, int y, int z, IAllele allele0, IAllele allele1, IGenome genome0, IGenome genome1) {
+/*
 		Block block;
 		int meta;
 		TileEntity tile;
@@ -53,8 +55,11 @@ public class MutationConditionRequiresResourceOreDict implements IMutationCondit
 			tile = world.getTileEntity(x, y-i, z);
 			i++;
 		} while (tile instanceof IBeeHousing);
-
-		int[] oreIds = OreDictionary.getOreIDs(new ItemStack(block, 1, meta));
+*/
+		ItemStack stk = BlockUtil.getItemStackFromBlockBelow(world, x, y, z,
+			(TileEntity tile) -> (tile instanceof IBeeHousing)
+		);
+		int[] oreIds = OreDictionary.getOreIDs(stk);
 		for (int oreId : oreIds) {
 			if (oreId == this.oreDictId) {
 				return 1;
@@ -67,4 +72,5 @@ public class MutationConditionRequiresResourceOreDict implements IMutationCondit
 	public String getDescription() {
 		return StringUtil.localizeAndFormat("mutation.condition.resource", displayName);
 	}
+
 }
