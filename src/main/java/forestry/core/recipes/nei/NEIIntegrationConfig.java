@@ -10,6 +10,9 @@
  ******************************************************************************/
 package forestry.core.recipes.nei;
 
+import forestry.factory.blocks.BlockFactoryPlainType;
+import forestry.factory.blocks.BlockFactoryTesrType;
+import forestry.plugins.PluginFactory;
 import net.minecraftforge.oredict.OreDictionary;
 
 import forestry.api.apiculture.BeeManager;
@@ -49,6 +52,15 @@ public class NEIIntegrationConfig implements IConfigureNEI {
 
 		CustomOverlayHandler handler = new CustomOverlayHandler(-14, 14, true);
 		API.registerGuiOverlayHandler(GuiWorktable.class, handler, "crafting");
+
+		API.addRecipeCatalyst(PluginFactory.blocks.factoryTESR.get(BlockFactoryTesrType.BOTTLER), new NEIHandlerBottler());
+		API.addRecipeCatalyst(PluginFactory.blocks.factoryTESR.get(BlockFactoryTesrType.CARPENTER), new NEIHandlerCarpenter());
+		API.addRecipeCatalyst(PluginFactory.blocks.factoryTESR.get(BlockFactoryTesrType.CENTRIFUGE), new NEIHandlerCentrifuge());
+		API.addRecipeCatalyst(PluginFactory.blocks.factoryPlain.get(BlockFactoryPlainType.FABRICATOR), new NEIHandlerFabricator());
+		API.addRecipeCatalyst(PluginFactory.blocks.factoryTESR.get(BlockFactoryTesrType.FERMENTER), new NEIHandlerFermenter());
+		API.addRecipeCatalyst(PluginFactory.blocks.factoryTESR.get(BlockFactoryTesrType.MOISTENER), new NEIHandlerMoistener());
+		API.addRecipeCatalyst(PluginFactory.blocks.factoryTESR.get(BlockFactoryTesrType.SQUEEZER), new NEIHandlerSqueezer());
+		API.addRecipeCatalyst(PluginFactory.blocks.factoryTESR.get(BlockFactoryTesrType.STILL), new NEIHandlerStill());
 
 		API.addSubset("Forestry.Bees.Princesses", new ItemFilterGenetic(BeeManager.beeRoot, EnumBeeType.PRINCESS.ordinal(), true));
 		API.addSubset("Forestry.Bees.Drones", new ItemFilterGenetic(BeeManager.beeRoot, EnumBeeType.DRONE.ordinal(), true));
