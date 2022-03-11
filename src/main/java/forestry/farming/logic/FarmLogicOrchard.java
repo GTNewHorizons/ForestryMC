@@ -44,9 +44,12 @@ public class FarmLogicOrchard extends FarmLogic {
 	protected final HashMap<Vect, Integer> lastExtents = new HashMap<>();
 	protected final ImmutableList<Block> traversalBlocks;
 
+	protected boolean precalcBlockType;
+	protected boolean precalcBlockMeta;
+
 	public FarmLogicOrchard(IFarmHousing housing) {
 		super(housing);
-		this.farmables = Farmables.farmables.get(FarmableReference.Orchard.get());
+		this.setFarmables(Farmables.farmables.get(FarmableReference.Orchard.get()));
 
 		ImmutableList.Builder<Block> traversalBlocksBuilder = ImmutableList.builder();
 		if (PluginManager.Module.AGRICRAFT.isEnabled() || PluginManager.Module.INDUSTRIALCRAFT.isEnabled()) {
@@ -213,17 +216,12 @@ public class FarmLogicOrchard extends FarmLogic {
 			return true;
 		}
 
-		Block block = null;
-		int meta = -1;
+		Block block = precalcBlockType ? world.getBlock(position.x, position.y, position.z) : null;
+		int meta = precalcBlockMeta ? world.getBlockMetadata(position.x, position.y, position.z) : -1;
 
 		for (IFarmable farmable : farmables) {
 			if (farmable instanceof IFarmableBasic) {
-				if (block == null)
-					block = world.getBlock(position.x, position.y, position.z);
-				IFarmableBasic farmableBasic = (IFarmableBasic) farmable;
-				if (farmableBasic.isMetadataAware() && meta == -1)
-					meta = world.getBlockMetadata(position.x, position.y, position.z);
-				if (farmableBasic.isSapling(block, meta))
+				if (((IFarmableBasic) farmable).isSapling(block, meta))
 					return true;
 			} else if (farmable.isSaplingAt(world, position.x, position.y, position.z)) {
 				return true;
@@ -264,4 +262,16 @@ public class FarmLogicOrchard extends FarmLogic {
 		return null;
 	}
 
+	protected void setFarmables(Collection<IFarmable> farmables) {
+		this.farmables = farmables;
+		for (IFarmable farmable : farmables) {
+			if (farmable instanceof IFarmableBasic) {
+				precalcBlockType = true;
+				if (((IFarmableBasic) farmable).isMetadataAware()) {
+					precalcBlockMeta = true;
+					return;
+				}
+			}
+		}
+	}
 }
