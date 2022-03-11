@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.Stack;
 
+import forestry.api.farming.*;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
@@ -31,11 +32,6 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-import forestry.api.farming.FarmDirection;
-import forestry.api.farming.Farmables;
-import forestry.api.farming.ICrop;
-import forestry.api.farming.IFarmHousing;
-import forestry.api.farming.IFarmable;
 import forestry.api.genetics.IFruitBearer;
 import forestry.core.utils.vect.Vect;
 import forestry.core.utils.vect.VectUtil;
@@ -217,8 +213,19 @@ public class FarmLogicOrchard extends FarmLogic {
 			return true;
 		}
 
+		Block block = null;
+		int meta = -1;
+
 		for (IFarmable farmable : farmables) {
-			if (farmable.isSaplingAt(world, position.x, position.y, position.z)) {
+			if (farmable instanceof IFarmableBasic) {
+				if (block == null)
+					block = world.getBlock(position.x, position.y, position.z);
+				IFarmableBasic farmableBasic = (IFarmableBasic) farmable;
+				if (farmableBasic.isMetadataAware() && meta == -1)
+					meta = world.getBlockMetadata(position.x, position.y, position.z);
+				if (farmableBasic.isSapling(block, meta))
+					return true;
+			} else if (farmable.isSaplingAt(world, position.x, position.y, position.z)) {
 				return true;
 			}
 		}
