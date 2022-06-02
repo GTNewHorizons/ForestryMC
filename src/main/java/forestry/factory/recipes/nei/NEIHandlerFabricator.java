@@ -153,6 +153,11 @@ public class NEIHandlerFabricator extends RecipeHandlerBase {
 	}
 
 	@Override
+	public String getOverlayIdentifier() {
+		return "fabricator";
+	}
+
+	@Override
 	public void loadTransferRects() {
 		this.addTransferRect(117, 44, 14, 13);
 	}

@@ -98,6 +98,11 @@ public class NEIHandlerBottler extends RecipeHandlerBase {
 	}
 
 	@Override
+	public String getOverlayIdentifier() {
+		return "bottler";
+	}
+
+	@Override
 	public void loadTransferRects() {
 		this.addTransferRect(75, 27, 24, 17);
 	}
