@@ -134,11 +134,6 @@ public class NEIHandlerCarpenter extends RecipeHandlerBase {
 	}
 
 	@Override
-	public String getOverlayIdentifier() {
-		return "carpenter";
-	}
-
-	@Override
 	public void loadTransferRects() {
 		this.addTransferRect(93, 36, 4, 18);
 	}

@@ -115,11 +115,6 @@ public class NEIHandlerCentrifuge extends RecipeHandlerBase {
 	}
 
 	@Override
-	public String getOverlayIdentifier() {
-		return "centrifuge";
-	}
-
-	@Override
 	public void loadTransferRects() {
 		this.addTransferRect(57 - 12, 26 - 8, 16, 24 + 6 + 6);
 	}

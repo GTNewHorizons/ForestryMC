@@ -171,11 +171,6 @@ public class NEIHandlerSqueezer extends RecipeHandlerBase {
 	}
 
 	@Override
-	public String getOverlayIdentifier() {
-		return "squeezer";
-	}
-
-	@Override
 	public void loadTransferRects() {
 		this.addTransferRect(98 - 16 - 6 - 4, 9 + 8 + 8 + 4, 15 + 16 + 6 + 4, 18);
 	}

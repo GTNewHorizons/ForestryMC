@@ -97,11 +97,6 @@ public class NEIHandlerMoistener extends RecipeHandlerBase {
 	}
 
 	@Override
-	public String getOverlayIdentifier() {
-		return "moistener";
-	}
-
-	@Override
 	public void loadTransferRects() {
 		this.addTransferRect(138, 27, 16, 14);
 	}

@@ -120,11 +120,6 @@ public class NEIHandlerFermenter extends RecipeHandlerBase {
 	}
 
 	@Override
-	public String getOverlayIdentifier() {
-		return "fermenter";
-	}
-
-	@Override
 	public void loadTransferRects() {
 		this.addTransferRect(76, 27, 14, 12);
 	}

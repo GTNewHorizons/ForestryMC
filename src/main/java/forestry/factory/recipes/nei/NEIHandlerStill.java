@@ -73,11 +73,6 @@ public class NEIHandlerStill extends RecipeHandlerBase {
 	}
 
 	@Override
-	public String getOverlayIdentifier() {
-		return "still";
-	}
-
-	@Override
 	public void loadTransferRects() {
 		this.addTransferRect(76, 27, 14, 12);
 	}
