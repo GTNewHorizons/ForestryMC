@@ -25,6 +25,7 @@ import forestry.core.utils.InventoryUtil;
 import forestry.factory.gui.widgets.ClearWorktable;
 import forestry.factory.gui.widgets.MemorizedRecipeSlot;
 import forestry.factory.inventory.InventoryGhostCrafting;
+import forestry.factory.recipes.MemorizedRecipe;
 import forestry.factory.recipes.RecipeMemory;
 import forestry.factory.tiles.TileWorktable;
 
@@ -69,24 +70,29 @@ public class GuiWorktable extends GuiForestryTitled<ContainerWorktable, TileWork
 	}
 
 	@Override
-	public void drawScreen(int p_73863_1_, int p_73863_2_, float p_73863_3_)
+	public void drawScreen(int mouseX, int mouseY, float parTicks)
 	{
-		super.drawScreen(p_73863_1_, p_73863_2_, p_73863_3_);
+		super.drawScreen(mouseX, mouseY, parTicks);
 
-		Slot par1Slot = (Slot) inventorySlots.inventorySlots.get(54 + InventoryGhostCrafting.SLOT_CRAFTING_RESULT);
+		final Slot itemSlot = (Slot) inventorySlots.inventorySlots.get(54 + InventoryGhostCrafting.SLOT_CRAFTING_RESULT);
 
 		if (
-			func_146978_c(par1Slot.xDisplayPosition, par1Slot.yDisplayPosition, 16, 16,  p_73863_1_, p_73863_2_) && 
+			func_146978_c(itemSlot.xDisplayPosition, itemSlot.yDisplayPosition, 16, 16, mouseX, mouseY) && 
 			!inventory.canTakeStack(InventoryGhostCrafting.SLOT_CRAFTING_RESULT)
 		) {
-			final ItemStack[] recipeItems = InventoryUtil.getStacks(inventory.getCurrentRecipe().getCraftMatrix());
-			final ItemStack[] availableItems = InventoryUtil.getStacks(inventory);
-			final ItemStack[] ingregients = RecipeUtil.getCraftIngredients(recipeItems, availableItems);
+			final MemorizedRecipe recipe = inventory.getCurrentRecipe();
 
-			for (int slot = 0; slot < ingregients.length; slot++) {
-
-				if (ingregients[slot] == null && recipeItems[slot] != null) {
-					renderSlotOverlay((Slot) inventorySlots.inventorySlots.get(54 + slot));
+			if (recipe != null) {
+				final ItemStack[] recipeItems = InventoryUtil.getStacks(recipe.getCraftMatrix());
+				final ItemStack[] availableItems = InventoryUtil.getStacks(inventory);
+				final ItemStack[] ingregients = RecipeUtil.getCraftIngredients(recipeItems, availableItems);
+	
+				for (int slot = 0; slot < ingregients.length; slot++) {
+	
+					if (ingregients[slot] == null && recipeItems[slot] != null) {
+						renderSlotOverlay((Slot) inventorySlots.inventorySlots.get(54 + slot));
+					}
+	
 				}
 
 			}
