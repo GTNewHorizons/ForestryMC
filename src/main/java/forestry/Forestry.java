@@ -85,7 +85,7 @@ public class Forestry {
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
-        checkForCoFHLib();
+		checkForCoFHLib();
 		packetHandler = new PacketHandler();
 
 		// Register event handler
@@ -161,8 +161,8 @@ public class Forestry {
 	}
 	
 	private static void checkForCoFHLib() {
-	    if (!ModAPIManager.INSTANCE.hasAPI("CoFHAPI|energy")) {
-	        throw new RuntimeException("CoFHAPI|energy could not be found! This version of Forestry does not contain the RedstoneFlux API anymore, so you have to install either CoFHLib or CoFHCore.");
-	    }
+		if (!ModAPIManager.INSTANCE.hasAPI("CoFHAPI|energy")) {
+			throw new RuntimeException("CoFHAPI|energy could not be found! This version of Forestry does not contain the RedstoneFlux API anymore, so you have to install either CoFHLib or CoFHCore.");
+		}
 	}
 }
