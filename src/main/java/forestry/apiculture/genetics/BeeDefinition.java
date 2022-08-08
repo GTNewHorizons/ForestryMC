@@ -634,7 +634,7 @@ public enum BeeDefinition implements IBeeDefinition {
 		
 		@Override
 		protected void registerMutations() {
-			registerMutation(MONASTIC, DEMONIC, 4).setIsSecret();
+			registerMutation(MONASTIC, DEMONIC, 4);
 		}
 	},
 	VENGEFUL(BeeBranchDefinition.VENGEFUL, "punire", false, new Color(0xc2de00), new Color(0xffdc16)) {
@@ -652,8 +652,8 @@ public enum BeeDefinition implements IBeeDefinition {
 		
 		@Override
 		protected void registerMutations() {
-			registerMutation(DEMONIC, VINDICTIVE, 8).setIsSecret();
-			registerMutation(MONASTIC, VINDICTIVE, 8).setIsSecret();
+			registerMutation(DEMONIC, VINDICTIVE, 8);
+			registerMutation(MONASTIC, VINDICTIVE, 8);
 		}
 	},
 	AVENGING(BeeBranchDefinition.VENGEFUL, "hostimentum", false, new Color(0xddff00), new Color(0xffdc16)) {
@@ -695,8 +695,7 @@ public enum BeeDefinition implements IBeeDefinition {
 		@Override
 		protected void registerMutations() {
 			registerMutation(MEADOWS, FOREST, 10)
-					.restrictDateRange(3, 29, 4, 15)
-					.setIsSecret();
+					.restrictDateRange(3, 29, 4, 15);
 		}
 	},
 	// Christmas
@@ -719,8 +718,7 @@ public enum BeeDefinition implements IBeeDefinition {
 		@Override
 		protected void registerMutations() {
 			registerMutation(WINTRY, FOREST, 10)
-					.restrictDateRange(12, 21, 12, 27)
-					.setIsSecret();
+					.restrictDateRange(12, 21, 12, 27);
 		}
 	},
 	// New Year
@@ -743,8 +741,7 @@ public enum BeeDefinition implements IBeeDefinition {
 		@Override
 		protected void registerMutations() {
 			registerMutation(WINTRY, MEADOWS, 10)
-					.restrictDateRange(12, 27, 1, 2)
-					.setIsSecret();
+					.restrictDateRange(12, 27, 1, 2);
 		}
 	},
 	// (missing) Solstice
@@ -772,8 +769,7 @@ public enum BeeDefinition implements IBeeDefinition {
 		@Override
 		protected void registerMutations() {
 			registerMutation(SINISTER, COMMON, 10)
-					.restrictDateRange(10, 15, 11, 3)
-					.setIsSecret();
+					.restrictDateRange(10, 15, 11, 3);
 		}
 	},
 	// (missing) Thanksgiving
