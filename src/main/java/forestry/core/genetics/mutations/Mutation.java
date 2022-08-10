@@ -56,7 +56,7 @@ public abstract class Mutation implements IMutationCustom {
 
 	@Override
 	public Mutation setIsSecret() {
-		isSecret = true;
+		isSecret = false;
 		return this;
 	}
 
