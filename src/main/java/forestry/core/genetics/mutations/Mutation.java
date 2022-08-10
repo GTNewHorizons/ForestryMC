@@ -56,6 +56,8 @@ public abstract class Mutation implements IMutationCustom {
 
 	@Override
 	public Mutation setIsSecret() {
+		//used to be true, but now it is false in order to make all bee mutations visible in NEI.
+		//not removed, but rather set to false by default to not break things.
 		isSecret = false;
 		return this;
 	}
