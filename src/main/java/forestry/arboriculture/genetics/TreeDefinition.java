@@ -566,7 +566,7 @@ public enum TreeDefinition implements ITreeDefinition, ITreeGenerator {
 
         @Override
         protected void registerMutations() {
-            registerMutation(Sequioa, Baobab, 1).requireNight().restrictBiomeType(BiomeDictionary.Type.FOREST);
+            registerMutation(Sequioa, Baobab, 1);
         }
     },
     Jungle(
