@@ -16,6 +16,7 @@ import forestry.api.apiculture.IBeeHousing;
 import forestry.api.apiculture.IJubilanceProvider;
 import forestry.api.core.EnumHumidity;
 import forestry.api.core.EnumTemperature;
+import forestry.core.utils.StringUtil;
 
 public class JubilanceDefault implements IJubilanceProvider {
 
@@ -33,6 +34,6 @@ public class JubilanceDefault implements IJubilanceProvider {
 
     @Override
     public String getDescription() {
-        return "Needs preffered climate";
+        return StringUtil.localize("jubilance.climate");
     }
 }

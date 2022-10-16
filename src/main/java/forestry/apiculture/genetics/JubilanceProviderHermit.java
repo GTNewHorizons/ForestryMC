@@ -14,6 +14,7 @@ import forestry.api.apiculture.IAlleleBeeSpecies;
 import forestry.api.apiculture.IBeeGenome;
 import forestry.api.apiculture.IBeeHousing;
 import forestry.apiculture.genetics.alleles.AlleleEffect;
+import forestry.core.utils.StringUtil;
 import java.util.List;
 import net.minecraft.entity.EntityLiving;
 
@@ -29,6 +30,6 @@ public class JubilanceProviderHermit extends JubilanceDefault {
 
     @Override
     public String getDescription() {
-        return "Will not produce if there are any other living creatures nearby";
+        return StringUtil.localize("jubilance.hermit");
     }
 }

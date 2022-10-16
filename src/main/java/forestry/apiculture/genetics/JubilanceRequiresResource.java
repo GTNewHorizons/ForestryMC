@@ -16,6 +16,7 @@ import forestry.api.apiculture.IBeeHousing;
 import forestry.api.apiculture.IJubilanceProvider;
 import forestry.core.utils.BlockUtil;
 import forestry.core.utils.InventoryUtil;
+import forestry.core.utils.StringUtil;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -46,6 +47,6 @@ public class JubilanceRequiresResource implements IJubilanceProvider {
 
     @Override
     public String getDescription() {
-        return "Requires " + blockRequired.getDisplayName() + " as foundation";
+        return StringUtil.localizeAndFormat("jubilance.resource", blockRequired.getDisplayName());
     }
 }
