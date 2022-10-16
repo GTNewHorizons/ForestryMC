@@ -302,6 +302,7 @@ public class GuiBeealyzer extends GuiAlyzer {
         }
 
         textLayout.newLine();
+        textLayout.newLine();
         if (jubilance != null) textLayout.drawLine(StringUtil.localizeAndFormat("gui.jubilance", jubilance), COLUMN_0);
 
         textLayout.endPage();
