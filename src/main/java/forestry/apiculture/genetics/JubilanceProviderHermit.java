@@ -26,4 +26,9 @@ public class JubilanceProviderHermit extends JubilanceDefault {
         List<EntityLiving> list = AlleleEffect.getEntitiesInRange(genome, housing, EntityLiving.class);
         return list.size() <= 0;
     }
+
+    @Override
+    public String getDescription() {
+        return "Will not produce if there are any other living creatures nearby";
+    }
 }

@@ -30,4 +30,9 @@ public class JubilanceDefault implements IJubilanceProvider {
 
         return temperature == species.getTemperature() && humidity == species.getHumidity();
     }
+
+    @Override
+    public String getDescription() {
+        return "Needs preffered climate";
+    }
 }
