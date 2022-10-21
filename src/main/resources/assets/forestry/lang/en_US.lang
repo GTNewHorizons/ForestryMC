@@ -1716,6 +1716,14 @@ for.config.gamemode.squeezer.mulch.apple.comment=modifies the chance of mulch pe
 
 for.config.gamemode.energy.engine.clockwork.comment=Enable the clockwork engine.
 
+for.frame.tooltip.durability=Durability
+for.frame.tooltip.territory=Territory
+for.frame.tooltip.mutation_rate=Mutation-Rate
+for.frame.tooltip.lifespan=Lifespan
+for.frame.tooltip.production=Production
+for.frame.tooltip.flowering=Flowering
+for.frame.tooltip.genetic_decay=Genetic-Decay
+
 ###################################
 # CUSTOM BEE AND TREE SPECIES NAMES
 ###################################

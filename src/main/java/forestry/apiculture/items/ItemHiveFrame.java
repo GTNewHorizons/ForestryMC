@@ -18,7 +18,12 @@ import forestry.api.apiculture.IBeeModifier;
 import forestry.api.apiculture.IHiveFrame;
 import forestry.api.core.Tabs;
 import forestry.core.items.ItemForestry;
+import forestry.core.proxy.Proxies;
+import forestry.core.utils.StringUtil;
+import java.util.List;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumChatFormatting;
 
 public class ItemHiveFrame extends ItemForestry implements IHiveFrame {
 
@@ -62,6 +67,32 @@ public class ItemHiveFrame extends ItemForestry implements IHiveFrame {
         @Override
         public float getGeneticDecay(IBeeGenome genome, float currentModifier) {
             return this.geneticDecay;
+        }
+    }
+
+    @Override
+    public void addInformation(ItemStack itemstack, EntityPlayer player, List list, boolean flag) {
+        addFrameInfomation(list, getBeeModifier());
+    }
+
+    public void addFrameInfomation(List list, IBeeModifier iBeeModifier) {
+        if (Proxies.common.isShiftDown()) {
+            list.add(StringUtil.localize("frame.tooltip.durability") + ": " + EnumChatFormatting.RED
+                    + this.getMaxDamage());
+            list.add(StringUtil.localize("frame.tooltip.territory") + ": " + EnumChatFormatting.AQUA + "x"
+                    + iBeeModifier.getTerritoryModifier(null, 1f));
+            list.add(StringUtil.localize("frame.tooltip.mutation_rate") + ": " + EnumChatFormatting.GOLD + "x"
+                    + iBeeModifier.getMutationModifier(null, null, 1f));
+            list.add(StringUtil.localize("frame.tooltip.lifespan") + ": " + EnumChatFormatting.YELLOW + "x"
+                    + iBeeModifier.getLifespanModifier(null, null, 1f));
+            list.add(StringUtil.localize("frame.tooltip.production") + ": " + EnumChatFormatting.DARK_GREEN + "x"
+                    + iBeeModifier.getProductionModifier(null, 1f));
+            list.add(StringUtil.localize("frame.tooltip.flowering") + ": " + EnumChatFormatting.LIGHT_PURPLE + "x"
+                    + iBeeModifier.getFloweringModifier(null, 1f));
+            list.add(StringUtil.localize("frame.tooltip.genetic_decay") + ": " + EnumChatFormatting.BLUE + "x"
+                    + iBeeModifier.getGeneticDecay(null, 1f));
+        } else {
+            list.add(EnumChatFormatting.ITALIC + "<" + StringUtil.localize("gui.tooltip.tmi") + ">");
         }
     }
 }
