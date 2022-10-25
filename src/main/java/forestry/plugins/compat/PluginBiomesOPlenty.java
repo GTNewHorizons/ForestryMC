@@ -168,9 +168,8 @@ public class PluginBiomesOPlenty extends ForestryPlugin {
                     10, new ItemStack[] {persimmon}, Fluids.JUICE.getFluid(200), mulch, 20);
         }
 
-        Item boPTurnipSeeds = GameRegistry.findItem(BoP, "turnipSeeds");
-        ItemStack boPTurnipSeedStack = new ItemStack(boPTurnipSeeds, 1, 0);
-        if (boPTurnipSeeds != null) {
+        ItemStack boPTurnipSeedStack = GameRegistry.findItemStack(BoP, "turnipSeeds", 1);
+        if (boPTurnipSeedStack != null) {
             if (PluginManager.Module.FACTORY.isEnabled()) {
                 RecipeManagers.squeezerManager.addRecipe(
                         10, new ItemStack[] {boPTurnipSeedStack}, Fluids.SEEDOIL.getFluid(amount));
