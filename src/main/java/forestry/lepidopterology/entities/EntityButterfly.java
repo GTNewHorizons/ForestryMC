@@ -370,7 +370,7 @@ public class EntityButterfly extends EntityCreature implements IEntityButterfly 
 
     @Override
     protected boolean canDespawn() {
-        if (Config.DISABLE_BUTTERFLY) {
+        if (Config.disableButterfly) {
             this.setDead();
         }
         return ticksExisted > MAX_LIFESPAN;

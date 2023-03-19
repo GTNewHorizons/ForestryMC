@@ -92,7 +92,7 @@ public class ItemButterflyGE extends ItemGE {
     @Override
     public void addInformation(ItemStack itemstack, EntityPlayer player, List list, boolean flag) {
         super.addInformation(itemstack, player, list, flag);
-        if (Config.DISABLE_BUTTERFLY && type == EnumFlutterType.BUTTERFLY) list.add(ChatFormatting.RED + "Disabled");
+        if (Config.disableButterfly && type == EnumFlutterType.BUTTERFLY) list.add(ChatFormatting.RED + "Disabled");
     }
 
     @SuppressWarnings({ "rawtypes", "unchecked" })
@@ -115,7 +115,7 @@ public class ItemButterflyGE extends ItemGE {
 
     @Override
     public boolean onEntityItemUpdate(EntityItem entityItem) {
-        if (type != EnumFlutterType.BUTTERFLY || Config.DISABLE_BUTTERFLY) {
+        if (type != EnumFlutterType.BUTTERFLY || Config.disableButterfly) {
             return false;
         }
         if (entityItem.worldObj.isRemote || entityItem.ticksExisted < 80) {

@@ -31,7 +31,7 @@ import forestry.mail.gui.GuiMailboxInfo;
 
 public class Config {
 
-    public static Boolean DISABLE_BUTTERFLY;
+    public static Boolean disableButterfly;
     public static final String CATEGORY_COMMON = "common";
     public static final String CATEGORY_FLUIDS = "fluids";
 
@@ -147,7 +147,7 @@ public class Config {
 
         configCommon = new LocalizedConfiguration(configFileCommon, "1.2.0");
 
-        DISABLE_BUTTERFLY = configCommon.getBooleanLocalized("mobs", "disable.butterfly", false);
+        disableButterfly = configCommon.getBooleanLocalized("mobs", "disable.butterfly", false);
 
         gameMode = configCommon
                 .getStringLocalized("difficulty", "game.mode", "EASY", new String[] { "OP, EASY, NORMAL, HARD" });

@@ -23,7 +23,7 @@ public class ButterflySpawner implements ILeafTickHandler {
 
     @Override
     public boolean onRandomLeafTick(ITree tree, World world, int x, int y, int z, boolean isDestroyed) {
-        if (Config.DISABLE_BUTTERFLY) {
+        if (Config.disableButterfly) {
             return false;
         }
 
