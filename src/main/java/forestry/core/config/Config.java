@@ -31,7 +31,7 @@ import forestry.mail.gui.GuiMailboxInfo;
 
 public class Config {
 
-    public static Boolean disableButterfly;
+    public static boolean disableButterfly;
     public static final String CATEGORY_COMMON = "common";
     public static final String CATEGORY_FLUIDS = "fluids";
 
