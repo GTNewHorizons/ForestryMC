@@ -43,7 +43,7 @@ public class DefaultBeeModifier implements IBeeModifier {
         return false;
     }
 
-    public boolean isSelfDelighted() {
+    public boolean isSelfUnlighted() {
         return false;
     }
 

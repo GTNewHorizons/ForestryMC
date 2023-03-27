@@ -95,9 +95,9 @@ public class BeeHousingModifier implements IBeeModifier {
     }
 
     @Override
-    public boolean isSelfDelighted() {
+    public boolean isSelfUnlighted() {
         for (IBeeModifier modifier : beeHousing.getBeeModifiers()) {
-            if (modifier.isSelfDelighted()) {
+            if (modifier.isSelfUnlighted()) {
                 return true;
             }
         }

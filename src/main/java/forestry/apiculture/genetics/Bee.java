@@ -311,13 +311,13 @@ public class Bee extends IndividualLiving implements IBee {
     @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     private boolean canWorkAtNight(IBeeModifier beeModifier) {
         return (genome.getPrimary().isNocturnal() || genome.getNocturnal() || beeModifier.isSelfLighted())
-                && !(beeModifier.isSelfDelighted() && beeModifier.isSelfLighted());
+                && !(beeModifier.isSelfUnlighted() && beeModifier.isSelfLighted());
     }
 
     @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     private boolean canWorkDuringDay(IBeeModifier beeModifier) {
-        return (!genome.getPrimary().isNocturnal() || genome.getNocturnal() || beeModifier.isSelfDelighted())
-                && !(beeModifier.isSelfDelighted() && beeModifier.isSelfLighted());
+        return (!genome.getPrimary().isNocturnal() || genome.getNocturnal() || beeModifier.isSelfUnlighted())
+                && !(beeModifier.isSelfUnlighted() && beeModifier.isSelfLighted());
     }
 
     private boolean canWorkUnderground(IBeeModifier beeModifier) {
