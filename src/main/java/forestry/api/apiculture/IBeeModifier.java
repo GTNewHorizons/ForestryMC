@@ -61,7 +61,9 @@ public interface IBeeModifier {
     /**
      * @return Boolean indicating if housing can ignore lightness/day. Cannot be used together with SelfLighted
      */
-    boolean isSelfDelighted();
+    default boolean isSelfDelighted() {
+        return false;
+    }
 
     /**
      * @return Boolean indicating if housing can ignore not seeing the sky
