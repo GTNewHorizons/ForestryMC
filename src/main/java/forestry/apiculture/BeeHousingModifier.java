@@ -95,6 +95,16 @@ public class BeeHousingModifier implements IBeeModifier {
     }
 
     @Override
+    public boolean isSelfDelighted() {
+        for (IBeeModifier modifier : beeHousing.getBeeModifiers()) {
+            if (modifier.isSelfDelighted()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
     public boolean isSunlightSimulated() {
         for (IBeeModifier modifier : beeHousing.getBeeModifiers()) {
             if (modifier.isSunlightSimulated()) {
