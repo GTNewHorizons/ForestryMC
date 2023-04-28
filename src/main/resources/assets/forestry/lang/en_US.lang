@@ -568,6 +568,13 @@ item.for.frameImpregnated.name=Impregnated Frame
 item.for.frameProven.name=Proven Frame
 item.for.frameUntreated.name=Untreated Frame
 
+for.frame.tooltip.durability=Durability:
+for.frame.tooltip.territory=Territory:
+for.frame.tooltip.mutationRate=Mutation Rate:
+for.frame.tooltip.lifespan=Lifespan:
+for.frame.tooltip.production=Production:
+for.frame.tooltip.geneticDecay=Genetic Decay:
+
 item.for.fruits.cherry.name=Cherry
 item.for.fruits.chestnut.name=Chestnut
 item.for.fruits.dates.name=Date

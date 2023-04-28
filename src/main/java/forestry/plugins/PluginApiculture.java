@@ -60,6 +60,7 @@ import forestry.api.recipes.RecipeManagers;
 import forestry.api.storage.ICrateRegistry;
 import forestry.api.storage.StorageManager;
 import forestry.apiculture.ArmorApiaristHelper;
+import forestry.apiculture.EventHandlerApiculture;
 import forestry.apiculture.SaveEventHandlerApiculture;
 import forestry.apiculture.VillageHandlerApiculture;
 import forestry.apiculture.blocks.BlockAlveary;
@@ -185,6 +186,7 @@ public class PluginApiculture extends ForestryPlugin {
         super.preInit();
 
         MinecraftForge.EVENT_BUS.register(this);
+        MinecraftForge.EVENT_BUS.register(new EventHandlerApiculture());
 
         blocks.apiculture.addDefinitions(
                 new MachineDefinition(BlockApicultureType.APIARY).setFaces(0, 1, 2, 2, 4, 4, 0, 7),
