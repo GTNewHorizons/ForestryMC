@@ -43,7 +43,7 @@ public class EventHandlerApiculture {
                     tooltip.add(StringUtil.localize("frame.tooltip.lifespan") + getColorFormatted(lifespan));
 
                     float production = modifier.getProductionModifier(null, 1.0F);
-                    tooltip.add(StringUtil.localize("frame.tooltip.production") + getColorFormatted(production));
+                    tooltip.add(StringUtil.localize("frame.tooltip.production") + getColorFormatted(production, true));
 
                     float decay = modifier.getGeneticDecay(null, 1.0F);
                     tooltip.add(StringUtil.localize("frame.tooltip.geneticDecay") + getColorFormatted(decay));
@@ -68,7 +68,7 @@ public class EventHandlerApiculture {
         return color + " " + durability;
     }
 
-    private static String getColorFormatted(float value) {
+    private static String getColorFormatted(float value, boolean additive) {
         EnumChatFormatting color;
         if (value <= 0.5F) {
             color = EnumChatFormatting.DARK_RED; // "bad" stat
@@ -81,11 +81,23 @@ public class EventHandlerApiculture {
         } else {
             color = EnumChatFormatting.AQUA; // "great" stat
         }
+        String formatted = color.toString();
+
+        // Set symbol for if this value is additive or multiplicative
+        if (additive) {
+            formatted += " +";
+        } else {
+            formatted += " x";
+        }
 
         // trim trailing zeroes if no decimal-precision is needed
         if (value == (long) value) {
-            return color + " x" + (long) value;
+            return formatted + (long) value;
         }
-        return color + " x" + value;
+        return formatted + value;
+    }
+
+    private static String getColorFormatted(float value) {
+        return getColorFormatted(value, false);
     }
 }
