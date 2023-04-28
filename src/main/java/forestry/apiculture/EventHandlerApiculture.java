@@ -25,23 +25,29 @@ public class EventHandlerApiculture {
             if (!Proxies.common.isShiftDown()) {
                 tooltip.add(EnumChatFormatting.ITALIC + "<" + StringUtil.localize("gui.tooltip.tmi") + ">");
             } else {
-                int durability = itemStack.getMaxDamage();
-                tooltip.add(StringUtil.localize("frame.tooltip.durability") + getDurabilityFormatted(durability));
+                if (frame.getFrameTooltip() != null) {
+                    // use the override if it exists
+                    tooltip.addAll(frame.getFrameTooltip());
+                } else {
+                    // otherwise use the auto-generated info
+                    int durability = itemStack.getMaxDamage();
+                    tooltip.add(StringUtil.localize("frame.tooltip.durability") + getDurabilityFormatted(durability));
 
-                float territory = modifier.getTerritoryModifier(null, 1.0F);
-                tooltip.add(StringUtil.localize("frame.tooltip.territory") + getColorFormatted(territory));
+                    float territory = modifier.getTerritoryModifier(null, 1.0F);
+                    tooltip.add(StringUtil.localize("frame.tooltip.territory") + getColorFormatted(territory));
 
-                float mutation = modifier.getMutationModifier(null, null, 1.0F);
-                tooltip.add(StringUtil.localize("frame.tooltip.mutationRate") + getColorFormatted(mutation));
+                    float mutation = modifier.getMutationModifier(null, null, 1.0F);
+                    tooltip.add(StringUtil.localize("frame.tooltip.mutationRate") + getColorFormatted(mutation));
 
-                float lifespan = modifier.getLifespanModifier(null, null, 1.0F);
-                tooltip.add(StringUtil.localize("frame.tooltip.lifespan") + getColorFormatted(lifespan));
+                    float lifespan = modifier.getLifespanModifier(null, null, 1.0F);
+                    tooltip.add(StringUtil.localize("frame.tooltip.lifespan") + getColorFormatted(lifespan));
 
-                float production = modifier.getProductionModifier(null, 1.0F);
-                tooltip.add(StringUtil.localize("frame.tooltip.production") + getColorFormatted(production));
+                    float production = modifier.getProductionModifier(null, 1.0F);
+                    tooltip.add(StringUtil.localize("frame.tooltip.production") + getColorFormatted(production));
 
-                float decay = modifier.getGeneticDecay(null, 1.0F);
-                tooltip.add(StringUtil.localize("frame.tooltip.geneticDecay") + getColorFormatted(decay));
+                    float decay = modifier.getGeneticDecay(null, 1.0F);
+                    tooltip.add(StringUtil.localize("frame.tooltip.geneticDecay") + getColorFormatted(decay));
+                }
             }
         }
     }
