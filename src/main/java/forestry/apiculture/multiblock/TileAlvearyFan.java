@@ -32,7 +32,7 @@ public class TileAlvearyFan extends TileAlvearyClimatiser {
 
         @Override
         public float getBoundaryDown() {
-            return 0.05f;
+            return -1f;
         }
 
         @Override
