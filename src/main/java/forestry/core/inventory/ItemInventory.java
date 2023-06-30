@@ -106,7 +106,7 @@ public abstract class ItemInventory implements IInventory, IFilterSlotDelegate {
 
         String baseUID = base.getTagCompound().getString(KEY_UID);
         String comparisonUID = comparison.getTagCompound().getString(KEY_UID);
-        return baseUID != null && comparisonUID != null && baseUID.equals(comparisonUID);
+        return baseUID != null && !baseUID.isEmpty() && baseUID.equals(comparisonUID);
     }
 
     public void readFromNBT(NBTTagCompound nbt) {
