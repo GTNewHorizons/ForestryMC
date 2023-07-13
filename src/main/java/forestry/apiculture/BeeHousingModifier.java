@@ -51,7 +51,7 @@ public class BeeHousingModifier implements IBeeModifier {
     public float getProductionModifier(IBeeGenome genome, final float currentModifier) {
         float modifierValue = 1.0f;
         for (IBeeModifier modifier : beeHousing.getBeeModifiers()) {
-            modifierValue *= modifier.getProductionModifier(genome, modifierValue * currentModifier);
+            modifierValue += modifier.getProductionModifier(genome, modifierValue + currentModifier);
         }
         return modifierValue;
     }
@@ -88,6 +88,16 @@ public class BeeHousingModifier implements IBeeModifier {
     public boolean isSelfLighted() {
         for (IBeeModifier modifier : beeHousing.getBeeModifiers()) {
             if (modifier.isSelfLighted()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean isSelfUnlighted() {
+        for (IBeeModifier modifier : beeHousing.getBeeModifiers()) {
+            if (modifier.isSelfUnlighted()) {
                 return true;
             }
         }

@@ -22,12 +22,12 @@ public class TileAlvearyHeater extends TileAlvearyClimatiser {
 
         @Override
         public float getChangePerTransfer() {
-            return 0.01f;
+            return 0.015f;
         }
 
         @Override
         public float getBoundaryUp() {
-            return 2.5f;
+            return 3.5f;
         }
 
         @Override

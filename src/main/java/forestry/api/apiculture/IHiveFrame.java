@@ -5,7 +5,12 @@
  ******************************************************************************/
 package forestry.api.apiculture;
 
+import java.util.List;
+
+import javax.annotation.Nullable;
+
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 
 public interface IHiveFrame {
 
@@ -22,4 +27,15 @@ public interface IHiveFrame {
     ItemStack frameUsed(IBeeHousing housing, ItemStack frame, IBee queen, int wear);
 
     IBeeModifier getBeeModifier();
+
+    /**
+     * Provides an override for the "Hold Shift" tooltip info for a frame.<br>
+     * Called by {@link forestry.apiculture.EventHandlerApiculture#addFrameTooltip(ItemTooltipEvent)}.
+     *
+     * @return The info to display for this frame, or null if default generated info.
+     */
+    @Nullable
+    default List<String> getFrameTooltip() {
+        return null;
+    }
 }
