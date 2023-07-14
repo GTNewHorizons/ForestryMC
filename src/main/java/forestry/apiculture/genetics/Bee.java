@@ -551,7 +551,7 @@ public class Bee extends IndividualLiving implements IBee {
     }
 
     public static float getFinalChance(float chance, float beeSpeed, float productionModifier, float t) {
-        if (productionModifier + t <= 0) {
+        if (productionModifier + t <= 0f) {
             return 0;
         }
         chance *= 100f;
