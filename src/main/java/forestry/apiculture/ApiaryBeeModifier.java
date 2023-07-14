@@ -15,6 +15,6 @@ public class ApiaryBeeModifier extends DefaultBeeModifier {
 
     @Override
     public float getProductionModifier(IBeeGenome genome, float currentModifier) {
-        return 0.1f;
+        return -0.9f; // results in 0.1 with no frames, see BeeHousingModifier,java
     }
 }
