@@ -84,10 +84,12 @@ public class EventHandlerApiculture {
         String formatted = color.toString();
 
         // Set symbol for if this value is additive or multiplicative
-        if (additive) {
+        if (!additive) {
+            formatted += " x";
+        } else if (value >= 0.0F) {
             formatted += " +";
         } else {
-            formatted += " x";
+            formatted += " "; // the "-" will be applied, but we still need a space or minecraft will crash
         }
 
         // trim trailing zeroes if no decimal-precision is needed
