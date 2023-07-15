@@ -12,13 +12,13 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 
+import forestry.api.recipes.IDescriptiveRecipe;
+import forestry.core.recipes.RecipeUtil;
 import uristqwerty.CraftGuide.api.ItemSlot;
 import uristqwerty.CraftGuide.api.RecipeGenerator;
 import uristqwerty.CraftGuide.api.RecipeProvider;
 import uristqwerty.CraftGuide.api.RecipeTemplate;
 import uristqwerty.CraftGuide.api.SlotType;
-import forestry.api.recipes.IDescriptiveRecipe;
-import forestry.core.recipes.RecipeUtil;
 
 public class CraftGuideCustomRecipes implements RecipeProvider {
 

@@ -10,6 +10,10 @@ package forestry.factory.recipes.craftguide;
 
 import net.minecraft.item.ItemStack;
 
+import forestry.api.recipes.ISqueezerRecipe;
+import forestry.api.recipes.RecipeManagers;
+import forestry.factory.blocks.BlockFactoryTesrType;
+import forestry.plugins.PluginFactory;
 import uristqwerty.CraftGuide.api.ChanceSlot;
 import uristqwerty.CraftGuide.api.ItemSlot;
 import uristqwerty.CraftGuide.api.LiquidSlot;
@@ -18,10 +22,6 @@ import uristqwerty.CraftGuide.api.RecipeProvider;
 import uristqwerty.CraftGuide.api.RecipeTemplate;
 import uristqwerty.CraftGuide.api.Slot;
 import uristqwerty.CraftGuide.api.SlotType;
-import forestry.api.recipes.ISqueezerRecipe;
-import forestry.api.recipes.RecipeManagers;
-import forestry.factory.blocks.BlockFactoryTesrType;
-import forestry.plugins.PluginFactory;
 
 public class CraftGuideSqueezer implements RecipeProvider {
 

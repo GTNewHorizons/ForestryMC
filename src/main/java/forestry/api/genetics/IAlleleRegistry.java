@@ -11,6 +11,7 @@ import java.util.Map;
 import net.minecraft.item.ItemStack;
 
 import com.mojang.authlib.GameProfile;
+
 import forestry.api.genetics.IClassification.EnumClassLevel;
 
 /**

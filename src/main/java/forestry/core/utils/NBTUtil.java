@@ -26,6 +26,7 @@ import net.minecraft.nbt.NBTTagShort;
 import net.minecraft.nbt.NBTTagString;
 
 import com.google.common.collect.ForwardingList;
+
 import cpw.mods.fml.common.ObfuscationReflectionHelper;
 
 /**

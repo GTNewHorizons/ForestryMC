@@ -12,6 +12,7 @@ import net.minecraft.init.Blocks;
 
 import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Table;
+
 import forestry.core.fluids.Fluids;
 
 public class ItemRegistryFluids extends ItemRegistry {

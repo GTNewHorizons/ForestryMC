@@ -14,6 +14,7 @@ import net.minecraft.block.Block;
 import net.minecraftforge.oredict.OreDictionary;
 
 import com.google.common.base.Objects;
+
 import forestry.api.genetics.IFlower;
 
 final class Flower implements IFlower {

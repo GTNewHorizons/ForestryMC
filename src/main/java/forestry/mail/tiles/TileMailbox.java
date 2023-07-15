@@ -19,10 +19,9 @@ import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
-import buildcraft.api.statements.ITriggerExternal;
-
 import com.mojang.authlib.GameProfile;
 
+import buildcraft.api.statements.ITriggerExternal;
 import cpw.mods.fml.common.Optional;
 import forestry.api.mail.ILetter;
 import forestry.api.mail.IMailAddress;
