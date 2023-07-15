@@ -49,7 +49,8 @@ public class BeeHousingModifier implements IBeeModifier {
 
     @Override
     public float getProductionModifier(IBeeGenome genome, final float currentModifier) {
-        float modifierValue = 1.0f;
+        float modifierValue = 0.0f; // part of the additive production nerf, but don't worry at least you effectively
+                                    // get +1 from `t` in `Bee.java:produceStacks`
         for (IBeeModifier modifier : beeHousing.getBeeModifiers()) {
             modifierValue += modifier.getProductionModifier(genome, modifierValue + currentModifier);
         }
