@@ -49,8 +49,7 @@ public class BeeHousingModifier implements IBeeModifier {
 
     @Override
     public float getProductionModifier(IBeeGenome genome, final float currentModifier) {
-        float modifierValue = 0.0f;// the "base" value of 1.0 should come from Bee.java or BeeKeepingMode.jave, that is,
-                                   // it should be set at the call site
+        float modifierValue = 1.0f;
         for (IBeeModifier modifier : beeHousing.getBeeModifiers()) {
             modifierValue += modifier.getProductionModifier(genome, modifierValue + currentModifier);
         }
