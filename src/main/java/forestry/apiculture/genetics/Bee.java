@@ -514,7 +514,7 @@ public class Bee extends IndividualLiving implements IBee {
 
         // Bee genetic speed * beehousing * beekeeping mode
         float speed = genome.getSpeed();
-        float prodModifier = beeHousingModifier.getProductionModifier(genome, 1f);
+        float prodModifier = beeHousingModifier.getProductionModifier(genome, 0f);
         prodModifier += beeModeModifier.getProductionModifier(genome, prodModifier);
 
         // / Primary Products
@@ -552,12 +552,12 @@ public class Bee extends IndividualLiving implements IBee {
 
     public static float getFinalChance(float chance, float beeSpeed, float productionModifier, float t) {
         if (productionModifier + t <= 0f) {
-            return 0;
+            return 0f;
         }
         chance *= 100f;
         return (float) (2.8 * Math.pow(chance, 0.52)
                 * Math.pow((productionModifier + t), 0.52)
-                * Math.pow(beeSpeed, 0.37)) / 100.f;
+                * Math.pow(beeSpeed, 0.37)) / 100f;
     }
 
     /* REPRODUCTION */

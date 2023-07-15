@@ -70,13 +70,16 @@ public class EventHandlerApiculture {
 
     private static String getColorFormatted(float value, boolean additive) {
         EnumChatFormatting color;
-        if (value <= 0.5F) {
+        float lo_threshold = additive ? -1.0F : 0.5F;
+        float mid_threshold = additive ? 0.0F : 1.0F;
+        float hi_threshold = 2.0F;
+        if (value <= lo_threshold) {
             color = EnumChatFormatting.DARK_RED; // "bad" stat
-        } else if (value < 1.0F) {
+        } else if (value < mid_threshold) {
             color = EnumChatFormatting.RED; // "below average" stat
-        } else if (value == 1.0F) {
+        } else if (value == mid_threshold) {
             color = EnumChatFormatting.GOLD; // "average" stat
-        } else if (value <= 2.0F) {
+        } else if (value <= hi_threshold) {
             color = EnumChatFormatting.GREEN; // "above average" stat
         } else {
             color = EnumChatFormatting.AQUA; // "great" stat

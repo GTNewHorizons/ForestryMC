@@ -101,7 +101,7 @@ public class BeekeepingMode implements IBeekeepingMode {
     public boolean isOverworked(IBee queen, IBeeHousing housing) {
         IBeeModifier beeModifier = BeeManager.beeRoot.createBeeHousingModifier(housing);
 
-        float productionModifier = beeModifier.getProductionModifier(queen.getGenome(), 1f);
+        float productionModifier = beeModifier.getProductionModifier(queen.getGenome(), 0f);
         if (productionModifier > 16) {
             if (housing.getWorld().rand.nextFloat() * 100 < 0.01 * ((productionModifier * productionModifier) - 100)) {
                 return true;
