@@ -34,43 +34,31 @@ public class EventHandlerApiculture {
                     tooltip.add(StringUtil.localize("frame.tooltip.durability") + getDurabilityFormatted(durability));
 
                     float territory = modifier.getTerritoryModifier(null, 1.0F);
-                    if (territory != 1.0F) {
-                        tooltip.add(
-                                StringUtil.localize("frame.tooltip.territory")
-                                        + getModifierFormatted(territory, false, false));
-                    }
+                    tooltip.add(
+                            StringUtil.localize("frame.tooltip.territory")
+                                    + getModifierFormatted(territory, false, false));
                     float mutation = modifier.getMutationModifier(null, null, 1.0F);
-                    if (mutation != 1.0F) {
-                        tooltip.add(
-                                StringUtil.localize("frame.tooltip.mutationRate")
-                                        + getModifierFormatted(mutation, false, false));
-                    }
+                    tooltip.add(
+                            StringUtil.localize("frame.tooltip.mutationRate")
+                                    + getModifierFormatted(mutation, false, false));
                     float lifespan = modifier.getLifespanModifier(null, null, 1.0F);
-                    if (lifespan != 1.0F) {
-                        // lower lifespan is better
-                        tooltip.add(
-                                StringUtil.localize("frame.tooltip.lifespan")
-                                        + getModifierFormatted(lifespan, false, true));
-                    }
+                    // lower lifespan is better
+                    tooltip.add(
+                            StringUtil.localize("frame.tooltip.lifespan")
+                                    + getModifierFormatted(lifespan, false, true));
                     float production = modifier.getProductionModifier(null, 0.0F);
-                    if (production != 0.0F) {
-                        tooltip.add(
-                                StringUtil.localize("frame.tooltip.production")
-                                        + getModifierFormatted(production, true, false));
-                    }
-                    float flowering = modifier.getProductionModifier(null, 1.0F);
-                    if (flowering != 1.0F) {
-                        tooltip.add(
-                                StringUtil.localize("frame.tooltip.flowering")
-                                        + getModifierFormatted(flowering, false, false));
-                    }
+                    tooltip.add(
+                            StringUtil.localize("frame.tooltip.production")
+                                    + getModifierFormatted(production, true, false));
+                    float flowering = modifier.getFloweringModifier(null, 1.0F);
+                    tooltip.add(
+                            StringUtil.localize("frame.tooltip.flowering")
+                                    + getModifierFormatted(flowering, false, false));
                     float decay = modifier.getGeneticDecay(null, 1.0F);
-                    if (decay != 1.0F) {
-                        // lower genetic decay is better
-                        tooltip.add(
-                                StringUtil.localize("frame.tooltip.geneticDecay")
-                                        + getModifierFormatted(decay, false, true));
-                    }
+                    // lower genetic decay is better
+                    tooltip.add(
+                            StringUtil.localize("frame.tooltip.geneticDecay")
+                                    + getModifierFormatted(decay, false, true));
                 }
             }
         }
