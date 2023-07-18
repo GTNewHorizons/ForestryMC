@@ -573,6 +573,7 @@ for.frame.tooltip.territory=Territory:
 for.frame.tooltip.mutationRate=Mutation Rate:
 for.frame.tooltip.lifespan=Lifespan:
 for.frame.tooltip.production=Production:
+for.frame.tooltip.flowering=Flowering:
 for.frame.tooltip.geneticDecay=Genetic Decay:
 
 item.for.fruits.cherry.name=Cherry

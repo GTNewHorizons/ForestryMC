@@ -58,6 +58,12 @@ public class EventHandlerApiculture {
                                 StringUtil.localize("frame.tooltip.production")
                                         + getModifierFormatted(production, true, false));
                     }
+                    float flowering = modifier.getProductionModifier(null, 1.0F);
+                    if (flowering != 1.0F) {
+                        tooltip.add(
+                                StringUtil.localize("frame.tooltip.flowering")
+                                        + getModifierFormatted(flowering, false, false));
+                    }
                     float decay = modifier.getGeneticDecay(null, 1.0F);
                     if (decay != 1.0F) {
                         // lower genetic decay is better
