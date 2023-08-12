@@ -1,12 +1,10 @@
 // Add your dependencies here
 
 dependencies {
-    compile('com.github.GTNewHorizons:NotEnoughItems:2.3.76-GTNH:dev')
-    compile('com.github.GTNewHorizons:inventory-tweaks:1.5.16:api')
-    compile('com.github.GTNewHorizons:BuildCraft:7.1.34:api')
-    compile('net.industrial-craft:industrialcraft-2:2.2.828-experimental:dev')
-
-    compile('curse.maven:cofh-lib-220333:2388748')
-
+    api('curse.maven:cofh-lib-220333:2388748')
+    devOnlyNonPublishable('com.github.GTNewHorizons:NotEnoughItems:2.3.81-GTNH:dev')
+    compileOnly('com.github.GTNewHorizons:inventory-tweaks:1.5.16:api')
+    compileOnly('com.github.GTNewHorizons:BuildCraft:7.1.36:api')
+    compileOnly('net.industrial-craft:industrialcraft-2:2.2.828-experimental:dev')
     compileOnly('curse.maven:craftguide-75557:2459320')
 }
