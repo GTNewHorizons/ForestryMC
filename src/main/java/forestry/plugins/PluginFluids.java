@@ -145,21 +145,6 @@ public class PluginFluids extends ForestryPlugin {
                     items.refractoryEmpty.getItemStack(),
                     PluginCore.items.refractoryWax.getItemStack(),
                     0.10f);
-        }
-
-        FluidStack ethanol = Fluids.ETHANOL.getFluid(1);
-        GeneratorFuel ethanolFuel = new GeneratorFuel(
-                ethanol,
-                (int) (32 * ForestryAPI.activeMode.getFloatSetting("fuel.ethanol.generator")),
-                4);
-        FuelManager.generatorFuel.put(ethanol.getFluid(), ethanolFuel);
-
-        FluidStack biomass = Fluids.BIOMASS.getFluid(1);
-        GeneratorFuel biomassFuel = new GeneratorFuel(
-                biomass,
-                (int) (8 * ForestryAPI.activeMode.getFloatSetting("fuel.biomass.generator")),
-                1);
-        FuelManager.generatorFuel.put(biomass.getFluid(), biomassFuel);
     }
 
     public static class MissingFluidException extends RuntimeException {
