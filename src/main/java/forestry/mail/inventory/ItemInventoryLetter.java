@@ -120,7 +120,8 @@ public class ItemInventoryLetter extends ItemInventory implements IErrorSource, 
             Item item = itemStack.getItem();
             return item instanceof ItemStamps;
         } else if (SlotUtil.isSlotInRange(slotIndex, Letter.SLOT_ATTACHMENT_1, Letter.SLOT_ATTACHMENT_COUNT)) {
-            return !(itemStack.getItem() instanceof ItemWithGui);
+            if (itemStack.getItem() instanceof ItemWithGui) return false;
+            return !Config.mailBlacklist.contains(itemStack.getItem());
         }
         return false;
     }

@@ -15,14 +15,17 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Properties;
 import java.util.Set;
 
+import net.minecraft.item.Item;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.common.config.Property;
 
 import com.google.common.collect.LinkedListMultimap;
 
+import cpw.mods.fml.common.registry.GameRegistry;
 import forestry.Forestry;
 import forestry.core.fluids.Fluids;
 import forestry.core.utils.Log;
@@ -96,6 +99,37 @@ public class Config {
     public static boolean mailAlertEnabled = true;
     public static GuiMailboxInfo.XPosition mailAlertXPosition = GuiMailboxInfo.XPosition.LEFT;
     public static GuiMailboxInfo.YPosition mailAlertYPosition = GuiMailboxInfo.YPosition.TOP;
+
+    public static List<Item> mailBlacklist = new ArrayList<Item>();
+    public static String[] mailBlacklistString;
+    public static final String[] mailBlacklistDefault = new String[] { "arsmagica2:essenceBag", "arsmagica2:runeBag",
+            "betterstorage:backpack", "betterstorage:cardboardBox", "betterstorage:thaumcraftBackpack",
+            "Botania:baubleBox", "Botania:flowerBag", "cardboardboxes:cbCardboardBox", "dendrology:fullDrawers1",
+            "dendrology:fullDrawers2", "dendrology:fullDrawers4", "dendrology:halfDrawers2", "dendrology:halfDrawers4",
+            "DQMIIINext:ItemMahounoTutu11", "DQMIIINext:ItemOokinaFukuro", "DQMIIINext:ItemOokinaFukuroB",
+            "DQMIIINext:ItemOokinaFukuroG", "DQMIIINext:ItemOokinaFukuroR", "DQMIIINext:ItemOokinaFukuroY",
+            "ExtraUtilities:golden_bag", "HardcoreEnderExpansion:charm_pouch", "ImmersiveEngineering:toolbox",
+            "ironbackpacks:basicBackpack", "ironbackpacks:diamondBackpack", "ironbackpacks:goldBackpack",
+            "ironbackpacks:ironBackpack", "JABBA:mover", "JABBA:moverDiamond", "MagicBees:backpack.thaumaturgeT1",
+            "MagicBees:backpack.thaumaturgeT2", "Mekanism:CardboardBox", "MineFactoryReloaded:plastic.bag",
+            "OpenBlocks:devnull", "ProjectE:item.pe_alchemical_bag",
+            "ProjRed|Exploration:projectred.exploration.backpack", "sgs_treasure:dread_pirate_chest",
+            "sgs_treasure:iron_chest", "sgs_treasure:locked_wooden_chest", "sgs_treasure:obsidian_chest",
+            "sgs_treasure:pirate_chest", "sgs_treasure:wither_chest", "sgs_treasure:wooden_chest",
+            "StorageDrawers:compDrawers", "StorageDrawers:fullCustom1", "StorageDrawers:fullCustom2",
+            "StorageDrawers:fullCustom4", "StorageDrawers:fullDrawers1", "StorageDrawers:fullDrawers2",
+            "StorageDrawers:fullDrawers4", "StorageDrawers:halfCustom2", "StorageDrawers:halfCustom4",
+            "StorageDrawers:halfDrawers2", "StorageDrawers:halfDrawers4", "StorageDrawersBop:fullDrawers1",
+            "StorageDrawersBop:fullDrawers1", "StorageDrawersBop:fullDrawers2", "StorageDrawersBop:fullDrawers2",
+            "StorageDrawersBop:fullDrawers4", "StorageDrawersBop:fullDrawers4", "StorageDrawersBop:halfDrawers2",
+            "StorageDrawersBop:halfDrawers2", "StorageDrawersBop:halfDrawers4", "StorageDrawersBop:halfDrawers4",
+            "StorageDrawersForestry:fullDrawers1A", "StorageDrawersForestry:fullDrawers2A",
+            "StorageDrawersForestry:fullDrawers4A", "StorageDrawersForestry:halfDrawers2A",
+            "StorageDrawersForestry:halfDrawers4A", "StorageDrawersNatura:fullDrawers1",
+            "StorageDrawersNatura:fullDrawers2", "StorageDrawersNatura:fullDrawers4",
+            "StorageDrawersNatura:halfDrawers2", "StorageDrawersNatura:halfDrawers4", "Thaumcraft:FocusPouch",
+            "ThaumicTinkerer:ichorPouch", "thebetweenlands:lurkerSkinPouch", "ThermalExpansion:Strongbox",
+            "ThermalExpansion:satchel", "warpbook:warpbook", "witchery:brewbag", "WitchingGadgets:item.WG_Bag" };
 
     // Gui tabs (Ledger)
     public static int guiTabSpeed = 8;
@@ -279,6 +313,11 @@ public class Config {
                 "yPosition",
                 mailAlertYPosition,
                 GuiMailboxInfo.YPosition.values());
+        mailBlacklistString = configCommon.getStringList(
+                "mailBlacklist",
+                "restrictions",
+                mailBlacklistDefault,
+                "Items that cannot be shipped through a letter");
 
         guiTabSpeed = configCommon.getIntLocalized("tweaks.gui.tabs", "speed", guiTabSpeed, 1, 50);
         enableHints = configCommon.getBooleanLocalized("tweaks.gui.tabs", "hints", enableHints);
@@ -384,6 +423,20 @@ public class Config {
             return new String[0];
         } else {
             return list.split("[;]+");
+        }
+    }
+
+    public static void parseMailBlacklist() {
+        for (String itemName : mailBlacklistString) {
+            String[] nameAndID;
+            if (itemName.contains(":") && (nameAndID = itemName.split(":")).length == 2) {
+                Item item = GameRegistry.findItem(nameAndID[0], nameAndID[1]);
+                if (item != null) {
+                    if (!mailBlacklist.contains(item)) {
+                        mailBlacklist.add(item);
+                    }
+                }
+            }
         }
     }
 }

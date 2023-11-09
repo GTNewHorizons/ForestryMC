@@ -112,6 +112,9 @@ public class Forestry {
     public void postInit(FMLPostInitializationEvent event) {
         PluginManager.runPostInit();
 
+        // Parse Mail Blacklist
+        Config.parseMailBlacklist();
+
         // Register world generator
         WorldGenerator worldGenerator = new WorldGenerator();
         GameRegistry.registerWorldGenerator(worldGenerator, 0);
