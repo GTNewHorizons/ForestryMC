@@ -26,7 +26,20 @@ import net.minecraft.world.biome.BiomeGenBase;
 
 import com.mojang.authlib.GameProfile;
 
-import forestry.api.apiculture.*;
+import forestry.api.apiculture.BeeManager;
+import forestry.api.apiculture.EnumBeeChromosome;
+import forestry.api.apiculture.FlowerManager;
+import forestry.api.apiculture.IAlleleBeeEffect;
+import forestry.api.apiculture.IAlleleBeeSpecies;
+import forestry.api.apiculture.IAlleleBeeSpeciesCustom;
+import forestry.api.apiculture.IApiaristTracker;
+import forestry.api.apiculture.IBee;
+import forestry.api.apiculture.IBeeGenome;
+import forestry.api.apiculture.IBeeHousing;
+import forestry.api.apiculture.IBeeModifier;
+import forestry.api.apiculture.IBeeMutation;
+import forestry.api.apiculture.IBeekeepingMode;
+import forestry.api.apiculture.IJubilanceProvider;
 import forestry.api.core.BiomeHelper;
 import forestry.api.core.EnumHumidity;
 import forestry.api.core.EnumTemperature;

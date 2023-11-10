@@ -13,7 +13,13 @@ import java.util.ArrayList;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 
-import forestry.api.apiculture.*;
+import forestry.api.apiculture.BeeManager;
+import forestry.api.apiculture.EnumBeeChromosome;
+import forestry.api.apiculture.EnumBeeType;
+import forestry.api.apiculture.IAlleleBeeSpecies;
+import forestry.api.apiculture.IAlleleBeeSpeciesCustom;
+import forestry.api.apiculture.IBee;
+import forestry.api.apiculture.IJubilanceProvider;
 import forestry.api.genetics.AlleleManager;
 import forestry.api.genetics.IAlleleInteger;
 import forestry.api.genetics.IAlleleTolerance;
