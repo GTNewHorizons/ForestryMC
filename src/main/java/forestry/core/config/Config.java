@@ -15,7 +15,6 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Properties;
 import java.util.Set;
 
@@ -100,7 +99,7 @@ public class Config {
     public static GuiMailboxInfo.XPosition mailAlertXPosition = GuiMailboxInfo.XPosition.LEFT;
     public static GuiMailboxInfo.YPosition mailAlertYPosition = GuiMailboxInfo.YPosition.TOP;
 
-    public static List<Item> mailBlacklist = new ArrayList<Item>();
+    public static Set<Item> mailBlacklist = new HashSet<Item>();
     public static String[] mailBlacklistString;
     public static final String[] mailBlacklistDefault = new String[] { "arsmagica2:essenceBag", "arsmagica2:runeBag",
             "betterstorage:backpack", "betterstorage:cardboardBox", "betterstorage:thaumcraftBackpack",
@@ -432,9 +431,7 @@ public class Config {
             if (itemName.contains(":") && (nameAndID = itemName.split(":")).length == 2) {
                 Item item = GameRegistry.findItem(nameAndID[0], nameAndID[1]);
                 if (item != null) {
-                    if (!mailBlacklist.contains(item)) {
-                        mailBlacklist.add(item);
-                    }
+                    mailBlacklist.add(item);
                 }
             }
         }
