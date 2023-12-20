@@ -1415,6 +1415,8 @@ tile.for.mushroom.1.name=Mushroom
 # LEPIDOPTEROLOGY
 ####################
 
+entity.Forestry.butterflyGE.name=Butterfly
+
 for.chat.command.forestry.butterfly.desc=- %s : Butterfly Commands
 for.chat.command.forestry.butterfly.help=Various commands related to butterflies
 for.chat.command.forestry.butterfly.format=Format: /%s <sub-command>
