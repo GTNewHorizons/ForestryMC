@@ -36,7 +36,7 @@ for.chat.command.forestry.plugins.info.format=Format: /%s <nom-module>
 
 for.chat.help=Tapez '%s' pour l'aide.
 for.chat.plugins.error=Pas d'information sur le module %s.
-for.chat.version=Forestry %1$s pour Minecraft %2$s (Dernier: %3$s).
+for.chat.version=Forestry %1$s pour Minecraft %2$s.
 
 for.circuit.dampener.1=Clapet coupe-feu
 for.circuit.dampener.1.description.1=Limite la sortie à 10 RF/t maximum

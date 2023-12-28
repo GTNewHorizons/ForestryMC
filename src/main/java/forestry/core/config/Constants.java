@@ -8,6 +8,7 @@
  ******************************************************************************/
 package forestry.core.config;
 
+import forestry.Tags;
 import forestry.api.core.IForestryConstants;
 
 public class Constants implements IForestryConstants {
@@ -15,7 +16,7 @@ public class Constants implements IForestryConstants {
     // System
     public static final String MOD = "Forestry";
     public static final String ID = "forestry";
-    public static final String VERSION = "GRADLETOKEN_VERSION";
+    public static final String VERSION = Tags.VERSION;
     public static final String URL = "http://forestry.sengir.net/";
 
     public static final int FLAG_BLOCK_UPDATE = 1;

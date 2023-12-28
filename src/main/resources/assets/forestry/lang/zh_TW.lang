@@ -36,7 +36,7 @@ for.chat.command.forestry.plugins.info.format=格式: /%s <plugin-name>
 
 for.chat.help=輸入'%s'檢視說明。
 for.chat.plugins.error=插件%s沒有說明可顯示。
-for.chat.version=林業%1$s適用於Minecraft%2$s (最新版本: %3$s)。
+for.chat.version=林業%1$s適用於Minecraft%2$s。
 
 for.circuit.dampener.1=阻尼
 for.circuit.dampener.1.description.1=最大輸出減少到10 RF/t

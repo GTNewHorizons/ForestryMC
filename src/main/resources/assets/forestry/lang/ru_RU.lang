@@ -36,7 +36,7 @@ for.chat.command.forestry.plugins.info.format=Формат: /%s <plugin-name>
 
 for.chat.help=Напишите '%s' для помощи.
 for.chat.plugins.error=Нет информации для плагина %s.
-for.chat.version=Forestry %1$s для Minecraft %2$s (Последняя: %3$s).
+for.chat.version=Forestry %1$s для Minecraft %2$s.
 
 for.circuit.dampener.1=Демпфер огня
 for.circuit.dampener.1.description.1=Понижает максимальную выходную мощность до 10 RF/тик

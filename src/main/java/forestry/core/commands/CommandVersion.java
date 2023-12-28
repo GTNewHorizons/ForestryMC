@@ -26,24 +26,11 @@ public class CommandVersion extends SubCommand {
 
     @Override
     public void processSubCommand(ICommandSender sender, String[] args) {
-        ChatStyle style = new ChatStyle();
-        if (Version.isOutdated()) {
-            style.setColor(EnumChatFormatting.RED);
-        } else {
-            style.setColor(EnumChatFormatting.GREEN);
-        }
-
         CommandHelpers.sendLocalizedChatMessage(
                 sender,
-                style,
+                new ChatStyle().setColor(EnumChatFormatting.GREEN),
                 "for.chat.version",
                 Version.getVersion(),
-                Proxies.common.getMinecraftVersion(),
-                Version.getRecommendedVersion());
-        if (Version.isOutdated()) {
-            for (String updateLine : Version.getChangelog()) {
-                CommandHelpers.sendChatMessage(sender, EnumChatFormatting.BLUE + updateLine);
-            }
-        }
+                Proxies.common.getMinecraftVersion());
     }
 }

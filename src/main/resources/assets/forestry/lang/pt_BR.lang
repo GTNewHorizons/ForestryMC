@@ -35,7 +35,7 @@ for.chat.command.forestry.plugins.info.format=Formato: /%s <plugin-name>
 for.chat.help=Digite '%s' para obter ajuda.
 for.chat.memorizednote=Você memorizá a nota e descartará papel amassado.
 for.chat.plugins.error=Não há informações disponíveis para o ´plugin´ %s.
-for.chat.version=Forestry %1$s para Minecraft %2$s (Mais recente: %3$s).
+for.chat.version=Forestry %1$s para Minecraft %2$s.
 
 for.circuit.dampener.1=Regulador de Tiragem
 for.circuit.dampener.1.description.1=Reduz a saída máxima para 10 RF/t

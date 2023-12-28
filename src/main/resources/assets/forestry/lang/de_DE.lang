@@ -36,7 +36,7 @@ for.chat.command.forestry.plugins.info.format=Format: /%s <Plugin-Name>
 
 for.chat.help=Gib '%s' für Hilfe ein.
 for.chat.plugins.error=Keine Informationen für das Plugin %s verfügbar.
-for.chat.version=Forestry %1$s für Minecraft %2$s (Aktuell: %3$s).
+for.chat.version=Forestry %1$s für Minecraft %2$s.
 
 for.circuit.dampener.1=Feuerdämpfer
 for.circuit.dampener.1.description.1=Reduziert maximalen Output auf 10 RF/t
