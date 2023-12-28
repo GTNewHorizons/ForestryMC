@@ -164,6 +164,8 @@ public class PluginFluids extends ForestryPlugin {
 
     public static class MissingFluidException extends RuntimeException {
 
+        private static final long serialVersionUID = -5764238838259167615L;
+
         public MissingFluidException(String tag) {
             super("Fluid '" + tag + "' was not found. Please check your configs.");
         }

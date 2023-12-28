@@ -32,17 +32,17 @@ public class CarpenterRecipeManager implements ICarpenterManager {
     private static final Set<Fluid> recipeFluids = new HashSet<>();
 
     @Override
-    public void addRecipe(ItemStack box, ItemStack product, Object materials[]) {
+    public void addRecipe(ItemStack box, ItemStack product, Object... materials) {
         addRecipe(5, null, box, product, materials);
     }
 
     @Override
-    public void addRecipe(int packagingTime, ItemStack box, ItemStack product, Object materials[]) {
+    public void addRecipe(int packagingTime, ItemStack box, ItemStack product, Object... materials) {
         addRecipe(packagingTime, null, box, product, materials);
     }
 
     @Override
-    public void addRecipe(int packagingTime, FluidStack liquid, ItemStack box, ItemStack product, Object materials[]) {
+    public void addRecipe(int packagingTime, FluidStack liquid, ItemStack box, ItemStack product, Object... materials) {
         ICarpenterRecipe recipe = new CarpenterRecipe(
                 packagingTime,
                 liquid,

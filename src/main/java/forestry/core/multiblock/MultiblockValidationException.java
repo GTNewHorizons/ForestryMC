@@ -8,6 +8,8 @@ package forestry.core.multiblock;
  */
 public class MultiblockValidationException extends Exception {
 
+    private static final long serialVersionUID = -3255564315819077747L;
+
     public MultiblockValidationException(String reason) {
         super(reason);
     }
