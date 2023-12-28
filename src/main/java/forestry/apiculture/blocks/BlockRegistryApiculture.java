@@ -12,12 +12,13 @@ import forestry.api.core.Tabs;
 import forestry.apiculture.items.ItemBlockCandle;
 import forestry.core.blocks.BlockBase;
 import forestry.core.blocks.BlockRegistry;
+import forestry.core.blocks.IMachineProperties;
 import forestry.core.items.ItemBlockForestry;
 
 public class BlockRegistryApiculture extends BlockRegistry {
 
     public final BlockApiculture apiculture;
-    public final BlockBase apicultureChest;
+    public final BlockBase<? extends IMachineProperties> apicultureChest;
     public final BlockBeehives beehives;
     public final BlockCandle candle;
     public final BlockStump stump;
@@ -26,7 +27,7 @@ public class BlockRegistryApiculture extends BlockRegistry {
     public BlockRegistryApiculture() {
         apiculture = registerBlock(new BlockApiculture(), ItemBlockForestry.class, "apiculture");
 
-        apicultureChest = registerBlock(new BlockBase(true), ItemBlockForestry.class, "apicultureChest");
+        apicultureChest = registerBlock(new BlockBase<>(true), ItemBlockForestry.class, "apicultureChest");
         apicultureChest.setCreativeTab(Tabs.tabApiculture);
         apicultureChest.setHarvestLevel("axe", 0);
 

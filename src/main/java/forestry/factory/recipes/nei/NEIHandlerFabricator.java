@@ -85,7 +85,7 @@ public class NEIHandlerFabricator extends RecipeHandlerBase {
                         continue;
                     } else if (item instanceof ItemStack[] && ((ItemStack[]) item).length == 0) {
                         continue;
-                    } else if (item instanceof List && ((List) item).size() == 0) {
+                    } else if (item instanceof List && ((List<?>) item).size() == 0) {
                         continue;
                     }
 
@@ -199,7 +199,7 @@ public class NEIHandlerFabricator extends RecipeHandlerBase {
     }
 
     @Override
-    public List<String> provideItemTooltip(GuiRecipe guiRecipe, ItemStack itemStack, List<String> currenttip,
+    public List<String> provideItemTooltip(GuiRecipe<?> guiRecipe, ItemStack itemStack, List<String> currenttip,
             CachedBaseRecipe crecipe, Point relMouse) {
         super.provideItemTooltip(guiRecipe, itemStack, currenttip, crecipe, relMouse);
 

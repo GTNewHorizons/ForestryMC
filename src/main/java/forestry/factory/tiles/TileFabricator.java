@@ -56,7 +56,7 @@ public class TileFabricator extends TilePowered
 
     private static final int MAX_HEAT = 5000;
 
-    private final InventoryAdapterTile craftingInventory;
+    private final InventoryAdapterTile<?> craftingInventory;
     private final TankManager tankManager;
     private final FilteredTank moltenTank;
     private int heat = 0;

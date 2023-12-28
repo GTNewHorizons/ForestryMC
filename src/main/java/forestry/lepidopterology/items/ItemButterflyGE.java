@@ -89,6 +89,7 @@ public class ItemButterflyGE extends ItemGE {
         return butterfly.getDisplayName();
     }
 
+    @SuppressWarnings({ "rawtypes", "unchecked" })
     @Override
     public void addInformation(ItemStack itemstack, EntityPlayer player, List list, boolean flag) {
         super.addInformation(itemstack, player, list, flag);

@@ -9,6 +9,8 @@
 package forestry.core.gui;
 
 import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.inventory.Container;
+import net.minecraft.inventory.IInventory;
 
 import org.lwjgl.opengl.GL11;
 
@@ -18,7 +20,7 @@ public class TextLayoutHelper {
 
     private static final int LINE_HEIGHT = 12;
 
-    private final GuiForestry guiForestry;
+    private final GuiForestry<? extends Container, ? extends IInventory> guiForestry;
     private final int defaultFontColor;
     private FontRenderer fontRendererObj;
 
@@ -27,7 +29,7 @@ public class TextLayoutHelper {
     public int column2;
     public int line;
 
-    public TextLayoutHelper(GuiForestry guiForestry, FontColour fontColour) {
+    public TextLayoutHelper(GuiForestry<? extends Container, ? extends IInventory> guiForestry, FontColour fontColour) {
         this.guiForestry = guiForestry;
         this.defaultFontColor = fontColour.get("gui.screen");
     }

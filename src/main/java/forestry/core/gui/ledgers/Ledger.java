@@ -227,12 +227,10 @@ public abstract class Ledger {
     protected int drawSplitText(String string, int x, int y, int width, int color, boolean shadow) {
         int originalY = y;
         Minecraft minecraft = Proxies.common.getClientInstance();
-        List strings = minecraft.fontRenderer.listFormattedStringToWidth(string, width);
-        for (Object obj : strings) {
-            if (obj instanceof String) {
-                minecraft.fontRenderer.drawString((String) obj, x, y, color, shadow);
-                y += minecraft.fontRenderer.FONT_HEIGHT;
-            }
+        List<String> strings = minecraft.fontRenderer.listFormattedStringToWidth(string, width);
+        for (String obj : strings) {
+            minecraft.fontRenderer.drawString(obj, x, y, color, shadow);
+            y += minecraft.fontRenderer.FONT_HEIGHT;
         }
         return y - originalY;
     }

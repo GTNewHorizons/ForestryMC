@@ -67,8 +67,7 @@ public class BlockEngine extends BlockBase<BlockEngineType> {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
-    public void addCollisionBoxesToList(World world, int x, int y, int z, AxisAlignedBB mask, List list,
+    public void addCollisionBoxesToList(World world, int x, int y, int z, AxisAlignedBB mask, List<AxisAlignedBB> list,
             Entity colliding) {
         TileEngine tile = TileUtil.getTile(world, x, y, z, TileEngine.class);
         if (tile == null) {

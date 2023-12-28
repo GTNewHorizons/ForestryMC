@@ -43,7 +43,6 @@ public class GuiCatalogue extends GuiForestry<ContainerCatalogue, IInventory> {
         this.ySize = 192;
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public void initGui() {
         super.initGui();

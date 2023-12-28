@@ -10,7 +10,6 @@ package forestry.core.fluids;
 
 import java.util.List;
 
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraftforge.common.util.ForgeDirection;
@@ -31,7 +30,7 @@ public class FakeTankManager implements ITankManager {
     public void containerAdded(Container container, ICrafting player) {}
 
     @Override
-    public void updateGuiData(Container container, List<EntityPlayerMP> crafters) {}
+    public void updateGuiData(Container container, List<ICrafting> crafters) {}
 
     @Override
     public void containerRemoved(Container container) {}

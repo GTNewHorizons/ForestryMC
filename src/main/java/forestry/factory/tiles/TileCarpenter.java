@@ -56,7 +56,7 @@ public class TileCarpenter extends TilePowered
 
     private final FilteredTank resourceTank;
     private final TankManager tankManager;
-    private final InventoryAdapterTile craftingInventory;
+    private final InventoryAdapterTile<?> craftingInventory;
     private final InventoryCraftResult craftPreviewInventory;
 
     @Nullable

@@ -16,7 +16,6 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 import com.mojang.authlib.GameProfile;
@@ -50,29 +49,22 @@ public abstract class BlockStructure extends BlockForestry {
         }
 
         TileEntity tile = world.getTileEntity(x, y, z);
-        if (!(tile instanceof MultiblockTileEntityForestry)) {
+        if (!(tile instanceof MultiblockTileEntityForestry<?>part)) {
             return false;
         }
 
-        MultiblockTileEntityForestry part = (MultiblockTileEntityForestry) tile;
         IMultiblockController controller = part.getMultiblockLogic().getController();
 
         // If the player's hands are empty and they right-click on a multiblock, they get a
         // multiblock-debugging message if the machine is not assembled.
         if (player.getCurrentEquippedItem() == null && !controller.isAssembled()) {
-            if (controller != null) {
-                String validationError = controller.getLastValidationError();
-                if (validationError != null) {
-                    long tick = world.getTotalWorldTime();
-                    if (tick > previousMessageTick + 20) {
-                        player.addChatMessage(new ChatComponentText(validationError));
-                        previousMessageTick = tick;
-                    }
-                    return true;
+            String validationError = controller.getLastValidationError();
+            if (validationError != null) {
+                long tick = world.getTotalWorldTime();
+                if (tick > previousMessageTick + 20) {
+                    player.addChatMessage(new ChatComponentText(validationError));
+                    previousMessageTick = tick;
                 }
-            } else {
-                player.addChatMessage(
-                        new ChatComponentText(StatCollector.translateToLocal("for.multiblock.error.notConnected")));
                 return true;
             }
         }
@@ -94,13 +86,12 @@ public abstract class BlockStructure extends BlockForestry {
             return;
         }
 
-        if (entityLiving instanceof EntityPlayer) {
+        if (entityLiving instanceof EntityPlayer player) {
             TileEntity tile = world.getTileEntity(i, j, k);
 
-            if (tile instanceof MultiblockTileEntityForestry) {
-                EntityPlayer player = (EntityPlayer) entityLiving;
+            if (tile instanceof MultiblockTileEntityForestry<?>tileForestry) {
                 GameProfile gameProfile = player.getGameProfile();
-                ((MultiblockTileEntityForestry) tile).setOwner(gameProfile);
+                tileForestry.setOwner(gameProfile);
             }
         }
     }

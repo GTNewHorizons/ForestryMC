@@ -26,7 +26,6 @@ import forestry.api.fuels.FermenterFuel;
 import forestry.api.fuels.FuelManager;
 import forestry.api.fuels.MoistenerFuel;
 import forestry.api.fuels.RainSubstrate;
-import forestry.api.recipes.ICraftingProvider;
 import forestry.api.recipes.RecipeManagers;
 import forestry.apiculture.items.ItemRegistryApiculture;
 import forestry.core.blocks.BlockCoreType;
@@ -78,7 +77,7 @@ public class PluginFactory extends ForestryPlugin {
     protected void setupAPI() {
         super.setupAPI();
 
-        RecipeManagers.craftingProviders = ImmutableList.<ICraftingProvider>of(
+        RecipeManagers.craftingProviders = ImmutableList.of(
                 RecipeManagers.carpenterManager = new CarpenterRecipeManager(),
                 RecipeManagers.centrifugeManager = new CentrifugeRecipeManager(),
                 RecipeManagers.fabricatorManager = new FabricatorRecipeManager(),
@@ -95,7 +94,7 @@ public class PluginFactory extends ForestryPlugin {
     protected void disabledSetupAPI() {
         super.disabledSetupAPI();
 
-        RecipeManagers.craftingProviders = ImmutableList.<ICraftingProvider>of(
+        RecipeManagers.craftingProviders = ImmutableList.of(
                 RecipeManagers.carpenterManager = new DummyManagers.DummyCarpenterManager(),
                 RecipeManagers.centrifugeManager = new DummyManagers.DummyCentrifugeManager(),
                 RecipeManagers.fabricatorManager = new DummyManagers.DummyFabricatorManager(),

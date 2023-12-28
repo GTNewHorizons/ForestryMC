@@ -32,7 +32,6 @@ public class ContainerEngineBiogas extends ContainerLiquidTanks<TileEngineBiogas
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public void detectAndSendChanges() {
         super.detectAndSendChanges();
 

@@ -302,7 +302,7 @@ public abstract class GuiForestry<C extends Container, I extends IInventory> ext
     @Optional.Method(modid = "NotEnoughItems")
     public boolean hideItemPanelSlot(GuiContainer gui, int x, int y, int w, int h) {
         if (gui instanceof GuiForestry) {
-            return ((GuiForestry) gui).ledgerManager.ledgerOverlaps(x, y, w, h);
+            return ((GuiForestry<?, ?>) gui).ledgerManager.ledgerOverlaps(x, y, w, h);
         } else {
             return false;
         }

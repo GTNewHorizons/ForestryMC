@@ -34,7 +34,6 @@ public class ContainerRaintank extends ContainerLiquidTanks<TileRaintank> {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public void detectAndSendChanges() {
         super.detectAndSendChanges();
 

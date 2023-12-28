@@ -32,7 +32,6 @@ public class ContainerGenerator extends ContainerLiquidTanks<TileGenerator> {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public void detectAndSendChanges() {
         super.detectAndSendChanges();
 

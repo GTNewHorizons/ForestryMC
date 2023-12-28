@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.inventory.Container;
+import net.minecraft.inventory.IInventory;
 
 import org.lwjgl.opengl.GL11;
 
@@ -20,11 +22,11 @@ import forestry.core.proxy.Proxies;
 
 public class WidgetManager {
 
-    public final GuiForestry gui;
+    public final GuiForestry<? extends Container, ? extends IInventory> gui;
     public final Minecraft minecraft;
     protected final List<Widget> widgets = new ArrayList<>();
 
-    public WidgetManager(GuiForestry gui) {
+    public WidgetManager(GuiForestry<? extends Container, ? extends IInventory> gui) {
         this.gui = gui;
         this.minecraft = Proxies.common.getClientInstance();
     }

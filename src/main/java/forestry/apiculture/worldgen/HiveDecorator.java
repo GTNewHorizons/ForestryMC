@@ -28,7 +28,6 @@ import forestry.plugins.PluginApiculture;
 
 public abstract class HiveDecorator {
 
-    @SuppressWarnings("rawtypes")
     private static final EventType EVENT_TYPE = EnumHelper
             .addEnum(EventType.class, "FORESTRY_HIVES", new Class[0], new Object[0]);
 

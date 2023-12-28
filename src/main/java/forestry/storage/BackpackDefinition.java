@@ -33,8 +33,8 @@ public class BackpackDefinition implements IBackpackDefinition {
 
     private final Set<String> validItemStacks = new HashSet<>();
     private final Set<Integer> validOreIds = new HashSet<>();
-    private final Set<Class> validItemClasses = new HashSet<>();
-    private final Set<Class> validBlockClasses = new HashSet<>();
+    private final Set<Class<?>> validItemClasses = new HashSet<>();
+    private final Set<Class<?>> validBlockClasses = new HashSet<>();
 
     public BackpackDefinition(String name, int primaryColor) {
         this(name, primaryColor, 0xffffff);
@@ -125,26 +125,26 @@ public class BackpackDefinition implements IBackpackDefinition {
         }
     }
 
-    public void addValidItemClass(Class itemClass) {
+    public void addValidItemClass(Class<?> itemClass) {
         if (itemClass != null) {
             validItemClasses.add(itemClass);
         }
     }
 
-    public void addValidItemClasses(List<Class> itemClasses) {
-        for (Class itemClass : itemClasses) {
+    public void addValidItemClasses(List<Class<?>> itemClasses) {
+        for (Class<?> itemClass : itemClasses) {
             addValidItemClass(itemClass);
         }
     }
 
-    public void addValidBlockClass(Class blockClass) {
+    public void addValidBlockClass(Class<?> blockClass) {
         if (blockClass != null) {
             validBlockClasses.add(blockClass);
         }
     }
 
-    public void addValidBlockClasses(List<Class> blockClasses) {
-        for (Class blockClass : blockClasses) {
+    public void addValidBlockClasses(List<Class<?>> blockClasses) {
+        for (Class<?> blockClass : blockClasses) {
             addValidBlockClass(blockClass);
         }
     }
@@ -157,11 +157,11 @@ public class BackpackDefinition implements IBackpackDefinition {
         return validOreIds;
     }
 
-    public Set<Class> getValidBlockClasses() {
+    public Set<Class<?>> getValidBlockClasses() {
         return validBlockClasses;
     }
 
-    public Set<Class> getValidItemClasses() {
+    public Set<Class<?>> getValidItemClasses() {
         return validItemClasses;
     }
 
@@ -197,7 +197,7 @@ public class BackpackDefinition implements IBackpackDefinition {
             }
         }
 
-        for (Class itemClass : validItemClasses) {
+        for (Class<?> itemClass : validItemClasses) {
             if (itemClass.isInstance(item)) {
                 validItemStacks.add(itemStackStringWild);
                 return true;
@@ -206,7 +206,7 @@ public class BackpackDefinition implements IBackpackDefinition {
 
         Block block = Block.getBlockFromItem(item);
         if (block != null) {
-            for (Class blockClass : validBlockClasses) {
+            for (Class<?> blockClass : validBlockClasses) {
                 if (blockClass.isInstance(block)) {
                     validItemStacks.add(itemStackStringWild);
                     return true;

@@ -25,7 +25,7 @@ import forestry.core.gui.tooltips.ToolTipLine;
 
 public class GuiUtil {
 
-    public static void drawItemStack(GuiForestry gui, ItemStack stack, int xPos, int yPos) {
+    public static void drawItemStack(GuiForestry<?, ?> gui, ItemStack stack, int xPos, int yPos) {
         GL11.glPushAttrib(GL11.GL_ENABLE_BIT);
         RenderHelper.enableGUIStandardItemLighting();
 
@@ -50,7 +50,7 @@ public class GuiUtil {
         GL11.glPopAttrib();
     }
 
-    public static void drawToolTips(GuiForestry gui, ToolTip toolTips, int mouseX, int mouseY) {
+    public static void drawToolTips(GuiForestry<?, ?> gui, ToolTip toolTips, int mouseX, int mouseY) {
         if (toolTips == null) {
             return;
         }
@@ -144,7 +144,7 @@ public class GuiUtil {
         itemRender.zLevel = 0.0F;
     }
 
-    public static void drawToolTips(GuiForestry gui, Collection<?> objects, int mouseX, int mouseY) {
+    public static void drawToolTips(GuiForestry<?, ?> gui, Collection<?> objects, int mouseX, int mouseY) {
         for (Object obj : objects) {
             if (!(obj instanceof IToolTipProvider)) {
                 continue;

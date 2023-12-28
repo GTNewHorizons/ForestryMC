@@ -94,7 +94,6 @@ public class GuiNaturalistInventory extends GuiForestry<Container, IPagedInvento
         }
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public void initGui() {
         super.initGui();

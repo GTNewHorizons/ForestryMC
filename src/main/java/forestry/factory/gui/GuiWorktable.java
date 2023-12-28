@@ -111,7 +111,6 @@ public class GuiWorktable extends GuiForestryTitled<ContainerWorktable, TileWork
         GL11.glEnable(GL11.GL_LIGHTING);
     }
 
-    @SuppressWarnings("unchecked")
     private void addButtons() {
         buttonList.add(new GuiBetterButton(0, guiLeft + 76, guiTop + 56, StandardButtonTextureSets.LEFT_BUTTON_SMALL));
         buttonList.add(new GuiBetterButton(1, guiLeft + 85, guiTop + 56, StandardButtonTextureSets.RIGHT_BUTTON_SMALL));

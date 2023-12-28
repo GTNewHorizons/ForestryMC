@@ -46,7 +46,7 @@ public class PacketGuiEnergy extends ForestryPacket implements IForestryPacketCl
     @Override
     public void onPacketData(DataInputStreamForestry data, EntityPlayer player) throws IOException {
         if (player.openContainer instanceof ContainerTile && player.openContainer.windowId == windowId) {
-            ((ContainerTile) player.openContainer).onGuiEnergy(value);
+            ((ContainerTile<?>) player.openContainer).onGuiEnergy(value);
         }
     }
 

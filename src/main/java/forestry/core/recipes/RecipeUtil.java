@@ -34,7 +34,7 @@ import forestry.factory.inventory.InventoryCraftingForestry;
 
 public abstract class RecipeUtil {
 
-    static List<Object> cachedRecipes = new ArrayList<Object>();
+    static List<IRecipe> cachedRecipes = new ArrayList<>();
 
     public static void addFermenterRecipes(ItemStack resource, int fermentationValue, Fluids output) {
         if (RecipeManagers.fermenterManager == null) {
@@ -183,15 +183,14 @@ public abstract class RecipeUtil {
         }
 
         List<ItemStack> matchingRecipes = new ArrayList<>();
-        List<Integer> matchingIndex = new ArrayList();
-        List<Object> matchingRecipeMap = new ArrayList();
+        List<Integer> matchingIndex = new ArrayList<>();
+        List<IRecipe> matchingRecipeMap = new ArrayList<>();
         int index = 0;
 
         if (Config.cacheWorktableRecipes) {
             // Check across the whole cached recipe map
             // Add each recipe to the matchingRecipes list
-            for (Object recipe : cachedRecipes) {
-                IRecipe irecipe = (IRecipe) recipe;
+            for (IRecipe irecipe : cachedRecipes) {
 
                 if (irecipe.matches(inventory, world)) {
                     ItemStack result = irecipe.getCraftingResult(inventory);
@@ -206,8 +205,7 @@ public abstract class RecipeUtil {
             }
         }
         // Only do this if there were no cached recipes hit
-        for (Object recipe : CraftingManager.getInstance().getRecipeList()) {
-            IRecipe irecipe = (IRecipe) recipe;
+        for (IRecipe irecipe : CraftingManager.getInstance().getRecipeList()) {
 
             if (irecipe.matches(inventory, world)) {
                 ItemStack result = irecipe.getCraftingResult(inventory);
@@ -216,8 +214,8 @@ public abstract class RecipeUtil {
                     if (Config.promoteWorktableRecipesToFrontOfGlobalRecipemap || Config.cacheWorktableRecipes) {
                         // Add to the back of the list. That way when we cycle through the list
                         // moving items to the front, the index locations for the following items doesn't change
-                        matchingRecipeMap.add(recipe);
-                        matchingIndex.add(new Integer(index));
+                        matchingRecipeMap.add(irecipe);
+                        matchingIndex.add(index);
                     }
                 }
             }
@@ -227,7 +225,7 @@ public abstract class RecipeUtil {
             if (Config.promoteWorktableRecipesToFrontOfGlobalRecipemap) {
                 // Only move the recipes if the last one was beyond 500 in the recipeMap (in GTNH about 57k recipes)
                 if (matchingIndex.get(matchingIndex.size() - 1) > 500) {
-                    List recipeMap = CraftingManager.getInstance().getRecipeList();
+                    List<IRecipe> recipeMap = CraftingManager.getInstance().getRecipeList();
                     // System.out.println( "Highest recipe found at " + matchingIndex.get(matchingIndex.size()-1) + ",
                     // moving " + matchingIndex.size() + " to front" );
                     // System.out.println( "Size of recipe map " + recipeMap.size() );
@@ -295,12 +293,10 @@ public abstract class RecipeUtil {
         addRecipe(new ItemStack(item), obj);
     }
 
-    @SuppressWarnings("unchecked")
     public static void addRecipe(ItemStack itemstack, Object... obj) {
         CraftingManager.getInstance().getRecipeList().add(new ShapedRecipeCustom(itemstack, obj));
     }
 
-    @SuppressWarnings("unchecked")
     public static void addPriorityRecipe(ItemStack itemStack, Object... obj) {
         CraftingManager.getInstance().getRecipeList().add(0, new ShapedRecipeCustom(itemStack, obj));
     }
@@ -309,7 +305,6 @@ public abstract class RecipeUtil {
         addShapelessRecipe(new ItemStack(item), obj);
     }
 
-    @SuppressWarnings("unchecked")
     public static void addShapelessRecipe(ItemStack itemstack, Object... obj) {
         CraftingManager.getInstance().getRecipeList().add(new ShapelessOreRecipe(itemstack, obj));
     }
@@ -400,7 +395,7 @@ public abstract class RecipeUtil {
         } else if (recipeIngredient instanceof ItemStack) {
             return ItemStackUtil.isCraftingEquivalent((ItemStack) recipeIngredient, resource);
         } else if (recipeIngredient instanceof Iterable) {
-            for (Object item : (Iterable) recipeIngredient) {
+            for (Object item : (Iterable<?>) recipeIngredient) {
                 if (checkIngredientMatch(item, resource)) {
                     return true;
                 }

@@ -109,6 +109,6 @@ public class CircuitRegistry implements ICircuitRegistry {
             return null;
         }
 
-        return new CircuitBoard(nbttagcompound);
+        return new CircuitBoard<>(nbttagcompound);
     }
 }

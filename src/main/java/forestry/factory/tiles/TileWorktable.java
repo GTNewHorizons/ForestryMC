@@ -38,7 +38,7 @@ import forestry.factory.recipes.RecipeMemory;
 public class TileWorktable extends TileBase implements ICrafterWorktable {
 
     private final RecipeMemory recipeMemory;
-    private final InventoryAdapterTile craftingDisplay;
+    private final InventoryAdapterTile<?> craftingDisplay;
     private MemorizedRecipe currentRecipe;
     private long savedTick = 0;
     private long savedSystemTimeExpiration = 0;

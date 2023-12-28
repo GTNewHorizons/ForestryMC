@@ -99,7 +99,7 @@ public class ComponentVillageBeeHouse extends StructureVillagePieces.House1 {
         }
     }
 
-    @SuppressWarnings("rawtypes")
+    @SuppressWarnings({ "rawtypes", "unchecked" })
     public static ComponentVillageBeeHouse buildComponent(StructureVillagePieces.Start startPiece, List par1List,
             Random random, int par3, int par4, int par5, int par6, int par7) {
         StructureBoundingBox bbox = StructureBoundingBox

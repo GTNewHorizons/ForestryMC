@@ -85,7 +85,7 @@ public class NEIHandlerCarpenter extends RecipeHandlerBase {
                         continue;
                     } else if (item instanceof ItemStack[] && ((ItemStack[]) item).length == 0) {
                         continue;
-                    } else if (item instanceof List && ((List) item).size() == 0) {
+                    } else if (item instanceof List && ((List<?>) item).size() == 0) {
                         continue;
                     }
 

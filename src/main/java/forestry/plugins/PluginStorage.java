@@ -100,7 +100,7 @@ public class PluginStorage extends ForestryPlugin {
     public static ItemRegistryStorage items;
 
     @Override
-    @SuppressWarnings({ "unchecked", "rawtypes" })
+    @SuppressWarnings({ "unchecked" })
     protected void setupAPI() {
         super.setupAPI();
 
@@ -149,7 +149,7 @@ public class PluginStorage extends ForestryPlugin {
     }
 
     @Override
-    @SuppressWarnings({ "unchecked", "rawtypes" })
+    @SuppressWarnings({ "unchecked" })
     protected void disabledSetupAPI() {
         BackpackManager.backpackItems = new ArrayList[6];
         BackpackManager.backpackItems[0] = minerItems;
@@ -186,12 +186,12 @@ public class PluginStorage extends ForestryPlugin {
         config.save();
 
         BackpackDefinition forester = (BackpackDefinition) BackpackManager.definitions.get("forester");
-        forester.addValidBlockClasses(Arrays.<Class>asList(IPlantable.class, IGrowable.class, IShearable.class));
-        forester.addValidItemClasses(Arrays.<Class>asList(IPlantable.class, IGrowable.class));
+        forester.addValidBlockClasses(Arrays.asList(IPlantable.class, IGrowable.class, IShearable.class));
+        forester.addValidItemClasses(Arrays.asList(IPlantable.class, IGrowable.class));
 
         BackpackDefinition builder = (BackpackDefinition) BackpackManager.definitions.get("builder");
         builder.addValidBlockClasses(
-                Arrays.<Class>asList(
+                Arrays.asList(
                         BlockStairs.class,
                         BlockFence.class,
                         BlockFenceGate.class,

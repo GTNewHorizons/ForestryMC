@@ -79,7 +79,6 @@ public class GuiSolderingIron extends GuiForestry<ContainerSolderingIron, ItemIn
         }
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public void initGui() {
         super.initGui();

@@ -33,7 +33,7 @@ public class AlleleHelper implements IAlleleHelper {
     private static final String modId = Constants.ID;
     public static AlleleHelper instance;
 
-    private final Map<Class, Map<?, ? extends IAllele>> alleleMaps = new HashMap<>();
+    private final Map<Class<?>, Map<?, ? extends IAllele>> alleleMaps = new HashMap<>();
 
     public void init() {
         if (PluginManager.Module.APICULTURE.isEnabled()) {

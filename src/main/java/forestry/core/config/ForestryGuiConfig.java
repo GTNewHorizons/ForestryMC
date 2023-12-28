@@ -25,6 +25,7 @@ public class ForestryGuiConfig extends GuiConfig {
         super(parent, getConfigCategories(), Constants.MOD, true, true, Constants.MOD);
     }
 
+    @SuppressWarnings("rawtypes")
     private static List<IConfigElement> getConfigCategories() {
         List<IConfigElement> configElements = new ArrayList<>();
 
@@ -32,13 +33,13 @@ public class ForestryGuiConfig extends GuiConfig {
                 .asList("crafting", "difficulty", "genetics", "performance", "structures", "tweaks", "world");
         for (String categoryName : commonCategoryNames) {
             ConfigCategory category = Config.configCommon.getCategory(categoryName);
-            configElements.add(new ConfigElement(category));
+            configElements.add(new ConfigElement<>(category));
         }
 
         List<String> fluidCategoryNames = Arrays.asList("enableFluid", "enableFluidBlock");
         for (String categoryName : fluidCategoryNames) {
             ConfigCategory category = Config.configFluid.getCategory(categoryName);
-            configElements.add(new ConfigElement(category));
+            configElements.add(new ConfigElement<>(category));
         }
 
         return configElements;

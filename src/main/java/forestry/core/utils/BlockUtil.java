@@ -31,6 +31,7 @@ import forestry.core.config.Constants;
 import forestry.core.tiles.TileEngine;
 import forestry.core.utils.vect.Vect;
 
+@SuppressWarnings("unchecked")
 public abstract class BlockUtil {
 
     private static final int slabWoodId = OreDictionary.getOreID("slabWood");

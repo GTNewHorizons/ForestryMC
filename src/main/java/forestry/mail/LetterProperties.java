@@ -97,7 +97,7 @@ public class LetterProperties {
     }
 
     @SuppressWarnings("unchecked")
-    public static void getSubItems(Item item, CreativeTabs tab, List list) {
+    public static void getSubItems(Item item, CreativeTabs tab, @SuppressWarnings("rawtypes") List list) {
         for (State state : State.values()) {
             for (Size size : Size.values()) {
                 int meta = encodeMeta(state, size);

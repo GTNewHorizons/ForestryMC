@@ -11,6 +11,9 @@ package forestry.core.gui.ledgers;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.minecraft.inventory.Container;
+import net.minecraft.inventory.IInventory;
+
 import org.lwjgl.opengl.GL11;
 
 import forestry.api.core.IErrorSource;
@@ -29,9 +32,9 @@ public class LedgerManager {
     private IErrorSource errorSource;
     private final int maxWidth;
 
-    public final GuiForestry gui;
+    public final GuiForestry<? extends Container, ? extends IInventory> gui;
 
-    public LedgerManager(GuiForestry gui, int maxWidth) {
+    public LedgerManager(GuiForestry<? extends Container, ? extends IInventory> gui, int maxWidth) {
         this.gui = gui;
         this.errorSource = FakeErrorSource.instance;
         this.maxWidth = maxWidth;

@@ -39,7 +39,7 @@ public class ToolTip extends ForwardingList<ToolTipLine> {
         return add(new ToolTipLine(line));
     }
 
-    public boolean add(List lines) {
+    public boolean add(List<?> lines) {
         boolean changed = false;
         for (Object line : lines) {
             if (line instanceof String) {

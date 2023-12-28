@@ -120,7 +120,7 @@ public abstract class MultiblockControllerBase implements IMultiblockControllerI
                     coord);
         }
 
-        MultiblockLogic logic = (MultiblockLogic) part.getMultiblockLogic();
+        MultiblockLogic<?> logic = (MultiblockLogic<?>) part.getMultiblockLogic();
 
         logic.setController(this);
         this.onBlockAdded(part);
@@ -138,7 +138,7 @@ public abstract class MultiblockControllerBase implements IMultiblockControllerI
             TileEntity te = this.worldObj.getTileEntity(referenceCoord.posX, referenceCoord.posY, referenceCoord.posZ);
             if (te instanceof IMultiblockComponent) {
                 IMultiblockComponent tePart = (IMultiblockComponent) te;
-                MultiblockLogic teLogic = (MultiblockLogic) tePart.getMultiblockLogic();
+                MultiblockLogic<?> teLogic = (MultiblockLogic<?>) tePart.getMultiblockLogic();
                 teLogic.forfeitMultiblockSaveDelegate();
             }
 
@@ -219,7 +219,7 @@ public abstract class MultiblockControllerBase implements IMultiblockControllerI
      */
     private void onDetachBlock(IMultiblockComponent part) {
         // Strip out this part
-        MultiblockLogic logic = (MultiblockLogic) part.getMultiblockLogic();
+        MultiblockLogic<?> logic = (MultiblockLogic<?>) part.getMultiblockLogic();
         logic.setController(null);
         this.onBlockRemoved(part);
         logic.forfeitMultiblockSaveDelegate();
@@ -361,7 +361,7 @@ public abstract class MultiblockControllerBase implements IMultiblockControllerI
             }
 
             connectedParts.add(acquiredPart);
-            MultiblockLogic logic = (MultiblockLogic) acquiredPart.getMultiblockLogic();
+            MultiblockLogic<?> logic = (MultiblockLogic<?>) acquiredPart.getMultiblockLogic();
             logic.setController(this);
             this.onBlockAdded(acquiredPart);
         }
@@ -383,7 +383,7 @@ public abstract class MultiblockControllerBase implements IMultiblockControllerI
                         .getTileEntity(referenceCoord.posX, referenceCoord.posY, referenceCoord.posZ);
                 if (te instanceof IMultiblockComponent) {
                     IMultiblockComponent part = (IMultiblockComponent) te;
-                    MultiblockLogic logic = (MultiblockLogic) part.getMultiblockLogic();
+                    MultiblockLogic<?> logic = (MultiblockLogic<?>) part.getMultiblockLogic();
                     logic.forfeitMultiblockSaveDelegate();
                 }
             }
@@ -745,7 +745,7 @@ public abstract class MultiblockControllerBase implements IMultiblockControllerI
                 continue;
             }
 
-            MultiblockLogic logic = (MultiblockLogic) part.getMultiblockLogic();
+            MultiblockLogic<?> logic = (MultiblockLogic<?>) part.getMultiblockLogic();
 
             logic.setUnvisited();
             logic.forfeitMultiblockSaveDelegate();
@@ -769,7 +769,7 @@ public abstract class MultiblockControllerBase implements IMultiblockControllerI
             MultiblockRegistry.addDeadController(worldObj, this);
             return Collections.emptySet();
         } else {
-            MultiblockLogic logic = (MultiblockLogic) referencePart.getMultiblockLogic();
+            MultiblockLogic<?> logic = (MultiblockLogic<?>) referencePart.getMultiblockLogic();
             logic.becomeMultiblockSaveDelegate();
         }
 
@@ -781,7 +781,7 @@ public abstract class MultiblockControllerBase implements IMultiblockControllerI
 
         while (!partsToCheck.isEmpty()) {
             part = partsToCheck.removeFirst();
-            MultiblockLogic partLogic = (MultiblockLogic) part.getMultiblockLogic();
+            MultiblockLogic<?> partLogic = (MultiblockLogic<?>) part.getMultiblockLogic();
             partLogic.setVisited();
 
             List<IMultiblockComponent> nearbyParts = MultiblockUtil.getNeighboringParts(worldObj, part); // Chunk-safe
@@ -790,7 +790,7 @@ public abstract class MultiblockControllerBase implements IMultiblockControllerI
                                                                                                          // client
             for (IMultiblockComponent nearbyPart : nearbyParts) {
                 // Ignore different machines
-                MultiblockLogic nearbyPartLogic = (MultiblockLogic) nearbyPart.getMultiblockLogic();
+                MultiblockLogic<?> nearbyPartLogic = (MultiblockLogic<?>) nearbyPart.getMultiblockLogic();
                 if (nearbyPartLogic.getController() != this) {
                     continue;
                 }
@@ -805,7 +805,7 @@ public abstract class MultiblockControllerBase implements IMultiblockControllerI
         // Finally, remove all parts that remain disconnected.
         Set<IMultiblockComponent> removedParts = new HashSet<>();
         for (IMultiblockComponent orphanCandidate : connectedParts) {
-            MultiblockLogic logic = (MultiblockLogic) orphanCandidate.getMultiblockLogic();
+            MultiblockLogic<?> logic = (MultiblockLogic<?>) orphanCandidate.getMultiblockLogic();
             if (!logic.isVisited()) {
                 deadParts.add(orphanCandidate);
                 onDetachBlock(orphanCandidate);
@@ -877,7 +877,7 @@ public abstract class MultiblockControllerBase implements IMultiblockControllerI
         }
 
         if (theChosenOne != null) {
-            MultiblockLogic logic = (MultiblockLogic) theChosenOne.getMultiblockLogic();
+            MultiblockLogic<?> logic = (MultiblockLogic<?>) theChosenOne.getMultiblockLogic();
             logic.becomeMultiblockSaveDelegate();
         }
     }

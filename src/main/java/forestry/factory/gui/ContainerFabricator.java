@@ -69,7 +69,6 @@ public class ContainerFabricator extends ContainerLiquidTanks<TileFabricator> im
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public void detectAndSendChanges() {
         super.detectAndSendChanges();
 

@@ -123,7 +123,7 @@ public abstract class Log {
         LogManager.getLogger(Constants.MOD).log(level, new MessageFormatMessage(msg, args), error);
     }
 
-    public static void logErrorAPI(String mod, Throwable error, Class classFile) {
+    public static void logErrorAPI(String mod, Throwable error, Class<?> classFile) {
         StringBuilder msg = new StringBuilder(mod);
         msg.append(" API error, please update your mods. Error: ").append(error);
         logThrowable(Level.ERROR, msg.toString(), 2, error);

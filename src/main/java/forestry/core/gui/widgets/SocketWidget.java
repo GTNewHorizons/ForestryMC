@@ -54,7 +54,6 @@ public class SocketWidget extends Widget {
 
     private final ToolTip toolTip = new ToolTip(250) {
 
-        @SuppressWarnings("unchecked")
         @Override
         public void refresh() {
             toolTip.clear();

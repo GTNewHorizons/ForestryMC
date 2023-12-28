@@ -59,13 +59,11 @@ public abstract class EntityUtil {
         Log.finer("Registered entity %s (%s) with id %s.", ident, entityClass.toString(), id);
     }
 
-    @SuppressWarnings("unchecked")
     public static <T extends Entity> List<T> getEntitiesWithinAABB(World world, Class<T> entityClass,
             AxisAlignedBB boundingBox) {
         return world.getEntitiesWithinAABB(entityClass, boundingBox);
     }
 
-    @SuppressWarnings("unchecked")
     public static <T extends Entity> List<T> selectEntitiesWithinAABB(World world, EntitySelector<T> entitySelector,
             AxisAlignedBB boundingBox) {
         return world.selectEntitiesWithinAABB(entitySelector.getEntityClass(), boundingBox, entitySelector);

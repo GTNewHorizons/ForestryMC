@@ -135,7 +135,7 @@ public class MultiblockWorldRegistry {
                     if (compatibleControllers.size() == 0) {
                         // FOREVER ALONE! Create and register a new controller.
                         // THIS IS THE ONLY PLACE WHERE NEW CONTROLLERS ARE CREATED.
-                        MultiblockLogic logic = (MultiblockLogic) orphan.getMultiblockLogic();
+                        MultiblockLogic<?> logic = (MultiblockLogic<?>) orphan.getMultiblockLogic();
                         IMultiblockControllerInternal newController = logic.createNewController(worldObj);
                         newController.attachBlock(orphan);
                         this.controllers.add(newController);
@@ -263,7 +263,7 @@ public class MultiblockWorldRegistry {
         // list, and will be checked next tick to see if their chunk is still loaded.
         for (IMultiblockComponent part : detachedParts) {
             // Ensure parts know they're detached
-            MultiblockLogic logic = (MultiblockLogic) part.getMultiblockLogic();
+            MultiblockLogic<?> logic = (MultiblockLogic<?>) part.getMultiblockLogic();
             logic.assertDetached(part);
         }
 
@@ -276,7 +276,7 @@ public class MultiblockWorldRegistry {
         Set<IMultiblockControllerInternal> controllers = new HashSet<>();
         IMultiblockControllerInternal bestController = null;
 
-        MultiblockLogic logic = (MultiblockLogic) part.getMultiblockLogic();
+        MultiblockLogic<?> logic = (MultiblockLogic<?>) part.getMultiblockLogic();
         Class<?> controllerClass = logic.getControllerClass();
         // Look for a compatible controller in our neighboring parts.
         List<IMultiblockComponent> partsToCheck = MultiblockUtil.getNeighboringParts(worldObj, part);
@@ -367,7 +367,7 @@ public class MultiblockWorldRegistry {
             }
         }
 
-        MultiblockLogic logic = (MultiblockLogic) part.getMultiblockLogic();
+        MultiblockLogic<?> logic = (MultiblockLogic<?>) part.getMultiblockLogic();
         logic.assertDetached(part);
     }
 

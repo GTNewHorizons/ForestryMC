@@ -58,7 +58,6 @@ public class ContainerMoistener extends ContainerLiquidTanks<TileMoistener> impl
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public void detectAndSendChanges() {
         super.detectAndSendChanges();
 

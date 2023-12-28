@@ -139,7 +139,7 @@ public abstract class RecipeHandlerBase extends TemplateRecipeHandler implements
         return currenttip;
     }
 
-    public List<String> provideTooltip(GuiRecipe guiRecipe, List<String> currenttip, CachedBaseRecipe crecipe,
+    public List<String> provideTooltip(GuiRecipe<?> guiRecipe, List<String> currenttip, CachedBaseRecipe crecipe,
             Point relMouse) {
         if (crecipe.getFluidTanks() != null) {
             for (PositionedFluidTank tank : crecipe.getFluidTanks()) {
@@ -151,7 +151,7 @@ public abstract class RecipeHandlerBase extends TemplateRecipeHandler implements
         return currenttip;
     }
 
-    public List<String> provideItemTooltip(GuiRecipe guiRecipe, ItemStack itemStack, List<String> currenttip,
+    public List<String> provideItemTooltip(GuiRecipe<?> guiRecipe, ItemStack itemStack, List<String> currenttip,
             CachedBaseRecipe crecipe, Point relMouse) {
         for (PositionedStack stack : crecipe.getIngredients()) {
             if (stack instanceof PositionedStackAdv && ((PositionedStackAdv) stack).getRect().contains(relMouse)) {
@@ -171,7 +171,7 @@ public abstract class RecipeHandlerBase extends TemplateRecipeHandler implements
     }
 
     @Override
-    public boolean keyTyped(GuiRecipe gui, char keyChar, int keyCode, int recipe) {
+    public boolean keyTyped(GuiRecipe<?> gui, char keyChar, int keyCode, int recipe) {
         if (keyCode == NEIClientConfig.getKeyBinding("gui.recipe")) {
             if (this.transferFluidTank(gui, recipe, false)) {
                 return true;
@@ -185,7 +185,7 @@ public abstract class RecipeHandlerBase extends TemplateRecipeHandler implements
     }
 
     @Override
-    public boolean mouseClicked(GuiRecipe gui, int button, int recipe) {
+    public boolean mouseClicked(GuiRecipe<?> gui, int button, int recipe) {
         if (button == 0) {
             if (this.transferFluidTank(gui, recipe, false)) {
                 return true;
@@ -198,7 +198,7 @@ public abstract class RecipeHandlerBase extends TemplateRecipeHandler implements
         return super.mouseClicked(gui, button, recipe);
     }
 
-    protected boolean transferFluidTank(GuiRecipe guiRecipe, int recipe, boolean usage) {
+    protected boolean transferFluidTank(GuiRecipe<?> guiRecipe, int recipe, boolean usage) {
         CachedBaseRecipe crecipe = (CachedBaseRecipe) this.arecipes.get(recipe);
         Point mousepos = GuiDraw.getMousePosition();
         Point offset = guiRecipe.getRecipePosition(recipe);

@@ -164,7 +164,6 @@ public class CommandHelpers {
         return false;
     }
 
-    @SuppressWarnings("unchecked")
     public static List<String> getListOfStringsMatchingLastWord(String[] strings, String... lastWords) {
         return CommandBase.getListOfStringsMatchingLastWord(strings, lastWords);
     }
