@@ -35,6 +35,7 @@ public abstract class BlockForestry extends BlockContainer {
         setCreativeTab(CreativeTabForestry.tabForestry);
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public boolean removedByPlayer(World world, EntityPlayer player, int x, int y, int z) {
         TileEntity tile = world.getTileEntity(x, y, z);

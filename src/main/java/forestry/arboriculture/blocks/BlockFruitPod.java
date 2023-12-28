@@ -61,6 +61,7 @@ public class BlockFruitPod extends BlockCocoa {
         tile.onBlockTick();
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public boolean removedByPlayer(World world, EntityPlayer player, int x, int y, int z) {
         if (!world.isRemote) {

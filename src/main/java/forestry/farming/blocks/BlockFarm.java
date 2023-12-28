@@ -71,6 +71,7 @@ public class BlockFarm extends BlockStructure {
         }
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z) {
         ArrayList<ItemStack> drops = getDrops(world, x, y, z, 0, 0);

@@ -75,7 +75,7 @@ public class DataInputStreamForestry extends DataInputStream {
     public <T extends IStreamable> T readStreamable(Class<T> streamableClass) throws IOException {
         if (readBoolean()) {
             try {
-                T streamable = streamableClass.newInstance();
+                T streamable = streamableClass.getConstructor().newInstance();
                 streamable.readData(this);
                 return streamable;
             } catch (ReflectiveOperationException e) {

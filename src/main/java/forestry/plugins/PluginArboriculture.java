@@ -73,6 +73,7 @@ import forestry.core.recipes.RecipeUtil;
 import forestry.core.tiles.MachineDefinition;
 import forestry.factory.recipes.FabricatorRecipe;
 
+@SuppressWarnings("deprecation")
 @Plugin(
         pluginID = "Arboriculture",
         name = "Arboriculture",

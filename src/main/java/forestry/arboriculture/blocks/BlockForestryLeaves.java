@@ -168,6 +168,7 @@ public class BlockForestryLeaves extends BlockNewLeaf implements ITileEntityProv
 
     @Override
     public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z) {
+        @SuppressWarnings("deprecation")
         ItemStack itemStack = super.getPickBlock(target, world, x, y, z);
         TileLeaves leaves = getLeafTile(world, x, y, z);
         NBTTagCompound leavesNBT = new NBTTagCompound();
