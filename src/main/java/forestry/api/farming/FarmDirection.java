@@ -34,7 +34,8 @@ public enum FarmDirection {
                 return SOUTH;
             case WEST:
                 return WEST;
+            default:
+                return null;
         }
-        return null;
     }
 }

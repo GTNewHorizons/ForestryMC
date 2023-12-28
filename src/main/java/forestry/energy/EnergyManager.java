@@ -51,8 +51,9 @@ public class EnergyManager implements IEnergyHandler, IStreamable {
             case EXTRACT:
             case BOTH:
                 return true;
+            default:
+                return false;
         }
-        return false;
     }
 
     private boolean canReceive() {
@@ -60,8 +61,9 @@ public class EnergyManager implements IEnergyHandler, IStreamable {
             case RECEIVE:
             case BOTH:
                 return true;
+            default:
+                return false;
         }
-        return false;
     }
 
     /* NBT */

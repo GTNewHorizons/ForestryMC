@@ -1059,6 +1059,8 @@ public enum TreeDefinition implements ITreeDefinition, ITreeGenerator {
                 case WEST:
                     vanillaWoodMeta |= 1 << 2;
                     break;
+                default:
+                    break;
             }
 
             world.setBlock(x, y, z, vanillaWoodBlock, vanillaWoodMeta, Constants.FLAG_BLOCK_SYNCH);

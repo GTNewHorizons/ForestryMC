@@ -133,8 +133,9 @@ public class StandardTank extends FluidTank implements IStreamable {
             case DEFAULT:
             case INPUT:
                 return true;
+            default:
+                return false;
         }
-        return false;
     }
 
     public boolean canBeDrainedExternally() {
@@ -142,8 +143,9 @@ public class StandardTank extends FluidTank implements IStreamable {
             case DEFAULT:
             case OUTPUT:
                 return true;
+            default:
+                return false;
         }
-        return false;
     }
 
     public boolean canFill(Fluid fluid, int amount) {

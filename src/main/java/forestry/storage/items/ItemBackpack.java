@@ -328,8 +328,9 @@ public class ItemBackpack extends ItemWithGui {
                 return new GuiBackpack(new ContainerBackpack(player, ContainerBackpack.Size.DEFAULT, heldItem));
             case T2:
                 return new GuiBackpackT2(new ContainerBackpack(player, ContainerBackpack.Size.T2, heldItem));
+            default:
+                return null;
         }
-        return null;
     }
 
     @Override
@@ -343,7 +344,8 @@ public class ItemBackpack extends ItemWithGui {
                 return new ContainerBackpack(player, ContainerBackpack.Size.DEFAULT, heldItem);
             case T2:
                 return new ContainerBackpack(player, ContainerBackpack.Size.T2, heldItem);
+            default:
+                return null;
         }
-        return null;
     }
 }
