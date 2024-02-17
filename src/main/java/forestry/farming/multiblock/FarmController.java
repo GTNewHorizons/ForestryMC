@@ -9,16 +9,17 @@
 package forestry.farming.multiblock;
 
 import java.io.IOException;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Deque;
 import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.Stack;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
@@ -110,8 +111,8 @@ public class FarmController extends RectangularMultiblockControllerBase
     private int allowedExtent = 0;
 
     private IFarmLogic harvestProvider; // The farm logic which supplied the pending crops.
-    private final Stack<ICrop> pendingCrops = new Stack<>();
-    private final Stack<ItemStack> pendingProduce = new Stack<>();
+    private final Deque<ICrop> pendingCrops = new ArrayDeque<>();
+    private final Deque<ItemStack> pendingProduce = new ArrayDeque<>();
 
     private Stage stage = Stage.CULTIVATE;
 

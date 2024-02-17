@@ -27,6 +27,7 @@ import forestry.core.config.Constants;
 import forestry.core.entities.EntitySelector;
 import forestry.core.render.SpriteSheet;
 import forestry.core.utils.EntityUtil;
+import forestry.core.utils.vect.MutableVect;
 import forestry.core.utils.vect.Vect;
 
 public abstract class FarmLogic implements IFarmLogic {
@@ -64,8 +65,10 @@ public abstract class FarmLogic implements IFarmLogic {
                 && world.getBlockMetadata(position.x, position.y, position.z) == 0;
     }
 
+    protected final MutableVect mutableVect = new MutableVect();
+
     protected final Vect translateWithOffset(int x, int y, int z, FarmDirection farmDirection, int step) {
-        return new Vect(farmDirection.getForgeDirection()).multiply(step).add(x, y, z);
+        return new Vect(mutableVect.set(farmDirection.getForgeDirection()).multiply(step).add(x, y, z));
     }
 
     protected final void setBlock(Vect position, Block block, int meta) {

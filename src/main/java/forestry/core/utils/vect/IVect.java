@@ -34,5 +34,13 @@ public interface IVect {
 
     IVect add(ChunkCoordinates coordinates);
 
+    IVect multiply(int factor);
+
+    IVect multiply(float factor);
+
     int[] toArray();
+
+    Vect asImmutable();
+
+    MutableVect asMutable();
 }

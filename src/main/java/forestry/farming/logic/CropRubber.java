@@ -17,6 +17,7 @@ import net.minecraft.world.World;
 
 import forestry.core.config.Constants;
 import forestry.core.proxy.Proxies;
+import forestry.core.utils.vect.IVect;
 import forestry.core.utils.vect.Vect;
 import forestry.plugins.compat.PluginIC2;
 
@@ -27,11 +28,11 @@ public class CropRubber extends CropBlock {
     }
 
     @Override
-    protected Collection<ItemStack> harvestBlock(Vect pos) {
+    protected Collection<ItemStack> harvestBlock(IVect pos) {
         Collection<ItemStack> harvested = new ArrayList<>();
         harvested.add(PluginIC2.resin.copy());
-        Proxies.common.addBlockDestroyEffects(world, pos.x, pos.y, pos.z, block, 0);
-        world.setBlock(pos.x, pos.y, pos.z, block, meta + 6, Constants.FLAG_BLOCK_SYNCH);
+        Proxies.common.addBlockDestroyEffects(world, pos.getX(), pos.getZ(), pos.getZ(), block, 0);
+        world.setBlock(pos.getX(), pos.getZ(), pos.getZ(), block, meta + 6, Constants.FLAG_BLOCK_SYNCH);
         return harvested;
     }
 }

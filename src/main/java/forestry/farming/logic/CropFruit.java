@@ -18,6 +18,7 @@ import net.minecraft.world.World;
 import forestry.api.genetics.IFruitBearer;
 import forestry.core.network.packets.PacketFXSignal;
 import forestry.core.proxy.Proxies;
+import forestry.core.utils.vect.IVect;
 import forestry.core.utils.vect.Vect;
 
 public class CropFruit extends Crop {
@@ -27,8 +28,8 @@ public class CropFruit extends Crop {
     }
 
     @Override
-    protected boolean isCrop(Vect pos) {
-        TileEntity tile = world.getTileEntity(pos.x, pos.y, pos.z);
+    protected boolean isCrop(IVect pos) {
+        TileEntity tile = world.getTileEntity(pos.getX(), pos.getY(), pos.getZ());
         if (!(tile instanceof IFruitBearer)) {
             return false;
         }
@@ -44,8 +45,8 @@ public class CropFruit extends Crop {
     }
 
     @Override
-    protected Collection<ItemStack> harvestBlock(Vect pos) {
-        TileEntity tile = world.getTileEntity(pos.x, pos.y, pos.z);
+    protected Collection<ItemStack> harvestBlock(IVect pos) {
+        TileEntity tile = world.getTileEntity(pos.getX(), pos.getY(), pos.getZ());
         if (!(tile instanceof IFruitBearer)) {
             return new ArrayList<>();
         }
@@ -54,10 +55,10 @@ public class CropFruit extends Crop {
                 PacketFXSignal.VisualFXType.BLOCK_DESTROY,
                 PacketFXSignal.SoundFXType.LEAF,
                 world,
-                pos.x,
-                pos.y,
-                pos.z,
-                world.getBlock(pos.x, pos.y, pos.z),
+                pos.getX(),
+                pos.getY(),
+                pos.getZ(),
+                world.getBlock(pos.getX(), pos.getY(), pos.getZ()),
                 0);
         return ((IFruitBearer) tile).pickFruit(null);
     }

@@ -8,7 +8,7 @@
  ******************************************************************************/
 package forestry.farming.multiblock;
 
-import java.util.Stack;
+import java.util.Deque;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -208,7 +208,7 @@ public class InventoryFarm extends InventoryAdapterRestricted implements IFarmIn
         produce.stackSize -= InventoryUtil.addStack(productInventory, produce, true);
     }
 
-    public void stowHarvest(Iterable<ItemStack> harvested, Stack<ItemStack> pendingProduce) {
+    public void stowHarvest(Iterable<ItemStack> harvested, Deque<ItemStack> pendingProduce) {
         for (ItemStack harvest : harvested) {
             if (harvest == null) {
                 continue;
@@ -232,7 +232,7 @@ public class InventoryFarm extends InventoryAdapterRestricted implements IFarmIn
         }
     }
 
-    public boolean tryAddPendingProduce(Stack<ItemStack> pendingProduce) {
+    public boolean tryAddPendingProduce(Deque<ItemStack> pendingProduce) {
         IInventory productInventory = getProductInventory();
 
         ItemStack next = pendingProduce.peek();

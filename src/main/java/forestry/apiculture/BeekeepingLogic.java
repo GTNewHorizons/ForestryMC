@@ -115,7 +115,7 @@ public class BeekeepingLogic implements IBeekeepingLogic, IStreamable {
 
         Stack<ItemStack> spawnCopy = new Stack<>();
         if (spawn.size() < 128) spawnCopy.addAll(spawn);
-        else for (byte b = 0; b < 128; ++b) spawnCopy.add(spawn.get(b));
+        else for (int b = 0; b < 128; ++b) spawnCopy.add(spawn.get(b));
         NBTTagList nbttaglist = new NBTTagList();
         while (!spawnCopy.isEmpty() && spawnCopy.size() <= 128) {
             NBTTagCompound nbttagcompound1 = new NBTTagCompound();

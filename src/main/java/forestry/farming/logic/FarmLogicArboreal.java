@@ -8,13 +8,14 @@
  ******************************************************************************/
 package forestry.farming.logic;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Deque;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.Stack;
 
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
@@ -32,6 +33,7 @@ import forestry.api.farming.IFarmHousing;
 import forestry.api.farming.IFarmable;
 import forestry.core.blocks.BlockSoil;
 import forestry.core.render.SpriteSheet;
+import forestry.core.utils.vect.MutableVect;
 import forestry.core.utils.vect.Vect;
 import forestry.core.utils.vect.VectUtil;
 import forestry.plugins.PluginCore;
@@ -128,7 +130,7 @@ public class FarmLogicArboreal extends FarmLogicHomogeneous {
         World world = getWorld();
 
         Set<Vect> seen = new HashSet<>();
-        Stack<ICrop> crops = new Stack<>();
+        Deque<ICrop> crops = new ArrayDeque<>();
 
         // Determine what type we want to harvest.
         IFarmable germling = null;
@@ -162,7 +164,7 @@ public class FarmLogicArboreal extends FarmLogicHomogeneous {
         return crops;
     }
 
-    private ArrayList<Vect> processHarvestBlock(IFarmable germling, Stack<ICrop> crops, Set<Vect> seen, Vect start,
+    private ArrayList<Vect> processHarvestBlock(IFarmable germling, Deque<ICrop> crops, Set<Vect> seen, Vect start,
             Vect position) {
 
         World world = getWorld();
@@ -170,30 +172,33 @@ public class FarmLogicArboreal extends FarmLogicHomogeneous {
         ArrayList<Vect> candidates = new ArrayList<>();
 
         // Get additional candidates to return
+        MutableVect mutable = new MutableVect();
         for (int x = -1; x < 2; x++) {
             for (int y = -1; y < 2; y++) {
                 for (int z = -1; z < 2; z++) {
-                    Vect candidate = position.add(x, y, z);
-                    if (candidate.equals(position)) {
+                    // Vect candidate = position.add(x, y, z);
+                    mutable.set(position).add(x, y, z);
+                    if (mutable.equals(position)) {
                         continue;
                     }
-                    if (Math.abs(candidate.x - start.x) > BRANCH_RANGE) {
+                    if (Math.abs(mutable.x - start.x) > BRANCH_RANGE) {
                         continue;
                     }
-                    if (Math.abs(candidate.z - start.z) > BRANCH_RANGE) {
+                    if (Math.abs(mutable.z - start.z) > BRANCH_RANGE) {
                         continue;
                     }
 
                     // See whether the given position has already been processed
-                    if (seen.contains(candidate)) {
+                    if (seen.contains(mutable)) {
                         continue;
                     }
 
-                    ICrop crop = germling.getCropAt(world, candidate.x, candidate.y, candidate.z);
+                    ICrop crop = germling.getCropAt(world, mutable.x, mutable.y, mutable.z);
                     if (crop != null) {
+                        Vect immutable = mutable.asImmutable();
                         crops.push(crop);
-                        candidates.add(candidate);
-                        seen.add(candidate);
+                        candidates.add(immutable);
+                        seen.add(immutable);
                     }
                 }
             }

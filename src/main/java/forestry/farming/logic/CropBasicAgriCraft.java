@@ -19,6 +19,7 @@ import net.minecraft.world.World;
 
 import forestry.core.config.Constants;
 import forestry.core.proxy.Proxies;
+import forestry.core.utils.vect.IVect;
 import forestry.core.utils.vect.Vect;
 
 public class CropBasicAgriCraft extends Crop {
@@ -33,21 +34,21 @@ public class CropBasicAgriCraft extends Crop {
     }
 
     @Override
-    protected boolean isCrop(Vect pos) {
+    protected boolean isCrop(IVect pos) {
         return getBlock(pos) == block && getBlockMeta(pos) == meta;
     }
 
     @Override
-    protected Collection<ItemStack> harvestBlock(Vect pos) {
-        ArrayList<ItemStack> harvest = block.getDrops(world, pos.x, pos.y, pos.z, meta, 0);
+    protected Collection<ItemStack> harvestBlock(IVect pos) {
+        ArrayList<ItemStack> harvest = block.getDrops(world, pos.getX(), pos.getY(), pos.getZ(), meta, 0);
         if (harvest.size() > 1) {
             harvest.remove(1); // AgriCraft returns cropsticks in 0, seeds in 1 in getDrops, removing since harvesting
                                // doesn't
             // return them.
         }
         harvest.remove(0);
-        Proxies.common.addBlockDestroyEffects(world, pos.x, pos.y, pos.z, Blocks.melon_block, 0);
-        world.setBlockMetadataWithNotify(pos.x, pos.y, pos.z, 0, Constants.FLAG_BLOCK_SYNCH);
+        Proxies.common.addBlockDestroyEffects(world, pos.getX(), pos.getY(), pos.getZ(), Blocks.melon_block, 0);
+        world.setBlockMetadataWithNotify(pos.getX(), pos.getY(), pos.getZ(), 0, Constants.FLAG_BLOCK_SYNCH);
         harvest.removeAll(Collections.singleton(null)); // sanatize nulls that get thru from Agricraft+Harvestcraft
                                                         // (sesameseed)
         return harvest;

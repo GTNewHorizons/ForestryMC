@@ -16,6 +16,7 @@ import net.minecraft.world.World;
 
 import forestry.api.farming.ICrop;
 import forestry.core.config.Constants;
+import forestry.core.utils.vect.IVect;
 import forestry.core.utils.vect.Vect;
 
 public abstract class Crop implements ICrop {
@@ -28,21 +29,21 @@ public abstract class Crop implements ICrop {
         this.position = position;
     }
 
-    protected final void setBlock(Vect position, Block block, int meta) {
-        world.setBlock(position.x, position.y, position.z, block, meta, Constants.FLAG_BLOCK_SYNCH);
+    protected final void setBlock(IVect position, Block block, int meta) {
+        world.setBlock(position.getX(), position.getY(), position.getZ(), block, meta, Constants.FLAG_BLOCK_SYNCH);
     }
 
-    protected final Block getBlock(Vect position) {
-        return world.getBlock(position.x, position.y, position.z);
+    protected final Block getBlock(IVect position) {
+        return world.getBlock(position.getX(), position.getY(), position.getZ());
     }
 
-    protected final int getBlockMeta(Vect position) {
-        return world.getBlockMetadata(position.x, position.y, position.z);
+    protected final int getBlockMeta(IVect position) {
+        return world.getBlockMetadata(position.getX(), position.getY(), position.getZ());
     }
 
-    protected abstract boolean isCrop(Vect pos);
+    protected abstract boolean isCrop(IVect pos);
 
-    protected abstract Collection<ItemStack> harvestBlock(Vect pos);
+    protected abstract Collection<ItemStack> harvestBlock(IVect pos);
 
     @Override
     public Collection<ItemStack> harvest() {

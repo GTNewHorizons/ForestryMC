@@ -8,10 +8,11 @@
  ******************************************************************************/
 package forestry.core.gui;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Stack;
 
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.entity.player.EntityPlayer;
@@ -208,7 +209,7 @@ public abstract class GuiAlyzer extends GuiForestry<ContainerAlyzer, IInventory>
         textLayout.drawLine(StringUtil.localize("gui.alyzer.classification") + ":", 12);
         textLayout.newLine();
 
-        Stack<IClassification> hierarchy = new Stack<>();
+        Deque<IClassification> hierarchy = new ArrayDeque<>();
         IClassification classification = individual.getGenome().getPrimary().getBranch();
         while (classification != null) {
 

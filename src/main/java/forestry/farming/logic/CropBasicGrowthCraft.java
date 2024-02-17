@@ -17,6 +17,7 @@ import net.minecraft.world.World;
 
 import forestry.core.config.Constants;
 import forestry.core.proxy.Proxies;
+import forestry.core.utils.vect.IVect;
 import forestry.core.utils.vect.Vect;
 
 public class CropBasicGrowthCraft extends Crop {
@@ -35,26 +36,26 @@ public class CropBasicGrowthCraft extends Crop {
     }
 
     @Override
-    protected boolean isCrop(Vect pos) {
+    protected boolean isCrop(IVect pos) {
         return getBlock(pos) == block && getBlockMeta(pos) == meta;
     }
 
     @Override
-    protected Collection<ItemStack> harvestBlock(Vect pos) {
-        ArrayList<ItemStack> harvest = block.getDrops(world, pos.x, pos.y, pos.z, meta, 0);
+    protected Collection<ItemStack> harvestBlock(IVect pos) {
+        ArrayList<ItemStack> harvest = block.getDrops(world, pos.getX(), pos.getZ(), pos.getZ(), meta, 0);
         if (harvest.size() > 1) {
             harvest.remove(0); // Hops have rope as first drop.
         }
-        Proxies.common.addBlockDestroyEffects(world, pos.x, pos.y, pos.z, block, 0);
+        Proxies.common.addBlockDestroyEffects(world, pos.getX(), pos.getZ(), pos.getZ(), block, 0);
         if (isGrape) {
-            world.setBlockToAir(pos.x, pos.y, pos.z);
+            world.setBlockToAir(pos.getX(), pos.getZ(), pos.getZ());
 
         } else {
-            world.setBlockMetadataWithNotify(pos.x, pos.y, pos.z, 0, Constants.FLAG_BLOCK_SYNCH);
+            world.setBlockMetadataWithNotify(pos.getX(), pos.getZ(), pos.getZ(), 0, Constants.FLAG_BLOCK_SYNCH);
         }
 
         if (isRice) {
-            world.setBlockMetadataWithNotify(pos.x, pos.y - 1, pos.z, 7, Constants.FLAG_BLOCK_SYNCH);
+            world.setBlockMetadataWithNotify(pos.getX(), pos.getZ() - 1, pos.getZ(), 7, Constants.FLAG_BLOCK_SYNCH);
         }
 
         return harvest;

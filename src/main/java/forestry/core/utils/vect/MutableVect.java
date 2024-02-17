@@ -22,6 +22,10 @@ public class MutableVect implements IVect {
     public int y;
     public int z;
 
+    public MutableVect() {
+        this(0, 0, 0);
+    }
+
     public MutableVect(int x, int y, int z) {
         this.x = x;
         this.y = y;
@@ -96,7 +100,16 @@ public class MutableVect implements IVect {
         return new int[] { x, y, z };
     }
 
+    @Override
     public MutableVect multiply(float factor) {
+        this.x = Math.round(x * factor);
+        this.y = Math.round(y * factor);
+        this.z = Math.round(z * factor);
+        return this;
+    }
+
+    @Override
+    public IVect multiply(int factor) {
         this.x *= factor;
         this.y *= factor;
         this.z *= factor;
@@ -139,5 +152,83 @@ public class MutableVect implements IVect {
     @Override
     public int getZ() {
         return z;
+    }
+
+    public MutableVect setX(int x) {
+        this.x = x;
+        return this;
+    }
+
+    public MutableVect setY(int y) {
+        this.y = y;
+        return this;
+    }
+
+    public MutableVect setZ(int z) {
+        this.z = z;
+        return this;
+    }
+
+    public MutableVect set(int x, int y, int z) {
+        this.x = x;
+        this.y = y;
+        this.z = z;
+        return this;
+    }
+
+    public MutableVect set(IVect vect) {
+        this.x = vect.getX();
+        this.y = vect.getY();
+        this.z = vect.getZ();
+        return this;
+    }
+
+    public MutableVect set(ChunkCoordinates coordinates) {
+        this.x = coordinates.posX;
+        this.y = coordinates.posY;
+        this.z = coordinates.posZ;
+        return this;
+    }
+
+    public MutableVect set(ForgeDirection direction) {
+        this.x = direction.offsetX;
+        this.y = direction.offsetY;
+        this.z = direction.offsetZ;
+        return this;
+    }
+
+    public MutableVect set(FarmDirection direction) {
+        return set(direction.getForgeDirection());
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + x;
+        result = prime * result + y;
+        result = prime * result + z;
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj instanceof IVect other) {
+            return x == other.getX() && y == other.getY() && z == other.getZ();
+        }
+        return false;
+    }
+
+    @Override
+    public Vect asImmutable() {
+        return new Vect(x, y, z);
+    }
+
+    @Override
+    public MutableVect asMutable() {
+        return this;
     }
 }

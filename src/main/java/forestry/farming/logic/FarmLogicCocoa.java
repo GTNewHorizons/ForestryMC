@@ -8,12 +8,13 @@
  ******************************************************************************/
 package forestry.farming.logic;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Deque;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.Stack;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLog;
@@ -29,6 +30,7 @@ import forestry.api.farming.FarmDirection;
 import forestry.api.farming.ICrop;
 import forestry.api.farming.IFarmHousing;
 import forestry.api.farming.IFarmable;
+import forestry.core.utils.vect.IVect;
 import forestry.core.utils.vect.MutableVect;
 import forestry.core.utils.vect.Vect;
 import forestry.core.utils.vect.VectUtil;
@@ -159,8 +161,8 @@ public class FarmLogicCocoa extends FarmLogic {
 
     private Collection<ICrop> getHarvestBlocks(Vect position) {
 
-        Set<Vect> seen = new HashSet<>();
-        Stack<ICrop> crops = new Stack<>();
+        Set<IVect> seen = new HashSet<>();
+        Deque<ICrop> crops = new ArrayDeque<>();
 
         // Determine what type we want to harvest.
         Block block = VectUtil.getBlock(getWorld(), position);
@@ -193,40 +195,44 @@ public class FarmLogicCocoa extends FarmLogic {
         return crops;
     }
 
-    private ArrayList<Vect> processHarvestBlock(Stack<ICrop> crops, Set<Vect> seen, Vect start, Vect position) {
+    private ArrayList<Vect> processHarvestBlock(Deque<ICrop> crops, Set<IVect> seen, Vect start, IVect position) {
 
         World world = getWorld();
 
         ArrayList<Vect> candidates = new ArrayList<>();
 
         // Get additional candidates to return
+        MutableVect mutable = new MutableVect();
         for (int i = -1; i < 2; i++) {
             for (int j = 0; j < 2; j++) {
                 for (int k = -1; k < 2; k++) {
-                    Vect candidate = position.add(i, j, k);
-                    if (candidate.equals(position)) {
+                    // Vect candidate = position.add(i, j, k);
+                    mutable.set(position).add(i, j, k);
+                    if (mutable.equals(position)) {
                         continue;
                     }
-                    if (Math.abs(candidate.x - start.x) > 5) {
+                    if (Math.abs(mutable.x - start.x) > 5) {
                         continue;
                     }
-                    if (Math.abs(candidate.z - start.z) > 5) {
+                    if (Math.abs(mutable.z - start.z) > 5) {
                         continue;
                     }
 
                     // See whether the given position has already been processed
-                    if (seen.contains(candidate)) {
+                    if (seen.contains(mutable)) {
                         continue;
                     }
 
-                    ICrop crop = cocoa.getCropAt(world, candidate.x, candidate.y, candidate.z);
+                    ICrop crop = cocoa.getCropAt(world, mutable.x, mutable.y, mutable.z);
                     if (crop != null) {
+                        Vect immutable = mutable.asImmutable();
                         crops.push(crop);
-                        candidates.add(candidate);
-                        seen.add(candidate);
-                    } else if (VectUtil.isWoodBlock(world, candidate)) {
-                        candidates.add(candidate);
-                        seen.add(candidate);
+                        candidates.add(immutable);
+                        seen.add(immutable);
+                    } else if (VectUtil.isWoodBlock(world, mutable)) {
+                        Vect immutable = mutable.asImmutable();
+                        candidates.add(immutable);
+                        seen.add(immutable);
                     }
                 }
             }
