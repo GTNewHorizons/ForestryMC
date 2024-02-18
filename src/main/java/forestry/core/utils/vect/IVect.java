@@ -46,6 +46,7 @@ public interface IVect extends Comparable<IVect> {
 
     // NOTE: All classes implementing this must implement the same hashCode and equals methods as Vect
     int hashCode();
+
     boolean equals(Object obj);
 
     default int compareTo(IVect other) {
