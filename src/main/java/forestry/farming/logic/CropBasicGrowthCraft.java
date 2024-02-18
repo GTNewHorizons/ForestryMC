@@ -42,20 +42,20 @@ public class CropBasicGrowthCraft extends Crop {
 
     @Override
     protected Collection<ItemStack> harvestBlock(IVect pos) {
-        ArrayList<ItemStack> harvest = block.getDrops(world, pos.getX(), pos.getZ(), pos.getZ(), meta, 0);
+        ArrayList<ItemStack> harvest = block.getDrops(world, pos.getX(), pos.getY(), pos.getZ(), meta, 0);
         if (harvest.size() > 1) {
             harvest.remove(0); // Hops have rope as first drop.
         }
-        Proxies.common.addBlockDestroyEffects(world, pos.getX(), pos.getZ(), pos.getZ(), block, 0);
+        Proxies.common.addBlockDestroyEffects(world, pos.getX(), pos.getY(), pos.getZ(), block, 0);
         if (isGrape) {
-            world.setBlockToAir(pos.getX(), pos.getZ(), pos.getZ());
+            world.setBlockToAir(pos.getX(), pos.getY(), pos.getZ());
 
         } else {
-            world.setBlockMetadataWithNotify(pos.getX(), pos.getZ(), pos.getZ(), 0, Constants.FLAG_BLOCK_SYNCH);
+            world.setBlockMetadataWithNotify(pos.getX(), pos.getY(), pos.getZ(), 0, Constants.FLAG_BLOCK_SYNCH);
         }
 
         if (isRice) {
-            world.setBlockMetadataWithNotify(pos.getX(), pos.getZ() - 1, pos.getZ(), 7, Constants.FLAG_BLOCK_SYNCH);
+            world.setBlockMetadataWithNotify(pos.getX(), pos.getY() - 1, pos.getZ(), 7, Constants.FLAG_BLOCK_SYNCH);
         }
 
         return harvest;

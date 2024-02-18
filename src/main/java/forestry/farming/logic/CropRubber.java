@@ -31,8 +31,8 @@ public class CropRubber extends CropBlock {
     protected Collection<ItemStack> harvestBlock(IVect pos) {
         Collection<ItemStack> harvested = new ArrayList<>();
         harvested.add(PluginIC2.resin.copy());
-        Proxies.common.addBlockDestroyEffects(world, pos.getX(), pos.getZ(), pos.getZ(), block, 0);
-        world.setBlock(pos.getX(), pos.getZ(), pos.getZ(), block, meta + 6, Constants.FLAG_BLOCK_SYNCH);
+        Proxies.common.addBlockDestroyEffects(world, pos.getX(), pos.getY(), pos.getZ(), block, 0);
+        world.setBlock(pos.getX(), pos.getY(), pos.getZ(), block, meta + 6, Constants.FLAG_BLOCK_SYNCH);
         return harvested;
     }
 }
