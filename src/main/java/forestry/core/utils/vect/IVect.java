@@ -44,6 +44,10 @@ public interface IVect extends Comparable<IVect> {
 
     MutableVect asMutable();
 
+    // NOTE: All classes implementing this must implement the same hashCode and equals methods as Vect
+    int hashCode();
+    boolean equals(Object obj);
+
     default int compareTo(IVect other) {
         int x = this.getX() - other.getX();
         if (x != 0) {
