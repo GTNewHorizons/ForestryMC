@@ -2,9 +2,9 @@
 
 dependencies {
     api('curse.maven:cofh-lib-220333:2388748')
-    devOnlyNonPublishable('com.github.GTNewHorizons:NotEnoughItems:2.5.3-GTNH:dev')
-    compileOnly('com.github.GTNewHorizons:inventory-tweaks:1.6.1:api')
-    compileOnly('com.github.GTNewHorizons:BuildCraft:7.1.38:api')
+    devOnlyNonPublishable('com.github.GTNewHorizons:NotEnoughItems:2.5.18-GTNH:dev')
+    compileOnly('com.github.GTNewHorizons:inventory-tweaks:1.6.2:api')
+    compileOnly('com.github.GTNewHorizons:BuildCraft:7.1.39:api')
     compileOnly('net.industrial-craft:industrialcraft-2:2.2.828-experimental:dev')
     compileOnly('curse.maven:craftguide-75557:2459320')
 }
