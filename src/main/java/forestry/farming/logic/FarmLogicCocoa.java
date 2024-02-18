@@ -161,7 +161,7 @@ public class FarmLogicCocoa extends FarmLogic {
 
     private Collection<ICrop> getHarvestBlocks(Vect position) {
 
-        Set<IVect> seen = new HashSet<>();
+        Set<Vect> seen = new HashSet<>();
         Deque<ICrop> crops = new ArrayDeque<>();
 
         // Determine what type we want to harvest.
@@ -195,7 +195,7 @@ public class FarmLogicCocoa extends FarmLogic {
         return crops;
     }
 
-    private ArrayList<Vect> processHarvestBlock(Deque<ICrop> crops, Set<IVect> seen, Vect start, IVect position) {
+    private ArrayList<Vect> processHarvestBlock(Deque<ICrop> crops, Set<Vect> seen, Vect start, IVect position) {
 
         World world = getWorld();
 
@@ -206,7 +206,6 @@ public class FarmLogicCocoa extends FarmLogic {
         for (int i = -1; i < 2; i++) {
             for (int j = 0; j < 2; j++) {
                 for (int k = -1; k < 2; k++) {
-                    // Vect candidate = position.add(i, j, k);
                     mutable.set(position).add(i, j, k);
                     if (mutable.equals(position)) {
                         continue;

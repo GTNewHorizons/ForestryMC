@@ -29,7 +29,6 @@ import forestry.api.farming.ICrop;
 import forestry.api.farming.IFarmHousing;
 import forestry.core.utils.ItemStackUtil;
 import forestry.core.utils.Log;
-import forestry.core.utils.vect.IVect;
 import forestry.core.utils.vect.MutableVect;
 import forestry.core.utils.vect.Vect;
 import forestry.core.utils.vect.VectUtil;
@@ -125,7 +124,7 @@ public class FarmLogicRubber extends FarmLogic {
 
     private Collection<ICrop> getHarvestBlocks(Vect position) {
 
-        Set<IVect> seen = new HashSet<>();
+        Set<Vect> seen = new HashSet<>();
         Deque<ICrop> crops = new ArrayDeque<>();
 
         World world = getWorld();
@@ -155,15 +154,14 @@ public class FarmLogicRubber extends FarmLogic {
         return crops;
     }
 
-    private ArrayList<Vect> processHarvestBlock(Deque<ICrop> crops, Set<IVect> seen, Vect position) {
+    private ArrayList<Vect> processHarvestBlock(Deque<ICrop> crops, Set<Vect> seen, Vect position) {
         World world = getWorld();
 
         ArrayList<Vect> candidates = new ArrayList<>();
 
         // Get additional candidates to return
-        final MutableVect mutable = new MutableVect();
+        final MutableVect mutable = position.asMutable();
         for (int j = 0; j < 2; j++) {
-            // Vect candidate = new Vect(position.x, position.y + j, position.z);
             mutable.y = position.y + j;
             if (mutable.equals(position)) {
                 continue;

@@ -176,7 +176,6 @@ public class FarmLogicArboreal extends FarmLogicHomogeneous {
         for (int x = -1; x < 2; x++) {
             for (int y = -1; y < 2; y++) {
                 for (int z = -1; z < 2; z++) {
-                    // Vect candidate = position.add(x, y, z);
                     mutable.set(position).add(x, y, z);
                     if (mutable.equals(position)) {
                         continue;

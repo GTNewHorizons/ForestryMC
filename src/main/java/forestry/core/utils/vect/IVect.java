@@ -16,7 +16,7 @@ import forestry.api.farming.FarmDirection;
 /**
  * Represents a position or dimensions.
  */
-public interface IVect {
+public interface IVect extends Comparable<IVect> {
 
     int getX();
 
@@ -43,4 +43,18 @@ public interface IVect {
     Vect asImmutable();
 
     MutableVect asMutable();
+
+    default int compareTo(IVect other) {
+        int x = this.getX() - other.getX();
+        if (x != 0) {
+            return x;
+        }
+
+        int y = this.getY() - other.getY();
+        if (y != 0) {
+            return y;
+        }
+
+        return this.getZ() - other.getZ();
+    }
 }

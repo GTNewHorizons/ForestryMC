@@ -147,7 +147,7 @@ public class FarmLogicOrchard extends FarmLogic {
 
     private Collection<ICrop> getHarvestBlocks(Vect position) {
 
-        Set<IVect> seen = new HashSet<>();
+        Set<Vect> seen = new HashSet<>();
         Deque<ICrop> crops = new ArrayDeque<>();
 
         World world = getWorld();
@@ -172,7 +172,7 @@ public class FarmLogicOrchard extends FarmLogic {
         return crops;
     }
 
-    private List<Vect> processHarvestBlock(Deque<ICrop> crops, Set<IVect> seen, IVect start, IVect position) {
+    private List<Vect> processHarvestBlock(Deque<ICrop> crops, Set<Vect> seen, IVect start, IVect position) {
         World world = getWorld();
 
         List<Vect> candidates = new ArrayList<>();
