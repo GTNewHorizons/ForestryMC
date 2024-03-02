@@ -8,13 +8,14 @@
  ******************************************************************************/
 package forestry.arboriculture.render;
 
-import com.gtnewhorizons.angelica.api.ThreadSafeISBRH;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.EntityRenderer;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
+
+import com.gtnewhorizons.angelica.api.ThreadSafeISBRH;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import forestry.api.arboriculture.EnumGermlingType;
@@ -83,8 +84,8 @@ public class RenderSaplingBlock implements ISimpleBlockRenderingHandler {
         return true;
     }
 
-    private static void drawCrossedSquares(IAlleleTreeSpecies species, double par3, double par5, double par7,
-            float mod, int renderLayer) {
+    private static void drawCrossedSquares(IAlleleTreeSpecies species, double par3, double par5, double par7, float mod,
+            int renderLayer) {
 
         final Tessellator tess = Tessellator.instance;
         IIcon icon = species.getGermlingIcon(EnumGermlingType.SAPLING, renderLayer);
