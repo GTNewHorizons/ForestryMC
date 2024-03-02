@@ -8,6 +8,7 @@
  ******************************************************************************/
 package forestry.arboriculture.render;
 
+import com.gtnewhorizons.angelica.api.ThreadSafeISBRH;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.EntityRenderer;
 import net.minecraft.client.renderer.RenderBlocks;
@@ -22,6 +23,7 @@ import forestry.plugins.PluginArboriculture;
 /**
  * Ugly but serviceable renderer for leaves, taking fruits into account.
  */
+@ThreadSafeISBRH(perThread = false)
 public class RenderLeavesBlock extends RenderOverlayBlock {
 
     @Override

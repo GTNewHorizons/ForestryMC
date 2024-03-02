@@ -8,6 +8,7 @@
  ******************************************************************************/
 package forestry.arboriculture.render;
 
+import com.gtnewhorizons.angelica.api.ThreadSafeISBRH;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDirectional;
 import net.minecraft.client.renderer.RenderBlocks;
@@ -20,6 +21,7 @@ import forestry.arboriculture.blocks.BlockFruitPod;
 import forestry.arboriculture.tiles.TileFruitPod;
 import forestry.plugins.PluginArboriculture;
 
+@ThreadSafeISBRH(perThread = false)
 public class RenderFruitPodBlock implements ISimpleBlockRenderingHandler {
 
     @Override
@@ -37,7 +39,7 @@ public class RenderFruitPodBlock implements ISimpleBlockRenderingHandler {
             maturity = pod.getMaturity();
         }
 
-        Tessellator tessellator = Tessellator.instance;
+        final Tessellator tessellator = Tessellator.instance;
         tessellator.setBrightness(blockPod.getMixedBrightnessForBlock(world, x, y, z));
         tessellator.setColorOpaque_F(1.0f, 1.0f, 1.0f);
         int metadata = world.getBlockMetadata(x, y, z);

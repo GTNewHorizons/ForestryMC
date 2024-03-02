@@ -8,6 +8,7 @@
  ******************************************************************************/
 package forestry.farming.render;
 
+import com.gtnewhorizons.angelica.api.ThreadSafeISBRH;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.world.IBlockAccess;
@@ -16,6 +17,7 @@ import forestry.core.render.RenderOverlayBlock;
 import forestry.farming.blocks.BlockFarm;
 import forestry.plugins.PluginFarming;
 
+@ThreadSafeISBRH(perThread = false)
 public class RenderFarmBlock extends RenderOverlayBlock {
 
     @Override
@@ -41,78 +43,14 @@ public class RenderFarmBlock extends RenderOverlayBlock {
         float adjG = 0.5f;
         float adjB = 0.5f;
 
-        renderBottomFace(
-                world,
-                block,
-                x,
-                y,
-                z,
-                renderer,
-                BlockFarm.getOverlayTextureForBlock(0, metadata),
-                mixedBrightness,
-                adjR,
-                adjG,
-                adjB);
-        renderTopFace(
-                world,
-                block,
-                x,
-                y,
-                z,
-                renderer,
-                BlockFarm.getOverlayTextureForBlock(1, metadata),
-                mixedBrightness,
-                adjR,
-                adjG,
-                adjB);
-        renderEastFace(
-                world,
-                block,
-                x,
-                y,
-                z,
-                renderer,
-                BlockFarm.getOverlayTextureForBlock(2, metadata),
-                mixedBrightness,
-                adjR,
-                adjG,
-                adjB);
-        renderWestFace(
-                world,
-                block,
-                x,
-                y,
-                z,
-                renderer,
-                BlockFarm.getOverlayTextureForBlock(3, metadata),
-                mixedBrightness,
-                adjR,
-                adjG,
-                adjB);
-        renderNorthFace(
-                world,
-                block,
-                x,
-                y,
-                z,
-                renderer,
-                BlockFarm.getOverlayTextureForBlock(4, metadata),
-                mixedBrightness,
-                adjR,
-                adjG,
-                adjB);
-        renderSouthFace(
-                world,
-                block,
-                x,
-                y,
-                z,
-                renderer,
-                BlockFarm.getOverlayTextureForBlock(5, metadata),
-                mixedBrightness,
-                adjR,
-                adjG,
-                adjB);
+        // spotless:off
+        renderBottomFace(world, block, x, y, z, renderer, BlockFarm.getOverlayTextureForBlock(0, metadata), mixedBrightness, adjR, adjG, adjB);
+        renderTopFace(world, block, x, y, z, renderer, BlockFarm.getOverlayTextureForBlock(1, metadata), mixedBrightness, adjR, adjG, adjB);
+        renderEastFace(world, block, x, y, z, renderer, BlockFarm.getOverlayTextureForBlock(2, metadata), mixedBrightness, adjR, adjG, adjB);
+        renderWestFace(world, block, x, y, z, renderer, BlockFarm.getOverlayTextureForBlock(3, metadata), mixedBrightness, adjR, adjG, adjB);
+        renderNorthFace(world, block, x, y, z, renderer, BlockFarm.getOverlayTextureForBlock(4, metadata), mixedBrightness, adjR, adjG, adjB);
+        renderSouthFace(world, block, x, y, z, renderer, BlockFarm.getOverlayTextureForBlock(5, metadata), mixedBrightness, adjR, adjG, adjB);
+        // spotless:on
     }
 
     @Override
