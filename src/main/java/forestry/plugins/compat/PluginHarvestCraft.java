@@ -148,7 +148,7 @@ public class PluginHarvestCraft extends ForestryPlugin {
                 );
 
         ImmutableList.Builder<String> genericCropsBuilder = ImmutableList.builder();
-        genericCropsBuilder.add("cotton", "rice", "tea", "coffee", "candleberry");
+        genericCropsBuilder.add("cotton", "rice", "tealeaf", "coffeebean", "candleberry");
         genericCropsBuilder.addAll(herbs);
         genericCropsBuilder.addAll(spices);
 
@@ -281,7 +281,14 @@ public class PluginHarvestCraft extends ForestryPlugin {
         }
 
         for (String cropName : genericCrops) {
-            ItemStack genericCropSeed = GameRegistry.findItemStack(HC, cropName + "seedItem", 1);
+            String seedName = cropName;
+            // Pam's Tea and Coffee have inconsistent Crop/Seed names, unlike other Pam's crops
+            if (seedName.equals("tealeaf")) {
+                seedName = "tea";
+            } else if (seedName.equals("coffeebean")) {
+                seedName = "coffee";
+            }
+            ItemStack genericCropSeed = GameRegistry.findItemStack(HC, seedName + "seedItem", 1);
             Block genericCropBlock = GameRegistry.findBlock(HC, "pam" + cropName + "Crop");
             if (genericCropSeed != null) {
                 RecipeManagers.squeezerManager
