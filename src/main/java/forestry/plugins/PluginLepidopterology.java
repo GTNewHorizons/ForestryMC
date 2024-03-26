@@ -60,6 +60,7 @@ public class PluginLepidopterology extends ForestryPlugin {
     public static int spawnConstraint = 100;
     public static int entityConstraint = 1000;
     private static boolean allowPollination = true;
+    public static boolean disableButterflyLeafSpawns = false;
 
     public static ItemRegistryLepidopterology items;
     public static BlockRegistryLepidopterology blocks;
@@ -112,7 +113,8 @@ public class PluginLepidopterology extends ForestryPlugin {
 
         blocks.lepidopterology.init();
 
-        TreeManager.treeRoot.registerLeafTickHandler(new ButterflySpawner());
+        if (!PluginLepidopterology.disableButterflyLeafSpawns)
+            TreeManager.treeRoot.registerLeafTickHandler(new ButterflySpawner());
 
         RecipeSorter.register(
                 "forestry:lepidopterologymating",
@@ -127,6 +129,8 @@ public class PluginLepidopterology extends ForestryPlugin {
         spawnConstraint = config.getIntLocalized("butterfly.entities", "spawn.limit", spawnConstraint, 0, 500);
         entityConstraint = config.getIntLocalized("butterfly.entities", "maximum", entityConstraint, 0, 5000);
         allowPollination = config.getBooleanLocalized("butterfly.entities", "pollination", allowPollination);
+        disableButterflyLeafSpawns = config
+                .getBooleanLocalized("butterfly.entities", "disable.leaf.spawns", disableButterflyLeafSpawns);
 
         config.save();
     }
