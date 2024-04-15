@@ -97,7 +97,7 @@ public class BlockAlveary extends BlockStructure {
     /* TILE ENTITY CREATION */
     @Override
     public TileEntity createTileEntity(World world, int metadata) {
-        if (metadata < 0 || metadata > Type.VALUES.length) {
+        if (metadata < 0 || metadata >= Type.VALUES.length) {
             return null;
         }
 
