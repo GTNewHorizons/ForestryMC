@@ -114,13 +114,18 @@ public abstract class RecipeHandlerBase extends TemplateRecipeHandler implements
         CachedBaseRecipe crecipe = (CachedBaseRecipe) this.arecipes.get(recipe);
         if (GuiContainerManager.shouldShowTooltip(guiRecipe)) {
             Point mouse = GuiDraw.getMousePosition();
-            Point offset = guiRecipe.getRecipePosition(recipe);
-            Point relMouse = new Point(
-                    mouse.x - (guiRecipe.width - 176) / 2 - offset.x,
-                    mouse.y - (guiRecipe.height - 166) / 2 - offset.y);
+            int recipeIndex = guiRecipe.getRecipeIndices().indexOf(recipe);
 
-            currenttip = this.provideTooltip(guiRecipe, currenttip, crecipe, relMouse);
+            if (recipeIndex >= 0) {
+                Point offset = guiRecipe.getRecipePosition(recipeIndex);
+                Point relMouse = new Point(
+                        mouse.x - (guiRecipe.width - 176) / 2 - offset.x,
+                        mouse.y - (guiRecipe.height - 166) / 2 - offset.y);
+
+                currenttip = this.provideTooltip(guiRecipe, currenttip, crecipe, relMouse);
+            }
         }
+
         return currenttip;
     }
 
@@ -130,12 +135,17 @@ public abstract class RecipeHandlerBase extends TemplateRecipeHandler implements
         super.handleItemTooltip(guiRecipe, itemStack, currenttip, recipe);
         CachedBaseRecipe crecipe = (CachedBaseRecipe) this.arecipes.get(recipe);
         Point mouse = GuiDraw.getMousePosition();
-        Point offset = guiRecipe.getRecipePosition(recipe);
-        Point relMouse = new Point(
-                mouse.x - (guiRecipe.width - 176) / 2 - offset.x,
-                mouse.y - (guiRecipe.height - 166) / 2 - offset.y);
+        int recipeIndex = guiRecipe.getRecipeIndices().indexOf(recipe);
 
-        currenttip = this.provideItemTooltip(guiRecipe, itemStack, currenttip, crecipe, relMouse);
+        if (recipeIndex >= 0) {
+            Point offset = guiRecipe.getRecipePosition(recipeIndex);
+            Point relMouse = new Point(
+                    mouse.x - (guiRecipe.width - 176) / 2 - offset.x,
+                    mouse.y - (guiRecipe.height - 166) / 2 - offset.y);
+
+            currenttip = this.provideItemTooltip(guiRecipe, itemStack, currenttip, crecipe, relMouse);
+        }
+
         return currenttip;
     }
 
