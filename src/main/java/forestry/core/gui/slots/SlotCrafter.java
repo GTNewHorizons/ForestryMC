@@ -20,12 +20,14 @@ public class SlotCrafter extends SlotCrafting {
 
     private final IInventory craftMatrix;
     private final ICrafterWorktable crafter;
+    private final EntityPlayer player;
 
     public SlotCrafter(EntityPlayer player, IInventory craftMatrix, ICrafterWorktable crafter, int slot, int xPos,
             int yPos) {
         super(player, craftMatrix, craftMatrix, slot, xPos, yPos);
         this.craftMatrix = craftMatrix;
         this.crafter = crafter;
+        this.player = player;
     }
 
     @Override
@@ -39,7 +41,7 @@ public class SlotCrafter extends SlotCrafting {
 
     @Override
     public boolean canTakeStack(EntityPlayer player) {
-        return crafter.canTakeStack(getSlotIndex());
+        return crafter.canTakeStack(player, getSlotIndex());
     }
 
     @Override
@@ -49,7 +51,7 @@ public class SlotCrafter extends SlotCrafting {
 
     @Override
     public boolean getHasStack() {
-        return getStack() != null && crafter.canTakeStack(getSlotIndex());
+        return getStack() != null && crafter.canTakeStack(player, getSlotIndex());
     }
 
     @Override

@@ -138,6 +138,10 @@ public abstract class Ledger {
         return false;
     }
 
+    public boolean acceptMouseButton(int mouseButton) {
+        return mouseButton == 0;
+    }
+
     public boolean intersectsWith(int mouseX, int mouseY) {
         return mouseX >= currentShiftX && mouseX <= currentShiftX + currentWidth
                 && mouseY >= currentShiftY

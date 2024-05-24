@@ -25,6 +25,8 @@ import forestry.core.network.packets.PacketAccessUpdate;
 import forestry.core.network.packets.PacketErrorUpdate;
 import forestry.core.network.packets.PacketGuiEnergy;
 import forestry.core.network.packets.PacketGuiUpdate;
+import forestry.core.network.packets.PacketTileConfiguration;
+import forestry.core.tiles.IConfigurable;
 import forestry.core.tiles.IPowerHandler;
 import forestry.core.tiles.TilePowered;
 import forestry.core.tiles.TileUtil;
@@ -34,6 +36,7 @@ public abstract class ContainerTile<T extends TileEntity> extends ContainerFores
 
     protected final T tile;
     private final IAccessHandler accessHandler;
+    private boolean configurationChanged;
 
     protected ContainerTile(T tile) {
         this.tile = tile;
@@ -42,6 +45,10 @@ public abstract class ContainerTile<T extends TileEntity> extends ContainerFores
             accessHandler = ((IRestrictedAccess) tile).getAccessHandler();
         } else {
             accessHandler = FakeAccessHandler.getInstance();
+        }
+
+        if (tile instanceof IConfigurable) {
+            configurationChanged = true;
         }
     }
 
@@ -128,6 +135,15 @@ public abstract class ContainerTile<T extends TileEntity> extends ContainerFores
                 sendPacketToCrafters(packet);
             }
         }
+
+        if (tile instanceof IConfigurable && configurationChanged) {
+            configurationChanged = false;
+            sendPacketToCrafters(new PacketTileConfiguration(tile));
+        }
+    }
+
+    protected void markConfigurationDirty() {
+        configurationChanged = true;
     }
 
     public void onGuiEnergy(int energyStored) {

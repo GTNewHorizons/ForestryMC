@@ -19,9 +19,12 @@ import forestry.core.config.Constants;
 import forestry.core.gui.GuiForestryTitled;
 import forestry.core.gui.buttons.GuiBetterButton;
 import forestry.core.gui.buttons.StandardButtonTextureSets;
+import forestry.core.gui.ledgers.SearchIngregientsLedger;
 import forestry.core.network.packets.PacketGuiSelectRequest;
 import forestry.core.proxy.Proxies;
 import forestry.core.recipes.RecipeUtil;
+import forestry.core.tiles.IIngredientsSearchController;
+import forestry.core.tiles.IngredientsStorage;
 import forestry.core.utils.InventoryUtil;
 import forestry.factory.gui.widgets.ClearWorktable;
 import forestry.factory.gui.widgets.MemorizedRecipeSlot;
@@ -30,13 +33,16 @@ import forestry.factory.recipes.MemorizedRecipe;
 import forestry.factory.recipes.RecipeMemory;
 import forestry.factory.tiles.TileWorktable;
 
-public class GuiWorktable extends GuiForestryTitled<ContainerWorktable, TileWorktable> {
+public class GuiWorktable extends GuiForestryTitled<ContainerWorktable, TileWorktable>
+        implements IIngredientsSearchController {
 
     private static final int SPACING = 18;
     private boolean hasRecipeConflict = false;
+    private final EntityPlayer player;
 
     public GuiWorktable(EntityPlayer player, TileWorktable tile) {
         super(Constants.TEXTURE_PATH_GUI + "/worktable2.png", new ContainerWorktable(player, tile), tile);
+        this.player = player;
 
         ySize = 218;
 
@@ -61,6 +67,12 @@ public class GuiWorktable extends GuiForestryTitled<ContainerWorktable, TileWork
     }
 
     @Override
+    protected void addLedgers() {
+        super.addLedgers();
+        ledgerManager.add(new SearchIngregientsLedger(ledgerManager, this));
+    }
+
+    @Override
     public void updateScreen() {
         super.updateScreen();
 
@@ -82,7 +94,7 @@ public class GuiWorktable extends GuiForestryTitled<ContainerWorktable, TileWork
                 .get(54 + InventoryGhostCrafting.SLOT_CRAFTING_RESULT);
 
         if (func_146978_c(itemSlot.xDisplayPosition, itemSlot.yDisplayPosition, 16, 16, mouseX, mouseY)
-                && !inventory.canTakeStack(InventoryGhostCrafting.SLOT_CRAFTING_RESULT)) {
+                && !inventory.canTakeStack(player, InventoryGhostCrafting.SLOT_CRAFTING_RESULT)) {
             final MemorizedRecipe recipe = inventory.getCurrentRecipe();
 
             if (recipe != null) {
@@ -120,5 +132,15 @@ public class GuiWorktable extends GuiForestryTitled<ContainerWorktable, TileWork
     protected void actionPerformed(GuiButton button) {
         int id = 100 + button.id;
         Proxies.net.sendToServer(new PacketGuiSelectRequest(id, 0));
+    }
+
+    @Override
+    public IngredientsStorage getIngredientsStorage() {
+        return container.getIngredientsStorage();
+    }
+
+    @Override
+    public void setIngredientsStorage(IngredientsStorage ingredientsStorage) {
+        Proxies.net.sendToServer(new PacketGuiSelectRequest(200, ingredientsStorage.ordinal()));
     }
 }
