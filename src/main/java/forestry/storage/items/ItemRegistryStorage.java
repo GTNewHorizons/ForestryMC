@@ -37,6 +37,8 @@ public class ItemRegistryStorage extends ItemRegistry {
     public final Item adventurerBackpackT2;
     public final Item builderBackpack;
     public final Item builderBackpackT2;
+    public final Item coinBackpack;
+    public final Item coinBackpackT2;
 
     public ItemRegistryStorage() {
         // CRATE
@@ -113,5 +115,13 @@ public class ItemRegistryStorage extends ItemRegistry {
         builderBackpackT2 = registerItem(
                 BackpackManager.backpackInterface.addBackpack(definition, EnumBackpackType.T2),
                 "builderBagT2");
+
+        definition = BackpackManager.definitions.get("coin");
+        coinBackpack = registerItem(
+                BackpackManager.backpackInterface.addBackpack(definition, EnumBackpackType.T1),
+                "coinBag");
+        coinBackpackT2 = registerItem(
+                BackpackManager.backpackInterface.addBackpack(definition, EnumBackpackType.T2),
+                "coinBagT2");
     }
 }
