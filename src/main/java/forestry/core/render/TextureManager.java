@@ -51,7 +51,9 @@ public class TextureManager implements ITextureManager {
                 "analyzer/nocturnal", "analyzer/princess", "analyzer/pure_breed", "analyzer/pure_cave",
                 "analyzer/pure_flyer", "analyzer/pure_nocturnal", "analyzer/queen", "particles/swarm_bee",
                 "errors/errored", "errors/unknown", "slots/blocked", "slots/blocked_2", "slots/liquid",
-                "slots/container", "slots/locked", "mail/carrier.player", "mail/carrier.trader" };
+                "slots/container", "slots/locked", "mail/carrier.player", "mail/carrier.trader",
+                "misc/search_ingredients.internal_inventory", "misc/search_ingredients.player_inventory",
+                "misc/search_ingredients.all_inventories" };
         for (String str : defaultIconNames) {
             IIcon icon = registerTex(register, str);
             defaultIcons.put(str, icon);

@@ -24,6 +24,8 @@ import forestry.core.inventory.wrappers.InventoryMapper;
 import forestry.core.network.DataInputStreamForestry;
 import forestry.core.network.DataOutputStreamForestry;
 import forestry.core.recipes.RecipeUtil;
+import forestry.core.tiles.IConfigurable;
+import forestry.core.tiles.IngredientsStorage;
 import forestry.core.tiles.TileBase;
 import forestry.core.utils.InventoryUtil;
 import forestry.core.utils.ItemStackUtil;
@@ -35,13 +37,14 @@ import forestry.factory.inventory.InventoryWorktable;
 import forestry.factory.recipes.MemorizedRecipe;
 import forestry.factory.recipes.RecipeMemory;
 
-public class TileWorktable extends TileBase implements ICrafterWorktable {
+public class TileWorktable extends TileBase implements ICrafterWorktable, IConfigurable {
 
     private final RecipeMemory recipeMemory;
     private final InventoryAdapterTile<?> craftingDisplay;
     private MemorizedRecipe currentRecipe;
     private long savedTick = 0;
     private long savedSystemTimeExpiration = 0;
+    private IngredientsStorage ingredientsStorage = IngredientsStorage.INTERNAL_INVENTORY;
 
     public TileWorktable() {
         super("worktable");
@@ -58,6 +61,7 @@ public class TileWorktable extends TileBase implements ICrafterWorktable {
 
         craftingDisplay.writeToNBT(nbttagcompound);
         recipeMemory.writeToNBT(nbttagcompound);
+        nbttagcompound.setInteger("IngredientsStorage", ingredientsStorage.ordinal());
     }
 
     @Override
@@ -66,6 +70,7 @@ public class TileWorktable extends TileBase implements ICrafterWorktable {
 
         craftingDisplay.readFromNBT(nbttagcompound);
         recipeMemory.readFromNBT(nbttagcompound);
+        ingredientsStorage = IngredientsStorage.fromInt(nbttagcompound.getInteger("IngredientsStorage"));
     }
 
     /* NETWORK */
@@ -108,16 +113,20 @@ public class TileWorktable extends TileBase implements ICrafterWorktable {
         }
     }
 
+    private IInventory getIngredientsInventory(EntityPlayer player) {
+        return ingredientsStorage.getInventory(this, player);
+    }
+
     /* ICrafterWorktable */
     @Override
-    public boolean canTakeStack(int craftingSlotIndex) {
+    public boolean canTakeStack(EntityPlayer player, int craftingSlotIndex) {
         if (craftingSlotIndex == InventoryGhostCrafting.SLOT_CRAFTING_RESULT) {
-            return canCraftCurrentRecipe();
+            return canCraftCurrentRecipe(player);
         }
         return true;
     }
 
-    private boolean canCraftCurrentRecipe() {
+    private boolean canCraftCurrentRecipe(EntityPlayer player) {
         if (currentRecipe == null) {
             return false;
         }
@@ -139,7 +148,7 @@ public class TileWorktable extends TileBase implements ICrafterWorktable {
         }
 
         ItemStack[] recipeItems = InventoryUtil.getStacks(currentRecipe.getCraftMatrix());
-        ItemStack[] inventory = InventoryUtil.getStacks(this);
+        ItemStack[] inventory = InventoryUtil.getStacks(getIngredientsInventory(player));
         InventoryCraftingForestry crafting = RecipeUtil
                 .getCraftRecipe(recipeItems, inventory, worldObj, currentRecipe.getRecipeOutput());
 
@@ -152,8 +161,9 @@ public class TileWorktable extends TileBase implements ICrafterWorktable {
             return false;
         }
 
+        IInventory ingredientsInventory = getIngredientsInventory(player);
         ItemStack[] recipeItems = InventoryUtil.getStacks(currentRecipe.getCraftMatrix());
-        ItemStack[] inventory = InventoryUtil.getStacks(this);
+        ItemStack[] inventory = InventoryUtil.getStacks(ingredientsInventory);
         InventoryCraftingForestry crafting = RecipeUtil
                 .getCraftRecipe(recipeItems, inventory, worldObj, currentRecipe.getRecipeOutput());
         if (crafting == null) {
@@ -163,7 +173,8 @@ public class TileWorktable extends TileBase implements ICrafterWorktable {
         recipeItems = InventoryUtil.getStacks(crafting);
 
         // craft recipe should exactly match ingredients here, so no oreDict or tool matching
-        ItemStack[] removed = InventoryUtil.removeSets(this, 1, recipeItems, player, false, false, false);
+        ItemStack[] removed = InventoryUtil
+                .removeSets(ingredientsInventory, 1, recipeItems, player, false, false, false);
         if (removed == null) {
             return false;
         }
@@ -175,6 +186,7 @@ public class TileWorktable extends TileBase implements ICrafterWorktable {
     @Override
     public void onCraftingComplete(EntityPlayer player) {
         IInventory craftingInventory = getCraftingDisplay();
+        IInventory ingredientsInventory = getIngredientsInventory(player);
         for (int i = 0; i < craftingInventory.getSizeInventory(); ++i) {
             ItemStack itemStack = craftingInventory.getStackInSlot(i);
             if (itemStack == null) {
@@ -202,7 +214,7 @@ public class TileWorktable extends TileBase implements ICrafterWorktable {
                 continue;
             }
 
-            if (!InventoryUtil.tryAddStack(this, container, true)) {
+            if (!InventoryUtil.tryAddStack(ingredientsInventory, container, true)) {
                 player.dropPlayerItemWithRandomChoice(container, false);
             }
         }
@@ -287,6 +299,14 @@ public class TileWorktable extends TileBase implements ICrafterWorktable {
         }
     }
 
+    public IngredientsStorage getIngredientsStorage() {
+        return ingredientsStorage;
+    }
+
+    public void setIngredientsStorage(IngredientsStorage ingredientsStorage) {
+        this.ingredientsStorage = ingredientsStorage;
+    }
+
     @Override
     public Object getGui(EntityPlayer player, int data) {
         return new GuiWorktable(player, this);
@@ -295,5 +315,15 @@ public class TileWorktable extends TileBase implements ICrafterWorktable {
     @Override
     public Object getContainer(EntityPlayer player, int data) {
         return new ContainerWorktable(player, this);
+    }
+
+    @Override
+    public void writeConfigurationData(DataOutputStreamForestry data) throws IOException {
+        data.writeEnum(ingredientsStorage, IngredientsStorage.VALUES);
+    }
+
+    @Override
+    public void readConfigurationData(DataInputStreamForestry data) throws IOException {
+        ingredientsStorage = data.readEnum(IngredientsStorage.VALUES);
     }
 }

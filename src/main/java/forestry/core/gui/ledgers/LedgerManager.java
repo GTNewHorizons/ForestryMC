@@ -159,29 +159,28 @@ public class LedgerManager {
     }
 
     public void handleMouseClicked(int x, int y, int mouseButton) {
+        Ledger ledger = this.getAtPosition(x, y);
+        if (ledger == null || !ledger.acceptMouseButton(mouseButton)) {
+            return;
+        }
 
-        if (mouseButton == 0) {
+        // Default action only if the mouse click was not handled by the
+        // ledger itself.
+        if (!ledger.handleMouseClicked(x, y, mouseButton)) {
 
-            Ledger ledger = this.getAtPosition(x, y);
-
-            // Default action only if the mouse click was not handled by the
-            // ledger itself.
-            if (ledger != null && !ledger.handleMouseClicked(x, y, mouseButton)) {
-
-                List<? extends Ledger> toggleLedgers;
-                if (ledgers.contains(ledger)) {
-                    toggleLedgers = ledgers;
-                } else {
-                    toggleLedgers = errorLedgers;
-                }
-
-                for (Ledger other : toggleLedgers) {
-                    if (other != ledger && other.isOpen()) {
-                        other.toggleOpen();
-                    }
-                }
-                ledger.toggleOpen();
+            List<? extends Ledger> toggleLedgers;
+            if (ledgers.contains(ledger)) {
+                toggleLedgers = ledgers;
+            } else {
+                toggleLedgers = errorLedgers;
             }
+
+            for (Ledger other : toggleLedgers) {
+                if (other != ledger && other.isOpen()) {
+                    other.toggleOpen();
+                }
+            }
+            ledger.toggleOpen();
         }
     }
 

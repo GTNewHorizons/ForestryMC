@@ -7,7 +7,7 @@ public interface ICrafterWorktable {
 
     ItemStack getResult();
 
-    boolean canTakeStack(int slotIndex);
+    boolean canTakeStack(EntityPlayer player, int slotIndex);
 
     boolean onCraftingStart(EntityPlayer player);
 

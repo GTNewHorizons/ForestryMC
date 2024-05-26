@@ -27,6 +27,7 @@ import forestry.core.network.packets.PacketPipetteClick;
 import forestry.core.network.packets.PacketSocketUpdate;
 import forestry.core.network.packets.PacketSolderingIronClick;
 import forestry.core.network.packets.PacketTankLevelUpdate;
+import forestry.core.network.packets.PacketTileConfiguration;
 import forestry.core.network.packets.PacketTileStream;
 
 public class PacketRegistryCore extends PacketRegistry {
@@ -47,6 +48,7 @@ public class PacketRegistryCore extends PacketRegistry {
         registerClientPacket(new PacketFXSignal());
         registerClientPacket(new PacketTankLevelUpdate());
         registerClientPacket(new PacketGenomeTrackerSync());
+        registerClientPacket(new PacketTileConfiguration());
 
         registerServerPacket(new PacketGuiSelectRequest());
         registerServerPacket(new PacketPipetteClick());
