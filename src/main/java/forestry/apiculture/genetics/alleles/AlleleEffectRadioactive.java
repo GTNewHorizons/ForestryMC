@@ -77,27 +77,18 @@ public class AlleleEffectRadioactive extends AlleleEffectThrottled {
             Vect randomPos = Vect.getRandomPositionInArea(rand, area);
             Vect posBlock = randomPos.add(posHousing).add(offset);
 
-            if (posBlock.y < 1 || posBlock.y >= world.getActualHeight()) {
-                continue;
-            }
-
             // Don't destroy blocks in the protected 3x3x4 area if housing is an Alveary.
             // Stops the bee destroying itself. Silly behaviour.
             if (isAlveary && isInAlvearyProtectedArea(posHousing, posBlock)) {
                 continue;
             }
 
-            // Don't destroy the blocks directly below the bee.
-            if (posBlock.y == posHousing.y - 1) {
+            // Don't destroy the block directly below the bee.
+            if (posBlock.y == posHousing.y - 3) {
                 continue;
             }
 
             Block block = world.getBlock(posBlock.x, posBlock.y, posBlock.z);
-
-            // Just in-case...
-            if (block instanceof BlockAlveary) {
-                continue;
-            }
 
             // Never delete a tile entity. Allows far too much griefing and abuse otherwise.
             TileEntity tile = world.getTileEntity(posBlock.x, posBlock.y, posBlock.z);
@@ -111,7 +102,7 @@ public class AlleleEffectRadioactive extends AlleleEffectThrottled {
             }
 
             // Some mods might use this logic? Idk, just a safety check. Might stop griefing.
-            if (world.canMineBlock(housing.getWorld().func_152378_a(housing.getOwner().getId()), posHousing.x, posHousing.y, posHousing.z)) {
+            if (!world.canMineBlock(housing.getWorld().func_152378_a(housing.getOwner().getId()), posHousing.x, posHousing.y, posHousing.z)) {
                 continue;
             }
 
