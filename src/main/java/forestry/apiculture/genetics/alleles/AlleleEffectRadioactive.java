@@ -37,11 +37,7 @@ public class AlleleEffectRadioactive extends AlleleEffectThrottled {
     @Override
     public IEffectData doEffectThrottled(IBeeGenome genome, IEffectData storedData, IBeeHousing housing) {
         harmEntities(genome, housing);
-        if (isMobGriefingEnabled(housing)) {
-            for (int i = 0; i < 50; i++) {
-                destroyEnvironment(genome, housing);
-            }
-        }
+        if (isMobGriefingEnabled(housing)) destroyEnvironment(genome, housing);
 
         return storedData;
     }
