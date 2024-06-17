@@ -73,9 +73,9 @@ public class Vect implements IVect {
     }
 
     public static Vect getRandomPositionInArea(Random random, IVect area) {
-        int x = random.nextInt(area.getX());
-        int y = random.nextInt(area.getY());
-        int z = random.nextInt(area.getZ());
+        int x = random.nextInt(area.getX() + 1);
+        int y = random.nextInt(area.getY() + 1);
+        int z = random.nextInt(area.getZ() + 1);
         return new Vect(x, y, z);
     }
 
