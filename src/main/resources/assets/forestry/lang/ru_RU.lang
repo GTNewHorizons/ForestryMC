@@ -241,6 +241,11 @@ for.gui.noeffect=Нет эффекта
 for.gui.owner=Владелец
 for.gui.page=Страница
 
+for.gui.search_ingredients=Искать предметы
+for.gui.search_ingredients.internal_inventory=Встроенный инвентарь
+for.gui.search_ingredients.player_inventory=Инвентарь игрока
+for.gui.search_ingredients.all_inventories=Все инвентари
+
 for.gui.pipe.filter.anything=Всё
 for.gui.pipe.filter.bee=Любые пчелы
 for.gui.pipe.filter.cave=Пещерные

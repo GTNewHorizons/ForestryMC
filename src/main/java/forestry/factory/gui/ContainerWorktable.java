@@ -24,6 +24,7 @@ import forestry.core.gui.slots.SlotCraftMatrix;
 import forestry.core.gui.slots.SlotCrafter;
 import forestry.core.network.packets.PacketGuiSelectRequest;
 import forestry.core.proxy.Proxies;
+import forestry.core.tiles.IngredientsStorage;
 import forestry.core.utils.ItemStackUtil;
 import forestry.core.utils.Log;
 import forestry.factory.inventory.InventoryCraftingForestry;
@@ -207,6 +208,15 @@ public class ContainerWorktable extends ContainerTile<TileWorktable> implements 
                 sendPacketToCrafters(new PacketWorktableRecipeUpdate(tile));
                 break;
             }
+            case 200: { // switch ingredients storage
+                tile.setIngredientsStorage(IngredientsStorage.fromInt(secondary));
+                markConfigurationDirty();
+                break;
+            }
         }
+    }
+
+    public IngredientsStorage getIngredientsStorage() {
+        return tile.getIngredientsStorage();
     }
 }

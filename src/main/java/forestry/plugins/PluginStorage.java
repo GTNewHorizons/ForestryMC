@@ -96,6 +96,7 @@ public class PluginStorage extends ForestryPlugin {
     private final ArrayList<ItemStack> hunterItems = new ArrayList<>();
     private final ArrayList<ItemStack> adventurerItems = new ArrayList<>();
     private final ArrayList<ItemStack> builderItems = new ArrayList<>();
+    private final ArrayList<ItemStack> coinItems = new ArrayList<>();
 
     public static ItemRegistryStorage items;
 
@@ -108,7 +109,7 @@ public class PluginStorage extends ForestryPlugin {
 
         BackpackManager.backpackInterface = new BackpackInterface();
 
-        BackpackManager.backpackItems = new ArrayList[6];
+        BackpackManager.backpackItems = new ArrayList[7];
 
         BackpackManager.backpackItems[0] = minerItems;
         BackpackManager.backpackItems[1] = diggerItems;
@@ -116,6 +117,7 @@ public class PluginStorage extends ForestryPlugin {
         BackpackManager.backpackItems[3] = hunterItems;
         BackpackManager.backpackItems[4] = adventurerItems;
         BackpackManager.backpackItems[5] = builderItems;
+        BackpackManager.backpackItems[6] = coinItems;
 
         BackpackDefinition definition;
 
@@ -146,18 +148,22 @@ public class PluginStorage extends ForestryPlugin {
 
         definition = new BackpackDefinition("builder", new Color(0xdd3a3a).getRGB());
         BackpackManager.definitions.put(definition.getKey(), definition);
+
+        definition = new BackpackDefinition("coin", new Color(0xffd700).getRGB());
+        BackpackManager.definitions.put(definition.getKey(), definition);
     }
 
     @Override
     @SuppressWarnings({ "unchecked" })
     protected void disabledSetupAPI() {
-        BackpackManager.backpackItems = new ArrayList[6];
+        BackpackManager.backpackItems = new ArrayList[7];
         BackpackManager.backpackItems[0] = minerItems;
         BackpackManager.backpackItems[1] = diggerItems;
         BackpackManager.backpackItems[2] = foresterItems;
         BackpackManager.backpackItems[3] = hunterItems;
         BackpackManager.backpackItems[4] = adventurerItems;
         BackpackManager.backpackItems[5] = builderItems;
+        BackpackManager.backpackItems[6] = coinItems;
     }
 
     @Override
@@ -182,6 +188,7 @@ public class PluginStorage extends ForestryPlugin {
         handleBackpackConfig(config, "hunter");
         handleBackpackConfig(config, "adventurer");
         handleBackpackConfig(config, "builder");
+        handleBackpackConfig(config, "coin");
 
         config.save();
 
@@ -219,6 +226,7 @@ public class PluginStorage extends ForestryPlugin {
         final BackpackDefinition adventurer = (BackpackDefinition) BackpackManager.definitions.get("adventurer");
         final BackpackDefinition builder = (BackpackDefinition) BackpackManager.definitions.get("builder");
         final BackpackDefinition hunter = (BackpackDefinition) BackpackManager.definitions.get("hunter");
+        final BackpackDefinition coin = (BackpackDefinition) BackpackManager.definitions.get("coin");
 
         miner.addValidItems(minerItems);
         digger.addValidItems(diggerItems);
@@ -226,6 +234,7 @@ public class PluginStorage extends ForestryPlugin {
         hunter.addValidItems(hunterItems);
         adventurer.addValidItems(adventurerItems);
         builder.addValidItems(builderItems);
+        coin.addValidItems(coinItems);
 
         final Pattern minerOreDictPattern = Pattern
                 .compile("(ore|dust|gem|ingot|nugget|crushed|cluster|denseore)[A-Z].*");
@@ -521,6 +530,7 @@ public class PluginStorage extends ForestryPlugin {
         addBackpackRecipe(items.hunterBackpack, Items.feather);
         addBackpackRecipe(items.adventurerBackpack, Items.bone);
         addBackpackRecipe(items.builderBackpack, Items.clay_ball);
+        addBackpackRecipe(items.coinBackpack, "ingotGold");
 
         // / CARPENTER
         if (PluginManager.Module.FACTORY.isEnabled()) {
@@ -543,6 +553,7 @@ public class PluginStorage extends ForestryPlugin {
             addT2BackpackRecipe(items.hunterBackpack, items.hunterBackpackT2);
             addT2BackpackRecipe(items.adventurerBackpack, items.adventurerBackpackT2);
             addT2BackpackRecipe(items.builderBackpack, items.builderBackpackT2);
+            addT2BackpackRecipe(items.coinBackpack, items.coinBackpackT2);
         }
     }
 
