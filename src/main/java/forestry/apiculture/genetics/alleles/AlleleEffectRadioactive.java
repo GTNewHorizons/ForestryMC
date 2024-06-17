@@ -84,8 +84,14 @@ public class AlleleEffectRadioactive extends AlleleEffectThrottled {
             }
 
             // Don't destroy the block directly below the bee.
-            if (posBlock.y == posHousing.y - 3) {
-                continue;
+            if (isAlveary) {
+                if (posBlock.y == posHousing.y - 3) {
+                    continue;
+                }
+            } else {
+                if (posBlock.y == posHousing.y - 1) {
+                    continue;
+                }
             }
 
             Block block = world.getBlock(posBlock.x, posBlock.y, posBlock.z);
