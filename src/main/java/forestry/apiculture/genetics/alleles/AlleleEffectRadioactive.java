@@ -11,6 +11,7 @@ package forestry.apiculture.genetics.alleles;
 import java.util.List;
 import java.util.Random;
 
+import forestry.apiculture.multiblock.AlvearyController;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.tileentity.TileEntity;
@@ -36,8 +37,17 @@ public class AlleleEffectRadioactive extends AlleleEffectThrottled {
     @Override
     public IEffectData doEffectThrottled(IBeeGenome genome, IEffectData storedData, IBeeHousing housing) {
         harmEntities(genome, housing);
+        if (isMobGriefingEnabled(housing)) {
+            for (int i = 0; i < 50; i++) {
+                destroyEnvironment(genome, housing);
+            }
+        }
 
-        return destroyEnvironment(genome, storedData, housing);
+        return storedData;
+    }
+
+    private boolean isMobGriefingEnabled(IBeeHousing housing) {
+        return housing.getWorld().getGameRules().getGameRuleBooleanValue("mobGriefing");
     }
 
     private void harmEntities(IBeeGenome genome, IBeeHousing housing) {
@@ -56,7 +66,7 @@ public class AlleleEffectRadioactive extends AlleleEffectThrottled {
         }
     }
 
-    private static IEffectData destroyEnvironment(IBeeGenome genome, IEffectData storedData, IBeeHousing housing) {
+    private static void destroyEnvironment(IBeeGenome genome, IBeeHousing housing) {
         World world = housing.getWorld();
         Random rand = world.rand;
 
@@ -65,43 +75,66 @@ public class AlleleEffectRadioactive extends AlleleEffectThrottled {
         Vect offset = area.multiply(-1 / 2.0f);
         Vect posHousing = new Vect(housing.getCoordinates());
 
+        boolean isAlveary = housing instanceof AlvearyController;
+
         for (int i = 0; i < 20; i++) {
             Vect randomPos = Vect.getRandomPositionInArea(rand, area);
-            Vect posBlock = randomPos.add(posHousing);
-            posBlock = posBlock.add(offset);
+            Vect posBlock = randomPos.add(posHousing).add(offset);
 
-            if (posBlock.y <= 1 || posBlock.y >= housing.getWorld().getActualHeight()) {
+            if (posBlock.y < 1 || posBlock.y >= world.getActualHeight()) {
                 continue;
             }
 
-            // Don't destroy ourselves or blocks below us.
-            if (posBlock.x == posHousing.x && posBlock.z == posHousing.z && posBlock.y <= posHousing.y) {
+            // Don't destroy blocks in the protected 3x3x4 area if housing is an Alveary.
+            // Stops the bee destroying itself. Silly behaviour.
+            if (isAlveary && isInAlvearyProtectedArea(posHousing, posBlock)) {
                 continue;
             }
 
-            if (world.isAirBlock(posBlock.x, posBlock.y, posBlock.z)) {
+            // Don't destroy the blocks directly below the bee.
+            if (posBlock.y == posHousing.y - 1) {
                 continue;
             }
 
             Block block = world.getBlock(posBlock.x, posBlock.y, posBlock.z);
 
+            // Just in-case...
             if (block instanceof BlockAlveary) {
                 continue;
             }
 
+            // Never delete a tile entity. Allows far too much griefing and abuse otherwise.
             TileEntity tile = world.getTileEntity(posBlock.x, posBlock.y, posBlock.z);
-            if (tile instanceof IBeeHousing) {
+            if (tile != null) {
                 continue;
             }
 
+            // Don't let us delete blocks that are not supposed to be breakable by players.
             if (block.getBlockHardness(world, posBlock.x, posBlock.y, posBlock.z) < 0) {
+                continue;
+            }
+
+            // Some mods might use this logic? Idk, just a safety check. Might stop griefing.
+            if (world.canMineBlock(housing.getWorld().func_152378_a(housing.getOwner().getId()), posHousing.x, posHousing.y, posHousing.z)) {
                 continue;
             }
 
             world.setBlockToAir(posBlock.x, posBlock.y, posBlock.z);
             break;
         }
+    }
 
-        return storedData;
+    private static boolean isInAlvearyProtectedArea(Vect posHousing, Vect posBlock) {
+        // Alveary protection area is a 3x3x4 area centered on the top middle, down one block.
+        int startX = posHousing.x - 1;
+        int endX = posHousing.x + 1;
+        int startZ = posHousing.z - 1;
+        int endZ = posHousing.z + 1;
+        int startY = posHousing.y - 2;
+        int endY = posHousing.y + 1;
+
+        return posBlock.x >= startX && posBlock.x <= endX &&
+                posBlock.z >= startZ && posBlock.z <= endZ &&
+                posBlock.y >= startY && posBlock.y <= endY;
     }
 }
