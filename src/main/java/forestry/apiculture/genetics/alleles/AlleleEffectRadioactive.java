@@ -11,7 +11,6 @@ package forestry.apiculture.genetics.alleles;
 import java.util.List;
 import java.util.Random;
 
-import forestry.apiculture.multiblock.AlvearyController;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.tileentity.TileEntity;
@@ -22,7 +21,7 @@ import forestry.api.apiculture.BeeManager;
 import forestry.api.apiculture.IBeeGenome;
 import forestry.api.apiculture.IBeeHousing;
 import forestry.api.genetics.IEffectData;
-import forestry.apiculture.blocks.BlockAlveary;
+import forestry.apiculture.multiblock.AlvearyController;
 import forestry.core.utils.DamageSourceForestry;
 import forestry.core.utils.vect.Vect;
 
@@ -108,7 +107,11 @@ public class AlleleEffectRadioactive extends AlleleEffectThrottled {
             }
 
             // Some mods might use this logic? Idk, just a safety check. Might stop griefing.
-            if (!world.canMineBlock(housing.getWorld().func_152378_a(housing.getOwner().getId()), posHousing.x, posHousing.y, posHousing.z)) {
+            if (!world.canMineBlock(
+                    housing.getWorld().func_152378_a(housing.getOwner().getId()),
+                    posHousing.x,
+                    posHousing.y,
+                    posHousing.z)) {
                 continue;
             }
 
@@ -126,8 +129,10 @@ public class AlleleEffectRadioactive extends AlleleEffectThrottled {
         int startY = posHousing.y - 2;
         int endY = posHousing.y + 1;
 
-        return posBlock.x >= startX && posBlock.x <= endX &&
-                posBlock.z >= startZ && posBlock.z <= endZ &&
-                posBlock.y >= startY && posBlock.y <= endY;
+        return posBlock.x >= startX && posBlock.x <= endX
+                && posBlock.z >= startZ
+                && posBlock.z <= endZ
+                && posBlock.y >= startY
+                && posBlock.y <= endY;
     }
 }
