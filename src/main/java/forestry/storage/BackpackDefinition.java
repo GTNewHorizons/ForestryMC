@@ -192,14 +192,24 @@ public class BackpackDefinition implements IBackpackDefinition {
         int[] oreIds = OreDictionary.getOreIDs(itemStack);
         for (int oreId : oreIds) {
             if (validOreIds.contains(oreId)) {
-                validItemStacks.add(itemStackStringWild);
+                if (meta != OreDictionary.WILDCARD_VALUE) {
+                    String itemStackString = itemStackStringWild + ':' + meta;
+                    validItemStacks.add(itemStackString);
+                } else {
+                    validItemStacks.add(itemStackStringWild);
+                }
                 return true;
             }
         }
 
         for (Class<?> itemClass : validItemClasses) {
             if (itemClass.isInstance(item)) {
-                validItemStacks.add(itemStackStringWild);
+                if (meta != OreDictionary.WILDCARD_VALUE) {
+                    String itemStackString = itemStackStringWild + ':' + meta;
+                    validItemStacks.add(itemStackString);
+                } else {
+                    validItemStacks.add(itemStackStringWild);
+                }
                 return true;
             }
         }
@@ -208,7 +218,12 @@ public class BackpackDefinition implements IBackpackDefinition {
         if (block != null) {
             for (Class<?> blockClass : validBlockClasses) {
                 if (blockClass.isInstance(block)) {
-                    validItemStacks.add(itemStackStringWild);
+                    if (meta != OreDictionary.WILDCARD_VALUE) {
+                        String itemStackString = itemStackStringWild + ':' + meta;
+                        validItemStacks.add(itemStackString);
+                    } else {
+                        validItemStacks.add(itemStackStringWild);
+                    }
                     return true;
                 }
             }
