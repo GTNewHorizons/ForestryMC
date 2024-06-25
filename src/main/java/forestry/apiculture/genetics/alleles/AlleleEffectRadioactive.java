@@ -78,7 +78,7 @@ public class AlleleEffectRadioactive extends AlleleEffectThrottled {
 
             // Don't destroy blocks in the protected 3x3x4 area if housing is an Alveary.
             // Stops the bee destroying itself. Silly behaviour.
-            if (isAlveary && isInAlvearyProtectedArea(posHousing, posBlock)) {
+            if (isInAlvearyProtectedArea(posHousing, posBlock)) {
                 continue;
             }
 
