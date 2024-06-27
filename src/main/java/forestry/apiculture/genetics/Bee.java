@@ -8,6 +8,9 @@
  ******************************************************************************/
 package forestry.apiculture.genetics;
 
+import static forestry.core.utils.MathUtil.safeAdd;
+import static forestry.core.utils.MathUtil.safeMultiply;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -66,9 +69,6 @@ import forestry.core.utils.GeneticsUtil;
 import forestry.core.utils.Log;
 import forestry.core.utils.StringUtil;
 import forestry.core.utils.vect.Vect;
-
-import static forestry.core.utils.MathUtil.safeAdd;
-import static forestry.core.utils.MathUtil.safeMultiply;
 
 public class Bee extends IndividualLiving implements IBee {
 
