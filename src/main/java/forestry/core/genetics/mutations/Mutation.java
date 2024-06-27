@@ -25,6 +25,8 @@ import forestry.api.genetics.IGenome;
 import forestry.api.genetics.IMutationCondition;
 import forestry.api.genetics.IMutationCustom;
 
+import static forestry.core.utils.MathUtil.safeMultiply;
+
 public abstract class Mutation implements IMutationCustom {
 
     private final int chance;
@@ -126,7 +128,7 @@ public abstract class Mutation implements IMutationCustom {
             IGenome genome1, IClimateProvider climate) {
         float mutationChance = chance;
         for (IMutationCondition mutationCondition : mutationConditions) {
-            mutationChance *= mutationCondition.getChance(world, x, y, z, allele0, allele1, genome0, genome1, climate);
+            mutationChance = safeMultiply(mutationChance, mutationCondition.getChance(world, x, y, z, allele0, allele1, genome0, genome1, climate));
             if (mutationChance == 0) {
                 return 0;
             }

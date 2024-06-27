@@ -67,6 +67,9 @@ import forestry.core.utils.Log;
 import forestry.core.utils.StringUtil;
 import forestry.core.utils.vect.Vect;
 
+import static forestry.core.utils.MathUtil.safeAdd;
+import static forestry.core.utils.MathUtil.safeMultiply;
+
 public class Bee extends IndividualLiving implements IBee {
 
     private int generation;
@@ -699,9 +702,9 @@ public class Bee extends IndividualLiving implements IBee {
 
             // boost chance for researched mutations
             if (breedingTracker.isResearched(beeMutation)) {
-                float mutationBoost = chance * (Config.researchMutationBoostMultiplier - 1.0f);
+                float mutationBoost = safeMultiply(chance, Config.researchMutationBoostMultiplier - 1.0f);
                 mutationBoost = Math.min(Config.maxResearchMutationBoostPercent, mutationBoost);
-                chance += mutationBoost;
+                chance = safeAdd(chance, mutationBoost);
             }
 
             if (chance > world.rand.nextFloat() * 100) {
