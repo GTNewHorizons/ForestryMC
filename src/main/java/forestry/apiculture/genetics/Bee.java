@@ -8,6 +8,9 @@
  ******************************************************************************/
 package forestry.apiculture.genetics;
 
+import static forestry.core.utils.MathUtil.safeAdd;
+import static forestry.core.utils.MathUtil.safeMultiply;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -699,9 +702,9 @@ public class Bee extends IndividualLiving implements IBee {
 
             // boost chance for researched mutations
             if (breedingTracker.isResearched(beeMutation)) {
-                float mutationBoost = chance * (Config.researchMutationBoostMultiplier - 1.0f);
+                float mutationBoost = safeMultiply(chance, Config.researchMutationBoostMultiplier - 1.0f);
                 mutationBoost = Math.min(Config.maxResearchMutationBoostPercent, mutationBoost);
-                chance += mutationBoost;
+                chance = safeAdd(chance, mutationBoost);
             }
 
             if (chance > world.rand.nextFloat() * 100) {

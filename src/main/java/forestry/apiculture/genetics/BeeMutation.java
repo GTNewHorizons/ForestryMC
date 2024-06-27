@@ -8,6 +8,8 @@
  ******************************************************************************/
 package forestry.apiculture.genetics;
 
+import static forestry.core.utils.MathUtil.safeMultiply;
+
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.World;
 
@@ -49,8 +51,12 @@ public class BeeMutation extends Mutation implements IBeeMutationCustom {
         IBeeModifier beeHousingModifier = BeeManager.beeRoot.createBeeHousingModifier(housing);
         IBeeModifier beeModeModifier = BeeManager.beeRoot.getBeekeepingMode(world).getBeeModifier();
 
-        processedChance *= beeHousingModifier.getMutationModifier(genome0, genome1, processedChance);
-        processedChance *= beeModeModifier.getMutationModifier(genome0, genome1, processedChance);
+        processedChance = safeMultiply(
+                processedChance,
+                beeHousingModifier.getMutationModifier(genome0, genome1, processedChance));
+        processedChance = safeMultiply(
+                processedChance,
+                beeModeModifier.getMutationModifier(genome0, genome1, processedChance));
 
         return processedChance;
     }

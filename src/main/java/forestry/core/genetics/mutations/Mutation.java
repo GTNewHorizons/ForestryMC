@@ -8,6 +8,8 @@
  ******************************************************************************/
 package forestry.core.genetics.mutations;
 
+import static forestry.core.utils.MathUtil.safeMultiply;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -126,7 +128,9 @@ public abstract class Mutation implements IMutationCustom {
             IGenome genome1, IClimateProvider climate) {
         float mutationChance = chance;
         for (IMutationCondition mutationCondition : mutationConditions) {
-            mutationChance *= mutationCondition.getChance(world, x, y, z, allele0, allele1, genome0, genome1, climate);
+            mutationChance = safeMultiply(
+                    mutationChance,
+                    mutationCondition.getChance(world, x, y, z, allele0, allele1, genome0, genome1, climate));
             if (mutationChance == 0) {
                 return 0;
             }
