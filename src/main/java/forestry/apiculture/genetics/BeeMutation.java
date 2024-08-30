@@ -53,10 +53,10 @@ public class BeeMutation extends Mutation implements IBeeMutationCustom {
 
         processedChance = safeMultiply(
                 processedChance,
-                beeHousingModifier.getMutationModifier(genome0, genome1, processedChance));
+                beeHousingModifier.getMutationModifier(genome0, genome1, 1.0F));
         processedChance = safeMultiply(
                 processedChance,
-                beeModeModifier.getMutationModifier(genome0, genome1, processedChance));
+                beeModeModifier.getMutationModifier(genome0, genome1, 1.0F));
 
         return processedChance;
     }
