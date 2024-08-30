@@ -1,29 +1,30 @@
 package forestry.core.utils;
 
+import java.math.BigDecimal;
+
 public class MathUtil {
 
-    public static float safeMultiply(float a, float b) {
-        if (a > 0 && b > 0 && a > Float.MAX_VALUE / b) {
+    private static final BigDecimal MAX_FLOAT = BigDecimal.valueOf(Float.MAX_VALUE);
+    private static final BigDecimal MIN_FLOAT = BigDecimal.valueOf(-Float.MAX_VALUE);
+
+    private static float clampToFloatRange(BigDecimal result) {
+        if (result.compareTo(MAX_FLOAT) > 0) {
             return Float.MAX_VALUE;
-        } else if (a > 0 && b < 0 && a > Float.MIN_VALUE / b) {
-            return Float.MIN_VALUE;
-        } else if (a < 0 && b > 0 && a < Float.MIN_VALUE / b) {
-            return Float.MIN_VALUE;
-        } else if (a < 0 && b < 0 && a < Float.MAX_VALUE / b) {
-            return Float.MAX_VALUE;
-        } else {
-            return a * b;
+        } else if (result.compareTo(MIN_FLOAT) < 0) {
+            return -Float.MAX_VALUE;
         }
+        return result.floatValue();
+    }
+
+    public static float safeMultiply(float a, float b) {
+        BigDecimal bigA = BigDecimal.valueOf(a);
+        BigDecimal bigB = BigDecimal.valueOf(b);
+        return clampToFloatRange(bigA.multiply(bigB));
     }
 
     public static float safeAdd(float a, float b) {
-        if (a > 0 && b > 0 && a > Float.MAX_VALUE - b) {
-            return Float.MAX_VALUE;
-        } else if (a < 0 && b < 0 && a < Float.MIN_VALUE - b) {
-            return Float.MIN_VALUE;
-        } else {
-            return a + b;
-        }
+        BigDecimal bigA = BigDecimal.valueOf(a);
+        BigDecimal bigB = BigDecimal.valueOf(b);
+        return clampToFloatRange(bigA.add(bigB));
     }
-
 }
