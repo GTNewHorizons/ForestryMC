@@ -61,6 +61,10 @@ public class ProxyCommon {
         return false;
     }
 
+    public boolean isCtrlDown() {
+        return false;
+    }
+
     public void playSoundFX(World world, int x, int y, int z, Block block) {
         Proxies.net.sendNetworkPacket(new PacketFXSignal(PacketFXSignal.SoundFXType.LEAF, x, y, z, block, 0), world);
     }

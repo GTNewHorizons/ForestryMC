@@ -65,6 +65,7 @@ import forestry.core.errors.EnumErrorCode;
 import forestry.core.genetics.Chromosome;
 import forestry.core.genetics.GenericRatings;
 import forestry.core.genetics.IndividualLiving;
+import forestry.core.proxy.Proxies;
 import forestry.core.utils.GeneticsUtil;
 import forestry.core.utils.Log;
 import forestry.core.utils.StringUtil;
@@ -455,6 +456,21 @@ public class Bee extends IndividualLiving implements IBee {
 
         if (genome.getTolerantFlyer()) {
             list.add(EnumChatFormatting.WHITE + StringUtil.localize("gui.flyer.tooltip"));
+        }
+
+        // Add lore and discovered by
+        String descTokens[] = primary.getDescription().split("\\|");
+        if (descTokens.length > 0) {
+            String speciesLore = descTokens[0];
+            if (!speciesLore.isEmpty() && Proxies.common.isCtrlDown()) {
+                list.addAll(StringUtil.multilineStrings(speciesLore, 50));
+            }
+        }
+        if (descTokens.length > 2) {
+            String discoveredBy = descTokens[2];
+            if (!discoveredBy.isEmpty()) {
+                list.add("Discovered by " + discoveredBy);
+            }
         }
     }
 

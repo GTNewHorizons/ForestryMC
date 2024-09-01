@@ -64,6 +64,11 @@ public class ProxyCommonClient extends ProxyCommon {
     }
 
     @Override
+    public boolean isCtrlDown() {
+        return Keyboard.isKeyDown(Keyboard.KEY_LCONTROL) || Keyboard.isKeyDown(Keyboard.KEY_RCONTROL);
+    }
+
+    @Override
     public String getDisplayName(ItemStack itemstack) {
         return itemstack.getItem().getItemStackDisplayName(itemstack);
     }

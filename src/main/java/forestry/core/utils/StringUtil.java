@@ -8,7 +8,9 @@
  ******************************************************************************/
 package forestry.core.utils;
 
+import java.util.ArrayList;
 import java.util.IllegalFormatException;
+import java.util.List;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
@@ -115,5 +117,27 @@ public class StringUtil {
         }
 
         return lineCount * fontRenderer.FONT_HEIGHT;
+    }
+
+    public static List<String> multilineStrings(String input, int n) {
+        List<String> result = new ArrayList<>();
+
+        int start = 0;
+        while (start < input.length()) {
+            // Find the end index by starting with n characters ahead
+            int end = Math.min(start + n, input.length());
+
+            // If end is not at the end of the string, backtrack to the last space
+            if (end < input.length() && !Character.isWhitespace(input.charAt(end))) {
+                int lastSpace = input.lastIndexOf(' ', end);
+                if (lastSpace > start) {
+                    end = lastSpace;
+                }
+            }
+
+            result.add(input.substring(start, end).trim());
+            start = end;
+        }
+        return result;
     }
 }
