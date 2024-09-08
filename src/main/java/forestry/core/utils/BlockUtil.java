@@ -242,8 +242,8 @@ public abstract class BlockUtil {
             // noinspection unchecked
             BW_MetaGenerated_WerkstoffBlocksClass = (Class<? extends Block>) Class
                     .forName("bartworks.system.material.BWMetaGeneratedWerkstoffBlocks");
-            BWBlocks = (Block) Class.forName("bartworks.system.material.WerkstoffLoader")
-                    .getField("BWBlocks").get(null);
+            BWBlocks = (Block) Class.forName("bartworks.system.material.WerkstoffLoader").getField("BWBlocks")
+                    .get(null);
         } catch (ClassNotFoundException | NoSuchFieldException | IllegalAccessException e) {
             e.printStackTrace();
         }
