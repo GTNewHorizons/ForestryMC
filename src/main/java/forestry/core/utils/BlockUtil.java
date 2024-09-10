@@ -241,16 +241,16 @@ public abstract class BlockUtil {
         if (bw) try {
             // noinspection unchecked
             BW_MetaGenerated_WerkstoffBlocksClass = (Class<? extends Block>) Class
-                    .forName("com.github.bartimaeusnek.bartworks.system.material.BW_MetaGenerated_WerkstoffBlocks");
-            BWBlocks = (Block) Class.forName("com.github.bartimaeusnek.bartworks.system.material.WerkstoffLoader")
-                    .getField("BWBlocks").get(null);
+                    .forName("bartworks.system.material.BWMetaGeneratedWerkstoffBlocks");
+            BWBlocks = (Block) Class.forName("bartworks.system.material.WerkstoffLoader").getField("BWBlocks")
+                    .get(null);
         } catch (ClassNotFoundException | NoSuchFieldException | IllegalAccessException e) {
             e.printStackTrace();
         }
         if (gt) try {
             // noinspection unchecked
-            GTBlockMachines_Class = (Class<? extends Block>) Class.forName("gregtech.common.blocks.GT_Block_Machines");
-            GTBlockMachines = (Block) Class.forName("gregtech.api.GregTech_API").getField("sBlockMachines").get(null);
+            GTBlockMachines_Class = (Class<? extends Block>) Class.forName("gregtech.common.blocks.BlockMachines");
+            GTBlockMachines = (Block) Class.forName("gregtech.api.GregTechAPI").getField("sBlockMachines").get(null);
         } catch (ClassNotFoundException | NoSuchFieldException | IllegalAccessException e) {
             e.printStackTrace();
         }
