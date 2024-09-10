@@ -335,6 +335,7 @@ for.gui.temperature=Temperatur
 for.gui.tolerance=Toleranz
 for.gui.temptol=Temp.Tol
 for.gui.tooltip.tmi=Drücke die Umschalttaste für mehr Infos.
+for.gui.tooltip.tml=Drücke die Steuerungstaste für mehr Geschichte.
 for.gui.triple=Dreifache
 for.gui.unknown=Unbekannt
 for.gui.warm=Warm

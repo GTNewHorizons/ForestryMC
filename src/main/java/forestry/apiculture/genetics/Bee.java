@@ -18,6 +18,7 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 
+import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -378,6 +379,36 @@ public class Bee extends IndividualLiving implements IBee {
     }
 
     @Override
+    public void addLore(List<String> text) {
+        IAlleleBeeSpecies primary = genome.getPrimary();
+        String descTokens[] = primary.getDescription().split("\\|");
+
+        if (descTokens.length > 0) {
+            String speciesLore = descTokens[0];
+            if (!speciesLore.isEmpty() && !speciesLore.contains("for.description") && Proxies.common.isCtrlDown()) {
+                FontRenderer fontRenderer = Proxies.common.getClientInstance().fontRenderer;
+                String formattedLore = EnumChatFormatting.GOLD + speciesLore;
+                List<String> formattedLoreList = fontRenderer.listFormattedStringToWidth(formattedLore, 200);
+                text.addAll(formattedLoreList);
+            }
+        }
+    }
+
+    @Override
+    public void addDiscoveredBy(List<String> text) {
+        IAlleleBeeSpecies primary = genome.getPrimary();
+        String descTokens[] = primary.getDescription().split("\\|");
+
+        if (descTokens.length > 2) {
+            String discoveredBy = descTokens[2];
+            if (!discoveredBy.isEmpty()) {
+                text.add("");
+                text.add("Discovered by " + EnumChatFormatting.ITALIC + discoveredBy);
+            }
+        }
+    }
+
+    @Override
     public void addTooltip(List<String> list) {
 
         // No info 4 u!
@@ -456,21 +487,6 @@ public class Bee extends IndividualLiving implements IBee {
 
         if (genome.getTolerantFlyer()) {
             list.add(EnumChatFormatting.WHITE + StringUtil.localize("gui.flyer.tooltip"));
-        }
-
-        // Add lore and discovered by
-        String descTokens[] = primary.getDescription().split("\\|");
-        if (descTokens.length > 0) {
-            String speciesLore = descTokens[0];
-            if (!speciesLore.isEmpty() && Proxies.common.isCtrlDown()) {
-                list.addAll(StringUtil.multilineStrings(speciesLore, 50));
-            }
-        }
-        if (descTokens.length > 2) {
-            String discoveredBy = descTokens[2];
-            if (!discoveredBy.isEmpty()) {
-                list.add("Discovered by " + discoveredBy);
-            }
         }
     }
 

@@ -8,6 +8,8 @@
  ******************************************************************************/
 package forestry.core.genetics;
 
+import java.util.List;
+
 import net.minecraft.nbt.NBTTagCompound;
 
 import forestry.api.genetics.IChromosomeType;
@@ -79,4 +81,10 @@ public abstract class Individual implements IIndividual {
         return getGenome().getActiveAllele(chromosomeType).getUID()
                 .equals(getGenome().getInactiveAllele(chromosomeType).getUID());
     }
+
+    @Override
+    public void addLore(List<String> text) {}
+
+    @Override
+    public void addDiscoveredBy(List<String> text) {}
 }
