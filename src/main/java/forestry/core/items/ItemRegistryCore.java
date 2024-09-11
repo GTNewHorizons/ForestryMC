@@ -8,6 +8,8 @@
  ******************************************************************************/
 package forestry.core.items;
 
+import static forestry.Forestry.isDreamcraftLoaded;
+
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -87,19 +89,26 @@ public class ItemRegistryCore extends ItemRegistry {
         fertilizerBio = registerItem(new ItemForestry(), "fertilizerBio");
         fertilizerCompound = registerItem(new ItemForestryBonemeal(), "fertilizerCompound");
 
-        apatite = registerItem(new ItemForestry(), "apatite");
-        OreDictionary.registerOre("gemApatite", apatite);
-
         researchNote = registerItem(new ItemResearchNote(), "researchNote");
 
-        ingotCopper = registerItem(new ItemForestry(), "ingotCopper");
-        OreDictionary.registerOre("ingotCopper", ingotCopper);
+        if (!isDreamcraftLoaded) {
+            apatite = registerItem(new ItemForestry(), "apatite");
+            OreDictionary.registerOre("gemApatite", apatite);
 
-        ingotTin = registerItem(new ItemForestry(), "ingotTin");
-        OreDictionary.registerOre("ingotTin", ingotTin);
+            ingotCopper = registerItem(new ItemForestry(), "ingotCopper");
+            OreDictionary.registerOre("ingotCopper", ingotCopper);
 
-        ingotBronze = registerItem(new ItemForestry(), "ingotBronze");
-        OreDictionary.registerOre("ingotBronze", ingotBronze);
+            ingotTin = registerItem(new ItemForestry(), "ingotTin");
+            OreDictionary.registerOre("ingotTin", ingotTin);
+
+            ingotBronze = registerItem(new ItemForestry(), "ingotBronze");
+            OreDictionary.registerOre("ingotBronze", ingotBronze);
+        } else {
+            apatite = null;
+            ingotCopper = null;
+            ingotTin = null;
+            ingotBronze = null;
+        }
 
         wrench = registerItem(new ItemWrench(), "wrench");
         pipette = registerItem(new ItemPipette(), "pipette");

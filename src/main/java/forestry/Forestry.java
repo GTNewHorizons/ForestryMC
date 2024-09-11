@@ -15,6 +15,7 @@ import net.minecraft.item.Item;
 import net.minecraftforge.common.MinecraftForge;
 
 import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.ModAPIManager;
@@ -79,10 +80,14 @@ public class Forestry {
 
     public static PacketHandler packetHandler;
 
+    public static boolean isDreamcraftLoaded;
+
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         checkForCoFHLib();
         packetHandler = new PacketHandler();
+
+        isDreamcraftLoaded = Loader.isModLoaded("dreamcraft");
 
         // Register event handler
         EventHandlerCore eventHandlerCore = new EventHandlerCore();

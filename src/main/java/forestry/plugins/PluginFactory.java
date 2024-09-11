@@ -8,6 +8,8 @@
  ******************************************************************************/
 package forestry.plugins;
 
+import static forestry.Forestry.isDreamcraftLoaded;
+
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -644,18 +646,20 @@ public class PluginFactory extends ForestryPlugin {
                 new Object[] { " # ", " X ", " X ", '#', "ingotBronze", 'X', "stickWood" });
 
         // Reclamation
-        RecipeManagers.carpenterManager.addRecipe(
-                null,
-                PluginCore.items.ingotBronze.getItemStack(2),
-                "#",
-                '#',
-                PluginCore.items.brokenBronzePickaxe);
-        RecipeManagers.carpenterManager.addRecipe(
-                null,
-                PluginCore.items.ingotBronze.getItemStack(),
-                "#",
-                '#',
-                PluginCore.items.brokenBronzeShovel);
+        if (!isDreamcraftLoaded) {
+            RecipeManagers.carpenterManager.addRecipe(
+                    null,
+                    PluginCore.items.ingotBronze.getItemStack(2),
+                    "#",
+                    '#',
+                    PluginCore.items.brokenBronzePickaxe);
+            RecipeManagers.carpenterManager.addRecipe(
+                    null,
+                    PluginCore.items.ingotBronze.getItemStack(),
+                    "#",
+                    '#',
+                    PluginCore.items.brokenBronzeShovel);
+        }
 
         // Crating and uncrating
         if (PluginManager.Module.STORAGE.isEnabled()) {

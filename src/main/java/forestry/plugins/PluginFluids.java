@@ -8,6 +8,8 @@
  ******************************************************************************/
 package forestry.plugins;
 
+import static forestry.Forestry.isDreamcraftLoaded;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -130,11 +132,13 @@ public class PluginFluids extends ForestryPlugin {
         }
 
         if (RecipeManagers.squeezerManager != null) {
-            RecipeManagers.squeezerManager.addContainerRecipe(
-                    10,
-                    items.canEmpty.getItemStack(),
-                    PluginCore.items.ingotTin.getItemStack(),
-                    0.05f);
+            if (!isDreamcraftLoaded) {
+                RecipeManagers.squeezerManager.addContainerRecipe(
+                        10,
+                        items.canEmpty.getItemStack(),
+                        PluginCore.items.ingotTin.getItemStack(),
+                        0.05f);
+            }
             RecipeManagers.squeezerManager.addContainerRecipe(
                     10,
                     items.waxCapsuleEmpty.getItemStack(),

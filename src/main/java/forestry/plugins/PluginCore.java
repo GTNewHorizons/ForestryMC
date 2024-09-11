@@ -8,6 +8,8 @@
  ******************************************************************************/
 package forestry.plugins;
 
+import static forestry.Forestry.isDreamcraftLoaded;
+
 import java.util.ArrayList;
 
 import net.minecraft.command.ICommand;
@@ -132,14 +134,16 @@ public class PluginCore extends ForestryPlugin {
 
         // forestry items
         crateRegistry.registerCrate(items.peat, "cratedPeat");
-        crateRegistry.registerCrate(items.apatite, "cratedApatite");
         crateRegistry.registerCrate(items.fertilizerCompound, "cratedFertilizer");
         crateRegistry.registerCrate(items.mulch, "cratedMulch");
         crateRegistry.registerCrate(items.phosphor, "cratedPhosphor");
         crateRegistry.registerCrate(items.ash, "cratedAsh");
-        crateRegistry.registerCrateUsingOreDict(items.ingotTin, "cratedTin");
-        crateRegistry.registerCrateUsingOreDict(items.ingotCopper, "cratedCopper");
-        crateRegistry.registerCrateUsingOreDict(items.ingotBronze, "cratedBronze");
+        if (!isDreamcraftLoaded) {
+            crateRegistry.registerCrate(items.apatite, "cratedApatite");
+            crateRegistry.registerCrateUsingOreDict(items.ingotTin, "cratedTin");
+            crateRegistry.registerCrateUsingOreDict(items.ingotCopper, "cratedCopper");
+            crateRegistry.registerCrateUsingOreDict(items.ingotBronze, "cratedBronze");
+        }
 
         // forestry blocks
         crateRegistry.registerCrate(blocks.soil.get(BlockSoil.SoilType.HUMUS, 1), "cratedHumus");
@@ -195,9 +199,14 @@ public class PluginCore extends ForestryPlugin {
     protected void registerRecipes() {
 
         /* SMELTING RECIPES */
-        RecipeUtil.addSmelting(blocks.resources.get(BlockResourceOre.ResourceType.APATITE, 1), items.apatite, 0.5f);
-        RecipeUtil.addSmelting(blocks.resources.get(BlockResourceOre.ResourceType.COPPER, 1), items.ingotCopper, 0.5f);
-        RecipeUtil.addSmelting(blocks.resources.get(BlockResourceOre.ResourceType.TIN, 1), items.ingotTin, 0.5f);
+        if (!isDreamcraftLoaded) {
+            RecipeUtil.addSmelting(blocks.resources.get(BlockResourceOre.ResourceType.APATITE, 1), items.apatite, 0.5f);
+            RecipeUtil.addSmelting(
+                    blocks.resources.get(BlockResourceOre.ResourceType.COPPER, 1),
+                    items.ingotCopper,
+                    0.5f);
+            RecipeUtil.addSmelting(blocks.resources.get(BlockResourceOre.ResourceType.TIN, 1), items.ingotTin, 0.5f);
+        }
         RecipeUtil.addSmelting(new ItemStack(items.peat), items.ash, 0.0f);
 
         /* BRONZE INGOTS */
@@ -382,41 +391,43 @@ public class PluginCore extends ForestryPlugin {
                 new ItemStack(Blocks.wool, 1, OreDictionary.WILDCARD_VALUE));
 
         // Storage Blocks
-        RecipeUtil.addRecipe(
-                blocks.resourceStorage.get(BlockResourceStorage.ResourceType.APATITE),
-                "###",
-                "###",
-                "###",
-                '#',
-                "gemApatite");
-        RecipeUtil.addShapelessRecipe(new ItemStack(items.apatite, 9), "blockApatite");
+        if (!isDreamcraftLoaded) {
+            RecipeUtil.addRecipe(
+                    blocks.resourceStorage.get(BlockResourceStorage.ResourceType.APATITE),
+                    "###",
+                    "###",
+                    "###",
+                    '#',
+                    "gemApatite");
+            RecipeUtil.addShapelessRecipe(new ItemStack(items.apatite, 9), "blockApatite");
 
-        RecipeUtil.addRecipe(
-                blocks.resourceStorage.get(BlockResourceStorage.ResourceType.COPPER),
-                "###",
-                "###",
-                "###",
-                '#',
-                "ingotCopper");
-        RecipeUtil.addShapelessRecipe(new ItemStack(items.ingotCopper, 9), "blockCopper");
+            RecipeUtil.addRecipe(
+                    blocks.resourceStorage.get(BlockResourceStorage.ResourceType.COPPER),
+                    "###",
+                    "###",
+                    "###",
+                    '#',
+                    "ingotCopper");
+            RecipeUtil.addShapelessRecipe(new ItemStack(items.ingotCopper, 9), "blockCopper");
 
-        RecipeUtil.addRecipe(
-                blocks.resourceStorage.get(BlockResourceStorage.ResourceType.TIN),
-                "###",
-                "###",
-                "###",
-                '#',
-                "ingotTin");
-        RecipeUtil.addShapelessRecipe(new ItemStack(items.ingotTin, 9), "blockTin");
+            RecipeUtil.addRecipe(
+                    blocks.resourceStorage.get(BlockResourceStorage.ResourceType.TIN),
+                    "###",
+                    "###",
+                    "###",
+                    '#',
+                    "ingotTin");
+            RecipeUtil.addShapelessRecipe(new ItemStack(items.ingotTin, 9), "blockTin");
 
-        RecipeUtil.addRecipe(
-                blocks.resourceStorage.get(BlockResourceStorage.ResourceType.BRONZE),
-                "###",
-                "###",
-                "###",
-                '#',
-                "ingotBronze");
-        RecipeUtil.addShapelessRecipe(new ItemStack(items.ingotBronze, 9), "blockBronze");
+            RecipeUtil.addRecipe(
+                    blocks.resourceStorage.get(BlockResourceStorage.ResourceType.BRONZE),
+                    "###",
+                    "###",
+                    "###",
+                    '#',
+                    "ingotBronze");
+            RecipeUtil.addShapelessRecipe(new ItemStack(items.ingotBronze, 9), "blockBronze");
+        }
     }
 
     @Override
