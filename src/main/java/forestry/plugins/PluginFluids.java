@@ -132,7 +132,7 @@ public class PluginFluids extends ForestryPlugin {
         }
 
         if (RecipeManagers.squeezerManager != null) {
-            if(!isDreamcraftLoaded) {
+            if (!isDreamcraftLoaded) {
                 RecipeManagers.squeezerManager.addContainerRecipe(
                         10,
                         items.canEmpty.getItemStack(),

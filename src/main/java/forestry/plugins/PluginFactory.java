@@ -646,7 +646,7 @@ public class PluginFactory extends ForestryPlugin {
                 new Object[] { " # ", " X ", " X ", '#', "ingotBronze", 'X', "stickWood" });
 
         // Reclamation
-        if(!isDreamcraftLoaded) {
+        if (!isDreamcraftLoaded) {
             RecipeManagers.carpenterManager.addRecipe(
                     null,
                     PluginCore.items.ingotBronze.getItemStack(2),

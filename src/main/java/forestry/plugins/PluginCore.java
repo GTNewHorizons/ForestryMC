@@ -138,7 +138,7 @@ public class PluginCore extends ForestryPlugin {
         crateRegistry.registerCrate(items.mulch, "cratedMulch");
         crateRegistry.registerCrate(items.phosphor, "cratedPhosphor");
         crateRegistry.registerCrate(items.ash, "cratedAsh");
-        if(!isDreamcraftLoaded) {
+        if (!isDreamcraftLoaded) {
             crateRegistry.registerCrate(items.apatite, "cratedApatite");
             crateRegistry.registerCrateUsingOreDict(items.ingotTin, "cratedTin");
             crateRegistry.registerCrateUsingOreDict(items.ingotCopper, "cratedCopper");
@@ -199,9 +199,12 @@ public class PluginCore extends ForestryPlugin {
     protected void registerRecipes() {
 
         /* SMELTING RECIPES */
-        if(!isDreamcraftLoaded) {
+        if (!isDreamcraftLoaded) {
             RecipeUtil.addSmelting(blocks.resources.get(BlockResourceOre.ResourceType.APATITE, 1), items.apatite, 0.5f);
-            RecipeUtil.addSmelting(blocks.resources.get(BlockResourceOre.ResourceType.COPPER, 1), items.ingotCopper, 0.5f);
+            RecipeUtil.addSmelting(
+                    blocks.resources.get(BlockResourceOre.ResourceType.COPPER, 1),
+                    items.ingotCopper,
+                    0.5f);
             RecipeUtil.addSmelting(blocks.resources.get(BlockResourceOre.ResourceType.TIN, 1), items.ingotTin, 0.5f);
         }
         RecipeUtil.addSmelting(new ItemStack(items.peat), items.ash, 0.0f);
@@ -388,7 +391,7 @@ public class PluginCore extends ForestryPlugin {
                 new ItemStack(Blocks.wool, 1, OreDictionary.WILDCARD_VALUE));
 
         // Storage Blocks
-        if(!isDreamcraftLoaded) {
+        if (!isDreamcraftLoaded) {
             RecipeUtil.addRecipe(
                     blocks.resourceStorage.get(BlockResourceStorage.ResourceType.APATITE),
                     "###",

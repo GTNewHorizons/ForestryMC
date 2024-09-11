@@ -91,7 +91,7 @@ public class ItemRegistryCore extends ItemRegistry {
 
         researchNote = registerItem(new ItemResearchNote(), "researchNote");
 
-        if(!isDreamcraftLoaded) {
+        if (!isDreamcraftLoaded) {
             apatite = registerItem(new ItemForestry(), "apatite");
             OreDictionary.registerOre("gemApatite", apatite);
 
@@ -103,11 +103,11 @@ public class ItemRegistryCore extends ItemRegistry {
 
             ingotBronze = registerItem(new ItemForestry(), "ingotBronze");
             OreDictionary.registerOre("ingotBronze", ingotBronze);
-        }else{
-            apatite=null;
-            ingotCopper=null;
-            ingotTin=null;
-            ingotBronze=null;
+        } else {
+            apatite = null;
+            ingotCopper = null;
+            ingotTin = null;
+            ingotBronze = null;
         }
 
         wrench = registerItem(new ItemWrench(), "wrench");
