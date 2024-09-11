@@ -53,7 +53,7 @@ public interface IIndividual extends INBTTagable {
 
     boolean isPureBred(IChromosomeType chromosomeType);
 
-    void addLore(List<String> text);
+    default void addLore(List<String> text) {}
 
-    void addDiscoveredBy(List<String> text);
+    default void addDiscoveredBy(List<String> text) {}
 }

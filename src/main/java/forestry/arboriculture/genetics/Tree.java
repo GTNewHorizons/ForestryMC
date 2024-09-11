@@ -16,6 +16,7 @@ import java.util.List;
 import javax.annotation.Nullable;
 
 import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -51,7 +52,6 @@ import forestry.arboriculture.genetics.alleles.AlleleFruit;
 import forestry.core.config.Config;
 import forestry.core.genetics.Chromosome;
 import forestry.core.genetics.Individual;
-import forestry.core.proxy.Proxies;
 import forestry.core.utils.StringUtil;
 
 public class Tree extends Individual implements ITree, IPlantable {
@@ -307,8 +307,8 @@ public class Tree extends Individual implements ITree, IPlantable {
 
         if (descTokens.length > 0) {
             String speciesLore = descTokens[0];
-            if (!speciesLore.isEmpty() && !speciesLore.contains("for.description") && Proxies.common.isCtrlDown()) {
-                FontRenderer fontRenderer = Proxies.common.getClientInstance().fontRenderer;
+            if (!speciesLore.isEmpty() && !speciesLore.contains("for.description")) {
+                FontRenderer fontRenderer = Minecraft.getMinecraft().fontRenderer;
                 String formattedLore = EnumChatFormatting.GOLD + speciesLore;
                 List<String> formattedLoreList = fontRenderer.listFormattedStringToWidth(formattedLore, 200);
                 text.addAll(formattedLoreList);
