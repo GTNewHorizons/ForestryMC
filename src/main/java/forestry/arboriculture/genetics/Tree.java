@@ -16,6 +16,7 @@ import java.util.List;
 import javax.annotation.Nullable;
 
 import net.minecraft.block.Block;
+import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumChatFormatting;
@@ -50,6 +51,7 @@ import forestry.arboriculture.genetics.alleles.AlleleFruit;
 import forestry.core.config.Config;
 import forestry.core.genetics.Chromosome;
 import forestry.core.genetics.Individual;
+import forestry.core.proxy.Proxies;
 import forestry.core.utils.StringUtil;
 
 public class Tree extends Individual implements ITree, IPlantable {
@@ -296,6 +298,36 @@ public class Tree extends Individual implements ITree, IPlantable {
     @Override
     public EnumSet<EnumPlantType> getPlantTypes() {
         return plantTypes;
+    }
+
+    @Override
+    public void addLore(List<String> text) {
+        IAlleleTreeSpecies primary = genome.getPrimary();
+        String descTokens[] = primary.getDescription().split("\\|");
+
+        if (descTokens.length > 0) {
+            String speciesLore = descTokens[0];
+            if (!speciesLore.isEmpty() && !speciesLore.contains("for.description") && Proxies.common.isCtrlDown()) {
+                FontRenderer fontRenderer = Proxies.common.getClientInstance().fontRenderer;
+                String formattedLore = EnumChatFormatting.GOLD + speciesLore;
+                List<String> formattedLoreList = fontRenderer.listFormattedStringToWidth(formattedLore, 200);
+                text.addAll(formattedLoreList);
+            }
+        }
+    }
+
+    @Override
+    public void addDiscoveredBy(List<String> text) {
+        IAlleleTreeSpecies primary = genome.getPrimary();
+        String descTokens[] = primary.getDescription().split("\\|");
+
+        if (descTokens.length > 2) {
+            String discoveredBy = descTokens[2];
+            if (!discoveredBy.isEmpty()) {
+                text.add("");
+                text.add("Discovered by " + EnumChatFormatting.ITALIC + discoveredBy);
+            }
+        }
     }
 
     @Override

@@ -244,6 +244,7 @@ gui.higher=Higher
 gui.highest=Highest
 gui.fecundated=Mated
 gui.tooltip.tmi=Hold shift for details
+gui.tooltip.tml=Hold ctrl for lore
 gui.worktable.clear=Click to clear Grid
 gui.escritoire.probe=Examine Specimens
 hints.beebiomes.tag=Choose your biome!
