@@ -13,6 +13,7 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
@@ -107,11 +108,8 @@ public class AlleleEffectRadioactive extends AlleleEffectThrottled {
             }
 
             // Some mods might use this logic? Idk, just a safety check. Might stop griefing.
-            if (!world.canMineBlock(
-                    housing.getWorld().func_152378_a(housing.getOwner().getId()),
-                    posHousing.x,
-                    posHousing.y,
-                    posHousing.z)) {
+            EntityPlayer player = world.func_152378_a(housing.getOwner().getId());
+            if (player == null || !world.canMineBlock(player, posHousing.x, posHousing.y, posHousing.z)) {
                 continue;
             }
 
