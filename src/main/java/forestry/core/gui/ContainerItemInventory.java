@@ -53,4 +53,13 @@ public abstract class ContainerItemInventory<I extends ItemInventory> extends Co
         inventory.onSlotClick(player);
         return result;
     }
+
+    @Override
+    public void detectAndSendChanges() {
+        if (!inventory.isParentItemEquipped()) {
+            inventory.getPlayer().closeScreen();
+            return;
+        }
+        super.detectAndSendChanges();
+    }
 }

@@ -78,6 +78,14 @@ public abstract class ItemInventory implements IInventory, IFilterSlotDelegate {
         }
     }
 
+    public boolean isParentItemEquipped() {
+        return isSameItemInventory(player.getCurrentEquippedItem(), parent);
+    }
+
+    public EntityPlayer getPlayer() {
+        return player;
+    }
+
     public boolean isParentItemInventory(ItemStack itemStack) {
         ItemStack parent = getParent();
         return isSameItemInventory(parent, itemStack);
