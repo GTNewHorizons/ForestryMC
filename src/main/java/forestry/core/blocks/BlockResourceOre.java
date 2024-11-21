@@ -8,6 +8,8 @@
  ******************************************************************************/
 package forestry.core.blocks;
 
+import static forestry.Forestry.isDreamcraftLoaded;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,7 +54,7 @@ public class BlockResourceOre extends Block {
     public void dropBlockAsItemWithChance(World world, int x, int y, int z, int metadata, float par6, int par7) {
         super.dropBlockAsItemWithChance(world, x, y, z, metadata, par6, par7);
 
-        if (metadata == 0) {
+        if (metadata == 0 && !isDreamcraftLoaded) {
             this.dropXpOnBlockBreak(world, x, y, z, MathHelper.getRandomIntegerInRange(world.rand, 1, 4));
         }
     }
@@ -61,7 +63,7 @@ public class BlockResourceOre extends Block {
     public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune) {
         ArrayList<ItemStack> drops = new ArrayList<>();
 
-        if (metadata == ResourceType.APATITE.ordinal()) {
+        if (metadata == ResourceType.APATITE.ordinal() && !isDreamcraftLoaded) {
             int fortuneModifier = world.rand.nextInt(fortune + 2) - 1;
             if (fortuneModifier < 0) {
                 fortuneModifier = 0;
