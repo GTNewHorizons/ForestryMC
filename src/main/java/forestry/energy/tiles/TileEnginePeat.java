@@ -78,7 +78,7 @@ public class TileEnginePeat extends TileEngine implements ISidedInventory {
                 return i;
             }
 
-            if (waste.getItem() != PluginCore.items.ash) {
+            if (waste.getItem() != PluginCore.items.getAsh().getItem()) {
                 continue;
             }
 
@@ -182,7 +182,7 @@ public class TileEnginePeat extends TileEngine implements ISidedInventory {
         if (wasteSlot >= 0) {
             IInventoryAdapter inventory = getInternalInventory();
             if (inventory.getStackInSlot(wasteSlot) == null) {
-                inventory.setInventorySlotContents(wasteSlot, PluginCore.items.ash.getItemStack());
+                inventory.setInventorySlotContents(wasteSlot, PluginCore.items.getAsh());
             } else {
                 inventory.getStackInSlot(wasteSlot).stackSize++;
             }
