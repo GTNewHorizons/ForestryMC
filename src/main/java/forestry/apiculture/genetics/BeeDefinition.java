@@ -331,7 +331,7 @@ public enum BeeDefinition implements IBeeDefinition {
         @Override
         protected void setSpeciesProperties(IAlleleBeeSpeciesCustom beeSpecies) {
             beeSpecies.addProduct(PluginApiculture.items.beeComb.get(EnumHoneyComb.SIMMERING, 1), 0.55f)
-                    .addProduct(PluginCore.items.ash.getItemStack(), 0.15f).setTemperature(EnumTemperature.HELLISH)
+                    .addProduct(PluginCore.items.getAsh(), 0.15f).setTemperature(EnumTemperature.HELLISH)
                     .setHumidity(EnumHumidity.ARID);
         }
 

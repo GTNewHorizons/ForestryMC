@@ -10,6 +10,8 @@ package forestry.core.items;
 
 import static forestry.Forestry.isDreamcraftLoaded;
 
+import java.util.List;
+
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -65,7 +67,7 @@ public class ItemRegistryCore extends ItemRegistry {
 
     /* Peat */
     public final ItemForestry peat;
-    public final ItemForestry ash;
+    private final ItemForestry ash;
     public final ItemForestry bituminousPeat;
 
     /* Moistener */
@@ -195,5 +197,13 @@ public class ItemRegistryCore extends ItemRegistry {
             ItemStack fruit = new ItemStack(fruits, 1, def.ordinal());
             OreDictionary.registerOre(def.getOreDict(), fruit);
         }
+    }
+
+    public ItemStack getAsh() {
+        List<ItemStack> options = OreDictionary.getOres("dustAsh");
+        for (ItemStack option : options) {
+            if (option.getItem() != ash) return option.copy();
+        }
+        return ash.getItemStack();
     }
 }

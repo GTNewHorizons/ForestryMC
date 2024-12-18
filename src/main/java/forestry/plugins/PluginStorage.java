@@ -449,10 +449,15 @@ public class PluginStorage extends ForestryPlugin {
                     String oreName = OreDictionary.getOreName(oreId);
                     addCrating(crateStack, oreName);
                 }
+                if (oreIds.length > 0 && oreIds[0] == OreDictionary.getOreID("dustAsh")) {
+                    addUncrating(crateStack, PluginCore.items.getAsh());
+                } else {
+                    addUncrating(crateStack, uncrated);
+                }
             } else {
                 addCrating(crateStack, uncrated);
+                addUncrating(crateStack, uncrated);
             }
-            addUncrating(crateStack, uncrated);
         }
     }
 
