@@ -137,7 +137,7 @@ public class PluginCore extends ForestryPlugin {
         crateRegistry.registerCrate(items.fertilizerCompound, "cratedFertilizer");
         crateRegistry.registerCrate(items.mulch, "cratedMulch");
         crateRegistry.registerCrate(items.phosphor, "cratedPhosphor");
-        crateRegistry.registerCrate(items.ash, "cratedAsh");
+        crateRegistry.registerCrateUsingOreDict(items.getAsh(), "cratedAsh");
         if (!isDreamcraftLoaded) {
             crateRegistry.registerCrate(items.apatite, "cratedApatite");
             crateRegistry.registerCrateUsingOreDict(items.ingotTin, "cratedTin");
@@ -207,7 +207,7 @@ public class PluginCore extends ForestryPlugin {
                     0.5f);
             RecipeUtil.addSmelting(blocks.resources.get(BlockResourceOre.ResourceType.TIN, 1), items.ingotTin, 0.5f);
         }
-        RecipeUtil.addSmelting(new ItemStack(items.peat), items.ash, 0.0f);
+        RecipeUtil.addSmelting(new ItemStack(items.peat), items.getAsh(), 0.0f);
 
         /* BRONZE INGOTS */
         if (Config.isCraftingBronzeEnabled()) {
