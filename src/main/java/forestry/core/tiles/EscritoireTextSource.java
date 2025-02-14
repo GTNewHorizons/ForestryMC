@@ -37,7 +37,8 @@ public class EscritoireTextSource {
         EnumSet<Notes> multipleTranslationNoteLevels = EnumSet
                 .of(Notes.level1, Notes.level2, Notes.level3, Notes.level4, Notes.success, Notes.failure);
         for (Notes notesLevel : multipleTranslationNoteLevels) {
-            int levelCount = Integer.valueOf(StringUtil.localize("gui.escritoire.notes." + notesLevel + ".count"));
+            int levelCount = Integer.valueOf(
+                    StringUtil.localize("gui.escritoire.notes." + notesLevel + ".count").replaceAll("§\\d", ""));
             for (int i = 1; i <= levelCount; i++) {
                 String note = StringUtil.localize("gui.escritoire.notes." + notesLevel + '.' + i);
                 researchNotes.put(notesLevel, note);
