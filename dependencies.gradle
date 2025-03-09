@@ -2,7 +2,7 @@
 
 dependencies {
     api('curse.maven:cofh-lib-220333:2388748')
-    compileOnlyApi('com.github.GTNewHorizons:Angelica:1.0.0-beta35:api')
+    compileOnlyApi('com.github.GTNewHorizons:Angelica:1.0.0-beta37:api')
     devOnlyNonPublishable('com.github.GTNewHorizons:NotEnoughItems:2.7.29-GTNH:dev')
     compileOnly('com.github.GTNewHorizons:inventory-tweaks:1.7.1:api')
     compileOnly('com.github.GTNewHorizons:BuildCraft:7.1.42:api')
