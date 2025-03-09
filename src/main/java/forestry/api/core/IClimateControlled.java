@@ -12,11 +12,15 @@ public interface IClimateControlled {
 
     /**
      * Change the temperature, but not lower than boundaryDown or higher than boundaryUp.
+     *
+     * When used in an alveary the change applies a 20x stronger effect
      */
     void addTemperatureChange(float change, float boundaryDown, float boundaryUp);
 
     /**
      * Change the humidity, but not lower than boundaryDown or higher than boundaryUp.
+     *
+     * When used in an alveary the change applies a 20x stronger effect
      */
     void addHumidityChange(float change, float boundaryDown, float boundaryUp);
 }

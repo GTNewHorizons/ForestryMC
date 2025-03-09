@@ -49,6 +49,14 @@ public interface IAlvearyComponent<T extends IMultiblockLogicAlveary> extends IM
          * @param alveary   the climate controlled alveary
          */
         void changeClimate(int tickCount, IClimateControlled alveary);
+
+        /**
+         * Get the priority of this climatiser. Called when alveary is constructed.
+         * {@link #changeClimate(int, IClimateControlled)} are run in descending priority.
+         */
+        default int getPriority() {
+            return 0;
+        }
     }
 
     /**
