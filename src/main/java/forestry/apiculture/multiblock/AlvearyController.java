@@ -9,8 +9,10 @@
 package forestry.apiculture.multiblock;
 
 import java.io.IOException;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.TreeSet;
 
 import net.minecraft.block.Block;
 import net.minecraft.nbt.NBTTagCompound;
@@ -59,7 +61,9 @@ public class AlvearyController extends RectangularMultiblockControllerBase
     // PARTS
     private final Set<IBeeModifier> beeModifiers = new HashSet<>();
     private final Set<IBeeListener> beeListeners = new HashSet<>();
-    private final Set<IAlvearyComponent.Climatiser> climatisers = new HashSet<>();
+    private final Set<IAlvearyComponent.Climatiser> climatisers = new TreeSet<>(
+            Comparator.comparingInt(IAlvearyComponent.Climatiser::getPriority).thenComparingInt(Object::hashCode)
+                    .reversed());
     private final Set<IAlvearyComponent.Active> activeComponents = new HashSet<>();
 
     // CLIENT
@@ -233,26 +237,24 @@ public class AlvearyController extends RectangularMultiblockControllerBase
             beekeepingLogic.doWork();
         }
 
+        tempChange = 0;
+        humidChange = 0;
         for (IAlvearyComponent.Climatiser climatiser : climatisers) {
             climatiser.changeClimate(tickCount, this);
         }
 
-        tempChange = equalizeChange(tempChange);
-        humidChange = equalizeChange(humidChange);
-
         return canWork;
     }
 
-    private static float equalizeChange(float change) {
-        if (change == 0) {
-            return 0;
+    private float applyChange(float base, float currentChange, float extraChange, float boundaryDown,
+            float boundaryUp) {
+        float boundedNewChange = Math.max(boundaryDown, Math.min(base + currentChange + (extraChange * 20), boundaryUp))
+                - base;
+        if (extraChange > 0) {
+            return Math.max(currentChange, boundedNewChange);
+        } else {
+            return Math.min(currentChange, boundedNewChange);
         }
-
-        change *= 0.95f;
-        if (change <= 0.001f && change >= -0.001f) {
-            change = 0;
-        }
-        return change;
     }
 
     @Override
@@ -410,19 +412,13 @@ public class AlvearyController extends RectangularMultiblockControllerBase
         ChunkCoordinates coordinates = getCoordinates();
 
         float temperature = getBiome().getFloatTemperature(coordinates.posX, coordinates.posY, coordinates.posZ);
-
-        tempChange += change;
-        tempChange = Math.max(boundaryDown - temperature, tempChange);
-        tempChange = Math.min(boundaryUp - temperature, tempChange);
+        tempChange = applyChange(temperature, tempChange, change, boundaryDown, boundaryUp);
     }
 
     @Override
     public void addHumidityChange(float change, float boundaryDown, float boundaryUp) {
         float humidity = getBiome().rainfall;
-
-        humidChange += change;
-        humidChange = Math.max(boundaryDown - humidity, humidChange);
-        humidChange = Math.min(boundaryUp - humidity, humidChange);
+        humidChange = applyChange(humidity, humidChange, change, boundaryDown, boundaryUp);
     }
 
     /* GUI */

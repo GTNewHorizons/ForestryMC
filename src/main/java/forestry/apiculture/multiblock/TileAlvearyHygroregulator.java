@@ -56,9 +56,9 @@ public class TileAlvearyHygroregulator extends TileAlveary
         this.tankManager = new TankManager(this, liquidTank);
 
         this.recipes = new HygroregulatorRecipe[] {
-                new HygroregulatorRecipe(new FluidStack(water, 1), 1, +0.01f, -0.0005f),
-                new HygroregulatorRecipe(new FluidStack(lava, 1), 10, -0.01f, +0.0005f),
-                new HygroregulatorRecipe(new FluidStack(liquidIce, 1), 10, +0.02f, -0.001f) };
+                new HygroregulatorRecipe(new FluidStack(water, 1), 1, +0.01f, -0.005f),
+                new HygroregulatorRecipe(new FluidStack(lava, 1), 10, -0.01f, +0.005f),
+                new HygroregulatorRecipe(new FluidStack(liquidIce, 1), 10, +0.02f, -0.01f) };
     }
 
     @Override
@@ -109,6 +109,11 @@ public class TileAlvearyHygroregulator extends TileAlveary
             // Check if we have suitable items waiting in the item slot
             FluidHelper.drainContainers(tankManager, this, 0);
         }
+    }
+
+    @Override
+    public int getPriority() {
+        return 100;
     }
 
     /* SAVING & LOADING */
