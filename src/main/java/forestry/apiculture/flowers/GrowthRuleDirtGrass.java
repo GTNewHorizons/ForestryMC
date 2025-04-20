@@ -24,7 +24,7 @@ public class GrowthRuleDirtGrass implements IFlowerGrowthRule {
     @Override
     public boolean growFlower(IFlowerRegistry flowerRegistry, String flowerType, World world, IIndividual individual,
             int x, int y, int z) {
-        if (!world.isAirBlock(x, y, z)) {
+        if (!world.blockExists(x, y, z) || !world.isAirBlock(x, y, z)) {
             return false;
         }
 
@@ -39,7 +39,7 @@ public class GrowthRuleDirtGrass implements IFlowerGrowthRule {
 
     @Override
     public boolean growFlower(IFlowerGrowthHelper helper, String flowerType, World world, int x, int y, int z) {
-        if (!world.isAirBlock(x, y, z)) {
+        if (!world.blockExists(x, y, z) || !world.isAirBlock(x, y, z)) {
             return false;
         }
 
