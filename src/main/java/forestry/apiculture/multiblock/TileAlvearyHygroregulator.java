@@ -19,6 +19,7 @@ import net.minecraftforge.fluids.IFluidHandler;
 
 import forestry.api.core.IClimateControlled;
 import forestry.api.multiblock.IAlvearyComponent;
+import forestry.api.multiblock.IMultiblockComponent;
 import forestry.apiculture.blocks.BlockAlveary;
 import forestry.apiculture.gui.ContainerAlvearyHygroregulator;
 import forestry.apiculture.gui.GuiAlvearyHygroregulator;
@@ -31,8 +32,8 @@ import forestry.core.fluids.tanks.FilteredTank;
 import forestry.core.inventory.IInventoryAdapter;
 import forestry.core.tiles.ILiquidTankTile;
 
-public class TileAlvearyHygroregulator extends TileAlveary
-        implements IInventory, ILiquidTankTile, IFluidHandler, IAlvearyComponent.Climatiser {
+public class TileAlvearyHygroregulator extends TileAlveary implements IInventory, ILiquidTankTile, IFluidHandler,
+        IAlvearyComponent.Climatiser, IMultiblockComponent.HasInventory {
 
     private final HygroregulatorRecipe[] recipes;
 
