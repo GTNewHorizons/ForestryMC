@@ -248,12 +248,12 @@ public class PluginBiomesOPlenty extends ForestryPlugin {
                     1.0,
                     FlowerManager.FlowerTypeVanilla,
                     FlowerManager.FlowerTypeSnow); // Waterlily
-            FlowerManager.flowerRegistry.registerPlantableFlower(
-                    flowers,
-                    11,
-                    1.0,
-                    FlowerManager.FlowerTypeVanilla,
-                    FlowerManager.FlowerTypeSnow); // EnderLotus (does not actually spawn in the end)
+            // FlowerManager.flowerRegistry.registerPlantableFlower(
+            // flowers,
+            // 11,
+            // 1.0,
+            // FlowerManager.FlowerTypeVanilla,
+            // FlowerManager.FlowerTypeSnow); // EnderLotus (does not actually spawn in the end)
             FlowerManager.flowerRegistry.registerPlantableFlower(flowers, 12, 1.0, FlowerManager.FlowerTypeCacti); // Bromeliad
             FlowerManager.flowerRegistry.registerPlantableFlower(flowers, 13, 1.0, FlowerManager.FlowerTypeNether); // EyeBulb
             // FlowerManager.flowerRegistry.registerPlantableFlower(flowers, 14, 1.0, FlowerManager.FlowerTypeNether);
@@ -283,8 +283,9 @@ public class PluginBiomesOPlenty extends ForestryPlugin {
             FlowerManager.flowerRegistry.registerPlantableFlower(flowers2, 3, 1.0, FlowerManager.FlowerTypeVanilla); // Lavender
             FlowerManager.flowerRegistry.registerPlantableFlower(flowers2, 4, 1.0, FlowerManager.FlowerTypeVanilla); // Goldenrod
             FlowerManager.flowerRegistry.registerPlantableFlower(flowers2, 5, 1.0, FlowerManager.FlowerTypeVanilla); // Bluebells
-            FlowerManager.flowerRegistry.registerPlantableFlower(flowers2, 6, 1.0, FlowerManager.FlowerTypeVanilla); // Miner's
-                                                                                                                     // delight
+            // FlowerManager.flowerRegistry.registerPlantableFlower(flowers2, 6, 1.0, FlowerManager.FlowerTypeVanilla);
+            // // Miner's
+            // // delight
             FlowerManager.flowerRegistry.registerPlantableFlower(
                     flowers2,
                     7,
