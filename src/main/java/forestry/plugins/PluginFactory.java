@@ -594,6 +594,16 @@ public class PluginFactory extends ForestryPlugin {
                     PluginFluids.items.canEmpty,
                     'Z',
                     beeItems.honeydew);
+            RecipeManagers.carpenterManager.addRecipe(
+                    5,
+                    PluginCore.items.iodineCharge.getItemStack(),
+                    PluginCore.items.phosphorCharge.getItemStack(),
+                    "# #",
+                    " # ",
+                    "# #",
+                    '#',
+                    PluginCore.items.phosphor.getItemStack()
+            );
         }
 
         // Ender pearl
