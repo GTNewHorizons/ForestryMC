@@ -8,6 +8,7 @@ package forestry.api.fuels;
 import net.minecraft.item.ItemStack;
 
 public class RainSubstrate {
+
     public enum WeatherState {
         CLEAR,
         RAIN,
