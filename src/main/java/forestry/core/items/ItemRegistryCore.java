@@ -78,6 +78,7 @@ public class ItemRegistryCore extends ItemRegistry {
     /* Rainmaker */
     public final ItemForestry iodineCharge;
     public final ItemForestry phosphor;
+    public final ItemForestry phosphorCharge;
 
     /* Misc */
     public final ItemCraftingMaterial craftingMaterial;
@@ -181,8 +182,8 @@ public class ItemRegistryCore extends ItemRegistry {
 
         // / RAINMAKER SUBSTRATES
         iodineCharge = registerItem(new ItemForestry(), "iodineCapsule");
-
         phosphor = registerItem(new ItemForestry(), "phosphor");
+        phosphorCharge = registerItem(new ItemForestry(), "phosphoricIodineCapsule");
 
         // / BEE RESOURCES
         beeswax = registerItem(new ItemForestry(), "beeswax");

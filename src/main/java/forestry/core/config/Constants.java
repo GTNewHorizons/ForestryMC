@@ -109,6 +109,7 @@ public class Constants implements IForestryConstants {
     public static final int MACHINE_MAX_ENERGY = 5000;
 
     public static final int RAINMAKER_RAIN_DURATION_IODINE = 10000;
+    public static final int RAINMAKER_RAIN_DURATION_PHOSPHORICIODINE = 10000;
 
     public static final int STILL_DESTILLATION_DURATION = 100;
     public static final int STILL_DESTILLATION_INPUT = 10;
