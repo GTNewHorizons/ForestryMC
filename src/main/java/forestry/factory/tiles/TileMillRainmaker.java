@@ -10,6 +10,7 @@ package forestry.factory.tiles;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.world.storage.WorldInfo;
 
 import forestry.api.fuels.FuelManager;
 import forestry.api.fuels.RainSubstrate;
@@ -114,18 +115,22 @@ public class TileMillRainmaker extends TileMill {
         }
 
         if (!worldObj.isRemote) {
+            WorldInfo world = worldObj.getWorldInfo();
             switch (weather) {
                 case CLEAR:
-                    worldObj.getWorldInfo().setRaining(false);
-                    worldObj.getWorldInfo().setThundering(false);
+                    world.setRaining(false);
+                    world.setThundering(false);
                     break;
                 case STORM:
-                    worldObj.getWorldInfo().setRaining(true);
-                    worldObj.getWorldInfo().setThundering(true);
+                    world.setRaining(true);
+                    world.setRainTime(duration);
+                    world.setThundering(true);
+                    world.setThunderTime(duration);
                     break;
                 case RAIN:
-                    worldObj.getWorldInfo().setRaining(true);
-                    worldObj.getWorldInfo().setThundering(false);
+                    world.setRaining(true);
+                    world.setRainTime(duration);
+                    world.setThundering(false);
                     break;
             }
             charge = 0;
