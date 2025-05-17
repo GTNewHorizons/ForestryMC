@@ -9,33 +9,37 @@ import net.minecraft.item.ItemStack;
 
 public class RainSubstrate {
 
+    public enum WeatherState {
+        CLEAR,
+        RAIN,
+        STORM
+    }
+
     /**
      * Rain substrate capable of activating the rainmaker.
      */
     public ItemStack item;
     /**
-     * Duration of the rain shower triggered by this substrate in Minecraft ticks.
+     * Duration of the weather event triggered by this substrate in Minecraft ticks.
      */
     public int duration;
     /**
      * Speed of activation sequence triggered.
      */
     public float speed;
+    /**
+     * The type of weather triggered.
+     */
+    public WeatherState weather;
 
-    public boolean reverse;
-
-    public RainSubstrate(ItemStack item, int duration, float speed) {
-        this(item, duration, speed, false);
+    public RainSubstrate(ItemStack item, float speed, WeatherState weather) {
+        this(item, 0, speed, weather);
     }
 
-    public RainSubstrate(ItemStack item, float speed) {
-        this(item, 0, speed, true);
-    }
-
-    public RainSubstrate(ItemStack item, int duration, float speed, boolean reverse) {
+    public RainSubstrate(ItemStack item, int duration, float speed, WeatherState weather) {
         this.item = item;
         this.duration = duration;
         this.speed = speed;
-        this.reverse = reverse;
+        this.weather = weather;
     }
 }

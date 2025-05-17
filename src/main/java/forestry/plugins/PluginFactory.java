@@ -222,9 +222,23 @@ public class PluginFactory extends ForestryPlugin {
         // Set rain substrates
         ItemStack iodineCharge = coreItems.iodineCharge.getItemStack();
         ItemStack dissipationCharge = coreItems.craftingMaterial.getDissipationCharge();
+        ItemStack phosphorCharge = coreItems.phosphorCharge.getItemStack();
+        FuelManager.rainSubstrate.put(
+                iodineCharge,
+                new RainSubstrate(
+                        iodineCharge,
+                        Constants.RAINMAKER_RAIN_DURATION_IODINE,
+                        0.01f,
+                        RainSubstrate.WeatherState.RAIN));
         FuelManager.rainSubstrate
-                .put(iodineCharge, new RainSubstrate(iodineCharge, Constants.RAINMAKER_RAIN_DURATION_IODINE, 0.01f));
-        FuelManager.rainSubstrate.put(dissipationCharge, new RainSubstrate(dissipationCharge, 0.075f));
+                .put(dissipationCharge, new RainSubstrate(dissipationCharge, 0.075f, RainSubstrate.WeatherState.CLEAR));
+        FuelManager.rainSubstrate.put(
+                phosphorCharge,
+                new RainSubstrate(
+                        phosphorCharge,
+                        Constants.RAINMAKER_RAIN_DURATION_PHOSPHORICIODINE,
+                        0.008f,
+                        RainSubstrate.WeatherState.STORM));
 
         for (BlockFactoryTesrType type : BlockFactoryTesrType.VALUES) {
             MachineDefinition machineDefinition = new MachineDefinition(type);
@@ -594,6 +608,15 @@ public class PluginFactory extends ForestryPlugin {
                     PluginFluids.items.canEmpty,
                     'Z',
                     beeItems.honeydew);
+            RecipeManagers.carpenterManager.addRecipe(
+                    5,
+                    PluginCore.items.iodineCharge.getItemStack(),
+                    PluginCore.items.phosphorCharge.getItemStack(),
+                    "# #",
+                    " # ",
+                    "# #",
+                    '#',
+                    PluginCore.items.phosphor.getItemStack());
         }
 
         // Ender pearl
