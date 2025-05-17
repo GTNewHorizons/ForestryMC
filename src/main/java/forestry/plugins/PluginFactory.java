@@ -223,8 +223,8 @@ public class PluginFactory extends ForestryPlugin {
         ItemStack iodineCharge = coreItems.iodineCharge.getItemStack();
         ItemStack dissipationCharge = coreItems.craftingMaterial.getDissipationCharge();
         FuelManager.rainSubstrate
-                .put(iodineCharge, new RainSubstrate(iodineCharge, Constants.RAINMAKER_RAIN_DURATION_IODINE, 0.01f));
-        FuelManager.rainSubstrate.put(dissipationCharge, new RainSubstrate(dissipationCharge, 0.075f));
+                .put(iodineCharge, new RainSubstrate(iodineCharge, Constants.RAINMAKER_RAIN_DURATION_IODINE, 0.01f, RainSubstrate.WeatherState.RAIN));
+        FuelManager.rainSubstrate.put(dissipationCharge, new RainSubstrate(dissipationCharge, 0.075f, RainSubstrate.WeatherState.CLEAR));
 
         for (BlockFactoryTesrType type : BlockFactoryTesrType.VALUES) {
             MachineDefinition machineDefinition = new MachineDefinition(type);

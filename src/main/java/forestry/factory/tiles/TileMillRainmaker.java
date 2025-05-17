@@ -20,7 +20,7 @@ import forestry.factory.inventory.InventoryRainmaker;
 public class TileMillRainmaker extends TileMill {
 
     private int duration;
-    private boolean reverse;
+    private RainSubstrate.WeatherState weather;
 
     public TileMillRainmaker() {
         super(null);
@@ -39,14 +39,25 @@ public class TileMillRainmaker extends TileMill {
         }
 
         // We don't have a gui, but we can be activated
-        if (FuelManager.rainSubstrate.containsKey(player.inventory.getCurrentItem()) && charge == 0) {
+        if (FuelManager.rainSubstrate.containsKey(player.inventory.getCurrentItem()) && charge == 0 && progress == 0) {
             RainSubstrate substrate = FuelManager.rainSubstrate.get(player.inventory.getCurrentItem());
-            if (substrate.item.isItemEqual(player.inventory.getCurrentItem())) {
+            if (isValidSubstrate(substrate)) {
                 addCharge(substrate);
                 player.inventory.getCurrentItem().stackSize--;
             }
         }
         sendNetworkUpdate();
+    }
+
+    public boolean isValidSubstrate(RainSubstrate substrate) {
+        boolean thundering = getWorld().isThundering();
+        boolean raining = getWorld().isRaining();
+
+        return switch (substrate.weather) {
+            case CLEAR -> (thundering || raining);
+            case RAIN -> (thundering || !raining);
+            case STORM -> (!thundering);
+        };
     }
 
     @Override
@@ -57,7 +68,7 @@ public class TileMillRainmaker extends TileMill {
         progress = nbttagcompound.getFloat("Progress");
         stage = nbttagcompound.getInteger("Stage");
         duration = nbttagcompound.getInteger("Duration");
-        reverse = nbttagcompound.getBoolean("Reverse");
+        weather = RainSubstrate.WeatherState.valueOf(nbttagcompound.getString("Weather"));
     }
 
     @Override
@@ -68,14 +79,14 @@ public class TileMillRainmaker extends TileMill {
         nbttagcompound.setFloat("Progress", progress);
         nbttagcompound.setInteger("Stage", stage);
         nbttagcompound.setInteger("Duration", duration);
-        nbttagcompound.setBoolean("Reverse", reverse);
+        nbttagcompound.setString("Weather", weather.name());
     }
 
     public void addCharge(RainSubstrate substrate) {
         charge = 1;
         speed = substrate.speed;
         duration = substrate.duration;
-        reverse = substrate.reverse;
+        weather = substrate.weather;
         sendNetworkUpdate();
     }
 
@@ -103,15 +114,22 @@ public class TileMillRainmaker extends TileMill {
         }
 
         if (!worldObj.isRemote) {
-            if (reverse) {
-                worldObj.getWorldInfo().setRaining(false);
-            } else {
-                worldObj.getWorldInfo().setRaining(true);
-                worldObj.getWorldInfo().setRainTime(duration);
+            switch (weather) {
+                case CLEAR:
+                    worldObj.getWorldInfo().setRaining(false);
+                    worldObj.getWorldInfo().setThundering(false);
+                    break;
+                case STORM:
+                    worldObj.getWorldInfo().setRaining(true);
+                    worldObj.getWorldInfo().setThundering(true);
+                    break;
+                case RAIN:
+                    worldObj.getWorldInfo().setRaining(true);
+                    worldObj.getWorldInfo().setThundering(false);
+                    break;
             }
             charge = 0;
             duration = 0;
-            reverse = false;
             sendNetworkUpdate();
         }
     }
