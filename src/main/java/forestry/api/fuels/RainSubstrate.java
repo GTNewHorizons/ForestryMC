@@ -19,14 +19,16 @@ public class RainSubstrate {
      */
     public ItemStack item;
     /**
-     * Duration of the rain shower triggered by this substrate in Minecraft ticks.
+     * Duration of the weather event triggered by this substrate in Minecraft ticks.
      */
     public int duration;
     /**
      * Speed of activation sequence triggered.
      */
     public float speed;
-
+    /**
+     * The type of weather triggered.
+     */
     public WeatherState weather;
 
     public RainSubstrate(ItemStack item, float speed, WeatherState weather) {
