@@ -116,6 +116,12 @@ public abstract class BlockStructure extends BlockForestry {
                     InventoryUtil.dropSockets((ISocketable) tile, world, x, y, z);
                 }
             }
+
+            if (tile instanceof IMultiblockComponent.HasInventory) {
+                IMultiblockComponent.HasInventory hasInventory = (IMultiblockComponent.HasInventory) tile;
+
+                InventoryUtil.dropInventory(hasInventory.getInternalInventory(), world, x, y, z);
+            }
         }
         super.breakBlock(world, x, y, z, block, meta);
     }
