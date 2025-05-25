@@ -34,6 +34,10 @@ public class GrowthRuleFlowerPot implements IFlowerGrowthRule {
     }
 
     private static boolean growFlower(String flowerType, World world, int x, int y, int z) {
+        if (!world.blockExists(x, y, z)) {
+            return false;
+        }
+
         TileEntity tile = world.getTileEntity(x, y, z);
         if (!(tile instanceof TileEntityFlowerPot)) {
             return false;

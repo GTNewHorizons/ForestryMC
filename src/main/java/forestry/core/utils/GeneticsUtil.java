@@ -96,6 +96,8 @@ public class GeneticsUtil {
      * altering the world by changing vanilla leaves to forestry ones.
      */
     public static ICheckPollinatable getCheckPollinatable(World world, final int x, final int y, final int z) {
+        if (world.blockExists(x, y, z)) return null;
+
         TileEntity tile = world.getTileEntity(x, y, z);
 
         if (tile instanceof IPollinatable) {
