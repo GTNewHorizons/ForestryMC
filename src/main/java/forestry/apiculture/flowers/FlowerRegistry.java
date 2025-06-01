@@ -213,6 +213,7 @@ public final class FlowerRegistry implements IFlowerRegistry, IFlowerGrowthHelpe
 
     private static boolean isAcceptedFlower(String flowerType, Set<Block> acceptedBlocks, Set<Flower> acceptedFlowers,
             World world, int x, int y, int z) {
+        if (!world.blockExists(x, y, z)) return false;
         Block block = world.getBlock(x, y, z);
 
         final int meta;

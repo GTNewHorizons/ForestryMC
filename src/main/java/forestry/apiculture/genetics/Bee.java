@@ -773,6 +773,9 @@ public class Bee extends IndividualLiving implements IBee {
         for (int i = 0; i < 20; i++) {
             Vect randomPos = Vect.getRandomPositionInArea(random, area);
             Vect blockPos = Vect.add(housingPos, randomPos, offset);
+            if (!world.blockExists(blockPos.x, blockPos.y, blockPos.z)) {
+                continue;
+            }
             TileEntity tile = world.getTileEntity(blockPos.x, blockPos.y, blockPos.z);
 
             if (tile instanceof IPollinatable) {
