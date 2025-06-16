@@ -112,18 +112,12 @@ public abstract class RecipeHandlerBase extends TemplateRecipeHandler implements
     public List<String> handleTooltip(GuiRecipe<?> guiRecipe, List<String> currenttip, int recipe) {
         super.handleTooltip(guiRecipe, currenttip, recipe);
         CachedBaseRecipe crecipe = (CachedBaseRecipe) this.arecipes.get(recipe);
+
         if (GuiContainerManager.shouldShowTooltip(guiRecipe)) {
             Point mouse = GuiDraw.getMousePosition();
-            int recipeIndex = guiRecipe.getRecipeIndices().indexOf(recipe);
-
-            if (recipeIndex >= 0) {
-                Point offset = guiRecipe.getRecipePosition(recipeIndex);
-                Point relMouse = new Point(
-                        mouse.x - (guiRecipe.width - 176) / 2 - offset.x,
-                        mouse.y - (guiRecipe.height - 166) / 2 - offset.y);
-
-                currenttip = this.provideTooltip(guiRecipe, currenttip, crecipe, relMouse);
-            }
+            Point offset = guiRecipe.getRecipePosition(recipe);
+            Point relMouse = new Point(mouse.x - guiRecipe.guiLeft - offset.x, mouse.y - guiRecipe.guiTop - offset.y);
+            currenttip = this.provideTooltip(guiRecipe, currenttip, crecipe, relMouse);
         }
 
         return currenttip;
@@ -135,18 +129,10 @@ public abstract class RecipeHandlerBase extends TemplateRecipeHandler implements
         super.handleItemTooltip(guiRecipe, itemStack, currenttip, recipe);
         CachedBaseRecipe crecipe = (CachedBaseRecipe) this.arecipes.get(recipe);
         Point mouse = GuiDraw.getMousePosition();
-        int recipeIndex = guiRecipe.getRecipeIndices().indexOf(recipe);
+        Point offset = guiRecipe.getRecipePosition(recipe);
+        Point relMouse = new Point(mouse.x - guiRecipe.guiLeft - offset.x, mouse.y - guiRecipe.guiTop - offset.y);
 
-        if (recipeIndex >= 0) {
-            Point offset = guiRecipe.getRecipePosition(recipeIndex);
-            Point relMouse = new Point(
-                    mouse.x - (guiRecipe.width - 176) / 2 - offset.x,
-                    mouse.y - (guiRecipe.height - 166) / 2 - offset.y);
-
-            currenttip = this.provideItemTooltip(guiRecipe, itemStack, currenttip, crecipe, relMouse);
-        }
-
-        return currenttip;
+        return this.provideItemTooltip(guiRecipe, itemStack, currenttip, crecipe, relMouse);
     }
 
     public List<String> provideTooltip(GuiRecipe<?> guiRecipe, List<String> currenttip, CachedBaseRecipe crecipe,
@@ -210,11 +196,9 @@ public abstract class RecipeHandlerBase extends TemplateRecipeHandler implements
 
     protected boolean transferFluidTank(GuiRecipe<?> guiRecipe, int recipe, boolean usage) {
         CachedBaseRecipe crecipe = (CachedBaseRecipe) this.arecipes.get(recipe);
-        Point mousepos = GuiDraw.getMousePosition();
+        Point mouse = GuiDraw.getMousePosition();
         Point offset = guiRecipe.getRecipePosition(recipe);
-        Point relMouse = new Point(
-                mousepos.x - (guiRecipe.width - 176) / 2 - offset.x,
-                mousepos.y - (guiRecipe.height - 166) / 2 - offset.y);
+        Point relMouse = new Point(mouse.x - guiRecipe.guiLeft - offset.x, mouse.y - guiRecipe.guiTop - offset.y);
 
         if (crecipe.getFluidTanks() != null) {
             for (PositionedFluidTank tank : crecipe.getFluidTanks()) {
