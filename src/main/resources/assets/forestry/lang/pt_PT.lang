@@ -150,7 +150,7 @@ gui.maxspeed=Mбximo
 gui.fastest=Rбpida++
 gui.faster=Rбpida+
 gui.fast=Rбpida
-gui.slowLenta
+gui.slow=Lenta
 gui.slower=Lenta+
 gui.slowest=Lenta++
 gui.longestlife=Longa++
