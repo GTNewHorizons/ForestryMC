@@ -31,7 +31,7 @@ public class ItemForestryTool extends ItemForestry {
         setMaxDamage(200);
         this.remnants = remnants;
         if (remnants != null) {
-            MinecraftForge.EVENT_BUS.register(this);
+            MinecraftForge.EVENT_BUS.register(new EventHandler());
         }
     }
 
@@ -53,20 +53,6 @@ public class ItemForestryTool extends ItemForestry {
         return ForgeHooks.canToolHarvestBlock(block, 0, stack);
     }
 
-    @SubscribeEvent
-    public void onDestroyCurrentItem(PlayerDestroyItemEvent event) {
-        if (event.original == null || event.original.getItem() != this) {
-            return;
-        }
-
-        EntityPlayer player = event.entityPlayer;
-        World world = player.worldObj;
-
-        if (!world.isRemote && remnants != null) {
-            ItemStackUtil.dropItemStackAsEntity(remnants.copy(), world, player.posX, player.posY, player.posZ);
-        }
-    }
-
     @Override
     public boolean onBlockDestroyed(ItemStack itemstack, World world, Block block, int x, int y, int z,
             EntityLivingBase entityliving) {
@@ -79,5 +65,22 @@ public class ItemForestryTool extends ItemForestry {
     @Override
     public boolean isFull3D() {
         return true;
+    }
+
+    public class EventHandler {
+
+        @SubscribeEvent
+        public void onDestroyCurrentItem(PlayerDestroyItemEvent event) {
+            if (event.original == null || event.original.getItem() != ItemForestryTool.this) {
+                return;
+            }
+
+            EntityPlayer player = event.entityPlayer;
+            World world = player.worldObj;
+
+            if (!world.isRemote && remnants != null) {
+                ItemStackUtil.dropItemStackAsEntity(remnants.copy(), world, player.posX, player.posY, player.posZ);
+            }
+        }
     }
 }
