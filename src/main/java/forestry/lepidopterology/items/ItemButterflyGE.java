@@ -18,10 +18,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
-
-import com.mojang.realmsclient.gui.ChatFormatting;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -93,7 +92,7 @@ public class ItemButterflyGE extends ItemGE {
     @Override
     public void addInformation(ItemStack itemstack, EntityPlayer player, List list, boolean flag) {
         super.addInformation(itemstack, player, list, flag);
-        if (Config.disableButterfly && type == EnumFlutterType.BUTTERFLY) list.add(ChatFormatting.RED + "Disabled");
+        if (Config.disableButterfly && type == EnumFlutterType.BUTTERFLY) list.add(EnumChatFormatting.RED + "Disabled");
     }
 
     @SuppressWarnings({ "rawtypes", "unchecked" })
