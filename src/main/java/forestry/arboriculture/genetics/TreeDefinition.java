@@ -1148,6 +1148,14 @@ public enum TreeDefinition implements ITreeDefinition, ITreeGenerator {
         return species.getUID();
     }
 
+    public EnumWoodType getWoodType() {
+        return woodType;
+    }
+
+    public ItemStack getVanillaWood() {
+        return vanillaWood;
+    }
+
     @Override
     public final ITreeGenome getGenome() {
         return genome;
