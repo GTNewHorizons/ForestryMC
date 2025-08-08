@@ -27,6 +27,10 @@ public abstract class AlleleEffectThrottled extends AlleleEffect {
         this.requiresWorkingQueen = requiresWorking;
     }
 
+    public int getThrottle() {
+        return throttle;
+    }
+
     @Override
     public boolean isCombinable() {
         return isCombinable;

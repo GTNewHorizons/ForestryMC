@@ -176,4 +176,8 @@ public abstract class Mutation implements IMutationCustom {
     public boolean isSecret() {
         return isSecret;
     }
+
+    public List<IMutationCondition> getMutationConditions() {
+        return mutationConditions;
+    }
 }
