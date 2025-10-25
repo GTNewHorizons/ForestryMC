@@ -159,6 +159,8 @@ public class AlvearyController extends RectangularMultiblockControllerBase
                 activeComponents.remove(oldPart);
             }
         }
+
+        inventory.dumpInventoryIntoWorld(this.worldObj, oldPart.getCoordinates());
     }
 
     @Override
