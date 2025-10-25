@@ -137,6 +137,7 @@ public class Config {
     public static boolean enableHints = true;
     public static final LinkedListMultimap<String, String> hints = LinkedListMultimap.create();
     public static boolean enableEnergyStat = true;
+    public static boolean showBackpackDurability = true;
 
     public static boolean isStructureEnabled(String uid) {
         return !Config.disabledStructures.contains(uid);
@@ -300,6 +301,9 @@ public class Config {
         // move legacy mail property
         configCommon.moveProperty("tweaks.gui", "mail.alert", "tweaks.gui.mail.alert");
         configCommon.renameProperty("tweaks.gui.mail.alert", "mail.alert", "enabled");
+
+        showBackpackDurability = configCommon
+                .getBooleanLocalized("tweaks.gui", "showBackpackDurability", showBackpackDurability);
 
         mailAlertEnabled = configCommon.getBooleanLocalized("tweaks.gui.mail.alert", "enabled", mailAlertEnabled);
         mailAlertXPosition = configCommon.getEnumLocalized(
