@@ -348,4 +348,17 @@ public class ItemBackpack extends ItemWithGui {
                 return null;
         }
     }
+
+    @Override
+    public double getDurabilityForDisplay(final ItemStack stack) {
+        final int occupied = ItemInventory.getOccupiedSlotCount(stack);
+        final int max = getBackpackSize();
+
+        return 1.0d - (occupied + 1.0d) / (max + 1.0d);
+    }
+
+    @Override
+    public boolean showDurabilityBar(final ItemStack stack) {
+        return Config.showBackpackDurability && ItemInventory.getOccupiedSlotCount(stack) > 0;
+    }
 }
