@@ -8,7 +8,10 @@
  ******************************************************************************/
 package forestry.apiculture;
 
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ChunkCoordinates;
+import net.minecraft.world.World;
 
 import forestry.api.apiculture.BeeManager;
 import forestry.api.apiculture.EnumBeeType;
@@ -72,5 +75,28 @@ public class InventoryBeeHousing extends InventoryAdapterRestricted implements I
     @Override
     public final boolean addProduct(ItemStack product, boolean all) {
         return InventoryUtil.tryAddStack(this, product, SLOT_PRODUCT_1, SLOT_PRODUCT_COUNT, all, true);
+    }
+
+    public void dumpInventoryIntoWorld(World world, ChunkCoordinates coordinates) {
+        if (world.isRemote) {
+            return;
+        }
+        for (int i = 0; i < SLOT_PRODUCT_COUNT; i++) {
+            ItemStack stack = getStackInSlot(i);
+            if (stack == null) {
+                continue;
+            }
+            setInventorySlotContents(i, null);
+
+            EntityItem entityitem = new EntityItem(
+                    world,
+                    coordinates.posX + 0.5,
+                    coordinates.posY + 0.5,
+                    coordinates.posZ + 0.5,
+                    stack);
+            entityitem.delayBeforeCanPickup = 10;
+            world.spawnEntityInWorld(entityitem);
+        }
+
     }
 }
