@@ -235,7 +235,7 @@ public abstract class BlockUtil {
     private static Class<? extends Block> GTBlockMachines_Class;
     private static Block GTBlockMachines;
     private static final boolean bw = Loader.isModLoaded("bartworks");
-    private static final boolean gt = Loader.isModLoaded("gregtech");
+    private static final boolean gt = Loader.isModLoaded("gregtech") && !Loader.isModLoaded("gregapi");
 
     static {
         if (bw) try {
@@ -268,11 +268,13 @@ public abstract class BlockUtil {
         } while (stillInside.test(tile));
         block = world.getBlock(x, y - depth, z);
 
-        if (bw && BW_MetaGenerated_WerkstoffBlocksClass.isInstance(block)) {
+        if (bw && BW_MetaGenerated_WerkstoffBlocksClass != null
+                && BWBlocks != null
+                && BW_MetaGenerated_WerkstoffBlocksClass.isInstance(block)) {
             return new ItemStack(BWBlocks, 1, block.getDamageValue(world, x, y - depth, z));
         }
 
-        if (gt && GTBlockMachines_Class.isInstance(block)) {
+        if (gt && GTBlockMachines_Class != null && GTBlockMachines != null && GTBlockMachines_Class.isInstance(block)) {
             return new ItemStack(GTBlockMachines, 1, block.getDamageValue(world, x, y - depth, z));
         }
 
