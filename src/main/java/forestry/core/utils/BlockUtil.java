@@ -268,11 +268,11 @@ public abstract class BlockUtil {
         } while (stillInside.test(tile));
         block = world.getBlock(x, y - depth, z);
 
-        if (bw && BW_MetaGenerated_WerkstoffBlocksClass.isInstance(block)) {
+        if (bw && BW_MetaGenerated_WerkstoffBlocksClass != null && BWBlocks != null && BW_MetaGenerated_WerkstoffBlocksClass.isInstance(block)) {
             return new ItemStack(BWBlocks, 1, block.getDamageValue(world, x, y - depth, z));
         }
 
-        if (gt && GTBlockMachines_Class.isInstance(block)) {
+        if (gt && GTBlockMachines_Class != null && GTBlockMachines != null && GTBlockMachines_Class.isInstance(block)) {
             return new ItemStack(GTBlockMachines, 1, block.getDamageValue(world, x, y - depth, z));
         }
 
