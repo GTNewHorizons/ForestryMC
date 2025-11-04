@@ -235,7 +235,7 @@ public abstract class BlockUtil {
     private static Class<? extends Block> GTBlockMachines_Class;
     private static Block GTBlockMachines;
     private static final boolean bw = Loader.isModLoaded("bartworks");
-    private static final boolean gt = Loader.isModLoaded("gregtech");
+    private static final boolean gt = Loader.isModLoaded("gregtech") && !Loader.isModLoaded("gregapi");
 
     static {
         if (bw) try {
