@@ -47,6 +47,7 @@ import forestry.plugins.compat.PluginBuildCraftTransport;
 import forestry.plugins.compat.PluginChisel;
 import forestry.plugins.compat.PluginEnderIO;
 import forestry.plugins.compat.PluginErebus;
+import forestry.plugins.compat.PluginEtFuturumRequiem;
 import forestry.plugins.compat.PluginExtraUtilities;
 import forestry.plugins.compat.PluginGrowthCraft;
 import forestry.plugins.compat.PluginHarvestCraft;
@@ -118,7 +119,8 @@ public class PluginManager {
         NATURA(new PluginNatura()),
         PLANTMEGAPACK(new PluginPlantMegaPack()),
         ROTARYCRAFT(new PluginRotaryCraft()),
-        WITCHERY(new PluginWitchery());
+        WITCHERY(new PluginWitchery()),
+        EFR(new PluginEtFuturumRequiem());
 
         static {
             ForestryAPI.enabledPlugins = new HashSet<>();
