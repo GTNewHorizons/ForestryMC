@@ -40,12 +40,22 @@ public class PluginEtFuturumRequiem extends ForestryPlugin {
         Block Lily = GameRegistry.findBlock(EFR, "lily_of_the_valley");
         Block Petals = GameRegistry.findBlock(EFR, "pink_petals");
         Block Rose = GameRegistry.findBlock(EFR, "rose");
-        Block WitherRose = GameRegistry.findBlock(EFR,"wither_rose");
+        Block WitherRose = GameRegistry.findBlock(EFR, "wither_rose");
 
-        FlowerManager.flowerRegistry.registerAcceptableFlower(CornFlower, FlowerManager.FlowerTypeVanilla);
-        FlowerManager.flowerRegistry.registerAcceptableFlower(Lily, FlowerManager.FlowerTypeVanilla);
-        FlowerManager.flowerRegistry.registerAcceptableFlower(Petals, FlowerManager.FlowerTypeVanilla);
-        FlowerManager.flowerRegistry.registerAcceptableFlower(Rose, FlowerManager.FlowerTypeVanilla);
-        FlowerManager.flowerRegistry.registerAcceptableFlower(WitherRose,FlowerManager.FlowerTypeNether);
+        if (CornFlower != null) {
+            FlowerManager.flowerRegistry.registerAcceptableFlower(CornFlower, FlowerManager.FlowerTypeVanilla);
+        }
+        if (Lily != null) {
+            FlowerManager.flowerRegistry.registerAcceptableFlower(Lily, FlowerManager.FlowerTypeVanilla);
+        }
+        if (Petals != null) {
+            FlowerManager.flowerRegistry.registerAcceptableFlower(Petals, FlowerManager.FlowerTypeVanilla);
+        }
+        if (Rose != null) {
+            FlowerManager.flowerRegistry.registerAcceptableFlower(Rose, FlowerManager.FlowerTypeVanilla);
+        }
+        if (WitherRose != null) {
+            FlowerManager.flowerRegistry.registerAcceptableFlower(WitherRose, FlowerManager.FlowerTypeNether);
+        }
     }
 }
