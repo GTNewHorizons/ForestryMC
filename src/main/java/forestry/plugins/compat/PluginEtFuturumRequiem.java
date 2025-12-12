@@ -58,7 +58,7 @@ public class PluginEtFuturumRequiem extends ForestryPlugin {
         if (WitherRose != null) {
             FlowerManager.flowerRegistry.registerAcceptableFlower(WitherRose, FlowerManager.FlowerTypeNether);
         }
-        if(ChorusFlower!=null){
+        if (ChorusFlower != null) {
             FlowerManager.flowerRegistry.registerAcceptableFlower(ChorusFlower, FlowerManager.FlowerTypeEnd);
         }
     }
