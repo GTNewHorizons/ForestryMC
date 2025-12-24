@@ -8,6 +8,7 @@
  ******************************************************************************/
 package forestry.storage.items;
 
+import forestry.core.inventory.ItemLocation;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 
@@ -35,23 +36,25 @@ public class ItemBackpackNaturalist extends ItemBackpack {
     }
 
     @Override
-    public Object getGui(EntityPlayer player, ItemStack heldItem, int page) {
+    public Object getGui(EntityPlayer player, ItemStack heldItem, int page, ItemLocation loc) {
         ItemInventoryBackpackPaged inventory = new ItemInventoryBackpackPaged(
                 player,
                 Constants.SLOTS_BACKPACK_APIARIST,
                 heldItem,
-                this);
+                this,
+                loc);
         ContainerNaturalistBackpack container = new ContainerNaturalistBackpack(player, inventory, page);
         return new GuiNaturalistInventory(speciesRoot, player, container, inventory, page, 5);
     }
 
     @Override
-    public Object getContainer(EntityPlayer player, ItemStack heldItem, int page) {
+    public Object getContainer(EntityPlayer player, ItemStack heldItem, int page, ItemLocation loc) {
         ItemInventoryBackpackPaged inventory = new ItemInventoryBackpackPaged(
                 player,
                 Constants.SLOTS_BACKPACK_APIARIST,
                 heldItem,
-                this);
+                this,
+                loc);
         return new ContainerNaturalistBackpack(player, inventory, page);
     }
 }

@@ -8,15 +8,14 @@
  ******************************************************************************/
 package forestry.core.inventory;
 
-import java.util.Random;
-
+import forestry.core.tiles.IFilterSlotDelegate;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 
-import forestry.core.tiles.IFilterSlotDelegate;
+import java.util.Random;
 
 public abstract class ItemInventory implements IInventory, IFilterSlotDelegate {
 
@@ -28,11 +27,17 @@ public abstract class ItemInventory implements IInventory, IFilterSlotDelegate {
     private final EntityPlayer player;
     private final ItemStack parent;
     private final ItemStack[] inventoryStacks;
+    private final ItemLocation location;
 
     public ItemInventory(EntityPlayer player, int size, ItemStack parent) {
+        this(player, size, parent, ItemLocation.UNKNOWN);
+    }
+
+    public ItemInventory(EntityPlayer player, int size, ItemStack parent, ItemLocation loc) {
         this.player = player;
         this.parent = parent;
         this.inventoryStacks = new ItemStack[size];
+        this.location = loc;
 
         setUID(); // Set a uid to identify the itemstack on SMP
 
@@ -79,7 +84,10 @@ public abstract class ItemInventory implements IInventory, IFilterSlotDelegate {
     }
 
     public boolean isParentItemEquipped() {
-        return isSameItemInventory(player.getCurrentEquippedItem(), parent);
+        return switch (location.type()) {
+            case HELD_BY_PLAYER, UNKNOWN -> isSameItemInventory(player.getCurrentEquippedItem(), parent);
+            case PLAYER_INVENTORY -> true;
+        };
     }
 
     public EntityPlayer getPlayer() {
@@ -92,7 +100,11 @@ public abstract class ItemInventory implements IInventory, IFilterSlotDelegate {
     }
 
     protected ItemStack getParent() {
-        ItemStack equipped = player.getCurrentEquippedItem();
+        ItemStack equipped = switch (location.type()) {
+            case HELD_BY_PLAYER, UNKNOWN -> player.getCurrentEquippedItem();
+            case PLAYER_INVENTORY -> player.inventory.getStackInSlot(location.slotIdx());
+        };
+
         if (isSameItemInventory(equipped, parent)) {
             return equipped;
         }

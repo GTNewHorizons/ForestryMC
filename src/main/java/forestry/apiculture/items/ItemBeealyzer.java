@@ -15,6 +15,7 @@ import forestry.api.core.Tabs;
 import forestry.apiculture.gui.GuiBeealyzer;
 import forestry.apiculture.inventory.ItemInventoryBeealyzer;
 import forestry.core.gui.ContainerAlyzer;
+import forestry.core.inventory.ItemLocation;
 import forestry.core.items.ItemWithGui;
 
 public class ItemBeealyzer extends ItemWithGui {
@@ -24,13 +25,13 @@ public class ItemBeealyzer extends ItemWithGui {
     }
 
     @Override
-    public Object getGui(EntityPlayer player, ItemStack heldItem, int data) {
+    public Object getGui(EntityPlayer player, ItemStack heldItem, int data, ItemLocation loc) {
         ItemInventoryBeealyzer inventory = new ItemInventoryBeealyzer(player, heldItem);
         return new GuiBeealyzer(player, inventory);
     }
 
     @Override
-    public Object getContainer(EntityPlayer player, ItemStack heldItem, int data) {
+    public Object getContainer(EntityPlayer player, ItemStack heldItem, int data, ItemLocation loc) {
         ItemInventoryBeealyzer inventory = new ItemInventoryBeealyzer(player, heldItem);
         return new ContainerAlyzer(inventory, player);
     }
