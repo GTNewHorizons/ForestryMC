@@ -8,6 +8,7 @@
  ******************************************************************************/
 package forestry.storage.inventory;
 
+import forestry.core.inventory.ItemLocation;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 
@@ -20,8 +21,8 @@ public class ItemInventoryBackpackPaged extends ItemInventoryBackpack implements
     private final ItemBackpackNaturalist backpackNaturalist;
 
     public ItemInventoryBackpackPaged(EntityPlayer player, int size, ItemStack itemstack,
-            ItemBackpackNaturalist backpackNaturalist) {
-        super(player, size, itemstack);
+                                      ItemBackpackNaturalist backpackNaturalist, ItemLocation loc) {
+        super(player, size, itemstack, loc);
         this.backpackNaturalist = backpackNaturalist;
     }
 

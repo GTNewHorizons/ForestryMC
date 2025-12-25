@@ -27,6 +27,17 @@ public abstract class ContainerItemInventory<I extends ItemInventory> extends Co
     }
 
     @Override
+    protected void addNormalSlot(InventoryPlayer playerInventory, int slot, int x, int y) {
+        ItemStack stackInSlot = playerInventory.getStackInSlot(slot);
+
+        if (inventory.isParentItemInventory(stackInSlot)) {
+            addSlotToContainer(new SlotLocked(playerInventory, slot, x, y));
+        } else {
+            addSlotToContainer(new Slot(playerInventory, slot, x, y));
+        }
+    }
+
+    @Override
     protected void addHotbarSlot(InventoryPlayer playerInventory, int slot, int x, int y) {
         ItemStack stackInSlot = playerInventory.getStackInSlot(slot);
 

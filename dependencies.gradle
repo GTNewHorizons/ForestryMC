@@ -8,4 +8,5 @@ dependencies {
     compileOnly('com.github.GTNewHorizons:BuildCraft:7.1.45:api')
     compileOnly('net.industrial-craft:industrialcraft-2:2.2.828-experimental:dev')
     compileOnly('curse.maven:craftguide-75557:2459320')
+    devOnlyNonPublishable('net.xonich.mc:NoHotbarNeeded:0.2.0')
 }

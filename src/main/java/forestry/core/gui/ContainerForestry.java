@@ -36,14 +36,17 @@ public abstract class ContainerForestry extends Container {
         // Player inventory
         for (int row = 0; row < 3; row++) {
             for (int column = 0; column < 9; column++) {
-                addSlotToContainer(
-                        new Slot(playerInventory, column + row * 9 + 9, xInv + column * 18, yInv + row * 18));
+                addNormalSlot(playerInventory, column + row * 9 + 9, xInv + column * 18, yInv + row * 18);
             }
         }
         // Player hotbar
         for (int column = 0; column < 9; column++) {
             addHotbarSlot(playerInventory, column, xInv + column * 18, yInv + 58);
         }
+    }
+
+    protected void addNormalSlot(InventoryPlayer playerInventory, int slot, int x, int y) {
+        addSlotToContainer(new Slot(playerInventory, slot, x, y));
     }
 
     protected void addHotbarSlot(InventoryPlayer playerInventory, int slot, int x, int y) {
