@@ -38,6 +38,17 @@ public class StringUtil {
                 .replace("\\%", "@");
     }
 
+    public static String localizeGuiTitle(String unlocalizedKey) {
+        String titleKey = unlocalizedKey + ".title";
+        String translated;
+        if (StatCollector.canTranslate(titleKey)) {
+            translated = StatCollector.translateToLocal(titleKey);
+        } else {
+            translated = StatCollector.translateToLocal(unlocalizedKey);
+        }
+        return translated.replace("\\n", "\n").replace("@", "%").replace("\\%", "@");
+    }
+
     public static String localizeAndFormat(String key, Object... args) {
         return localizeAndFormatRaw("for." + key, args);
     }
