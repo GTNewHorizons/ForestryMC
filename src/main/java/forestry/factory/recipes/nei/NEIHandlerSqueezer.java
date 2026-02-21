@@ -18,7 +18,6 @@ import java.util.Random;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.StatCollector;
 import net.minecraftforge.fluids.FluidStack;
 
 import codechicken.nei.NEIServerUtils;
@@ -30,6 +29,7 @@ import forestry.core.recipes.nei.NEIUtils;
 import forestry.core.recipes.nei.PositionedFluidTank;
 import forestry.core.recipes.nei.PositionedStackAdv;
 import forestry.core.recipes.nei.RecipeHandlerBase;
+import forestry.core.utils.StringUtil;
 import forestry.factory.gui.GuiSqueezer;
 import forestry.factory.recipes.ISqueezerContainerRecipe;
 import forestry.factory.recipes.SqueezerRecipeManager;
@@ -165,7 +165,7 @@ public class NEIHandlerSqueezer extends RecipeHandlerBase {
 
     @Override
     public String getRecipeName() {
-        return StatCollector.translateToLocal("tile.for.factory.5.name");
+        return StringUtil.localizeGuiTitle("tile.for.factory.5.name");
     }
 
     @Override

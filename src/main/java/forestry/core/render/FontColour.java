@@ -8,15 +8,19 @@
  ******************************************************************************/
 package forestry.core.render;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+import net.minecraft.client.resources.IResource;
 import net.minecraft.client.resources.IResourceManager;
+import net.minecraft.util.ResourceLocation;
 
 public class FontColour {
 
-    // private static final ResourceLocation colourDefinitions = new
-    // ForestryResource("/config/forestry/colour.properties");
+    private static final ResourceLocation colourDefinitions = new ForestryResource("config/colour.properties");
+    private static final String defaultColourDefinitions = "/assets/forestry/config/colour.properties";
 
     private final Properties defaultMappings = new Properties();
     private final Properties mappings = new Properties();
@@ -30,17 +34,30 @@ public class FontColour {
     }
 
     public void load(IResourceManager texturepack) {
-        try {
-            // InputStream fontStream = texturepack.func_110536_a(colourDefinitions).func_110527_b();
-            InputStream defaultFontStream = FontColour.class.getResourceAsStream("/config/forestry/colour.properties");
-            // mappings.load((fontStream == null) ? defaultFontStream : fontStream);
-            mappings.load(defaultFontStream);
-            defaultMappings.load(defaultFontStream);
+        mappings.clear();
+        defaultMappings.clear();
 
-            // if (fontStream != null)
-            // fontStream.close();
-            defaultFontStream.close();
-        } catch (Exception e) {
+        try (InputStream defaultFontStream = FontColour.class.getResourceAsStream(defaultColourDefinitions)) {
+            if (defaultFontStream != null) {
+                defaultMappings.load(defaultFontStream);
+                mappings.putAll(defaultMappings);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        if (texturepack == null) {
+            return;
+        }
+
+        try {
+            IResource resource = texturepack.getResource(colourDefinitions);
+            try (InputStream fontStream = resource.getInputStream()) {
+                mappings.load(fontStream);
+            }
+        } catch (FileNotFoundException ignored) {
+            // Resource pack does not provide an override.
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

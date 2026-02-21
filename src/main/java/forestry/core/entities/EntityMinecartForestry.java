@@ -14,7 +14,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.minecart.MinecartInteractEvent;
@@ -29,6 +28,7 @@ import forestry.core.gui.GuiHandler;
 import forestry.core.gui.IGuiHandlerEntity;
 import forestry.core.gui.IHintSource;
 import forestry.core.tiles.ITitled;
+import forestry.core.utils.StringUtil;
 
 public abstract class EntityMinecartForestry extends EntityMinecart
         implements ITitled, IRestrictedAccess, IHintSource, IGuiHandlerEntity {
@@ -111,7 +111,7 @@ public abstract class EntityMinecartForestry extends EntityMinecart
 
     @Override
     public String getCommandSenderName() {
-        return StatCollector.translateToLocal(getUnlocalizedTitle());
+        return StringUtil.localizeGuiTitle(getUnlocalizedTitle());
     }
 
     /* ITitled */
