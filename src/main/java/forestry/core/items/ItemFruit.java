@@ -34,6 +34,9 @@ public class ItemFruit extends ItemForestryFood {
         DATES("cropDate"),
         PAPAYA("cropPapaya"); // , COCONUT("cropCoconut");
 
+        /**
+         * Cached values() array for frequent read-only operations, the array should NOT be mutated.
+         */
         public static final EnumFruit[] VALUES = values();
 
         private final String oreDict;
@@ -94,13 +97,13 @@ public class ItemFruit extends ItemForestryFood {
     @SideOnly(Side.CLIENT)
     @Override
     public IIcon getIconFromDamage(int meta) {
-        return EnumFruit.values()[meta].getIcon();
+        return EnumFruit.VALUES[meta].getIcon();
     }
 
     @SuppressWarnings({ "rawtypes", "unchecked" })
     @Override
     public void getSubItems(Item item, CreativeTabs par2CreativeTabs, List itemList) {
-        for (int i = 0; i < EnumFruit.values().length; i++) {
+        for (int i = 0; i < EnumFruit.VALUES.length; i++) {
             itemList.add(new ItemStack(this, 1, i));
         }
     }
