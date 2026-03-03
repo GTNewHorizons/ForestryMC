@@ -86,6 +86,9 @@ public enum EnumBeeChromosome implements IChromosomeType {
 
     final Class<? extends IAllele> clss;
 
+    /**
+     * Cached values() array for frequent read-only operations, the array should NOT be mutated.
+     */
     public static final EnumBeeChromosome[] VALUES = values();
 
     EnumBeeChromosome(Class<? extends IAllele> clss) {

@@ -16,6 +16,9 @@ public enum FarmDirection {
 
     private final ForgeDirection forgeDirection;
 
+    /**
+     * Cached values() array for frequent read-only operations, the array should NOT be mutated.
+     */
     public static final FarmDirection[] VALUES = values();
 
     FarmDirection(ForgeDirection forgeDirection) {

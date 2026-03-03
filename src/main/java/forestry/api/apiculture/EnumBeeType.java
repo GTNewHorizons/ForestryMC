@@ -17,6 +17,9 @@ public enum EnumBeeType implements ISpeciesType {
     LARVAE,
     NONE;
 
+    /**
+     * Cached values() array for frequent read-only operations, the array should NOT be mutated.
+     */
     public static final EnumBeeType[] VALUES = values();
 
     private final String name;
