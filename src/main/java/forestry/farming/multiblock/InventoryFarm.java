@@ -106,7 +106,7 @@ public class InventoryFarm extends InventoryAdapterRestricted implements IFarmIn
             return false;
         }
 
-        for (FarmDirection farmDirection : FarmDirection.values()) {
+        for (FarmDirection farmDirection : FarmDirection.VALUES) {
             IFarmLogic logic = farmController.getFarmLogic(farmDirection);
             if (logic.isAcceptedGermling(itemstack)) {
                 return true;
@@ -122,7 +122,7 @@ public class InventoryFarm extends InventoryAdapterRestricted implements IFarmIn
             return false;
         }
 
-        for (FarmDirection farmDirection : FarmDirection.values()) {
+        for (FarmDirection farmDirection : FarmDirection.VALUES) {
             IFarmLogic logic = farmController.getFarmLogic(farmDirection);
             if (logic.isAcceptedResource(itemstack)) {
                 return true;
