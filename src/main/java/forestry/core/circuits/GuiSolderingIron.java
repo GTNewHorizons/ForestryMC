@@ -63,7 +63,7 @@ public class GuiSolderingIron extends GuiForestry<ContainerSolderingIron, ItemIn
                 try {
                     ICircuitSocketType socketType = layout.getSocketType();
                     if (CircuitSocketType.FARM.equals(socketType)) {
-                        FarmDirection farmDirection = FarmDirection.values()[i];
+                        FarmDirection farmDirection = FarmDirection.fromOrdinal(i);
                         String farmDirectionString = farmDirection.toString().toLowerCase(Locale.ENGLISH);
                         String localizedDirection = StringUtil.localize("gui.solder." + farmDirectionString);
                         fontRendererObj.drawString(

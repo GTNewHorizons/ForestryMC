@@ -194,7 +194,7 @@ public class ItemRegistryCore extends ItemRegistry {
 
         // FRUITS
         fruits = registerItem(new ItemFruit(), "fruits");
-        for (ItemFruit.EnumFruit def : ItemFruit.EnumFruit.values()) {
+        for (ItemFruit.EnumFruit def : ItemFruit.EnumFruit.VALUES) {
             ItemStack fruit = new ItemStack(fruits, 1, def.ordinal());
             OreDictionary.registerOre(def.getOreDict(), fruit);
         }

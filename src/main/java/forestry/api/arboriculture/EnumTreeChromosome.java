@@ -73,9 +73,14 @@ public enum EnumTreeChromosome implements IChromosomeType {
     /**
      * Determines if the tree can burn.
      */
-    FIREPROOF(IAlleleBoolean.class),;
+    FIREPROOF(IAlleleBoolean.class);
 
-    Class<? extends IAllele> clss;
+    final Class<? extends IAllele> clss;
+
+    /**
+     * Cached values() array for frequent read-only operations, the array should NOT be mutated.
+     */
+    public static final EnumTreeChromosome[] VALUES = values();
 
     EnumTreeChromosome(Class<? extends IAllele> clss) {
         this.clss = clss;

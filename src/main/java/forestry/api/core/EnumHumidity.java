@@ -17,9 +17,14 @@ public enum EnumHumidity {
     NORMAL("Normal"),
     DAMP("Damp");
 
+    /**
+     * Cached values() array for frequent read-only operations, the array should NOT be mutated.
+     */
+    public static final EnumHumidity[] VALUES = values();
+
     public final String name;
 
-    private EnumHumidity(String name) {
+    EnumHumidity(String name) {
         this.name = name;
     }
 

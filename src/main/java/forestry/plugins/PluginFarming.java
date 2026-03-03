@@ -300,7 +300,7 @@ public class PluginFarming extends ForestryPlugin {
         ItemStack valve = blocks.farm.get(BlockFarmType.VALVE, 1);
         ItemStack control = blocks.farm.get(BlockFarmType.CONTROL, 1);
 
-        for (EnumFarmBlockTexture block : EnumFarmBlockTexture.values()) {
+        for (EnumFarmBlockTexture block : EnumFarmBlockTexture.VALUES) {
             NBTTagCompound compound = new NBTTagCompound();
             block.saveToCompound(compound);
 

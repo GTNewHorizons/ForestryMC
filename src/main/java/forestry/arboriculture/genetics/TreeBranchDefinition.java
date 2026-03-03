@@ -82,7 +82,7 @@ public enum TreeBranchDefinition implements IBranchDefinition {
     @Override
     public IAllele[] getTemplate() {
         if (defaultTemplate == null) {
-            defaultTemplate = new IAllele[EnumTreeChromosome.values().length];
+            defaultTemplate = new IAllele[EnumTreeChromosome.VALUES.length];
 
             AlleleHelper.instance.set(defaultTemplate, EnumTreeChromosome.FRUITS, AlleleFruit.fruitNone);
             AlleleHelper.instance.set(defaultTemplate, EnumTreeChromosome.GROWTH, AlleleGrowth.growthLightLevel);

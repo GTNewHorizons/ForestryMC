@@ -77,7 +77,12 @@ public enum EnumButterflyChromosome implements IChromosomeType {
      */
     TERRITORY(IAlleleArea.class),;
 
-    Class<? extends IAllele> clss;
+    final Class<? extends IAllele> clss;
+
+    /**
+     * Cached values() array for frequent read-only operations, the array should NOT be mutated.
+     */
+    public static final EnumButterflyChromosome[] VALUES = values();
 
     EnumButterflyChromosome(Class<? extends IAllele> clss) {
         this.clss = clss;

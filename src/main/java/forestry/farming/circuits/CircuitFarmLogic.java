@@ -61,7 +61,7 @@ public class CircuitFarmLogic extends Circuit {
         } catch (Throwable e) {
             // uses older version of the API that doesn't implement setManual
         }
-        housing.setFarmLogic(FarmDirection.values()[slot], logic);
+        housing.setFarmLogic(FarmDirection.fromOrdinal(slot), logic);
     }
 
     @Override
@@ -75,8 +75,7 @@ public class CircuitFarmLogic extends Circuit {
         if (farmHousing == null) {
             return;
         }
-
-        farmHousing.resetFarmLogic(FarmDirection.values()[slot]);
+        farmHousing.resetFarmLogic(FarmDirection.fromOrdinal(slot));
     }
 
     @Override
