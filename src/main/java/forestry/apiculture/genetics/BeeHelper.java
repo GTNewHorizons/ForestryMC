@@ -353,7 +353,7 @@ public class BeeHelper extends SpeciesRoot implements IBeeRoot {
 
     @Override
     public IChromosomeType[] getKaryotype() {
-        return EnumBeeChromosome.values();
+        return EnumBeeChromosome.VALUES;
     }
 
     @Override
