@@ -15,6 +15,11 @@ public enum EnumCircuitBoardType {
     REFINED((short) 3, 0x191919, 0xc9c9c9),
     INTRICATE((short) 4, 0x191919, 0xe2cb6b);
 
+    /**
+     * Cached values() array for frequent read-only operations, the array should NOT be mutated.
+     */
+    public static final EnumCircuitBoardType[] VALUES = values();
+
     private final short sockets;
     private final int primaryColor;
     private final int secondaryColor;
