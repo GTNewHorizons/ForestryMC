@@ -45,18 +45,18 @@ public class ClimateUtil implements IClimateHelper {
             case BOTH_4:
             case BOTH_3:
             case BOTH_2:
-                if (prefered.ordinal() + 2 < EnumHumidity.values().length) {
-                    tolerated.add(EnumHumidity.values()[prefered.ordinal() + 2]);
+                if (prefered.ordinal() + 2 < EnumHumidity.VALUES.length) {
+                    tolerated.add(EnumHumidity.VALUES[prefered.ordinal() + 2]);
                 }
                 if (prefered.ordinal() - 2 >= 0) {
-                    tolerated.add(EnumHumidity.values()[prefered.ordinal() - 2]);
+                    tolerated.add(EnumHumidity.VALUES[prefered.ordinal() - 2]);
                 }
             case BOTH_1:
-                if (prefered.ordinal() + 1 < EnumHumidity.values().length) {
-                    tolerated.add(EnumHumidity.values()[prefered.ordinal() + 1]);
+                if (prefered.ordinal() + 1 < EnumHumidity.VALUES.length) {
+                    tolerated.add(EnumHumidity.VALUES[prefered.ordinal() + 1]);
                 }
                 if (prefered.ordinal() - 1 >= 0) {
-                    tolerated.add(EnumHumidity.values()[prefered.ordinal() - 1]);
+                    tolerated.add(EnumHumidity.VALUES[prefered.ordinal() - 1]);
                 }
                 return tolerated;
 
@@ -64,12 +64,12 @@ public class ClimateUtil implements IClimateHelper {
             case UP_4:
             case UP_3:
             case UP_2:
-                if (prefered.ordinal() + 2 < EnumHumidity.values().length) {
-                    tolerated.add(EnumHumidity.values()[prefered.ordinal() + 2]);
+                if (prefered.ordinal() + 2 < EnumHumidity.VALUES.length) {
+                    tolerated.add(EnumHumidity.VALUES[prefered.ordinal() + 2]);
                 }
             case UP_1:
-                if (prefered.ordinal() + 1 < EnumHumidity.values().length) {
-                    tolerated.add(EnumHumidity.values()[prefered.ordinal() + 1]);
+                if (prefered.ordinal() + 1 < EnumHumidity.VALUES.length) {
+                    tolerated.add(EnumHumidity.VALUES[prefered.ordinal() + 1]);
                 }
                 return tolerated;
 
@@ -78,11 +78,11 @@ public class ClimateUtil implements IClimateHelper {
             case DOWN_3:
             case DOWN_2:
                 if (prefered.ordinal() - 2 >= 0) {
-                    tolerated.add(EnumHumidity.values()[prefered.ordinal() - 2]);
+                    tolerated.add(EnumHumidity.VALUES[prefered.ordinal() - 2]);
                 }
             case DOWN_1:
                 if (prefered.ordinal() - 1 >= 0) {
-                    tolerated.add(EnumHumidity.values()[prefered.ordinal() - 1]);
+                    tolerated.add(EnumHumidity.VALUES[prefered.ordinal() - 1]);
                 }
                 return tolerated;
 
