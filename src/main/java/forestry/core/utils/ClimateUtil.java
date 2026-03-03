@@ -96,85 +96,86 @@ public class ClimateUtil implements IClimateHelper {
         ArrayList<EnumTemperature> tolerated = new ArrayList<>();
         tolerated.add(prefered);
 
+        final EnumTemperature[] TEMP_VALUES = EnumTemperature.VALUES;
         switch (tolerance) {
             case BOTH_5:
-                if (prefered.ordinal() + 5 < EnumTemperature.values().length) {
-                    tolerated.add(EnumTemperature.values()[prefered.ordinal() + 5]);
+                if (prefered.ordinal() + 5 < TEMP_VALUES.length) {
+                    tolerated.add(TEMP_VALUES[prefered.ordinal() + 5]);
                 }
                 if (prefered.ordinal() - 5 >= 0) {
-                    tolerated.add(EnumTemperature.values()[prefered.ordinal() - 5]);
+                    tolerated.add(TEMP_VALUES[prefered.ordinal() - 5]);
                 }
             case BOTH_4:
-                if (prefered.ordinal() + 4 < EnumTemperature.values().length) {
-                    tolerated.add(EnumTemperature.values()[prefered.ordinal() + 4]);
+                if (prefered.ordinal() + 4 < TEMP_VALUES.length) {
+                    tolerated.add(TEMP_VALUES[prefered.ordinal() + 4]);
                 }
                 if (prefered.ordinal() - 4 >= 0) {
-                    tolerated.add(EnumTemperature.values()[prefered.ordinal() - 4]);
+                    tolerated.add(TEMP_VALUES[prefered.ordinal() - 4]);
                 }
             case BOTH_3:
-                if (prefered.ordinal() + 3 < EnumTemperature.values().length) {
-                    tolerated.add(EnumTemperature.values()[prefered.ordinal() + 3]);
+                if (prefered.ordinal() + 3 < TEMP_VALUES.length) {
+                    tolerated.add(TEMP_VALUES[prefered.ordinal() + 3]);
                 }
                 if (prefered.ordinal() - 3 >= 0) {
-                    tolerated.add(EnumTemperature.values()[prefered.ordinal() - 3]);
+                    tolerated.add(TEMP_VALUES[prefered.ordinal() - 3]);
                 }
             case BOTH_2:
-                if (prefered.ordinal() + 2 < EnumTemperature.values().length) {
-                    tolerated.add(EnumTemperature.values()[prefered.ordinal() + 2]);
+                if (prefered.ordinal() + 2 < TEMP_VALUES.length) {
+                    tolerated.add(TEMP_VALUES[prefered.ordinal() + 2]);
                 }
                 if (prefered.ordinal() - 2 >= 0) {
-                    tolerated.add(EnumTemperature.values()[prefered.ordinal() - 2]);
+                    tolerated.add(TEMP_VALUES[prefered.ordinal() - 2]);
                 }
             case BOTH_1:
-                if (prefered.ordinal() + 1 < EnumTemperature.values().length) {
-                    tolerated.add(EnumTemperature.values()[prefered.ordinal() + 1]);
+                if (prefered.ordinal() + 1 < TEMP_VALUES.length) {
+                    tolerated.add(TEMP_VALUES[prefered.ordinal() + 1]);
                 }
                 if (prefered.ordinal() - 1 >= 0) {
-                    tolerated.add(EnumTemperature.values()[prefered.ordinal() - 1]);
+                    tolerated.add(TEMP_VALUES[prefered.ordinal() - 1]);
                 }
                 return tolerated;
 
             case UP_5:
-                if (prefered.ordinal() + 5 < EnumTemperature.values().length) {
-                    tolerated.add(EnumTemperature.values()[prefered.ordinal() + 5]);
+                if (prefered.ordinal() + 5 < TEMP_VALUES.length) {
+                    tolerated.add(TEMP_VALUES[prefered.ordinal() + 5]);
                 }
             case UP_4:
-                if (prefered.ordinal() + 4 < EnumTemperature.values().length) {
-                    tolerated.add(EnumTemperature.values()[prefered.ordinal() + 4]);
+                if (prefered.ordinal() + 4 < TEMP_VALUES.length) {
+                    tolerated.add(TEMP_VALUES[prefered.ordinal() + 4]);
                 }
             case UP_3:
-                if (prefered.ordinal() + 3 < EnumTemperature.values().length) {
-                    tolerated.add(EnumTemperature.values()[prefered.ordinal() + 3]);
+                if (prefered.ordinal() + 3 < TEMP_VALUES.length) {
+                    tolerated.add(TEMP_VALUES[prefered.ordinal() + 3]);
                 }
             case UP_2:
-                if (prefered.ordinal() + 2 < EnumTemperature.values().length) {
-                    tolerated.add(EnumTemperature.values()[prefered.ordinal() + 2]);
+                if (prefered.ordinal() + 2 < TEMP_VALUES.length) {
+                    tolerated.add(TEMP_VALUES[prefered.ordinal() + 2]);
                 }
             case UP_1:
-                if (prefered.ordinal() + 1 < EnumTemperature.values().length) {
-                    tolerated.add(EnumTemperature.values()[prefered.ordinal() + 1]);
+                if (prefered.ordinal() + 1 < TEMP_VALUES.length) {
+                    tolerated.add(TEMP_VALUES[prefered.ordinal() + 1]);
                 }
                 return tolerated;
 
             case DOWN_5:
                 if (prefered.ordinal() - 5 >= 0) {
-                    tolerated.add(EnumTemperature.values()[prefered.ordinal() - 5]);
+                    tolerated.add(TEMP_VALUES[prefered.ordinal() - 5]);
                 }
             case DOWN_4:
                 if (prefered.ordinal() - 4 >= 0) {
-                    tolerated.add(EnumTemperature.values()[prefered.ordinal() - 4]);
+                    tolerated.add(TEMP_VALUES[prefered.ordinal() - 4]);
                 }
             case DOWN_3:
                 if (prefered.ordinal() - 3 >= 0) {
-                    tolerated.add(EnumTemperature.values()[prefered.ordinal() - 3]);
+                    tolerated.add(TEMP_VALUES[prefered.ordinal() - 3]);
                 }
             case DOWN_2:
                 if (prefered.ordinal() - 2 >= 0) {
-                    tolerated.add(EnumTemperature.values()[prefered.ordinal() - 2]);
+                    tolerated.add(TEMP_VALUES[prefered.ordinal() - 2]);
                 }
             case DOWN_1:
                 if (prefered.ordinal() - 1 >= 0) {
-                    tolerated.add(EnumTemperature.values()[prefered.ordinal() - 1]);
+                    tolerated.add(TEMP_VALUES[prefered.ordinal() - 1]);
                 }
                 return tolerated;
 

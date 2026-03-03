@@ -27,10 +27,15 @@ public enum EnumTemperature {
     HOT("Hot", "habitats/desert"),
     HELLISH("Hellish", "habitats/nether");
 
+    /**
+     * Cached values() array for frequent read-only operations, the array should NOT be mutated.
+     */
+    public static final EnumTemperature[] VALUES = values();
+
     public final String name;
     public final String iconIndex;
 
-    private EnumTemperature(String name, String iconIndex) {
+    EnumTemperature(String name, String iconIndex) {
         this.name = name;
         this.iconIndex = iconIndex;
     }
