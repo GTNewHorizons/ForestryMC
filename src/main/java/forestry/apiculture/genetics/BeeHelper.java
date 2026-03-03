@@ -102,7 +102,7 @@ public class BeeHelper extends SpeciesRoot implements IBeeRoot {
         IBee bee = (IBee) individual;
 
         Item beeItem;
-        switch (EnumBeeType.VALUES[type]) {
+        switch (EnumBeeType.fromOrdinal(type)) {
             case QUEEN:
                 beeItem = PluginApiculture.items.beeQueenGE;
                 // ensure a queen is always mated

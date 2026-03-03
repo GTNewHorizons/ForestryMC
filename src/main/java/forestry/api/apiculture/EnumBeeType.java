@@ -19,7 +19,7 @@ public enum EnumBeeType implements ISpeciesType {
 
     public static final EnumBeeType[] VALUES = values();
 
-    String name;
+    private final String name;
 
     EnumBeeType() {
         this.name = this.toString().toLowerCase(Locale.ENGLISH);
@@ -27,5 +27,9 @@ public enum EnumBeeType implements ISpeciesType {
 
     public String getName() {
         return name;
+    }
+
+    public static EnumBeeType fromOrdinal(int ordinal) {
+        return VALUES[ordinal];
     }
 }
