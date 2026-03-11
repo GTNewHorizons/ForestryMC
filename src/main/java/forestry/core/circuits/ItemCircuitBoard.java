@@ -50,7 +50,7 @@ public class ItemCircuitBoard extends ItemForestryMultiPass {
 
     @Override
     public int getColorFromItemStack(ItemStack itemstack, int pass) {
-        EnumCircuitBoardType type = EnumCircuitBoardType.values()[itemstack.getItemDamage()];
+        EnumCircuitBoardType type = EnumCircuitBoardType.VALUES[itemstack.getItemDamage()];
         if (pass == 0) {
             return type.getPrimaryColor();
         } else {
@@ -60,7 +60,7 @@ public class ItemCircuitBoard extends ItemForestryMultiPass {
 
     @Override
     public String getUnlocalizedName(ItemStack stack) {
-        EnumCircuitBoardType type = EnumCircuitBoardType.values()[stack.getItemDamage()];
+        EnumCircuitBoardType type = EnumCircuitBoardType.VALUES[stack.getItemDamage()];
         return "item.for.circuitboard." + type.toString().toLowerCase(Locale.ENGLISH);
     }
 

@@ -245,7 +245,7 @@ public class ButterflyHelper extends SpeciesRoot implements IButterflyRoot {
 
     @Override
     public IChromosomeType[] getKaryotype() {
-        return EnumButterflyChromosome.values();
+        return EnumButterflyChromosome.VALUES;
     }
 
     @Override

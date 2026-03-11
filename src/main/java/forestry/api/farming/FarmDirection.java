@@ -16,6 +16,11 @@ public enum FarmDirection {
 
     private final ForgeDirection forgeDirection;
 
+    /**
+     * Cached values() array for frequent read-only operations, the array should NOT be mutated.
+     */
+    public static final FarmDirection[] VALUES = values();
+
     FarmDirection(ForgeDirection forgeDirection) {
         this.forgeDirection = forgeDirection;
     }
@@ -25,17 +30,16 @@ public enum FarmDirection {
     }
 
     public static FarmDirection getFarmDirection(ForgeDirection forgeDirection) {
-        switch (forgeDirection) {
-            case NORTH:
-                return NORTH;
-            case EAST:
-                return EAST;
-            case SOUTH:
-                return SOUTH;
-            case WEST:
-                return WEST;
-            default:
-                return null;
-        }
+        return switch (forgeDirection) {
+            case NORTH -> NORTH;
+            case EAST -> EAST;
+            case SOUTH -> SOUTH;
+            case WEST -> WEST;
+            default -> null;
+        };
+    }
+
+    public static FarmDirection fromOrdinal(int ordinal) {
+        return VALUES[ordinal];
     }
 }

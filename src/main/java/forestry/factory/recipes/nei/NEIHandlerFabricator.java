@@ -18,7 +18,6 @@ import java.util.Map;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.StatCollector;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 
@@ -31,6 +30,7 @@ import forestry.api.recipes.RecipeManagers;
 import forestry.core.recipes.nei.NEIUtils;
 import forestry.core.recipes.nei.PositionedFluidTank;
 import forestry.core.recipes.nei.RecipeHandlerBase;
+import forestry.core.utils.StringUtil;
 import forestry.factory.gui.GuiFabricator;
 import forestry.factory.recipes.FabricatorSmeltingRecipeManager;
 
@@ -140,7 +140,7 @@ public class NEIHandlerFabricator extends RecipeHandlerBase {
 
     @Override
     public String getRecipeName() {
-        return StatCollector.translateToLocal("tile.for.factory2.0.name");
+        return StringUtil.localizeGuiTitle("tile.for.factory2.0.name");
     }
 
     @Override

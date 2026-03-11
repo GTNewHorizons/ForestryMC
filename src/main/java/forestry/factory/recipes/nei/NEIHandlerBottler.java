@@ -15,7 +15,6 @@ import java.util.List;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.StatCollector;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidContainerRegistry.FluidContainerData;
 import net.minecraftforge.fluids.FluidStack;
@@ -26,6 +25,7 @@ import codechicken.nei.PositionedStack;
 import forestry.core.recipes.nei.NEIUtils;
 import forestry.core.recipes.nei.PositionedFluidTank;
 import forestry.core.recipes.nei.RecipeHandlerBase;
+import forestry.core.utils.StringUtil;
 import forestry.factory.gui.GuiBottler;
 import forestry.factory.recipes.BottlerRecipe;
 
@@ -89,7 +89,7 @@ public class NEIHandlerBottler extends RecipeHandlerBase {
 
     @Override
     public String getRecipeName() {
-        return StatCollector.translateToLocal("tile.for.factory.0.name");
+        return StringUtil.localizeGuiTitle("tile.for.factory.0.name");
     }
 
     @Override
