@@ -84,31 +84,26 @@ public class BlockSoil extends Block implements IItemTyped {
     }
 
     @Override
-    public void updateTick(World world, int i, int j, int k, Random random) {
+    public void updateTick(World world, int x, int y, int z, Random random) {
         if (world.isRemote) {
             return;
         }
 
-        int meta = world.getBlockMetadata(i, j, k);
-
+        int meta = world.getBlockMetadata(x, y, z);
         SoilType type = getTypeFromMeta(meta);
 
         if (type == SoilType.HUMUS) {
-            updateTickHumus(world, i, j, k);
+            if (world.checkChunksExist(x - 1, y + 1, z - 1, x + 1, y + 1, z + 1)) {
+                if (isEnrooted(world, x, y, z)) {
+                    degradeSoil(world, x, y, z);
+                }
+            }
         } else if (type == SoilType.BOG_EARTH) {
-            updateTickBogEarth(world, i, j, k);
-        }
-    }
-
-    private static void updateTickHumus(World world, int i, int j, int k) {
-        if (isEnrooted(world, i, j, k)) {
-            degradeSoil(world, i, j, k);
-        }
-    }
-
-    private static void updateTickBogEarth(World world, int i, int j, int k) {
-        if (isMoistened(world, i, j, k)) {
-            matureBog(world, i, j, k);
+            if (world.checkChunksExist(x - 2, y, z - 2, x + 2, y, z + 2)) {
+                if (isMoistened(world, x, y, z)) {
+                    matureBog(world, x, y, z);
+                }
+            }
         }
     }
 
@@ -122,7 +117,6 @@ public class BlockSoil extends Block implements IItemTyped {
                 }
             }
         }
-
         return false;
     }
 
@@ -156,7 +150,6 @@ public class BlockSoil extends Block implements IItemTyped {
     }
 
     private static boolean isMoistened(World world, int x, int y, int z) {
-
         for (int i = -2; i < 3; i++) {
             for (int j = -2; j < 3; j++) {
                 Block block = world.getBlock(x + i, y, z + j);
@@ -165,7 +158,6 @@ public class BlockSoil extends Block implements IItemTyped {
                 }
             }
         }
-
         return false;
     }
 
