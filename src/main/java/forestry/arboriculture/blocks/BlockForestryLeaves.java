@@ -34,6 +34,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
+import com.gtnewhorizon.gtnhlib.blocks.util.BFSLeafDecay;
 import com.mojang.authlib.GameProfile;
 
 import cpw.mods.fml.relauncher.Side;
@@ -48,7 +49,6 @@ import forestry.api.core.Tabs;
 import forestry.api.lepidopterology.ButterflyManager;
 import forestry.api.lepidopterology.EnumFlutterType;
 import forestry.api.lepidopterology.IButterfly;
-import forestry.arboriculture.LeafDecayHelper;
 import forestry.arboriculture.genetics.TreeDefinition;
 import forestry.arboriculture.items.ItemBlockLeaves;
 import forestry.arboriculture.render.TextureLeaves;
@@ -230,7 +230,12 @@ public class BlockForestryLeaves extends BlockNewLeaf implements ITileEntityProv
             return;
         }
 
-        LeafDecayHelper.leafDecay(this, world, x, y, z);
+        if (!world.isRemote) {
+            final int meta = world.getBlockMetadata(x, y, z);
+            if ((meta & 8) != 0 && (meta & 4) == 0) {
+                BFSLeafDecay.handleDecayChecked(this, world, x, y, z, meta, 4);
+            }
+        }
 
         // check leaves tile again because they can decay in super.updateTick
         if (tileLeaves.isInvalid()) {
