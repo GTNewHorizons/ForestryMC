@@ -8,6 +8,7 @@
  ******************************************************************************/
 package forestry.lepidopterology.items;
 
+import forestry.core.inventory.ItemLocation;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 
@@ -24,12 +25,12 @@ public class ItemFlutterlyzer extends ItemWithGui {
     }
 
     @Override
-    public Object getGui(EntityPlayer player, ItemStack heldItem, int data) {
+    public Object getGui(EntityPlayer player, ItemStack heldItem, int data, ItemLocation loc) {
         return new GuiFlutterlyzer(player, new ItemInventoryFlutterlyzer(player, heldItem));
     }
 
     @Override
-    public Object getContainer(EntityPlayer player, ItemStack heldItem, int data) {
+    public Object getContainer(EntityPlayer player, ItemStack heldItem, int data, ItemLocation loc) {
         return new ContainerAlyzer(new ItemInventoryFlutterlyzer(player, heldItem), player);
     }
 }

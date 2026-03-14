@@ -8,6 +8,7 @@
  ******************************************************************************/
 package forestry.core.items;
 
+import forestry.core.inventory.ItemLocation;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 
@@ -19,12 +20,12 @@ import forestry.core.inventory.ItemInventorySolderingIron;
 public class ItemSolderingIron extends ItemWithGui implements ISolderingIron {
 
     @Override
-    public Object getGui(EntityPlayer player, ItemStack heldItem, int data) {
+    public Object getGui(EntityPlayer player, ItemStack heldItem, int data, ItemLocation loc) {
         return new GuiSolderingIron(player, new ItemInventorySolderingIron(player, heldItem));
     }
 
     @Override
-    public Object getContainer(EntityPlayer player, ItemStack heldItem, int data) {
+    public Object getContainer(EntityPlayer player, ItemStack heldItem, int data, ItemLocation loc) {
         return new ContainerSolderingIron(player, new ItemInventorySolderingIron(player, heldItem));
     }
 }
