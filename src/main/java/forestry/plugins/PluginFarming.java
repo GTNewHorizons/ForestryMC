@@ -20,6 +20,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.oredict.OreDictionary;
 
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInterModComms.IMCMessage;
@@ -30,6 +31,7 @@ import forestry.api.circuits.CircuitSocketType;
 import forestry.api.circuits.ICircuitLayout;
 import forestry.api.farming.Farmables;
 import forestry.api.farming.IFarmable;
+import forestry.api.multiblock.MultiblockManager;
 import forestry.core.circuits.Circuit;
 import forestry.core.circuits.CircuitLayout;
 import forestry.core.config.Constants;
@@ -402,5 +404,8 @@ public class PluginFarming extends ForestryPlugin {
                 layoutManual,
                 PluginCore.items.tubes.get(EnumElectronTube.LAPIS, 1),
                 Circuit.farmCocoaManual);
+
+        MultiblockManager.farmFertilizerRegistry
+                .addFertilizer(new ItemStack(PluginCore.items.fertilizerCompound, 1, OreDictionary.WILDCARD_VALUE));
     }
 }
