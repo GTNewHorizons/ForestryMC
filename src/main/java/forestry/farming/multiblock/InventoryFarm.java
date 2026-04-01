@@ -12,7 +12,6 @@ import java.util.Deque;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.Fluid;
@@ -21,6 +20,7 @@ import forestry.api.farming.FarmDirection;
 import forestry.api.farming.IFarmInventory;
 import forestry.api.farming.IFarmLogic;
 import forestry.api.farming.IFarmable;
+import forestry.api.multiblock.MultiblockManager;
 import forestry.core.fluids.FluidHelper;
 import forestry.core.fluids.TankManager;
 import forestry.core.inventory.InventoryAdapterRestricted;
@@ -28,9 +28,6 @@ import forestry.core.inventory.wrappers.InventoryMapper;
 import forestry.core.utils.InventoryUtil;
 import forestry.core.utils.PlayerUtil;
 import forestry.core.utils.SlotUtil;
-import forestry.plugins.PluginCore;
-import forestry.plugins.PluginManager;
-import ic2.api.item.IC2Items;
 
 public class InventoryFarm extends InventoryAdapterRestricted implements IFarmInventory {
 
@@ -134,18 +131,8 @@ public class InventoryFarm extends InventoryAdapterRestricted implements IFarmIn
 
     @Override
     public boolean acceptsAsFertilizer(ItemStack itemstack) {
-        if (itemstack == null) {
-            return false;
-        }
-        Item item = itemstack.getItem();
-        if (PluginManager.Module.INDUSTRIALCRAFT.isEnabled()) {
-            Item ic2fert = IC2Items.getItem("fertilizer").getItem();
-            if (ic2fert == item) {
-                return true;
-            }
-        }
-
-        return PluginCore.items.fertilizerCompound == item;
+        // check if it's a fertilizer
+        return MultiblockManager.farmFertilizerRegistry.isFertilizer(itemstack);
     }
 
     @Override

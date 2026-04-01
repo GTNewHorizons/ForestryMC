@@ -55,6 +55,7 @@ import forestry.core.recipes.RecipeUtil;
 import forestry.core.tiles.MachineDefinition;
 import forestry.core.utils.ClimateUtil;
 import forestry.core.utils.ForestryModEnvWarningCallable;
+import forestry.farming.multiblock.FarmFertilizerRegistry;
 
 @Plugin(
         pluginID = "Core",
@@ -85,6 +86,7 @@ public class PluginCore extends ForestryPlugin {
         AlleleHelper.instance = new AlleleHelper();
 
         MultiblockManager.logicFactory = new MultiblockLogicFactory();
+        MultiblockManager.farmFertilizerRegistry = new FarmFertilizerRegistry();
     }
 
     @Override

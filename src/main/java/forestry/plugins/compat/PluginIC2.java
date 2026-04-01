@@ -32,6 +32,7 @@ import forestry.api.core.ForestryAPI;
 import forestry.api.farming.Farmables;
 import forestry.api.fuels.EngineBronzeFuel;
 import forestry.api.fuels.FuelManager;
+import forestry.api.multiblock.MultiblockManager;
 import forestry.api.recipes.RecipeManagers;
 import forestry.api.storage.BackpackManager;
 import forestry.api.storage.IBackpackDefinition;
@@ -94,6 +95,7 @@ public class PluginIC2 extends ForestryPlugin {
     private static ItemStack silver;
     private static ItemStack brass;
     private static ItemStack uuMatter;
+    private static ItemStack fertilizer;
 
     public static ItemStack resin;
     public static ItemStack rubberwood;
@@ -162,11 +164,13 @@ public class PluginIC2 extends ForestryPlugin {
         brass = IC2Items.getItem("bronzeIngot");
 
         uran238 = IC2Items.getItem("Uran238");
+        fertilizer = IC2Items.getItem("fertilizer");
 
         Circuit.farmRubberManual = new CircuitFarmLogic("manualRubber", FarmLogicRubber.class);
 
         ICircuitLayout layoutEngineTin = new CircuitLayout("engine.tin", CircuitSocketType.ELECTRIC_ENGINE);
         ChipsetManager.circuitRegistry.registerLayout(layoutEngineTin);
+
     }
 
     @Override
@@ -377,6 +381,10 @@ public class PluginIC2 extends ForestryPlugin {
                     "gearTin",
                     'V',
                     Blocks.piston);
+        }
+
+        if (PluginManager.Module.FARMING.isEnabled() && fertilizer != null) {
+            MultiblockManager.farmFertilizerRegistry.addFertilizer(fertilizer);
         }
     }
 
