@@ -25,12 +25,7 @@ import forestry.lepidopterology.entities.EntityButterfly;
 
 public class RenderButterflyItem implements IItemRenderer {
 
-    private final ModelButterfly model;
     private EntityButterfly entity;
-
-    public RenderButterflyItem() {
-        model = new ModelButterfly();
-    }
 
     private static float getWingYaw(IButterfly butterfly) {
         float wingYaw = 1f;
@@ -119,11 +114,11 @@ public class RenderButterflyItem implements IItemRenderer {
             GL11.glScalef(-2.0f, 2.0f, 2.0f);
             GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
             GL11.glRotatef(-135.0F, 0.0F, 1.0F, 0.0F);
-            GL11.glRotatef(-((float) Math.atan((double) (pitch / 40.0F))) * 20.0F, 1.0F, 0.0F, 0.0F);
+            GL11.glRotatef(-((float) Math.atan(pitch / 40.0F)) * 20.0F, 1.0F, 0.0F, 0.0F);
 
-            entity.renderYawOffset = (float) Math.atan((double) (yaw / 40.0F)) * 20.0F;
-            entity.rotationYaw = (float) Math.atan((double) (yaw / 40.0F)) * 40.0F;
-            entity.rotationPitch = -((float) Math.atan((double) (pitch / 40.0F))) * 20.0F;
+            entity.renderYawOffset = (float) Math.atan(yaw / 40.0F) * 20.0F;
+            entity.rotationYaw = (float) Math.atan(yaw / 40.0F) * 40.0F;
+            entity.rotationPitch = -((float) Math.atan(pitch / 40.0F)) * 20.0F;
             entity.rotationYawHead = entity.rotationYaw;
 
             RenderManager.instance.renderEntityWithPosYaw(entity, 0.0D, 0.0D, 0.0D, 0.0F, getWingYaw(butterfly));
@@ -173,39 +168,27 @@ public class RenderButterflyItem implements IItemRenderer {
 
     @Override
     public boolean handleRenderType(ItemStack item, ItemRenderType type) {
-        switch (type) {
-            case ENTITY:
-            case EQUIPPED:
-            case EQUIPPED_FIRST_PERSON:
-            case INVENTORY:
-                return true;
-            default:
-                return false;
-        }
+        return switch (type) {
+            case ENTITY, EQUIPPED, EQUIPPED_FIRST_PERSON, INVENTORY -> true;
+            default -> false;
+        };
     }
 
     @Override
     public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item, ItemRendererHelper helper) {
-        switch (helper) {
-            case ENTITY_BOBBING:
-            case ENTITY_ROTATION:
-                return false;
-            default:
-                return true;
-        }
+        return switch (helper) {
+            case ENTITY_BOBBING, ENTITY_ROTATION -> false;
+            default -> true;
+        };
     }
 
     @Override
     public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
-
         switch (type) {
             case ENTITY:
                 renderButterflyItem(initButterfly(item), 0f, -0.5f, 0f);
                 break;
-            case EQUIPPED:
-                renderButterflyItem(initButterfly(item), 0.5f, -0.9f, 1.0f);
-                break;
-            case EQUIPPED_FIRST_PERSON:
+            case EQUIPPED, EQUIPPED_FIRST_PERSON:
                 renderButterflyItem(initButterfly(item), 0.5f, -0.9f, 1.0f);
                 break;
             case INVENTORY:
