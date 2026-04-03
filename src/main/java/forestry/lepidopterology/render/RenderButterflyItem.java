@@ -72,10 +72,17 @@ public class RenderButterflyItem implements IItemRenderer {
                     .templateAsIndividual(ButterflyManager.butterflyRoot.getDefaultTemplate());
         }
 
-        if (entity == null) {
-            entity = new EntityButterfly(Proxies.common.getRenderWorld(), butterfly, 0, 0, 0);
-        } else {
-            entity.setIndividual(butterfly);
+        try {
+            if (entity == null) {
+                entity = new EntityButterfly(Proxies.common.getRenderWorld(), butterfly, 0, 0, 0);
+            } else {
+                entity.setWorld(Proxies.common.getRenderWorld());
+                entity.setIndividual(butterfly);
+            }
+        } finally {
+            if (entity != null) {
+                entity.setWorld(null);
+            }
         }
 
         return butterfly;
@@ -106,7 +113,12 @@ public class RenderButterflyItem implements IItemRenderer {
             entity.rotationPitch = 0;
             entity.rotationYawHead = entity.rotationYaw;
 
-            RenderManager.instance.renderEntityWithPosYaw(entity, 0.0D, 0.0D, 0.0D, 0.0F, 1.0f);
+            try {
+                entity.setWorld(Proxies.common.getRenderWorld());
+                RenderManager.instance.renderEntityWithPosYaw(entity, 0.0D, 0.0D, 0.0D, 0.0F, 1.0f);
+            } finally {
+                entity.setWorld(null);
+            }
 
         } else {
             GL11.glTranslatef(translateX, translateY, translateZ);
@@ -121,7 +133,12 @@ public class RenderButterflyItem implements IItemRenderer {
             entity.rotationPitch = -((float) Math.atan(pitch / 40.0F)) * 20.0F;
             entity.rotationYawHead = entity.rotationYaw;
 
-            RenderManager.instance.renderEntityWithPosYaw(entity, 0.0D, 0.0D, 0.0D, 0.0F, getWingYaw(butterfly));
+            try {
+                entity.setWorld(Proxies.common.getRenderWorld());
+                RenderManager.instance.renderEntityWithPosYaw(entity, 0.0D, 0.0D, 0.0D, 0.0F, getWingYaw(butterfly));
+            } finally {
+                entity.setWorld(null);
+            }
         }
 
         GL11.glPopMatrix();
@@ -155,8 +172,12 @@ public class RenderButterflyItem implements IItemRenderer {
         entity.rotationPitch = 0;
         entity.rotationYawHead = entity.rotationYaw;
 
-        RenderManager.instance.renderEntityWithPosYaw(entity, 0.0D, 0.0D, 0.0D, 0.0F, getWingYaw(butterfly));
-
+        try {
+            entity.setWorld(Proxies.common.getRenderWorld());
+            RenderManager.instance.renderEntityWithPosYaw(entity, 0.0D, 0.0D, 0.0D, 0.0F, getWingYaw(butterfly));
+        } finally {
+            entity.setWorld(null);
+        }
         GL11.glPopMatrix();
         RenderHelper.disableStandardItemLighting();
         GL11.glDisable(GL12.GL_RESCALE_NORMAL);
