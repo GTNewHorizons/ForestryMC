@@ -22,8 +22,6 @@ import forestry.core.tiles.TileMill;
 
 public class RenderMill extends TileEntitySpecialRenderer implements IBlockRenderer {
 
-    private final ModelBase model = new ModelBase() {};
-
     private enum Textures {
         PEDESTAL,
         EXTENSION,
@@ -41,6 +39,7 @@ public class RenderMill extends TileEntitySpecialRenderer implements IBlockRende
     private final ModelRenderer blade2;
 
     public RenderMill() {
+        ModelBase model = new ModelBase() {};
         pedestal = new ModelRenderer(model, 0, 0);
         pedestal.addBox(-8F, -8F, -8F, 16, 1, 16);
         pedestal.rotationPointX = 8;
