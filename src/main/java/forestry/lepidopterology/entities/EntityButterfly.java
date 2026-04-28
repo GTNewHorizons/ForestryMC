@@ -307,8 +307,7 @@ public class EntityButterfly extends EntityCreature implements IEntityButterfly 
         size = genome.getSize();
         setSize(size, 0.4f);
         species = genome.getPrimary();
-
-        if (!worldObj.isRemote) {
+        if (worldObj != null && !worldObj.isRemote) {
             dataWatcher.updateObject(DATAWATCHER_ID_SIZE, (int) (size * 100));
             dataWatcher.updateObject(DATAWATCHER_ID_SPECIES, species.getUID());
         } else {
