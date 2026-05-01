@@ -66,7 +66,11 @@ public class RenderButterflyItem implements IItemRenderer {
     }
 
     private IButterfly initButterfly(ItemStack item) {
-        final IButterfly butterfly = ButterflyManager.butterflyRoot.getMember(item);
+        IButterfly butterfly = ButterflyManager.butterflyRoot.getMember(item);
+        if (butterfly == null) {
+            butterfly = ButterflyManager.butterflyRoot
+                    .templateAsIndividual(ButterflyManager.butterflyRoot.getDefaultTemplate());
+        }
         if (entity == null) {
             entity = new EntityButterfly(null, butterfly, 0, 0, 0);
         } else {
