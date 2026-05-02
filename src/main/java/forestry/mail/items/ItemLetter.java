@@ -10,7 +10,6 @@ package forestry.mail.items;
 
 import java.util.List;
 
-import forestry.core.inventory.ItemLocation;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -24,6 +23,7 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import forestry.api.mail.ILetter;
+import forestry.core.inventory.ItemLocation;
 import forestry.core.items.ItemWithGui;
 import forestry.core.utils.StringUtil;
 import forestry.mail.Letter;

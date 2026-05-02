@@ -8,10 +8,10 @@
  ******************************************************************************/
 package forestry.food.items;
 
-import forestry.core.inventory.ItemLocation;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 
+import forestry.core.inventory.ItemLocation;
 import forestry.core.items.ItemWithGui;
 import forestry.food.gui.ContainerInfuser;
 import forestry.food.gui.GuiInfuser;

@@ -8,12 +8,12 @@
  ******************************************************************************/
 package forestry.lepidopterology.items;
 
-import forestry.core.inventory.ItemLocation;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 
 import forestry.api.core.Tabs;
 import forestry.core.gui.ContainerAlyzer;
+import forestry.core.inventory.ItemLocation;
 import forestry.core.items.ItemWithGui;
 import forestry.lepidopterology.gui.GuiFlutterlyzer;
 import forestry.lepidopterology.inventory.ItemInventoryFlutterlyzer;

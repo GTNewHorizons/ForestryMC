@@ -122,8 +122,9 @@ public class GuiIdRegistry {
 
         if (idMap.size() > 256) {
             // see {@link GuiHandler.encodeGuiData(forestry.core.gui.IGuiHandlerForestry, short, int)}
-            throw new IllegalStateException("Current implementation can't have more than different 256 GUI handlers " +
-                    "because its id is coded by 8 bits");
+            throw new IllegalStateException(
+                    "Current implementation can't have more than different 256 GUI handlers "
+                            + "because its id is coded by 8 bits");
         }
     }
 

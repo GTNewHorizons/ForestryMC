@@ -4,6 +4,7 @@ package forestry.core.inventory;
  * Location of items in inventory.
  */
 public class ItemLocation {
+
     public enum TYPE {
         UNKNOWN,
         HELD_BY_PLAYER,
@@ -15,7 +16,6 @@ public class ItemLocation {
 
     private final TYPE type;
     private final int slotIdx;
-
 
     public ItemLocation(TYPE type, int slotIdx) {
         this.type = type;

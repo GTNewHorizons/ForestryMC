@@ -8,12 +8,12 @@
  ******************************************************************************/
 package forestry.storage.gui;
 
-import forestry.core.inventory.ItemLocation;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 
 import forestry.core.gui.ContainerItemInventory;
 import forestry.core.gui.slots.SlotFilteredInventory;
+import forestry.core.inventory.ItemLocation;
 import forestry.storage.inventory.ItemInventoryBackpack;
 
 public class ContainerBackpack extends ContainerItemInventory<ItemInventoryBackpack> {
