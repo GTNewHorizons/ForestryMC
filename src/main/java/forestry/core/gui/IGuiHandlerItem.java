@@ -8,12 +8,13 @@
  ******************************************************************************/
 package forestry.core.gui;
 
+import forestry.core.inventory.ItemLocation;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 
 public interface IGuiHandlerItem extends IGuiHandlerForestry {
 
-    Object getGui(EntityPlayer player, ItemStack heldItem, int data);
+    Object getGui(EntityPlayer player, ItemStack heldItem, int data, ItemLocation loc);
 
-    Object getContainer(EntityPlayer player, ItemStack heldItem, int data);
+    Object getContainer(EntityPlayer player, ItemStack heldItem, int data, ItemLocation loc);
 }
