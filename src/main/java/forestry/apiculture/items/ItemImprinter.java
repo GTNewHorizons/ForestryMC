@@ -15,6 +15,7 @@ import forestry.api.core.Tabs;
 import forestry.apiculture.gui.ContainerImprinter;
 import forestry.apiculture.gui.GuiImprinter;
 import forestry.apiculture.inventory.ItemInventoryImprinter;
+import forestry.core.inventory.ItemLocation;
 import forestry.core.items.ItemWithGui;
 
 public class ItemImprinter extends ItemWithGui {
@@ -24,12 +25,12 @@ public class ItemImprinter extends ItemWithGui {
     }
 
     @Override
-    public Object getGui(EntityPlayer player, ItemStack heldItem, int data) {
+    public Object getGui(EntityPlayer player, ItemStack heldItem, int data, ItemLocation loc) {
         return new GuiImprinter(player.inventory, new ItemInventoryImprinter(player, heldItem));
     }
 
     @Override
-    public Object getContainer(EntityPlayer player, ItemStack heldItem, int data) {
+    public Object getContainer(EntityPlayer player, ItemStack heldItem, int data, ItemLocation loc) {
         return new ContainerImprinter(player.inventory, new ItemInventoryImprinter(player, heldItem));
     }
 }
