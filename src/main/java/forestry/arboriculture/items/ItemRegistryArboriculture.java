@@ -26,6 +26,7 @@ public class ItemRegistryArboriculture extends ItemRegistry {
         OreDictionary.registerOre("treeSapling", sapling.getWildcard());
 
         pollenFertile = registerItem(new ItemGermlingGE(EnumGermlingType.POLLEN), "pollenFertile");
+        OreDictionary.registerOre("itemPollenFertile", pollenFertile.getWildcard());
         treealyzer = registerItem(new ItemTreealyzer(), "treealyzer");
         grafter = registerItem(new ItemGrafter(4), "grafter");
         grafterProven = registerItem(new ItemGrafter(149), "grafterProven");
