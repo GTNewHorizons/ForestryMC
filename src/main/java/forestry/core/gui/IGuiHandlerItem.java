@@ -8,9 +8,10 @@
  ******************************************************************************/
 package forestry.core.gui;
 
-import forestry.core.inventory.ItemLocation;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+
+import forestry.core.inventory.ItemLocation;
 
 public interface IGuiHandlerItem extends IGuiHandlerForestry {
 

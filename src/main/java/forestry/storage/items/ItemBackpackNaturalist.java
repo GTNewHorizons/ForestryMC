@@ -8,7 +8,6 @@
  ******************************************************************************/
 package forestry.storage.items;
 
-import forestry.core.inventory.ItemLocation;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 
@@ -18,6 +17,7 @@ import forestry.api.storage.IBackpackDefinition;
 import forestry.core.config.Constants;
 import forestry.core.gui.GuiHandler;
 import forestry.core.gui.GuiNaturalistInventory;
+import forestry.core.inventory.ItemLocation;
 import forestry.storage.gui.ContainerNaturalistBackpack;
 import forestry.storage.inventory.ItemInventoryBackpackPaged;
 

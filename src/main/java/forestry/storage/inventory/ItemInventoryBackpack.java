@@ -1,12 +1,12 @@
 package forestry.storage.inventory;
 
-import forestry.core.inventory.ItemLocation;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 import forestry.api.storage.IBackpackDefinition;
 import forestry.core.inventory.ItemInventory;
+import forestry.core.inventory.ItemLocation;
 import forestry.storage.items.ItemBackpack;
 
 public class ItemInventoryBackpack extends ItemInventory {

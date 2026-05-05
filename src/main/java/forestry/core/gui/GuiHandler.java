@@ -10,6 +10,8 @@ package forestry.core.gui;
 
 import static forestry.core.inventory.ItemLocation.TYPE.PLAYER_INVENTORY;
 
+import javax.annotation.Nullable;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -21,8 +23,6 @@ import net.minecraft.world.World;
 import cpw.mods.fml.common.network.IGuiHandler;
 import forestry.api.core.ForestryAPI;
 import forestry.core.inventory.ItemLocation;
-
-import javax.annotation.Nullable;
 
 public class GuiHandler implements IGuiHandler {
 
@@ -78,8 +78,8 @@ public class GuiHandler implements IGuiHandler {
     }
 
     /**
-     * Encodes data required for GUI handler to function properly.
-     * Because of minecraft implementation we are limited to 32 bits.
+     * Encodes data required for GUI handler to function properly. Because of minecraft implementation we are limited to
+     * 32 bits.
      *
      * @param guiHandler GUI handler.
      * @param data       High bits which were encoded by GUI handler.
@@ -127,7 +127,8 @@ public class GuiHandler implements IGuiHandler {
         return getGuiElement(true, guiData, player, world, x, y, z);
     }
 
-    private @Nullable Object getGuiElement(boolean isServerSide, int guiData, EntityPlayer player, World world, int x, int y, int z) {
+    private @Nullable Object getGuiElement(boolean isServerSide, int guiData, EntityPlayer player, World world, int x,
+            int y, int z) {
         GuiId guiId = decodeGuiID(guiData);
         if (guiId == null) {
             return null;

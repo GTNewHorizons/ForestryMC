@@ -8,10 +8,10 @@
  ******************************************************************************/
 package forestry.mail.items;
 
-import forestry.core.inventory.ItemLocation;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 
+import forestry.core.inventory.ItemLocation;
 import forestry.core.items.ItemWithGui;
 import forestry.mail.gui.ContainerCatalogue;
 import forestry.mail.gui.GuiCatalogue;

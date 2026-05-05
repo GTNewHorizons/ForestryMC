@@ -8,12 +8,12 @@
  ******************************************************************************/
 package forestry.storage.inventory;
 
-import forestry.core.inventory.ItemLocation;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 
 import forestry.core.gui.GuiHandler;
 import forestry.core.gui.IPagedInventory;
+import forestry.core.inventory.ItemLocation;
 import forestry.storage.items.ItemBackpackNaturalist;
 
 public class ItemInventoryBackpackPaged extends ItemInventoryBackpack implements IPagedInventory {
@@ -21,7 +21,7 @@ public class ItemInventoryBackpackPaged extends ItemInventoryBackpack implements
     private final ItemBackpackNaturalist backpackNaturalist;
 
     public ItemInventoryBackpackPaged(EntityPlayer player, int size, ItemStack itemstack,
-                                      ItemBackpackNaturalist backpackNaturalist, ItemLocation loc) {
+            ItemBackpackNaturalist backpackNaturalist, ItemLocation loc) {
         super(player, size, itemstack, loc);
         this.backpackNaturalist = backpackNaturalist;
     }
