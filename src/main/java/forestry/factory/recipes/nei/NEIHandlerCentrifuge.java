@@ -18,7 +18,6 @@ import java.util.Set;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.StatCollector;
 
 import codechicken.nei.NEIServerUtils;
 import codechicken.nei.PositionedStack;
@@ -26,6 +25,7 @@ import forestry.api.recipes.ICentrifugeRecipe;
 import forestry.api.recipes.RecipeManagers;
 import forestry.core.recipes.nei.PositionedStackAdv;
 import forestry.core.recipes.nei.RecipeHandlerBase;
+import forestry.core.utils.StringUtil;
 import forestry.factory.gui.GuiCentrifuge;
 
 public class NEIHandlerCentrifuge extends RecipeHandlerBase {
@@ -109,7 +109,7 @@ public class NEIHandlerCentrifuge extends RecipeHandlerBase {
 
     @Override
     public String getRecipeName() {
-        return StatCollector.translateToLocal("tile.for.factory.2.name");
+        return StringUtil.localizeGuiTitle("tile.for.factory.2.name");
     }
 
     @Override

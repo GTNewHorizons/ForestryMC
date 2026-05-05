@@ -118,7 +118,7 @@ public class GuiWorktable extends GuiForestryTitled<ContainerWorktable, TileWork
 
         GL11.glDisable(GL11.GL_LIGHTING);
         GL11.glTranslatef(0, 0, 150);
-        drawRect(left, top, left + 16, top + 16, 0x88ff0000);
+        drawRect(left, top, left + 16, top + 16, 0x88000000 | getFontColor().get("gui.worktable.missing"));
         GL11.glTranslatef(0, 0, -150);
         GL11.glEnable(GL11.GL_LIGHTING);
     }

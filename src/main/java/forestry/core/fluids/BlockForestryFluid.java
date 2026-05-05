@@ -193,7 +193,7 @@ public class BlockForestryFluid extends BlockFluidClassic {
         super.updateTick(world, x, y, z, rand);
 
         // Start fires if the fluid is lava-like
-        if (getMaterial() == Material.lava) {
+        if (getMaterial() == Material.lava && world.checkChunksExist(x - 4, y, z - 4, x + 4, y, z + 4)) {
             int rangeUp = rand.nextInt(3);
 
             for (int i = 0; i < rangeUp; ++i) {

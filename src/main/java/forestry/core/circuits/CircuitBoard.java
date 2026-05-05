@@ -71,7 +71,7 @@ public class CircuitBoard<T> implements ICircuitBoard {
     @Override
     public void readFromNBT(NBTTagCompound nbttagcompound) {
 
-        type = EnumCircuitBoardType.values()[nbttagcompound.getShort("T")];
+        type = EnumCircuitBoardType.VALUES[nbttagcompound.getShort("T")];
 
         // Layout
         if (nbttagcompound.hasKey("LY")) {

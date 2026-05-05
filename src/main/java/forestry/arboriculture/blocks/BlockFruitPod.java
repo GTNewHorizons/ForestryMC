@@ -36,29 +36,29 @@ public class BlockFruitPod extends BlockCocoa {
     }
 
     public static TileFruitPod getPodTile(IBlockAccess world, int x, int y, int z) {
-        TileEntity tile = world.getTileEntity(x, y, z);
-        if (!(tile instanceof TileFruitPod)) {
-            return null;
+        final TileEntity tile = world.getTileEntity(x, y, z);
+        if (tile instanceof TileFruitPod) {
+            return (TileFruitPod) tile;
         }
-
-        return (TileFruitPod) tile;
+        return null;
     }
 
     @Override
     public void updateTick(World world, int x, int y, int z, Random rand) {
-
+        if (!world.checkChunksExist(x - 1, y, z - 1, x + 1, y, z + 1)) {
+            return;
+        }
         if (!canBlockStay(world, x, y, z)) {
-            dropBlockAsItem(world, x, y, z, world.getBlockMetadata(x, y, z), 0);
+            final int meta = world.getBlockMetadata(x, y, z);
+            this.dropBlockAsItem(world, x, y, z, meta, 0);
             world.setBlockToAir(x, y, z);
             return;
         }
 
-        TileFruitPod tile = getPodTile(world, x, y, z);
-        if (tile == null) {
-            return;
+        final TileFruitPod tile = getPodTile(world, x, y, z);
+        if (tile != null) {
+            tile.onBlockTick();
         }
-
-        tile.onBlockTick();
     }
 
     @SuppressWarnings("deprecation")

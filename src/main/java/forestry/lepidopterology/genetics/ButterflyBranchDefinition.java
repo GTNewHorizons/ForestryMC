@@ -57,7 +57,7 @@ public enum ButterflyBranchDefinition implements IBranchDefinition {
     @Override
     public IAllele[] getTemplate() {
         if (defaultTemplate == null) {
-            defaultTemplate = new IAllele[EnumButterflyChromosome.values().length];
+            defaultTemplate = new IAllele[EnumButterflyChromosome.VALUES.length];
 
             AlleleHelper.instance.set(defaultTemplate, EnumButterflyChromosome.SIZE, EnumAllele.Size.SMALL);
             AlleleHelper.instance.set(defaultTemplate, EnumButterflyChromosome.SPEED, EnumAllele.Speed.SLOWEST);

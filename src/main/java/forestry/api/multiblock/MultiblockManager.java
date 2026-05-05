@@ -8,4 +8,6 @@ package forestry.api.multiblock;
 public class MultiblockManager {
 
     public static IMultiblockLogicFactory logicFactory;
+
+    public static IFarmFertilizerRegistry farmFertilizerRegistry;
 }

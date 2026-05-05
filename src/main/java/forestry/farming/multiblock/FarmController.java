@@ -372,7 +372,7 @@ public class FarmController extends RectangularMultiblockControllerBase
     }
 
     private void refreshFarmLogics() {
-        for (FarmDirection direction : FarmDirection.values()) {
+        for (FarmDirection direction : FarmDirection.VALUES) {
             resetFarmLogic(direction);
         }
 
@@ -475,7 +475,7 @@ public class FarmController extends RectangularMultiblockControllerBase
         // Cultivation and collection
         FarmWorkStatus farmWorkStatus = new FarmWorkStatus();
 
-        for (FarmDirection farmSide : FarmDirection.values()) {
+        for (FarmDirection farmSide : FarmDirection.VALUES) {
 
             IFarmLogic logic = getFarmLogic(farmSide);
             if (logic == null) {
@@ -541,7 +541,7 @@ public class FarmController extends RectangularMultiblockControllerBase
     private static void createTargets(World world, Map<FarmDirection, List<FarmTarget>> targets, Vect targetStart,
             final int allowedExtent, final int farmSizeNorthSouth, final int farmSizeEastWest) {
 
-        for (FarmDirection farmSide : FarmDirection.values()) {
+        for (FarmDirection farmSide : FarmDirection.VALUES) {
 
             final int farmWidth;
             if (farmSide == FarmDirection.NORTH || farmSide == FarmDirection.SOUTH) {

@@ -8,8 +8,6 @@
  ******************************************************************************/
 package forestry.apiculture.genetics;
 
-import java.util.Locale;
-
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.util.IIcon;
 
@@ -22,10 +20,9 @@ import forestry.core.render.TextureManager;
 public class DefaultBeeIconProvider implements IBeeIconProvider {
 
     public static final DefaultBeeIconProvider instance = new DefaultBeeIconProvider();
+    private static final IIcon[][] icons = new IIcon[EnumBeeType.VALUES.length][3];
 
     private DefaultBeeIconProvider() {}
-
-    private static final IIcon[][] icons = new IIcon[EnumBeeType.values().length][3];
 
     @Override
     @SideOnly(Side.CLIENT)
@@ -33,13 +30,13 @@ public class DefaultBeeIconProvider implements IBeeIconProvider {
         String beeIconDir = "bees/default/";
         IIcon body1 = TextureManager.registerTex(register, beeIconDir + "body1");
 
-        for (int i = 0; i < EnumBeeType.values().length; i++) {
-            EnumBeeType beeType = EnumBeeType.values()[i];
+        for (int i = 0; i < EnumBeeType.VALUES.length; i++) {
+            EnumBeeType beeType = EnumBeeType.VALUES[i];
             if (beeType == EnumBeeType.NONE) {
                 continue;
             }
 
-            String beeTypeNameBase = beeIconDir + beeType.toString().toLowerCase(Locale.ENGLISH);
+            String beeTypeNameBase = beeIconDir + beeType.getName();
 
             icons[i][0] = TextureManager.registerTex(register, beeTypeNameBase + ".outline");
             if (beeType == EnumBeeType.LARVAE) {

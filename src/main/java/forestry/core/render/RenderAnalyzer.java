@@ -60,8 +60,6 @@ public class RenderAnalyzer extends TileEntitySpecialRenderer implements IBlockR
 
     private void render(ItemStack itemstack, World world, ForgeDirection orientation, double x, double y, double z) {
 
-        dummyEntityItem.worldObj = world;
-
         model.render(orientation, (float) x, (float) y, (float) z);
         if (itemstack == null) {
             return;
@@ -72,13 +70,18 @@ public class RenderAnalyzer extends TileEntitySpecialRenderer implements IBlockR
         GL11.glTranslatef((float) x, (float) y, (float) z);
         GL11.glTranslatef(0.5f, 0.2f, 0.5f);
         GL11.glScalef(renderScale, renderScale, renderScale);
-        dummyEntityItem.setEntityItemStack(itemstack);
 
-        if (world.getTotalWorldTime() != lastTick) {
-            lastTick = world.getTotalWorldTime();
-            dummyEntityItem.onUpdate();
+        try {
+            dummyEntityItem.worldObj = world;
+            dummyEntityItem.setEntityItemStack(itemstack);
+            if (world.getTotalWorldTime() != lastTick) {
+                lastTick = world.getTotalWorldTime();
+                dummyEntityItem.onUpdate();
+            }
+            customRenderItem.doRender(dummyEntityItem, 0, 0, 0, 0, 0);
+        } finally {
+            dummyEntityItem.worldObj = null;
         }
-        customRenderItem.doRender(dummyEntityItem, 0, 0, 0, 0, 0);
         GL11.glPopMatrix();
     }
 }

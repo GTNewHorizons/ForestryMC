@@ -389,7 +389,7 @@ public class TreeHelper extends SpeciesRoot implements ITreeRoot {
 
     @Override
     public IChromosomeType[] getKaryotype() {
-        return EnumTreeChromosome.values();
+        return EnumTreeChromosome.VALUES;
     }
 
     @Override

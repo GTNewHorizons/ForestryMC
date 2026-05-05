@@ -61,7 +61,7 @@ public class BlockFarm extends BlockStructure {
                 continue;
             }
 
-            for (EnumFarmBlockTexture block : EnumFarmBlockTexture.values()) {
+            for (EnumFarmBlockTexture block : EnumFarmBlockTexture.VALUES) {
                 ItemStack stack = new ItemStack(item, 1, i);
                 NBTTagCompound compound = new NBTTagCompound();
                 block.saveToCompound(compound);

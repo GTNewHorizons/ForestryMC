@@ -45,8 +45,17 @@ public enum EnumFarmBlockTexture {
     private static final int TYPE_VALVE = 6;
     private static final int TYPE_CONTROL = 7;
 
+    /**
+     * Cached values() array for frequent read-only operations, the array should NOT be mutated.
+     */
+    public static final EnumFarmBlockTexture[] VALUES = values();
     @SideOnly(Side.CLIENT)
     private static List<IIcon> icons;
+    private final ItemStack base;
+
+    EnumFarmBlockTexture(ItemStack base) {
+        this.base = base;
+    }
 
     @SideOnly(Side.CLIENT)
     public static void registerIcons(IIconRegister register) {
@@ -59,12 +68,6 @@ public enum EnumFarmBlockTexture {
                 TextureManager.registerTex(register, "farm/hatch"),
                 TextureManager.registerTex(register, "farm/valve"),
                 TextureManager.registerTex(register, "farm/control"));
-    }
-
-    private final ItemStack base;
-
-    EnumFarmBlockTexture(ItemStack base) {
-        this.base = base;
     }
 
     @SideOnly(Side.CLIENT)
@@ -109,11 +112,10 @@ public enum EnumFarmBlockTexture {
     public static EnumFarmBlockTexture getFromCompound(NBTTagCompound compound) {
         if (compound != null) {
             int farmBlockOrdinal = compound.getInteger("FarmBlock");
-            if (farmBlockOrdinal < EnumFarmBlockTexture.values().length) {
-                return EnumFarmBlockTexture.values()[farmBlockOrdinal];
+            if (farmBlockOrdinal < EnumFarmBlockTexture.VALUES.length) {
+                return EnumFarmBlockTexture.VALUES[farmBlockOrdinal];
             }
         }
-
         return EnumFarmBlockTexture.BRICK_STONE;
     }
 }

@@ -113,11 +113,7 @@ public final class AccessHandler implements IAccessHandler {
         if (!isOwner(player)) {
             return false;
         }
-
-        int ordinal = (access.ordinal() + 1) % EnumAccess.values().length;
-        EnumAccess newAccess = EnumAccess.values()[ordinal];
-        setAccess(player.worldObj, newAccess);
-
+        setAccess(player.worldObj, access.next());
         return true;
     }
 
@@ -156,7 +152,7 @@ public final class AccessHandler implements IAccessHandler {
     public void readData(DataInputStreamForestry data) throws IOException {
         byte accessOrdinal = data.readByte();
         if (accessOrdinal >= 0) {
-            access = EnumAccess.values()[accessOrdinal];
+            access = EnumAccess.fromOrdinal(accessOrdinal);
             GameProfile owner = new GameProfile(new UUID(data.readLong(), data.readLong()), data.readUTF());
             setOwner(owner);
         }
@@ -164,8 +160,7 @@ public final class AccessHandler implements IAccessHandler {
 
     @Override
     public void readFromNBT(NBTTagCompound data) {
-        access = EnumAccess.values()[data.getInteger("Access")];
-
+        access = EnumAccess.fromOrdinal(data.getInteger("Access"));
         if (data.hasKey("owner")) {
             owner = NBTUtil.func_152459_a(data.getCompoundTag("owner"));
         }

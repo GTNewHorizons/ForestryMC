@@ -72,51 +72,54 @@ public class BlockMushroom extends BlockSapling implements IItemTyped {
     }
 
     @Override
-    public void updateTick(World world, int i, int j, int k, Random random) {
-
+    public void updateTick(World world, int x, int y, int z, Random random) {
         if (world.isRemote) {
             return;
         }
 
-        int meta = world.getBlockMetadata(i, j, k);
-        MushroomType type = getTypeFromMeta(meta);
-        int maturity = meta >> 2;
+        final int meta = world.getBlockMetadata(x, y, z);
+        final MushroomType type = getTypeFromMeta(meta);
+        final int maturity = meta >> 2;
 
-        tickGermling(world, i, j, k, random, type, maturity);
+        tickGermling(world, x, y, z, random, type, maturity);
     }
 
-    private void tickGermling(World world, int i, int j, int k, Random random, MushroomType type, int maturity) {
-
-        int lightvalue = world.getBlockLightValue(i, j + 1, k);
-
+    private void tickGermling(World world, int x, int y, int z, Random random, MushroomType type, int maturity) {
         if (random.nextInt(2) != 0) {
             return;
         }
-
         if (maturity != 3) {
             maturity = 3;
-            int matX = maturity << 2;
-            int meta = (matX | type.ordinal());
-            world.setBlockMetadataWithNotify(i, j, k, meta, Constants.FLAG_BLOCK_SYNCH);
-        } else if (lightvalue <= 7) {
-            func_149878_d(world, i, j, k, random);
+            final int matX = maturity << 2;
+            final int meta = (matX | type.ordinal());
+            world.setBlockMetadataWithNotify(x, y, z, meta, Constants.FLAG_BLOCK_SYNCH);
+        } else {
+            if (world.checkChunksExist(x - 1, y, z - 1, x + 1, y, z + 1)) {
+                final int lightvalue = world.getBlockLightValue(x, y + 1, z);
+                if (lightvalue <= 7) {
+                    func_149878_d(world, x, y, z, random);
+                }
+            }
         }
     }
 
     @Override
-    public void func_149878_d(World world, int i, int j, int k, Random random) {
-        MushroomType type = getTypeFromMeta(world.getBlockMetadata(i, j, k));
+    public void func_149878_d(World world, int x, int y, int z, Random random) {
+        MushroomType type = getTypeFromMeta(world.getBlockMetadata(x, y, z));
 
-        world.setBlockToAir(i, j, k);
-        if (!generators[type.ordinal()].generate(world, random, i, j, k)) {
-            world.setBlock(i, j, k, this, type.ordinal(), 0);
+        world.setBlockToAir(x, y, z);
+        if (!generators[type.ordinal()].generate(world, random, x, y, z)) {
+            world.setBlock(x, y, z, this, type.ordinal(), 0);
         }
     }
 
     @Override
     public MushroomType getTypeFromMeta(int meta) {
-        meta %= MushroomType.values().length;
-        return MushroomType.values()[meta];
+        return switch (meta % 2) {
+            case 0 -> MushroomType.BROWN;
+            case 1 -> MushroomType.RED;
+            default -> throw new IllegalStateException("Unexpected value: " + meta);
+        };
     }
 
     /* ICONS */
@@ -135,15 +138,10 @@ public class BlockMushroom extends BlockSapling implements IItemTyped {
     @SideOnly(Side.CLIENT)
     @Override
     public IIcon getIcon(int side, int meta) {
-        MushroomType type = getTypeFromMeta(meta);
-
-        switch (type) {
-            case BROWN:
-                return Blocks.brown_mushroom.getIcon(side, meta);
-            case RED:
-                return Blocks.red_mushroom.getIcon(side, meta);
-            default:
-                return null;
-        }
+        final MushroomType type = getTypeFromMeta(meta);
+        return switch (type) {
+            case BROWN -> Blocks.brown_mushroom.getIcon(side, meta);
+            case RED -> Blocks.red_mushroom.getIcon(side, meta);
+        };
     }
 }

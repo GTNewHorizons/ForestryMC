@@ -38,7 +38,7 @@ public class CommandBeeGive extends SubCommand {
         setPermLevel(PermLevel.ADMIN);
 
         List<String> beeTypeStrings = new ArrayList<>();
-        for (EnumBeeType type : EnumBeeType.values()) {
+        for (EnumBeeType type : EnumBeeType.VALUES) {
             if (type == EnumBeeType.NONE) {
                 continue;
             }
@@ -166,7 +166,7 @@ public class CommandBeeGive extends SubCommand {
     }
 
     private static EnumBeeType getBeeType(String beeTypeName) {
-        for (EnumBeeType beeType : EnumBeeType.values()) {
+        for (EnumBeeType beeType : EnumBeeType.VALUES) {
             if (beeType.getName().equalsIgnoreCase(beeTypeName)) {
                 return beeType;
             }

@@ -95,8 +95,7 @@ public class TileWood extends TileEntity implements IStreamable {
         EnumWoodType woodType = wood.getWoodType();
 
         int amount = 1;
-        if (block instanceof BlockSlab) {
-            BlockSlab blockSlab = (BlockSlab) block;
+        if (block instanceof BlockSlab blockSlab) {
             if (blockSlab.isDoubleSlab()) {
                 amount = 2;
                 block = PluginArboriculture.blocks.slabs;
@@ -104,6 +103,7 @@ public class TileWood extends TileEntity implements IStreamable {
         }
 
         ItemStack itemStack = new ItemStack(block, amount);
+        if (itemStack.getItem() == null) return null;
         ItemBlockWood.saveToItemStack(woodType, itemStack);
         return itemStack;
     }

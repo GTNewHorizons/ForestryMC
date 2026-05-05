@@ -250,8 +250,9 @@ public class AlvearyController extends RectangularMultiblockControllerBase
 
     private float applyChange(float base, float currentChange, float extraChange, float boundaryDown,
             float boundaryUp) {
-        float boundedNewChange = Math.max(boundaryDown, Math.min(base + currentChange + (extraChange * 20), boundaryUp))
-                - base;
+        float boundedNewChange = Math.round(
+                (Math.max(boundaryDown, Math.min(base + currentChange + (extraChange * 20), boundaryUp)) - base) * 100)
+                / 100.0f;
         if (extraChange > 0) {
             return Math.max(currentChange, boundedNewChange);
         } else {
@@ -355,12 +356,13 @@ public class AlvearyController extends RectangularMultiblockControllerBase
     @Override
     public float getExactTemperature() {
         ChunkCoordinates coords = getReferenceCoord();
-        return getBiome().getFloatTemperature(coords.posX, coords.posY, coords.posZ) + tempChange;
+        return Math.round((getBiome().getFloatTemperature(coords.posX, coords.posY, coords.posZ) + tempChange) * 100)
+                / 100.0f;
     }
 
     @Override
     public float getExactHumidity() {
-        return getBiome().rainfall + humidChange;
+        return Math.round((getBiome().rainfall + humidChange) * 100) / 100.0f;
     }
 
     @Override

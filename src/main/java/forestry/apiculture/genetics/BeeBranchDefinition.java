@@ -148,7 +148,7 @@ public enum BeeBranchDefinition implements IBranchDefinition {
 
     private static IAllele[] getDefaultTemplate() {
         if (defaultTemplate == null) {
-            defaultTemplate = new IAllele[EnumBeeChromosome.values().length];
+            defaultTemplate = new IAllele[EnumBeeChromosome.VALUES.length];
 
             AlleleHelper.instance.set(defaultTemplate, EnumBeeChromosome.SPEED, EnumAllele.Speed.SLOWEST);
             AlleleHelper.instance.set(defaultTemplate, EnumBeeChromosome.LIFESPAN, EnumAllele.Lifespan.SHORTER);

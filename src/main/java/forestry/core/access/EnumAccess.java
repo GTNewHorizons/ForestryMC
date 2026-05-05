@@ -8,21 +8,14 @@
  ******************************************************************************/
 package forestry.core.access;
 
-import net.minecraft.util.IIcon;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
 public enum EnumAccess {
 
     SHARED("gui.rule.shared"),
     VIEWABLE("gui.rule.restricted"),
     PRIVATE("gui.rule.private");
 
+    private static final EnumAccess[] VALUES = values();
     private final String name;
-
-    @SideOnly(Side.CLIENT)
-    private IIcon icon;
 
     EnumAccess(String name) {
         this.name = name;
@@ -30,5 +23,14 @@ public enum EnumAccess {
 
     public String getName() {
         return this.name;
+    }
+
+    public EnumAccess next() {
+        int ordinal = (this.ordinal() + 1) % VALUES.length;
+        return VALUES[ordinal];
+    }
+
+    public static EnumAccess fromOrdinal(int ordinal) {
+        return VALUES[ordinal];
     }
 }

@@ -16,7 +16,6 @@ import java.util.List;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.StatCollector;
 import net.minecraftforge.fluids.FluidStack;
 
 import codechicken.lib.gui.GuiDraw;
@@ -32,6 +31,7 @@ import forestry.core.config.Constants;
 import forestry.core.recipes.nei.NEIUtils;
 import forestry.core.recipes.nei.PositionedFluidTank;
 import forestry.core.recipes.nei.RecipeHandlerBase;
+import forestry.core.utils.StringUtil;
 import forestry.factory.gui.GuiFermenter;
 
 public class NEIHandlerFermenter extends RecipeHandlerBase {
@@ -118,7 +118,7 @@ public class NEIHandlerFermenter extends RecipeHandlerBase {
 
     @Override
     public String getRecipeName() {
-        return StatCollector.translateToLocal("tile.for.factory.3.name");
+        return StringUtil.localizeGuiTitle("tile.for.factory.3.name");
     }
 
     @Override
