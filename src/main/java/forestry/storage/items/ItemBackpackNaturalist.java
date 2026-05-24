@@ -9,8 +9,10 @@
 package forestry.storage.items;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 
+import cpw.mods.fml.common.Optional;
 import forestry.api.genetics.ISpeciesRoot;
 import forestry.api.storage.EnumBackpackType;
 import forestry.api.storage.IBackpackDefinition;
@@ -56,5 +58,11 @@ public class ItemBackpackNaturalist extends ItemBackpack {
                 this,
                 loc);
         return new ContainerNaturalistBackpack(player, inventory, page);
+    }
+
+    @Override
+    @Optional.Method(modid = "nohotbarneeded")
+    public void activateFromInventory(EntityPlayerMP player, int slotIdx) {
+        GuiHandler.openGui(player, this, /* page */(short) 0, slotIdx);
     }
 }
