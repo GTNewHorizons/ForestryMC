@@ -23,6 +23,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.xonich.mc.nohotbarneeded.api.ActivatableFromInventoryServerSide;
 
+import cpw.mods.fml.common.Optional;
 import cpw.mods.fml.common.eventhandler.Event;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -47,6 +48,9 @@ import forestry.storage.gui.GuiBackpack;
 import forestry.storage.gui.GuiBackpackT2;
 import forestry.storage.inventory.ItemInventoryBackpack;
 
+@Optional.Interface(
+        iface = "net.xonich.mc.nohotbarneeded.api.ActivatableFromInventoryServerSide",
+        modid = "nohotbarneeded")
 public class ItemBackpack extends ItemWithGui implements ActivatableFromInventoryServerSide {
 
     private final IBackpackDefinition definition;
@@ -322,7 +326,7 @@ public class ItemBackpack extends ItemWithGui implements ActivatableFromInventor
 
     @Override
     public Object getGui(EntityPlayer player, ItemStack heldItem, int data, ItemLocation loc) {
-        if (data > EnumBackpackType.values().length) {
+        if (data >= EnumBackpackType.values().length) {
             return null;
         }
         EnumBackpackType type = EnumBackpackType.values()[data];
@@ -338,7 +342,7 @@ public class ItemBackpack extends ItemWithGui implements ActivatableFromInventor
 
     @Override
     public Object getContainer(EntityPlayer player, ItemStack heldItem, int data, ItemLocation loc) {
-        if (data > EnumBackpackType.values().length) {
+        if (data >= EnumBackpackType.values().length) {
             return null;
         }
         EnumBackpackType type = EnumBackpackType.values()[data];
@@ -366,6 +370,7 @@ public class ItemBackpack extends ItemWithGui implements ActivatableFromInventor
     }
 
     @Override
+    @Optional.Method(modid = "nohotbarneeded")
     public void activateFromInventory(EntityPlayerMP player, int slotIdx) {
         GuiHandler.openGui(player, this, (short) type.ordinal(), slotIdx);
     }

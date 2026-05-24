@@ -8,7 +8,7 @@
  ******************************************************************************/
 package forestry.core.gui;
 
-import static forestry.core.inventory.ItemLocation.TYPE.PLAYER_INVENTORY;
+import static forestry.core.inventory.ItemLocation.Type.PLAYER_INVENTORY;
 
 import javax.annotation.Nullable;
 
@@ -53,6 +53,7 @@ public class GuiHandler implements IGuiHandler {
      * @param invSlotIdx   Index or slot in player inventory should be in range [0, 40).
      */
     public static void openGui(EntityPlayer entityPlayer, IGuiHandlerItem guiHandler, short data, int invSlotIdx) {
+        assert invSlotIdx >= 0 && invSlotIdx < 40 : "Incorrect inventory index is used: " + invSlotIdx;
         int guiData = encodeGuiData(guiHandler, data, invSlotIdx);
         entityPlayer.openGui(ForestryAPI.instance, guiData, entityPlayer.worldObj, 0, 0, 0);
     }
@@ -88,7 +89,7 @@ public class GuiHandler implements IGuiHandler {
      */
     private static int encodeGuiData(IGuiHandlerForestry guiHandler, short data, int invSlotIdx) {
         // inventory slot idx will be encoded in third byte
-        // player have 40 different inventory which means that we need 6 bits to encode all values.
+        // player inventory has 40 slots which means that we need 6 bits to encode all values.
         // first 2 bits are reserved for type currently values 0(heldItem) and 1(item inventory) have meaning,
         // 2 and 3 are reserved for possible extension.
         if (invSlotIdx < -1 || invSlotIdx >= 40) {
