@@ -23,6 +23,7 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import forestry.api.mail.ILetter;
+import forestry.core.inventory.ItemLocation;
 import forestry.core.items.ItemWithGui;
 import forestry.core.utils.StringUtil;
 import forestry.mail.Letter;
@@ -87,12 +88,12 @@ public class ItemLetter extends ItemWithGui {
     }
 
     @Override
-    public Object getGui(EntityPlayer player, ItemStack heldItem, int data) {
+    public Object getGui(EntityPlayer player, ItemStack heldItem, int data, ItemLocation loc) {
         return new GuiLetter(player, new ItemInventoryLetter(player, heldItem));
     }
 
     @Override
-    public Object getContainer(EntityPlayer player, ItemStack heldItem, int data) {
+    public Object getContainer(EntityPlayer player, ItemStack heldItem, int data, ItemLocation loc) {
         return new ContainerLetter(player, new ItemInventoryLetter(player, heldItem));
     }
 }

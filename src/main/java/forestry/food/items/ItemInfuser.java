@@ -11,6 +11,7 @@ package forestry.food.items;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 
+import forestry.core.inventory.ItemLocation;
 import forestry.core.items.ItemWithGui;
 import forestry.food.gui.ContainerInfuser;
 import forestry.food.gui.GuiInfuser;
@@ -19,12 +20,12 @@ import forestry.food.inventory.ItemInventoryInfuser;
 public class ItemInfuser extends ItemWithGui {
 
     @Override
-    public Object getGui(EntityPlayer player, ItemStack heldItem, int data) {
+    public Object getGui(EntityPlayer player, ItemStack heldItem, int data, ItemLocation loc) {
         return new GuiInfuser(player.inventory, new ItemInventoryInfuser(player, heldItem));
     }
 
     @Override
-    public Object getContainer(EntityPlayer player, ItemStack heldItem, int data) {
+    public Object getContainer(EntityPlayer player, ItemStack heldItem, int data, ItemLocation loc) {
         return new ContainerInfuser(player.inventory, new ItemInventoryInfuser(player, heldItem));
     }
 }

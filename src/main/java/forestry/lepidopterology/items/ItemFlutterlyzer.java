@@ -13,6 +13,7 @@ import net.minecraft.item.ItemStack;
 
 import forestry.api.core.Tabs;
 import forestry.core.gui.ContainerAlyzer;
+import forestry.core.inventory.ItemLocation;
 import forestry.core.items.ItemWithGui;
 import forestry.lepidopterology.gui.GuiFlutterlyzer;
 import forestry.lepidopterology.inventory.ItemInventoryFlutterlyzer;
@@ -24,12 +25,12 @@ public class ItemFlutterlyzer extends ItemWithGui {
     }
 
     @Override
-    public Object getGui(EntityPlayer player, ItemStack heldItem, int data) {
+    public Object getGui(EntityPlayer player, ItemStack heldItem, int data, ItemLocation loc) {
         return new GuiFlutterlyzer(player, new ItemInventoryFlutterlyzer(player, heldItem));
     }
 
     @Override
-    public Object getContainer(EntityPlayer player, ItemStack heldItem, int data) {
+    public Object getContainer(EntityPlayer player, ItemStack heldItem, int data, ItemLocation loc) {
         return new ContainerAlyzer(new ItemInventoryFlutterlyzer(player, heldItem), player);
     }
 }

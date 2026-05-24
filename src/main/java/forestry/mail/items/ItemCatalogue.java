@@ -11,6 +11,7 @@ package forestry.mail.items;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 
+import forestry.core.inventory.ItemLocation;
 import forestry.core.items.ItemWithGui;
 import forestry.mail.gui.ContainerCatalogue;
 import forestry.mail.gui.GuiCatalogue;
@@ -18,12 +19,12 @@ import forestry.mail.gui.GuiCatalogue;
 public class ItemCatalogue extends ItemWithGui {
 
     @Override
-    public Object getGui(EntityPlayer player, ItemStack heldItem, int data) {
+    public Object getGui(EntityPlayer player, ItemStack heldItem, int data, ItemLocation loc) {
         return new GuiCatalogue(player);
     }
 
     @Override
-    public Object getContainer(EntityPlayer player, ItemStack heldItem, int data) {
+    public Object getContainer(EntityPlayer player, ItemStack heldItem, int data, ItemLocation loc) {
         return new ContainerCatalogue(player);
     }
 }

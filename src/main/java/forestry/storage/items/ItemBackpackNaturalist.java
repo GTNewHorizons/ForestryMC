@@ -9,14 +9,17 @@
 package forestry.storage.items;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 
+import cpw.mods.fml.common.Optional;
 import forestry.api.genetics.ISpeciesRoot;
 import forestry.api.storage.EnumBackpackType;
 import forestry.api.storage.IBackpackDefinition;
 import forestry.core.config.Constants;
 import forestry.core.gui.GuiHandler;
 import forestry.core.gui.GuiNaturalistInventory;
+import forestry.core.inventory.ItemLocation;
 import forestry.storage.gui.ContainerNaturalistBackpack;
 import forestry.storage.inventory.ItemInventoryBackpackPaged;
 
@@ -35,23 +38,31 @@ public class ItemBackpackNaturalist extends ItemBackpack {
     }
 
     @Override
-    public Object getGui(EntityPlayer player, ItemStack heldItem, int page) {
+    public Object getGui(EntityPlayer player, ItemStack heldItem, int page, ItemLocation loc) {
         ItemInventoryBackpackPaged inventory = new ItemInventoryBackpackPaged(
                 player,
                 Constants.SLOTS_BACKPACK_APIARIST,
                 heldItem,
-                this);
+                this,
+                loc);
         ContainerNaturalistBackpack container = new ContainerNaturalistBackpack(player, inventory, page);
         return new GuiNaturalistInventory(speciesRoot, player, container, inventory, page, 5);
     }
 
     @Override
-    public Object getContainer(EntityPlayer player, ItemStack heldItem, int page) {
+    public Object getContainer(EntityPlayer player, ItemStack heldItem, int page, ItemLocation loc) {
         ItemInventoryBackpackPaged inventory = new ItemInventoryBackpackPaged(
                 player,
                 Constants.SLOTS_BACKPACK_APIARIST,
                 heldItem,
-                this);
+                this,
+                loc);
         return new ContainerNaturalistBackpack(player, inventory, page);
+    }
+
+    @Override
+    @Optional.Method(modid = "nohotbarneeded")
+    public void activateFromInventory(EntityPlayerMP player, int slotIdx) {
+        GuiHandler.openGui(player, this, /* page */(short) 0, slotIdx);
     }
 }

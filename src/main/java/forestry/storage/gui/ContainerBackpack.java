@@ -13,6 +13,7 @@ import net.minecraft.item.ItemStack;
 
 import forestry.core.gui.ContainerItemInventory;
 import forestry.core.gui.slots.SlotFilteredInventory;
+import forestry.core.inventory.ItemLocation;
 import forestry.storage.inventory.ItemInventoryBackpack;
 
 public class ContainerBackpack extends ContainerItemInventory<ItemInventoryBackpack> {
@@ -39,9 +40,9 @@ public class ContainerBackpack extends ContainerItemInventory<ItemInventoryBackp
         }
     }
 
-    public ContainerBackpack(EntityPlayer player, Size size, ItemStack parent) {
+    public ContainerBackpack(EntityPlayer player, Size size, ItemStack parent, ItemLocation loc) {
         super(
-                new ItemInventoryBackpack(player, size.getSize(), parent),
+                new ItemInventoryBackpack(player, size.getSize(), parent, loc),
                 player.inventory,
                 8,
                 11 + size.startY + size.rows * 18);

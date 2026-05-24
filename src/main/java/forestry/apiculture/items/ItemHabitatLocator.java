@@ -29,6 +29,7 @@ import forestry.apiculture.gui.ContainerHabitatLocator;
 import forestry.apiculture.gui.GuiHabitatLocator;
 import forestry.apiculture.inventory.ItemInventoryHabitatLocator;
 import forestry.apiculture.render.TextureHabitatLocator;
+import forestry.core.inventory.ItemLocation;
 import forestry.core.items.ItemWithGui;
 import forestry.core.utils.StringUtil;
 
@@ -81,12 +82,12 @@ public class ItemHabitatLocator extends ItemWithGui {
     }
 
     @Override
-    public Object getGui(EntityPlayer player, ItemStack heldItem, int data) {
+    public Object getGui(EntityPlayer player, ItemStack heldItem, int data, ItemLocation loc) {
         return new GuiHabitatLocator(player, new ItemInventoryHabitatLocator(player, heldItem));
     }
 
     @Override
-    public Object getContainer(EntityPlayer player, ItemStack heldItem, int data) {
+    public Object getContainer(EntityPlayer player, ItemStack heldItem, int data, ItemLocation loc) {
         return new ContainerHabitatLocator(player, new ItemInventoryHabitatLocator(player, heldItem));
     }
 }

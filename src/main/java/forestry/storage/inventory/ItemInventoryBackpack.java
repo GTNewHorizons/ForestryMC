@@ -6,6 +6,7 @@ import net.minecraft.item.ItemStack;
 
 import forestry.api.storage.IBackpackDefinition;
 import forestry.core.inventory.ItemInventory;
+import forestry.core.inventory.ItemLocation;
 import forestry.storage.items.ItemBackpack;
 
 public class ItemInventoryBackpack extends ItemInventory {
@@ -13,7 +14,11 @@ public class ItemInventoryBackpack extends ItemInventory {
     private final IBackpackDefinition backpackDefinition;
 
     public ItemInventoryBackpack(EntityPlayer player, int size, ItemStack parent) {
-        super(player, size, parent);
+        this(player, size, parent, ItemLocation.UNKNOWN);
+    }
+
+    public ItemInventoryBackpack(EntityPlayer player, int size, ItemStack parent, ItemLocation location) {
+        super(player, size, parent, location);
 
         if (parent == null) {
             throw new IllegalArgumentException("Parent cannot be null.");

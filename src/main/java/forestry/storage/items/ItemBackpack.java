@@ -13,6 +13,7 @@ import java.util.Locale;
 
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -20,7 +21,9 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.ForgeDirection;
+import net.xonich.mc.nohotbarneeded.api.ActivatableFromInventoryServerSide;
 
+import cpw.mods.fml.common.Optional;
 import cpw.mods.fml.common.eventhandler.Event;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -31,6 +34,7 @@ import forestry.core.config.Config;
 import forestry.core.config.Constants;
 import forestry.core.gui.GuiHandler;
 import forestry.core.inventory.ItemInventory;
+import forestry.core.inventory.ItemLocation;
 import forestry.core.inventory.wrappers.IInvSlot;
 import forestry.core.inventory.wrappers.InventoryIterator;
 import forestry.core.items.ItemWithGui;
@@ -44,7 +48,10 @@ import forestry.storage.gui.GuiBackpack;
 import forestry.storage.gui.GuiBackpackT2;
 import forestry.storage.inventory.ItemInventoryBackpack;
 
-public class ItemBackpack extends ItemWithGui {
+@Optional.Interface(
+        iface = "net.xonich.mc.nohotbarneeded.api.ActivatableFromInventoryServerSide",
+        modid = "nohotbarneeded")
+public class ItemBackpack extends ItemWithGui implements ActivatableFromInventoryServerSide {
 
     private final IBackpackDefinition definition;
     private final EnumBackpackType type;
@@ -318,32 +325,32 @@ public class ItemBackpack extends ItemWithGui {
     }
 
     @Override
-    public Object getGui(EntityPlayer player, ItemStack heldItem, int data) {
-        if (data > EnumBackpackType.values().length) {
+    public Object getGui(EntityPlayer player, ItemStack heldItem, int data, ItemLocation loc) {
+        if (data >= EnumBackpackType.values().length) {
             return null;
         }
         EnumBackpackType type = EnumBackpackType.values()[data];
         switch (type) {
             case T1:
-                return new GuiBackpack(new ContainerBackpack(player, ContainerBackpack.Size.DEFAULT, heldItem));
+                return new GuiBackpack(new ContainerBackpack(player, ContainerBackpack.Size.DEFAULT, heldItem, loc));
             case T2:
-                return new GuiBackpackT2(new ContainerBackpack(player, ContainerBackpack.Size.T2, heldItem));
+                return new GuiBackpackT2(new ContainerBackpack(player, ContainerBackpack.Size.T2, heldItem, loc));
             default:
                 return null;
         }
     }
 
     @Override
-    public Object getContainer(EntityPlayer player, ItemStack heldItem, int data) {
-        if (data > EnumBackpackType.values().length) {
+    public Object getContainer(EntityPlayer player, ItemStack heldItem, int data, ItemLocation loc) {
+        if (data >= EnumBackpackType.values().length) {
             return null;
         }
         EnumBackpackType type = EnumBackpackType.values()[data];
         switch (type) {
             case T1:
-                return new ContainerBackpack(player, ContainerBackpack.Size.DEFAULT, heldItem);
+                return new ContainerBackpack(player, ContainerBackpack.Size.DEFAULT, heldItem, loc);
             case T2:
-                return new ContainerBackpack(player, ContainerBackpack.Size.T2, heldItem);
+                return new ContainerBackpack(player, ContainerBackpack.Size.T2, heldItem, loc);
             default:
                 return null;
         }
@@ -360,5 +367,11 @@ public class ItemBackpack extends ItemWithGui {
     @Override
     public boolean showDurabilityBar(final ItemStack stack) {
         return Config.showBackpackDurability && ItemInventory.getOccupiedSlotCount(stack) > 0;
+    }
+
+    @Override
+    @Optional.Method(modid = "nohotbarneeded")
+    public void activateFromInventory(EntityPlayerMP player, int slotIdx) {
+        GuiHandler.openGui(player, this, (short) type.ordinal(), slotIdx);
     }
 }

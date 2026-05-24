@@ -15,16 +15,17 @@ import forestry.core.circuits.ContainerSolderingIron;
 import forestry.core.circuits.GuiSolderingIron;
 import forestry.core.circuits.ISolderingIron;
 import forestry.core.inventory.ItemInventorySolderingIron;
+import forestry.core.inventory.ItemLocation;
 
 public class ItemSolderingIron extends ItemWithGui implements ISolderingIron {
 
     @Override
-    public Object getGui(EntityPlayer player, ItemStack heldItem, int data) {
+    public Object getGui(EntityPlayer player, ItemStack heldItem, int data, ItemLocation loc) {
         return new GuiSolderingIron(player, new ItemInventorySolderingIron(player, heldItem));
     }
 
     @Override
-    public Object getContainer(EntityPlayer player, ItemStack heldItem, int data) {
+    public Object getContainer(EntityPlayer player, ItemStack heldItem, int data, ItemLocation loc) {
         return new ContainerSolderingIron(player, new ItemInventorySolderingIron(player, heldItem));
     }
 }
