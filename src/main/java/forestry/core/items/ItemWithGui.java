@@ -33,7 +33,7 @@ public abstract class ItemWithGui extends ItemForestry implements IGuiHandlerIte
     }
 
     protected void openGui(EntityPlayer entityplayer) {
-        GuiHandler.openGui(entityplayer, this);
+        GuiHandler.openGui(entityplayer, this, (short) 0, entityplayer.inventory.currentItem);
     }
 
     @Override
