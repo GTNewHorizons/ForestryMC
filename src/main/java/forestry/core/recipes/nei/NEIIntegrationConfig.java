@@ -19,6 +19,8 @@ import forestry.api.arboriculture.TreeManager;
 import forestry.api.lepidopterology.ButterflyManager;
 import forestry.api.lepidopterology.EnumFlutterType;
 import forestry.core.utils.Log;
+import forestry.factory.gui.GuiCarpenter;
+import forestry.factory.gui.GuiFabricator;
 import forestry.factory.gui.GuiWorktable;
 import forestry.factory.recipes.nei.NEIHandlerBottler;
 import forestry.factory.recipes.nei.NEIHandlerCarpenter;
@@ -46,6 +48,8 @@ public class NEIIntegrationConfig implements IConfigureNEI {
 
         CustomOverlayHandler handler = new CustomOverlayHandler(-14, 14, true);
         API.registerGuiOverlayHandler(GuiWorktable.class, handler, "crafting");
+        API.registerGuiOverlayHandler(GuiCarpenter.class, handler, "forestry.carpenter");
+        API.registerGuiOverlayHandler(GuiFabricator.class, handler, "forestry.fabricator");
 
         API.addSubset(
                 "Forestry.Bees.Princesses",

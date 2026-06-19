@@ -11,6 +11,7 @@ package forestry.factory.recipes.nei;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -24,13 +25,14 @@ import codechicken.nei.api.API;
 import forestry.api.recipes.ICarpenterRecipe;
 import forestry.api.recipes.IDescriptiveRecipe;
 import forestry.api.recipes.RecipeManagers;
+import forestry.core.recipes.nei.IGridRecipeHandler;
 import forestry.core.recipes.nei.NEIUtils;
 import forestry.core.recipes.nei.PositionedFluidTank;
 import forestry.core.recipes.nei.RecipeHandlerBase;
 import forestry.core.utils.StringUtil;
 import forestry.factory.gui.GuiCarpenter;
 
-public class NEIHandlerCarpenter extends RecipeHandlerBase {
+public class NEIHandlerCarpenter extends RecipeHandlerBase implements IGridRecipeHandler {
 
     private static Class<? extends GuiContainer> guiClass;
 
@@ -40,11 +42,35 @@ public class NEIHandlerCarpenter extends RecipeHandlerBase {
         API.setGuiOffset(guiClass, 5, 14);
     }
 
+    @Override
+    public int getGridStartX() {
+        return 5;
+    }
+
+    @Override
+    public int getGridStartY() {
+        return 6;
+    }
+
+    @Override
+    public int getGridSpacing() {
+        return 18;
+    }
+
+    @Override
+    public List<PositionedStack> getGridStacks(int recipeIndex) {
+        if (arecipes.get(recipeIndex) instanceof CachedCarpenterRecipe recipe) {
+            return recipe.inputs.subList(0, recipe.ingredientCount);
+        }
+        return Collections.emptyList();
+    }
+
     public class CachedCarpenterRecipe extends CachedBaseRecipe {
 
         public List<PositionedStack> inputs = new ArrayList<>();
         public PositionedFluidTank tank;
         public PositionedStack output;
+        public int ingredientCount;
 
         public CachedCarpenterRecipe(ICarpenterRecipe recipe, boolean genPerms) {
             IDescriptiveRecipe irecipe = recipe.getCraftingGridRecipe();
@@ -78,6 +104,7 @@ public class NEIHandlerCarpenter extends RecipeHandlerBase {
         }
 
         public void setIngredients(int width, int height, Object[] items) {
+            ingredientCount = 0;
             for (int x = 0; x < width; x++) {
                 for (int y = 0; y < height; y++) {
                     Object item = items[y * width + x];
@@ -89,9 +116,14 @@ public class NEIHandlerCarpenter extends RecipeHandlerBase {
                         continue;
                     }
 
-                    PositionedStack stack = new PositionedStack(item, 5 + x * 18, 6 + y * 18, false);
+                    PositionedStack stack = new PositionedStack(
+                            item,
+                            getGridStartX() + x * getGridSpacing(),
+                            getGridStartY() + y * getGridSpacing(),
+                            false);
                     stack.setMaxSize(1);
                     this.inputs.add(stack);
+                    ingredientCount++;
                 }
             }
         }

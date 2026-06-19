@@ -19,27 +19,29 @@ import forestry.core.network.IForestryPacketServer;
 import forestry.core.network.PacketIdServer;
 import forestry.core.network.packets.PacketNBT;
 import forestry.core.recipes.nei.SetRecipeCommandHandler;
+import forestry.factory.gui.ContainerCarpenter;
+import forestry.factory.gui.ContainerFabricator;
 import forestry.factory.gui.ContainerWorktable;
 
-public class PacketWorktableNEISelect extends PacketNBT implements IForestryPacketServer {
+public class PacketNEISelect extends PacketNBT implements IForestryPacketServer {
 
-    private static final SetRecipeCommandHandler worktableNEISelectHandler = new SetRecipeCommandHandler(
-            ContainerWorktable.class,
+    private static final SetRecipeCommandHandler neiSelectHandler = new SetRecipeCommandHandler(
+            new Class[] { ContainerWorktable.class, ContainerCarpenter.class, ContainerFabricator.class },
             SlotCraftMatrix.class);
 
-    public PacketWorktableNEISelect() {}
+    public PacketNEISelect() {}
 
-    public PacketWorktableNEISelect(NBTTagCompound nbttagcompound) {
+    public PacketNEISelect(NBTTagCompound nbttagcompound) {
         super(nbttagcompound);
     }
 
     @Override
     public void onPacketData(DataInputStreamForestry data, EntityPlayerMP player) throws IOException {
-        worktableNEISelectHandler.handle(getTagCompound(), player);
+        neiSelectHandler.handle(getTagCompound(), player);
     }
 
     @Override
     public PacketIdServer getPacketId() {
-        return PacketIdServer.WORKTABLE_NEI_SELECT;
+        return PacketIdServer.NEI_SELECT;
     }
 }
