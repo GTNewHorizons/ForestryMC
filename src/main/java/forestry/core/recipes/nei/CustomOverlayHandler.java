@@ -23,7 +23,7 @@ import codechicken.nei.api.IOverlayHandler;
 import codechicken.nei.api.IStackPositioner;
 import codechicken.nei.recipe.IRecipeHandler;
 import forestry.core.proxy.Proxies;
-import forestry.factory.network.packets.PacketWorktableNEISelect;
+import forestry.factory.network.packets.PacketNEISelect;
 
 /**
  * @author bdew
@@ -42,7 +42,18 @@ public class CustomOverlayHandler implements IOverlayHandler {
 
     @Override
     public void overlayRecipe(GuiContainer cont, IRecipeHandler recipe, int recipeIndex, boolean shift) {
-        List<PositionedStack> ingr = recipe.getIngredientStacks(recipeIndex);
+        int offsetX = 25;
+        int offsetY = 6;
+        int gridSpacing = 18;
+        List<PositionedStack> ingr;
+        if (recipe instanceof IGridRecipeHandler gridHandler) {
+            offsetX = gridHandler.getGridStartX();
+            offsetY = gridHandler.getGridStartY();
+            gridSpacing = gridHandler.getGridSpacing();
+            ingr = gridHandler.getGridStacks(recipeIndex);
+        } else {
+            ingr = recipe.getIngredientStacks(recipeIndex);
+        }
 
         if (shift || forceShift) {
             NBTTagList stacksnbt = new NBTTagList();
@@ -50,8 +61,8 @@ public class CustomOverlayHandler implements IOverlayHandler {
             for (PositionedStack pstack : ingr) {
                 if (pstack != null) {
                     // This is back-asswards but i don't see a better way :(
-                    int x = (pstack.relx - 25) / 18;
-                    int y = (pstack.rely - 6) / 18;
+                    int x = (pstack.relx - offsetX) / gridSpacing;
+                    int y = (pstack.rely - offsetY) / gridSpacing;
 
                     ItemStack stack = pstack.item;
                     NBTTagCompound stacknbt = stack.writeToNBT(new NBTTagCompound());
@@ -68,7 +79,7 @@ public class CustomOverlayHandler implements IOverlayHandler {
             NBTTagCompound data = new NBTTagCompound();
             data.setTag("stacks", stacksnbt);
 
-            Proxies.net.sendToServer(new PacketWorktableNEISelect(data));
+            Proxies.net.sendToServer(new PacketNEISelect(data));
         } else {
             IStackPositioner positioner = new OffsetPositioner(xOffs, yOffs);
             LayoutManager.overlayRenderer = new DefaultOverlayRenderer(ingr, positioner);
