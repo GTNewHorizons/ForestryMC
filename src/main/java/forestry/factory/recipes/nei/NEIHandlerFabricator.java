@@ -11,6 +11,7 @@ package forestry.factory.recipes.nei;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,6 +28,7 @@ import codechicken.nei.recipe.GuiRecipe;
 import forestry.api.recipes.IFabricatorRecipe;
 import forestry.api.recipes.IFabricatorSmeltingRecipe;
 import forestry.api.recipes.RecipeManagers;
+import forestry.core.recipes.nei.IGridRecipeHandler;
 import forestry.core.recipes.nei.NEIUtils;
 import forestry.core.recipes.nei.PositionedFluidTank;
 import forestry.core.recipes.nei.RecipeHandlerBase;
@@ -34,7 +36,30 @@ import forestry.core.utils.StringUtil;
 import forestry.factory.gui.GuiFabricator;
 import forestry.factory.recipes.FabricatorSmeltingRecipeManager;
 
-public class NEIHandlerFabricator extends RecipeHandlerBase {
+public class NEIHandlerFabricator extends RecipeHandlerBase implements IGridRecipeHandler {
+
+    @Override
+    public int getGridStartX() {
+        return 62;
+    }
+
+    @Override
+    public int getGridStartY() {
+        return 6;
+    }
+
+    @Override
+    public int getGridSpacing() {
+        return 18;
+    }
+
+    @Override
+    public List<PositionedStack> getGridStacks(int recipeIndex) {
+        if (arecipes.get(recipeIndex) instanceof CachedFabricatorRecipe recipe) {
+            return recipe.inputs.subList(0, recipe.ingredientCount);
+        }
+        return Collections.emptyList();
+    }
 
     public class CachedFabricatorRecipe extends CachedBaseRecipe {
 
@@ -42,6 +67,7 @@ public class NEIHandlerFabricator extends RecipeHandlerBase {
         public PositionedFluidTank tank;
         public List<PositionedStack> inputs = new ArrayList<>();
         public PositionedStack output;
+        public int ingredientCount;
 
         public CachedFabricatorRecipe(IFabricatorRecipe recipe, boolean genPerms) {
             if (recipe.getLiquid() != null) {
@@ -78,6 +104,7 @@ public class NEIHandlerFabricator extends RecipeHandlerBase {
         }
 
         public void setIngredients(int width, int height, Object[] items) {
+            ingredientCount = 0;
             for (int x = 0; x < width; x++) {
                 for (int y = 0; y < height; y++) {
                     Object item = items[y * width + x];
@@ -89,9 +116,14 @@ public class NEIHandlerFabricator extends RecipeHandlerBase {
                         continue;
                     }
 
-                    PositionedStack stack = new PositionedStack(item, 62 + x * 18, 6 + y * 18, false);
+                    PositionedStack stack = new PositionedStack(
+                            item,
+                            getGridStartX() + x * getGridSpacing(),
+                            getGridStartY() + y * getGridSpacing(),
+                            false);
                     stack.setMaxSize(1);
                     this.inputs.add(stack);
+                    ingredientCount++;
                 }
             }
         }

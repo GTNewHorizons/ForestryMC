@@ -10,7 +10,6 @@ package forestry.apiculture;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 import forestry.api.apiculture.IArmorApiarist;
@@ -20,21 +19,14 @@ public class ArmorApiaristHelper implements IArmorApiaristHelper {
 
     @Override
     public boolean isArmorApiarist(ItemStack stack, EntityLivingBase entity, String cause, boolean doProtect) {
-        if (stack == null) {
-            return false;
-        }
 
-        Item item = stack.getItem();
-        if (!(item instanceof IArmorApiarist)) {
-            return false;
-        }
+        if (stack == null || !(stack.getItem() instanceof IArmorApiarist armor)) return false;
 
-        IArmorApiarist armorApiarist = (IArmorApiarist) item;
         try {
-            return armorApiarist.protectEntity(entity, stack, cause, doProtect);
+            return armor.protectEntity(entity, stack, cause, doProtect);
         } catch (Throwable ignored) { // protectEntity is new to the API and may not be implemented by the armor
             if (entity instanceof EntityPlayer) {
-                return armorApiarist.protectPlayer((EntityPlayer) entity, stack, cause, doProtect);
+                return armor.protectPlayer((EntityPlayer) entity, stack, cause, doProtect);
             } else {
                 return true; // fallback on assuming IArmorApiarist will protect the entity
             }
@@ -48,11 +40,11 @@ public class ArmorApiaristHelper implements IArmorApiaristHelper {
         for (int i = 1; i <= 4; i++) {
             ItemStack armorItem = entity.getEquipmentInSlot(i);
             if (isArmorApiarist(armorItem, entity, cause, doProtect)) {
-                count++;
+                count += ((IArmorApiarist) armorItem.getItem()).getProtectionCount(entity, armorItem, cause);
             }
         }
 
-        return count;
+        return Math.min(count, 4);
     }
 
     @Override

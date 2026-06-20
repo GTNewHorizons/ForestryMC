@@ -28,7 +28,7 @@ public enum PacketIdServer implements IPacketId {
     BEE_LOGIC_ACTIVE_ENTITY_REQUEST,
 
     // Factory
-    WORKTABLE_NEI_SELECT,
+    NEI_SELECT,
 
     // Mail
     LETTER_INFO_REQUEST,

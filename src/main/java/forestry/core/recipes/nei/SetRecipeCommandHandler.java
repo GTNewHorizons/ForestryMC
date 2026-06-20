@@ -23,18 +23,19 @@ import net.minecraft.nbt.NBTTagList;
  */
 public class SetRecipeCommandHandler {
 
-    private final Class<? extends Container> containerClass;
+    private final Class<? extends Container>[] containerClasses;
     private final Class<? extends Slot> slotClass;
 
-    public SetRecipeCommandHandler(Class<? extends Container> containerClass, Class<? extends Slot> slotClass) {
-        this.containerClass = containerClass;
+    public SetRecipeCommandHandler(Class<? extends Container>[] containerClasses, Class<? extends Slot> slotClass) {
+        this.containerClasses = containerClasses;
         this.slotClass = slotClass;
     }
 
     public void handle(NBTTagCompound data, EntityPlayerMP player) {
         NBTTagList stacks = data.getTagList("stacks", 10);
         Container cont = player.openContainer;
-        if (!containerClass.isInstance(cont)) {
+
+        if (!isContainerClassCorrect(cont)) {
             return;
         }
 
@@ -43,17 +44,20 @@ public class SetRecipeCommandHandler {
             NBTTagCompound itemdata = stacks.getCompoundTagAt(i);
             stmap.put(itemdata.getInteger("slot"), ItemStack.loadItemStackFromNBT(itemdata));
         }
-        for (Object slotobj : cont.inventorySlots) {
-            if (!slotClass.isInstance(slotobj)) {
+        for (Slot slot : cont.inventorySlots) {
+            if (!slotClass.isInstance(slot)) {
                 continue;
             }
+            slot.putStack(stmap.getOrDefault(slot.getSlotIndex(), null));
+        }
+    }
 
-            Slot slot = (Slot) slotobj;
-            if (stmap.containsKey(slot.getSlotIndex())) {
-                slot.putStack(stmap.get(slot.getSlotIndex()));
-            } else {
-                slot.putStack(null);
+    private boolean isContainerClassCorrect(Container cont) {
+        for (Class<? extends Container> containerClass : containerClasses) {
+            if (containerClass.isInstance(cont)) {
+                return true;
             }
         }
+        return false;
     }
 }
