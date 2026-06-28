@@ -4,7 +4,7 @@ dependencies {
     api("com.github.GTNewHorizons:GTNHLib:0.9.54:dev")
     api('curse.maven:cofh-lib-220333:2388748')
     compileOnlyApi('com.github.GTNewHorizons:Angelica:2.1.19:api')
-    devOnlyNonPublishable('com.github.GTNewHorizons:NotEnoughItems:2.8.104-GTNH:dev')
+    devOnlyNonPublishable('com.github.GTNewHorizons:NotEnoughItems:2.8.107-GTNH:dev')
     compileOnly('com.github.GTNewHorizons:inventory-tweaks:1.7.1:api')
     compileOnly('com.github.GTNewHorizons:BuildCraft:7.1.57:api')
     compileOnly('net.industrial-craft:industrialcraft-2:2.2.828-experimental:dev')

@@ -41,6 +41,11 @@ public class CustomOverlayHandler implements IOverlayHandler {
     }
 
     @Override
+    public boolean requireShiftForOverlayRecipe() {
+        return false;
+    }
+
+    @Override
     public void overlayRecipe(GuiContainer cont, IRecipeHandler recipe, int recipeIndex, boolean shift) {
         int offsetX = 25;
         int offsetY = 6;
