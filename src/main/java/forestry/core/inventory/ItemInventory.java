@@ -87,12 +87,16 @@ public abstract class ItemInventory implements IInventory, IFilterSlotDelegate {
     public boolean isParentItemEquipped() {
         return switch (location.type()) {
             case HELD_BY_PLAYER, UNKNOWN -> isSameItemInventory(player.getCurrentEquippedItem(), parent);
-            case PLAYER_INVENTORY -> true;
+            case PLAYER_INVENTORY -> isSameItemInventory(player.inventory.getStackInSlot(location.slotIdx()), parent);
         };
     }
 
     public EntityPlayer getPlayer() {
         return player;
+    }
+
+    public ItemLocation getLocation() {
+        return location;
     }
 
     public boolean isParentItemInventory(ItemStack itemStack) {

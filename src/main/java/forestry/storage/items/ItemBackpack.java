@@ -72,7 +72,7 @@ public class ItemBackpack extends ItemWithGui implements ActivatableFromInventor
 
     @Override
     protected void openGui(EntityPlayer entityplayer) {
-        GuiHandler.openGui(entityplayer, this, (short) type.ordinal());
+        GuiHandler.openGui(entityplayer, this, (short) type.ordinal(), entityplayer.inventory.currentItem);
     }
 
     @Override
