@@ -28,6 +28,11 @@ public class ItemInventoryBackpackPaged extends ItemInventoryBackpack implements
 
     @Override
     public void flipPage(EntityPlayer player, short page) {
-        GuiHandler.openGui(player, backpackNaturalist, page);
+        ItemLocation loc = getLocation();
+        if (loc.type() == ItemLocation.Type.PLAYER_INVENTORY) {
+            GuiHandler.openGui(player, backpackNaturalist, page, loc.slotIdx());
+        } else {
+            GuiHandler.openGui(player, backpackNaturalist, page);
+        }
     }
 }

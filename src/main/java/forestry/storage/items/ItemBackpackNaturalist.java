@@ -34,7 +34,7 @@ public class ItemBackpackNaturalist extends ItemBackpack {
 
     @Override
     protected void openGui(EntityPlayer entityplayer) {
-        GuiHandler.openGui(entityplayer, this);
+        GuiHandler.openGui(entityplayer, this, (short) 0, entityplayer.inventory.currentItem);
     }
 
     @Override
