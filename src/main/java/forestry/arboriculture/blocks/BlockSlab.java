@@ -16,8 +16,8 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.particle.EffectRenderer;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -84,7 +84,8 @@ public class BlockSlab extends net.minecraft.block.BlockSlab implements IWoodTyp
 
     @Override
     protected ItemStack createStackedBlock(int meta) {
-        return new ItemStack(Blocks.wooden_slab, 2, meta & 7);
+        Item item = Item.getItemFromBlock(this);
+        return item != null ? new ItemStack(item, 2, 0) : null;
     }
 
     @Override
@@ -105,6 +106,18 @@ public class BlockSlab extends net.minecraft.block.BlockSlab implements IWoodTyp
     @Override
     public final TileEntity createNewTileEntity(World world, int meta) {
         return new TileWood();
+    }
+
+    @Override
+    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entity, ItemStack stack) {
+        // Special case for double slabs placed by building mods (e.g., MatterManipulator)
+        if (stack == null) return;
+        int damage = stack.getItemDamage();
+        if (damage < 0 || damage >= EnumWoodType.VALUES.length) return;
+        TileWood tile = TileWood.getWoodTile(world, x, y, z);
+        if (tile != null) {
+            tile.setWoodType(EnumWoodType.VALUES[damage]);
+        }
     }
 
     /* PROPERTIES */
