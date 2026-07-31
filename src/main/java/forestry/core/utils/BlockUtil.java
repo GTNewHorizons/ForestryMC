@@ -231,7 +231,6 @@ public abstract class BlockUtil {
     }
 
     private static Class<? extends Block> BW_MetaGenerated_WerkstoffBlocksClass;
-    private static Block BWBlocks;
     private static Class<? extends Block> GTBlockMachines_Class;
     private static Block GTBlockMachines;
     private static final boolean bw = Loader.isModLoaded("bartworks");
@@ -242,9 +241,7 @@ public abstract class BlockUtil {
             // noinspection unchecked
             BW_MetaGenerated_WerkstoffBlocksClass = (Class<? extends Block>) Class
                     .forName("bartworks.system.material.BWMetaGeneratedWerkstoffBlocks");
-            BWBlocks = (Block) Class.forName("bartworks.system.material.WerkstoffLoader").getField("BWBlocks")
-                    .get(null);
-        } catch (ClassNotFoundException | NoSuchFieldException | IllegalAccessException e) {
+        } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
         if (gt) try {
@@ -268,10 +265,10 @@ public abstract class BlockUtil {
         } while (stillInside.test(tile));
         block = world.getBlock(x, y - depth, z);
 
+        // Werkstoff blocks hold their material in the tile entity, so the world metadata is not the item damage.
         if (bw && BW_MetaGenerated_WerkstoffBlocksClass != null
-                && BWBlocks != null
                 && BW_MetaGenerated_WerkstoffBlocksClass.isInstance(block)) {
-            return new ItemStack(BWBlocks, 1, block.getDamageValue(world, x, y - depth, z));
+            return new ItemStack(block, 1, block.getDamageValue(world, x, y - depth, z));
         }
 
         if (gt && GTBlockMachines_Class != null && GTBlockMachines != null && GTBlockMachines_Class.isInstance(block)) {
