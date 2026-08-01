@@ -501,10 +501,10 @@ tile.for.log1=原木
 tile.for.log2=原木
 tile.for.log3=原木
 tile.for.log4=原木
-tile.for.planks=木材
+tile.for.planks.name=木材
 tile.for.slabs1=木材ハーフブロック
 tile.for.slabs2=木材ハーフブロック
-tile.for.fences=フェンス
+tile.for.fences.name=フェンス
 tile.harvester.0=伐採機
 tile.harvester.1=収穫機
 tile.harvester.2=ゴムの木収穫機
@@ -757,9 +757,11 @@ tile.candle.dyed.stump=Unlit Dyed Candle
 tile.candle.lit=Lit Candle
 tile.candle.dyed.lit=Lit Dyed Candle
 tile.stump.0=Candle Stump
-tile.for.apiculture.0=Apiary
-tile.for.apiculture.1=Apiarist's Chest
-tile.for.apiculture.2=Bee House
+tile.for.apiculture.name=養蜂箱
+tile.for.apiculture.0.name=養蜂箱
+tile.for.apicultureChest.name=養蜂家のチェスト
+tile.for.apicultureChest.0.name=養蜂家のチェスト
+tile.for.apiculture.2.name=ビーハウス
 item.for.beeQueenGE.name=Unknown Queen
 
 ####################
@@ -808,7 +810,7 @@ tile.log=Wood
 tile.planks=Wood Planks
 tile.slab=Wood Slab
 tile.fences=Fence
-tile.for.stairs=Stairs
+tile.for.stairs.name=階段
 wood.0=Larch
 wood.1=Teak
 wood.2=Acacia
@@ -833,7 +835,8 @@ wood.20=Pine
 wood.21=Plum
 wood.22=Maple
 wood.23=Citrus
-tile.for.arboriculture.0=Arborist's Chest
+tile.for.arboriculture.name=樹医のチェスト
+tile.for.arboriculture.0.name=樹医のチェスト
 
 ####################
 # FARMING
@@ -906,7 +909,8 @@ item.butterfly=Butterfly
 item.moth=Moth
 item.flutterlyzer=Flutterlyzer
 storage.backpack.lepidopterist=Lepidopterist's Backpack
-tile.for.lepidopterology.0=Lepidopterist's Chest
+tile.for.lepidopterology.name=鱗翅類学者のチェスト
+tile.for.lepidopterology.0.name=鱗翅類学者のチェスト
 
 ####################
 # MAIL
