@@ -25,16 +25,22 @@ import forestry.plugins.PluginMail;
 public class LetterProperties {
 
     private enum State {
+
         FRESH,
         STAMPED,
         OPENED,
-        EMPTIED
+        EMPTIED;
+
+        public static final State[] VALUES = values();
     }
 
     private enum Size {
+
         EMPTY,
         SMALL,
-        BIG
+        BIG;
+
+        public static final Size[] VALUES = values();
     }
 
     public static ItemStack createStampedLetterStack(ILetter letter) {
@@ -98,8 +104,8 @@ public class LetterProperties {
 
     @SuppressWarnings("unchecked")
     public static void getSubItems(Item item, CreativeTabs tab, @SuppressWarnings("rawtypes") List list) {
-        for (State state : State.values()) {
-            for (Size size : Size.values()) {
+        for (State state : State.VALUES) {
+            for (Size size : Size.VALUES) {
                 int meta = encodeMeta(state, size);
                 ItemStack letter = new ItemStack(item, 1, meta);
                 list.add(letter);
@@ -117,7 +123,7 @@ public class LetterProperties {
 
     private static State getState(int meta) {
         int ordinal = meta & 0x0f;
-        State[] values = State.values();
+        State[] values = State.VALUES;
         if (ordinal >= values.length) {
             ordinal = 0;
         }
@@ -126,7 +132,7 @@ public class LetterProperties {
 
     private static Size getSize(int meta) {
         int ordinal = meta >> 4;
-        Size[] values = Size.values();
+        Size[] values = Size.VALUES;
         if (ordinal >= values.length) {
             ordinal = 0;
         }
