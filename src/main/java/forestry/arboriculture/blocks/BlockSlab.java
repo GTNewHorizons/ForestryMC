@@ -72,7 +72,7 @@ public class BlockSlab extends net.minecraft.block.BlockSlab implements IWoodTyp
     @SideOnly(Side.CLIENT)
     @Override
     public IIcon getIcon(int side, int meta) {
-        return IconProviderWood.getPlankIcon(EnumWoodType.LARCH);
+        return IconProviderWood.getPlankIcon(EnumWoodType.values()[meta]);
     }
 
     @Override
