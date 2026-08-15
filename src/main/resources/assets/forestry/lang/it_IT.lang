@@ -489,10 +489,10 @@ tile.for.log1=Legna
 tile.for.log2=Legna
 tile.for.log3=Legna
 tile.for.log4=Legna
-tile.for.planks=Assi di legno
+tile.for.planks.name=Assi di legno
 tile.for.slabs1=Lastra di legno
 tile.for.slabs2=Lastra di legno
-tile.for.fences=Staccionata
+tile.for.fences.name=Staccionata
 tile.harvester.0=Taglialegna
 tile.harvester.1=Combinatore
 tile.harvester.2=Raccogli-albero della gomma
@@ -741,7 +741,7 @@ tile.log=Wood
 tile.planks=Wood Planks
 tile.slab=Wood Slab
 tile.fences=Fence
-tile.for.stairs=Stairs
+tile.for.stairs.name=Stairs
 wood.0=Larch
 wood.1=Teak
 wood.2=Acacia
@@ -766,7 +766,8 @@ wood.20=Pine
 wood.21=Plum
 wood.22=Maple
 wood.23=Citrus
-tile.for.arboriculture.0=Arborist's Chest
+tile.for.arboriculture.name=Arborist's Chest
+tile.for.arboriculture.0.name=Arborist's Chest
 
 ####################
 # FARMING
@@ -836,7 +837,8 @@ item.butterfly=Butterfly
 item.moth=Moth
 item.flutterlyzer=Flutterlyzer
 storage.backpack.lepidopterist=Lepidopterist's Backpack
-tile.for.lepidopterology.0=Lepidopterist's Chest
+tile.for.lepidopterology.name=Lepidopterist's Chest
+tile.for.lepidopterology.0.name=Lepidopterist's Chest
 
 ####################
 # MAIL
