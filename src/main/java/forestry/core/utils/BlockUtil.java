@@ -265,7 +265,6 @@ public abstract class BlockUtil {
         } while (stillInside.test(tile));
         block = world.getBlock(x, y - depth, z);
 
-        // Werkstoff blocks hold their material in the tile entity, so the world metadata is not the item damage.
         if (bw && BW_MetaGenerated_WerkstoffBlocksClass != null
                 && BW_MetaGenerated_WerkstoffBlocksClass.isInstance(block)) {
             return new ItemStack(block, 1, block.getDamageValue(world, x, y - depth, z));

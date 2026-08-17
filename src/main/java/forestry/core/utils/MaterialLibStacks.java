@@ -8,10 +8,9 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.GameRegistry.UniqueIdentifier;
 
 /// Resolves the `ml:<Material>:<shape>` stack string form, which names a MaterialLib item by material and shape
-/// rather than by the metadata index that shifts between sessions.
+/// rather than by a metadata index that shifts between sessions.
 ///
-/// The only class naming a MaterialLib type. [Stack] loads it only once `materiallib` is present, so the dependency
-/// stays soft.
+/// MaterialLib types are named only here, so [Stack] can gate loading this class on `materiallib` being present.
 public abstract class MaterialLibStacks {
 
     public static Stack parse(String mlString) {
