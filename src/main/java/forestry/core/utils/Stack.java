@@ -58,12 +58,20 @@ public class Stack {
             return null;
         }
 
+        if (stackString.startsWith("ml:")) {
+            if (!ModUtil.isModLoaded("materiallib")) {
+                Log.warning("Stack string (" + stackString + ") needs MaterialLib, which is not loaded. Ignoring it.");
+                return null;
+            }
+            return MaterialLibStacks.parse(stackString);
+        }
+
         String[] parts = stackString.split(":+");
 
         if (parts.length != 2 && parts.length != 3) {
             Log.warning(
                     "Stack string (" + stackString
-                            + ") isn't formatted properly. Suitable formats are <modId>:<name>, <modId>:<name>:<meta> or <modId>:<name>:*, e.g. IC2:blockWall:*");
+                            + ") isn't formatted properly. Suitable formats are <modId>:<name>, <modId>:<name>:<meta>, <modId>:<name>:* or ml:<Material>:<shape>, e.g. IC2:blockWall:*");
             return null;
         }
 
