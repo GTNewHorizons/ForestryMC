@@ -59,14 +59,25 @@ public class PluginFluids extends ForestryPlugin {
     public static ItemRegistryFluids items;
 
     private static void createFluid(Fluids forestryFluid) {
-        if (forestryFluid.getFluid() == null && Config.isFluidEnabled(forestryFluid)) {
-            String fluidName = forestryFluid.getTag();
-            if (!FluidRegistry.isFluidRegistered(fluidName)) {
-                Fluid fluid = new Fluid(fluidName).setDensity(forestryFluid.getDensity())
-                        .setViscosity(forestryFluid.getViscosity()).setTemperature(forestryFluid.getTemperature());
-                FluidRegistry.registerFluid(fluid);
-                createBlock(forestryFluid);
-            }
+        if (!Config.isFluidEnabled(forestryFluid)) {
+            return;
+        }
+
+        String fluidName = forestryFluid.getTag();
+        boolean preRegistered = FluidRegistry.isFluidRegistered(fluidName);
+        if (!preRegistered) {
+            Fluid fluid = new Fluid(fluidName).setDensity(forestryFluid.getDensity())
+                    .setViscosity(forestryFluid.getViscosity()).setTemperature(forestryFluid.getTemperature());
+            FluidRegistry.registerFluid(fluid);
+        }
+
+        // Milk is pre-registered by another mod that gives it no block, so Forestry must not add one either.
+        if (preRegistered && forestryFluid == Fluids.MILK) {
+            return;
+        }
+
+        if (forestryFluid.getFluid() != null) {
+            createBlock(forestryFluid);
         }
     }
 
