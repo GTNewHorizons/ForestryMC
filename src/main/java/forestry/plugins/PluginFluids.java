@@ -71,8 +71,9 @@ public class PluginFluids extends ForestryPlugin {
             FluidRegistry.registerFluid(fluid);
         }
 
-        // Milk is pre-registered by another mod that gives it no block, so Forestry must not add one either.
-        if (preRegistered && forestryFluid == Fluids.MILK) {
+        // A pre-registered fluid keeps whatever block the mod that registered it chose: milk is deliberately left
+        // blockless, and any fluid that already carries a block must not get a competing Forestry one.
+        if (preRegistered && (forestryFluid == Fluids.MILK || forestryFluid.getBlock() != null)) {
             return;
         }
 
