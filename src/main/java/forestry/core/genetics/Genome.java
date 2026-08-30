@@ -202,7 +202,8 @@ public abstract class Genome implements IGenome {
     private static IChromosome[] getChromosomes(NBTTagCompound genomeNBT, ISpeciesRoot speciesRoot) {
 
         NBTTagList chromosomesNBT = genomeNBT.getTagList("Chromosomes", 10);
-        IChromosome[] chromosomes = new IChromosome[speciesRoot.getDefaultTemplate().length];
+        IAllele[] defaultTemplate = speciesRoot.getDefaultTemplate();
+        IChromosome[] chromosomes = new IChromosome[defaultTemplate.length];
 
         for (int i = 0; i < chromosomesNBT.tagCount(); i++) {
             NBTTagCompound chromosomeNBT = chromosomesNBT.getCompoundTagAt(i);
@@ -213,7 +214,7 @@ public abstract class Genome implements IGenome {
                 chromosomes[chromosomeOrdinal] = chromosome;
 
                 if (Config.clearInvalidChromosomes) {
-                    IAllele template = speciesRoot.getDefaultTemplate()[chromosomeOrdinal];
+                    IAllele template = defaultTemplate[chromosomeOrdinal];
                     Class<? extends IAllele> chromosomeClass = speciesRoot.getKaryotype()[chromosomeOrdinal]
                             .getAlleleClass();
                     if (chromosome.overrideInvalidAlleles(template, chromosomeClass)) {
