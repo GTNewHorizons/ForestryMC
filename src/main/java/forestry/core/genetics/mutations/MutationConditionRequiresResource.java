@@ -32,6 +32,10 @@ public class MutationConditionRequiresResource implements IMutationCondition {
         blockRequired = new ItemStack(block, 1, meta);
     }
 
+    public ItemStack getBlockRequired() {
+        return blockRequired.copy();
+    }
+
     @Override
     public float getChance(World world, int x, int y, int z, IAllele allele0, IAllele allele1, IGenome genome0,
             IGenome genome1, IClimateProvider climate) {

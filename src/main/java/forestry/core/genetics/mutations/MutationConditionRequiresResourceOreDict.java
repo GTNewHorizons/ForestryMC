@@ -39,6 +39,10 @@ public class MutationConditionRequiresResourceOreDict implements IMutationCondit
         }
     }
 
+    public int getOreDictId() {
+        return oreDictId;
+    }
+
     @Override
     public float getChance(World world, int x, int y, int z, IAllele allele0, IAllele allele1, IGenome genome0,
             IGenome genome1, IClimateProvider climate) {
