@@ -34,4 +34,9 @@ public abstract class MaterialLibStacks {
 
         return new Stack(id.toString(), stack.getItemDamage());
     }
+
+    /// The named material's item in the named shape, or null when MaterialLib serves no such pair.
+    public static ItemStack getStack(String material, String shape) {
+        return StackResolver.getStack(material, shape, 1);
+    }
 }
