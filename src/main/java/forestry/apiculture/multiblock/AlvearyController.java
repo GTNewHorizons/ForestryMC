@@ -112,6 +112,14 @@ public class AlvearyController extends RectangularMultiblockControllerBase
     }
 
     @Override
+    public void detachBlock(IMultiblockComponent part, boolean chunkUnloading) {
+        if (!chunkUnloading) {
+            inventory.dumpInventoryIntoWorld(this.worldObj, part.getCoordinates());
+        }
+        super.detachBlock(part, chunkUnloading);
+    }
+
+    @Override
     protected void onBlockAdded(IMultiblockComponent newPart) {
         if (newPart instanceof IAlvearyComponent) {
             if (newPart instanceof IAlvearyComponent.BeeModifier) {
@@ -159,8 +167,6 @@ public class AlvearyController extends RectangularMultiblockControllerBase
                 activeComponents.remove(oldPart);
             }
         }
-
-        inventory.dumpInventoryIntoWorld(this.worldObj, oldPart.getCoordinates());
     }
 
     @Override
