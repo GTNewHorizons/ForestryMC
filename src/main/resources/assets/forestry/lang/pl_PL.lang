@@ -695,9 +695,11 @@ tile.alveary.6=Stabilizator Wielkiego Ula
 tile.alveary.7=Sito Wielkiego Ula
 tile.candle.0=świeca
 tile.stump.0=Postawa świecy
-tile.for.apiculture.0=Ul
-tile.for.apiculture.1=Skrzynia pszczelarza
-tile.for.apiculture.2=Dom pszczół
+tile.for.apiculture.name=Ul
+tile.for.apiculture.0.name=Ul
+tile.for.apicultureChest.name=Skrzynia pszczelarza
+tile.for.apicultureChest.0.name=Skrzynia pszczelarza
+tile.for.apiculture.2.name=Dom pszczół
 item.for.beeQueenGE.name=Unknown Queen
 
 ####################
@@ -746,7 +748,7 @@ tile.log=Drewno
 tile.planks=Drewniane Deski
 tile.slab=Drewniana Półpłytka
 tile.fences=Płotek
-tile.for.stairs=Schody
+tile.for.stairs.name=Schody
 wood.0=Modrzew
 wood.1=Tek
 wood.2=Akacja
@@ -771,7 +773,8 @@ wood.20=Sosna
 wood.21=Śliwka
 wood.22=Klon
 wood.23=Cytrus
-tile.for.arboriculture.0=Skrzynia Drzewiarza
+tile.for.arboriculture.name=Skrzynia Drzewiarza
+tile.for.arboriculture.0.name=Skrzynia Drzewiarza
 
 ####################
 # FARMING
@@ -844,7 +847,8 @@ item.butterfly=Motyl
 item.moth=Ćma
 item.flutterlyzer=Motyloanalizer
 storage.backpack.lepidopterist=Plecak Entomolog'a
-tile.for.lepidopterology.0=Skrzynia Entomolog'a
+tile.for.lepidopterology.name=Skrzynia Entomolog'a
+tile.for.lepidopterology.0.name=Skrzynia Entomolog'a
 
 ####################
 # MAIL
