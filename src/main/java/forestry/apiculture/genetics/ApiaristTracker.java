@@ -103,7 +103,8 @@ public class ApiaristTracker extends BreedingTracker implements IApiaristTracker
 
     @Override
     protected IBreedingTracker getBreedingTracker(EntityPlayer player) {
-        return BeeManager.beeRoot.getBreedingTracker(player.worldObj, player.getGameProfile());
+        BeeManager.beeRoot.getBeekeepingMode(player.worldObj);
+        return BeeManager.beeRoot.getBreedingTracker(player.worldObj, null);
     }
 
     @Override
