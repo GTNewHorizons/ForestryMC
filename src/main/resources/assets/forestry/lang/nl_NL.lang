@@ -709,9 +709,11 @@ tile.candle.dyed.stump=Unlit Dyed Candle
 tile.candle.lit=Lit Candle
 tile.candle.dyed.lit=Lit Dyed Candle
 tile.stump.0=Candle Stump
-tile.for.apiculture.0=Apiary
-tile.for.apiculture.1=Apiarist's Chest
-tile.for.apiculture.2=Bee House
+tile.for.apiculture.name=Apiary
+tile.for.apiculture.0.name=Apiary
+tile.for.apicultureChest.name=Apiarist's Chest
+tile.for.apicultureChest.0.name=Apiarist's Chest
+tile.for.apiculture.2.name=Bee House
 item.for.beeQueenGE.name=Unknown Queen
 
 ####################
@@ -760,7 +762,7 @@ tile.log=Hout
 tile.planks=houten planken
 tile.slab=houten plaat
 tile.fences=houten hek
-tile.for.stairs=houten treden
+tile.for.stairs.name=houten treden
 wood.0=Lariks
 wood.1=Teak
 wood.2=Acacia
@@ -857,7 +859,8 @@ item.butterfly=Butterfly
 item.moth=Moth
 item.flutterlyzer=Flutterlyzer
 storage.backpack.lepidopterist=Lepidopterist's Backpack
-tile.for.lepidopterology.0=Lepidopterist's Chest
+tile.for.lepidopterology.name=Lepidopterist's Chest
+tile.for.lepidopterology.0.name=Lepidopterist's Chest
 
 ####################
 # MAIL

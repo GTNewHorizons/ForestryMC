@@ -679,9 +679,11 @@ tile.alveary.6=Estabilizador de Colmeia
 tile.alveary.7=Peneira para Colmeia
 tile.candle.0=Vela
 tile.stump.0=Cepo de Vela
-tile.for.apiculture.0=Apiбrio
-tile.for.apiculture.1=Baъ de Apicultor
-tile.for.apiculture.2=Ninho para Abelhas
+tile.for.apiculture.name=Apiбrio
+tile.for.apiculture.0.name=Apiбrio
+tile.for.apicultureChest.name=Baъ de Apicultor
+tile.for.apicultureChest.0.name=Baъ de Apicultor
+tile.for.apiculture.2.name=Ninho para Abelhas
 item.for.beeQueenGE.name=Unknown Queen
 
 ####################
@@ -730,7 +732,7 @@ tile.log=Wood
 tile.planks=Tбbuas de Madeira
 tile.slab=Degrau de Madeira
 tile.fences=Cerca
-tile.for.stairs=Escadas
+tile.for.stairs.name=Escadas
 wood.0=Lariзo
 wood.1=Teca
 wood.2=Acбcia
@@ -827,7 +829,8 @@ item.butterfly=Borboleta
 item.moth=Mariposa
 item.flutterlyzer=Borboletizador
 storage.backpack.lepidopterist=Mala de Lepidopterologista
-tile.for.lepidopterology.0=Baъ de Lepidopterologista
+tile.for.lepidopterology.name=Baъ de Lepidopterologista
+tile.for.lepidopterology.0.name=Baъ de Lepidopterologista
 
 ####################
 # MAIL

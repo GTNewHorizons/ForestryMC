@@ -685,9 +685,11 @@ tile.alveary.6=Estabilizador de Enjambre
 tile.alveary.7=Tamiz para Enjambre
 tile.candle.0=Vela
 tile.stump.0=Tocуn de Vela
-tile.for.apiculture.0=Apiario
-tile.for.apiculture.1=Cofre de Apicultor
-tile.for.apiculture.2=Casa de Abejas
+tile.for.apiculture.name=Apiario
+tile.for.apiculture.0.name=Apiario
+tile.for.apicultureChest.name=Cofre de Apicultor
+tile.for.apicultureChest.0.name=Cofre de Apicultor
+tile.for.apiculture.2.name=Casa de Abejas
 item.for.beeQueenGE.name=Unknown Queen
 
 ####################
@@ -736,7 +738,7 @@ tile.log=Madera
 tile.planks=Tablones de Madera
 tile.slab=Losa de Madera
 tile.fences=Cerca
-tile.for.stairs=Escaleras
+tile.for.stairs.name=Escaleras
 wood.0=Alerce
 wood.1=Teca
 wood.2=Acacia
@@ -761,7 +763,8 @@ wood.20=Pino
 wood.21=Ciruela
 wood.22=Arce
 wood.23=Citrus
-tile.for.arboriculture.0=Cofre de Arborista
+tile.for.arboriculture.name=Cofre de Arborista
+tile.for.arboriculture.0.name=Cofre de Arborista
 
 ####################
 # FARMING
@@ -834,7 +837,8 @@ item.butterfly=Mariposa
 item.moth=Polilla
 item.flutterlyzer=Mariposanalizador
 storage.backpack.lepidopterist=Mochila de Lepidopterуlogo
-tile.for.lepidopterology.0=Cofre de Lepidopterуlogo
+tile.for.lepidopterology.name=Cofre de Lepidopterуlogo
+tile.for.lepidopterology.0.name=Cofre de Lepidopterуlogo
 
 ####################
 # MAIL
