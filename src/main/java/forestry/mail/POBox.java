@@ -19,6 +19,7 @@ import forestry.api.mail.IMailAddress;
 import forestry.api.mail.PostManager;
 import forestry.core.inventory.InventoryAdapter;
 import forestry.core.utils.InventoryUtil;
+import forestry.core.utils.PosteaCompat;
 
 public class POBox extends WorldSavedData implements IInventory {
 
@@ -42,6 +43,7 @@ public class POBox extends WorldSavedData implements IInventory {
 
     @Override
     public void readFromNBT(NBTTagCompound nbttagcompound) {
+        PosteaCompat.transform("forestry:" + mapName, nbttagcompound);
         if (nbttagcompound.hasKey("address")) {
             this.address = MailAddress.loadFromNBT(nbttagcompound.getCompoundTag("address"));
         }
@@ -56,6 +58,7 @@ public class POBox extends WorldSavedData implements IInventory {
             nbttagcompound.setTag("address", nbt);
         }
         letters.writeToNBT(nbttagcompound);
+        PosteaCompat.stamp(nbttagcompound);
     }
 
     public boolean storeLetter(ItemStack letterstack) {
