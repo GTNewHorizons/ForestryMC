@@ -14,6 +14,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.MinecraftForge;
 
+import forestry.api.apiculture.IBeeRoot;
 import forestry.api.core.ForestryEvent;
 import forestry.api.genetics.AlleleManager;
 import forestry.api.genetics.IBreedingTracker;
@@ -43,6 +44,12 @@ public class PacketGenomeTrackerSync extends PacketNBT implements IForestryPacke
         }
         if (tracker != null) {
             tracker.decodeFromNBT(getTagCompound());
+            if (root instanceof IBeeRoot) {
+                String modeName = tracker.getModeName();
+                if (modeName != null && !modeName.isEmpty()) {
+                    ((IBeeRoot) root).setBeekeepingMode(player.worldObj, modeName);
+                }
+            }
             MinecraftForge.EVENT_BUS.post(new ForestryEvent.SyncedBreedingTracker(tracker, player));
         }
     }
