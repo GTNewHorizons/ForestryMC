@@ -92,6 +92,8 @@ public class BeekeepingLogic implements IBeekeepingLogic, IStreamable {
 
         hasFlowersCache.readFromNBT(nbttagcompound);
 
+        // A partially unloaded alveary can restore saved data into an existing controller.
+        spawn.clear();
         NBTTagList nbttaglist = nbttagcompound.getTagList("Offspring", 10);
         for (int i = 0; i < nbttaglist.tagCount(); i++) {
             spawn.add(ItemStack.loadItemStackFromNBT(nbttaglist.getCompoundTagAt(i)));
