@@ -13,7 +13,6 @@ import java.util.List;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Items;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
@@ -71,9 +70,7 @@ public class ItemBeverage extends ItemForestryFood {
         if (!entityplayer.inventory.addItemStackToInventory(container)) {
             entityplayer.dropPlayerItemWithRandomChoice(container, false);
         }
-        if (entityplayer instanceof EntityPlayerMP) {
-            ((EntityPlayerMP) entityplayer).sendContainerToPlayer(entityplayer.inventoryContainer);
-        }
+        entityplayer.inventoryContainer.detectAndSendChanges();
 
         entityplayer.getFoodStats().func_151686_a(this, itemstack);
         world.playSoundAtEntity(entityplayer, "random.burp", 0.5F, world.rand.nextFloat() * 0.1F + 0.9F);
