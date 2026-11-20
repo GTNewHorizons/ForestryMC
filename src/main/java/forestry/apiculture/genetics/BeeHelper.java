@@ -14,6 +14,7 @@ import java.util.Collections;
 import java.util.Locale;
 import java.util.Map.Entry;
 
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -302,8 +303,17 @@ public class BeeHelper extends SpeciesRoot implements IBeeRoot {
 
     @Override
     public void setBeekeepingMode(World world, String name) {
+        IBeekeepingMode previousMode = activeBeekeepingMode;
         activeBeekeepingMode = getBeekeepingMode(name);
         getBreedingTracker(world, null).setModeName(name);
+
+        if (!world.isRemote && previousMode != null && previousMode != activeBeekeepingMode) {
+            for (Object playerObject : FMLCommonHandler.instance().getMinecraftServerInstance()
+                    .getConfigurationManager().playerEntityList) {
+                EntityPlayer player = (EntityPlayer) playerObject;
+                getBreedingTracker(player.worldObj, player.getGameProfile()).synchToPlayer(player);
+            }
+        }
     }
 
     @Override
