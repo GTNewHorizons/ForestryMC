@@ -69,8 +69,6 @@ public class ItemBeverage extends ItemForestryFood {
         itemstack.stackSize--;
         if (!entityplayer.inventory.addItemStackToInventory(container)) {
             entityplayer.dropPlayerItemWithRandomChoice(container, false);
-        } else {
-            entityplayer.inventory.setInventorySlotContents(entityplayer.inventory.currentItem, container);
         }
         entityplayer.inventory.markDirty();
 

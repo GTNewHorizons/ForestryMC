@@ -690,9 +690,11 @@ tile.candle.dyed.stump=Unlit Dyed Candle
 tile.candle.lit=Lit Candle
 tile.candle.dyed.lit=Lit Dyed Candle
 tile.stump.0=Candle Stump
-tile.for.apiculture.0=Apiary
-tile.for.apiculture.1=Apiarist's Chest
-tile.for.apiculture.2=Bee House
+tile.for.apiculture.name=Apiary
+tile.for.apiculture.0.name=Apiary
+tile.for.apicultureChest.name=Apiarist's Chest
+tile.for.apicultureChest.0.name=Apiarist's Chest
+tile.for.apiculture.2.name=Bee House
 item.for.beeQueenGE.name=Unknown Queen
 
 ####################
@@ -741,7 +743,7 @@ tile.log=Wood
 tile.planks=Wood Planks
 tile.slab=Wood Slab
 tile.fences=Fence
-tile.for.stairs=Stairs
+tile.for.stairs.name=Stairs
 wood.0=Larch
 wood.1=Teak
 wood.2=Acacia
@@ -766,7 +768,8 @@ wood.20=Pine
 wood.21=Plum
 wood.22=Maple
 wood.23=Citrus
-tile.for.arboriculture.0=Arborist's Chest
+tile.for.arboriculture.name=Arborist's Chest
+tile.for.arboriculture.0.name=Arborist's Chest
 
 ####################
 # FARMING
@@ -839,7 +842,8 @@ item.butterfly=Butterfly
 item.moth=Moth
 item.flutterlyzer=Flutterlyzer
 storage.backpack.lepidopterist=Lepidopterist's Backpack
-tile.for.lepidopterology.0=Lepidopterist's Chest
+tile.for.lepidopterology.name=Lepidopterist's Chest
+tile.for.lepidopterology.0.name=Lepidopterist's Chest
 
 ####################
 # MAIL
