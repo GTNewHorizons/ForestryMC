@@ -48,6 +48,7 @@ import forestry.core.items.EnumElectronTube;
 import forestry.core.recipes.RecipeUtil;
 import forestry.core.utils.ItemStackUtil;
 import forestry.core.utils.Log;
+import forestry.core.utils.MaterialLibStacks;
 import forestry.core.utils.ModUtil;
 import forestry.energy.blocks.BlockEngineType;
 import forestry.energy.blocks.BlockRegistryEnergy;
@@ -227,7 +228,7 @@ public class PluginIC2 extends ForestryPlugin {
         }
 
         if (rubber != null) {
-            crateRegistry.registerCrate(rubber, "cratedRubber");
+            crateRegistry.registerCrate(cratedPart(rubber, "Rubber", "ingot"), "cratedRubber");
         }
 
         if (scrap != null) {
@@ -239,12 +240,22 @@ public class PluginIC2 extends ForestryPlugin {
         }
 
         if (silver != null) {
-            crateRegistry.registerCrateUsingOreDict(silver, "cratedSilver");
+            crateRegistry.registerCrateUsingOreDict(cratedPart(silver, "Silver", "ingot"), "cratedSilver");
         }
 
         if (brass != null) {
-            crateRegistry.registerCrateUsingOreDict(brass, "cratedBrass");
+            crateRegistry.registerCrateUsingOreDict(cratedPart(brass, "Bronze", "ingot"), "cratedBrass");
         }
+    }
+
+    /// GregTech's MaterialLib part in place of IndustrialCraft 2's copy of it, so uncrating hands out the part that
+    /// GregTech's recipes produce.
+    private static ItemStack cratedPart(ItemStack ic2Part, String material, String shape) {
+        if (!ModUtil.isModLoaded("gregtech")) {
+            return ic2Part;
+        }
+        ItemStack part = MaterialLibStacks.getStack(material, shape);
+        return part != null ? part : ic2Part;
     }
 
     @Optional.Method(modid = "IC2")

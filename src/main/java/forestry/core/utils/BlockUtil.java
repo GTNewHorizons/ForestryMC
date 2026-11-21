@@ -230,23 +230,11 @@ public abstract class BlockUtil {
         return vec != null && (vec.xCoord >= minX && vec.xCoord <= maxX && vec.yCoord >= minY && vec.yCoord <= maxY);
     }
 
-    private static Class<? extends Block> BW_MetaGenerated_WerkstoffBlocksClass;
-    private static Block BWBlocks;
     private static Class<? extends Block> GTBlockMachines_Class;
     private static Block GTBlockMachines;
-    private static final boolean bw = Loader.isModLoaded("bartworks");
     private static final boolean gt = Loader.isModLoaded("gregtech") && !Loader.isModLoaded("gregapi");
 
     static {
-        if (bw) try {
-            // noinspection unchecked
-            BW_MetaGenerated_WerkstoffBlocksClass = (Class<? extends Block>) Class
-                    .forName("bartworks.system.material.BWMetaGeneratedWerkstoffBlocks");
-            BWBlocks = (Block) Class.forName("bartworks.system.material.WerkstoffLoader").getField("BWBlocks")
-                    .get(null);
-        } catch (ClassNotFoundException | NoSuchFieldException | IllegalAccessException e) {
-            e.printStackTrace();
-        }
         if (gt) try {
             // noinspection unchecked
             GTBlockMachines_Class = (Class<? extends Block>) Class.forName("gregtech.common.blocks.BlockMachines");
@@ -267,12 +255,6 @@ public abstract class BlockUtil {
             tile = world.getTileEntity(x, y - depth, z);
         } while (stillInside.test(tile));
         block = world.getBlock(x, y - depth, z);
-
-        if (bw && BW_MetaGenerated_WerkstoffBlocksClass != null
-                && BWBlocks != null
-                && BW_MetaGenerated_WerkstoffBlocksClass.isInstance(block)) {
-            return new ItemStack(BWBlocks, 1, block.getDamageValue(world, x, y - depth, z));
-        }
 
         if (gt && GTBlockMachines_Class != null && GTBlockMachines != null && GTBlockMachines_Class.isInstance(block)) {
             return new ItemStack(GTBlockMachines, 1, block.getDamageValue(world, x, y - depth, z));
