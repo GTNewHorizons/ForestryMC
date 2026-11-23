@@ -32,6 +32,7 @@ public class GuiUtil {
 
         RenderItem itemRender = GuiForestry.getItemRenderer();
 
+        GL11.glPushMatrix();
         GL11.glTranslatef(0.0F, 0.0F, 32.0F);
         gui.setZLevel(100.0F);
         itemRender.zLevel = 100.0F;
@@ -46,6 +47,7 @@ public class GuiUtil {
         itemRender.renderItemOverlayIntoGUI(font, gui.mc.getTextureManager(), stack, xPos, yPos);
         gui.setZLevel(0.0F);
         itemRender.zLevel = 0.0F;
+        GL11.glPopMatrix();
 
         RenderHelper.disableStandardItemLighting();
         GL11.glPopAttrib();
