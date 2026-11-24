@@ -12,16 +12,14 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.world.WorldSavedData;
 
 import forestry.api.mail.ILetter;
 import forestry.api.mail.IMailAddress;
 import forestry.api.mail.PostManager;
 import forestry.core.inventory.InventoryAdapter;
 import forestry.core.utils.InventoryUtil;
-import forestry.core.utils.PosteaCompat;
 
-public class POBox extends WorldSavedData implements IInventory {
+public class POBox extends MailSavedData implements IInventory {
 
     public static final String SAVE_NAME = "POBox_";
     public static final short SLOT_SIZE = 84;
@@ -42,8 +40,7 @@ public class POBox extends WorldSavedData implements IInventory {
     }
 
     @Override
-    public void readFromNBT(NBTTagCompound nbttagcompound) {
-        PosteaCompat.transform("forestry:" + mapName, nbttagcompound);
+    protected void readData(NBTTagCompound nbttagcompound) {
         if (nbttagcompound.hasKey("address")) {
             this.address = MailAddress.loadFromNBT(nbttagcompound.getCompoundTag("address"));
         }
@@ -51,14 +48,13 @@ public class POBox extends WorldSavedData implements IInventory {
     }
 
     @Override
-    public void writeToNBT(NBTTagCompound nbttagcompound) {
+    protected void writeData(NBTTagCompound nbttagcompound) {
         if (this.address != null) {
             NBTTagCompound nbt = new NBTTagCompound();
             this.address.writeToNBT(nbt);
             nbttagcompound.setTag("address", nbt);
         }
         letters.writeToNBT(nbttagcompound);
-        PosteaCompat.stamp(nbttagcompound);
     }
 
     public boolean storeLetter(ItemStack letterstack) {

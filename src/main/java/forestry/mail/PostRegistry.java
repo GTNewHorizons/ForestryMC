@@ -57,6 +57,7 @@ public class PostRegistry implements IPostRegistry {
 
         POBox pobox = (POBox) world.loadItemData(POBox.class, POBox.SAVE_NAME + address);
         if (pobox != null) {
+            pobox.throwIfLoadFailed();
             cachedPOBoxes.put(address, pobox);
         }
         return pobox;
