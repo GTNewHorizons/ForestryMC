@@ -13,6 +13,7 @@ import forestry.core.utils.PosteaCompat;
 public abstract class MailSavedData extends WorldSavedData {
 
     private RuntimeException loadFailure;
+    private NBTTagCompound savedStamps;
 
     protected MailSavedData(String mapName) {
         super(mapName);
@@ -26,13 +27,14 @@ public abstract class MailSavedData extends WorldSavedData {
             loadFailure = e;
             throw e;
         }
+        savedStamps = PosteaCompat.savedStamps(root);
         readData(root);
     }
 
     @Override
     public final void writeToNBT(NBTTagCompound root) {
         writeData(root);
-        PosteaCompat.stamp(root);
+        PosteaCompat.stamp(root, savedStamps);
     }
 
     @Override
