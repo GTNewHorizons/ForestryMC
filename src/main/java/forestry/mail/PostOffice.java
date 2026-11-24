@@ -182,6 +182,8 @@ public class PostOffice extends WorldSavedData implements IPostOffice {
         return EnumDeliveryState.OK;
     }
 
+    /// Loads every storage a delivery of `letter` writes to, so a storage whose migration failed throws before the
+    /// delivery changes anything.
     private static void loadDeliveryTargets(World world, ILetter letter, boolean doLodge) {
         for (IMailAddress recipient : letter.getRecipients()) {
             if (PostRegistry.loadMailStorage(world, recipient) instanceof TradeStation trade) {
