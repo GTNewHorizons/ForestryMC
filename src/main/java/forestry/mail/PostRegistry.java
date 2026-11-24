@@ -112,6 +112,9 @@ public class PostRegistry implements IPostRegistry {
         }
 
         TradeStation trade = (TradeStation) world.loadItemData(TradeStation.class, TradeStation.SAVE_NAME + address);
+        if (trade != null) {
+            trade.throwIfLoadFailed();
+        }
 
         // Only existing and valid mail orders are returned
         if (trade != null && trade.isValid()) {

@@ -16,7 +16,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTUtil;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldSavedData;
 
 import com.mojang.authlib.GameProfile;
 
@@ -37,7 +36,7 @@ import forestry.mail.inventory.InventoryTradeStation;
 import forestry.mail.items.EnumStampDefinition;
 import forestry.plugins.PluginMail;
 
-public class TradeStation extends WorldSavedData implements ITradeStation, IInventoryAdapter {
+public class TradeStation extends MailSavedData implements ITradeStation, IInventoryAdapter {
 
     public static final String SAVE_NAME = "TradePO_";
     public static final short SLOT_TRADEGOOD = 0;
@@ -85,7 +84,7 @@ public class TradeStation extends WorldSavedData implements ITradeStation, IInve
 
     // / SAVING & LOADING
     @Override
-    public void readFromNBT(NBTTagCompound nbttagcompound) {
+    protected void readData(NBTTagCompound nbttagcompound) {
         if (nbttagcompound.hasKey("owner")) {
             owner = NBTUtil.func_152459_a(nbttagcompound.getCompoundTag("owner"));
         }
@@ -100,7 +99,7 @@ public class TradeStation extends WorldSavedData implements ITradeStation, IInve
     }
 
     @Override
-    public void writeToNBT(NBTTagCompound nbttagcompound) {
+    protected void writeData(NBTTagCompound nbttagcompound) {
         if (owner != null) {
             NBTTagCompound nbt = new NBTTagCompound();
             NBTUtil.func_152460_a(nbt, owner);
