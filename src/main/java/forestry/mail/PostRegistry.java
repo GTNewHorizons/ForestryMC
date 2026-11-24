@@ -63,7 +63,7 @@ public class PostRegistry implements IPostRegistry {
         return pobox;
     }
 
-    /// The post box or trade station at `address`, or null when none exists.
+    /// The post box or trade station at `address`, or null when none exists or the trade station is invalid.
     static MailSavedData loadMailStorage(World world, IMailAddress address) {
         if (address == null) return null;
         if (address.isPlayer()) return getPOBox(world, address);
