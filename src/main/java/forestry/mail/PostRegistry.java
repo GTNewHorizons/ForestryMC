@@ -63,6 +63,14 @@ public class PostRegistry implements IPostRegistry {
         return pobox;
     }
 
+    /// The post box or trade station at `address`, or null when none exists.
+    static MailSavedData loadMailStorage(World world, IMailAddress address) {
+        if (address == null) return null;
+        if (address.isPlayer()) return getPOBox(world, address);
+        if (address.isTrader()) return (TradeStation) PostManager.postRegistry.getTradeStation(world, address);
+        return null;
+    }
+
     public static POBox getOrCreatePOBox(World world, IMailAddress address) {
         POBox pobox = getPOBox(world, address);
 

@@ -171,9 +171,10 @@ public class TradeStation extends MailSavedData implements ITradeStation, IInven
     @Override
     public IPostalState handleLetter(World world, IMailAddress recipient, ItemStack letterstack, boolean doLodge) {
 
-        boolean sendOwnerNotice = doLodge && owner != null;
+        boolean sendOwnerNotice = sendsOwnerNotice(doLodge);
 
         ILetter letter = PostManager.postRegistry.getLetter(letterstack);
+        loadTradeTargets(world, letter, doLodge);
 
         if (!isVirtual() && !hasPaper(sendOwnerNotice ? 2 : 1)) {
             return EnumStationState.INSUFFICIENT_PAPER;
@@ -307,6 +308,19 @@ public class TradeStation extends MailSavedData implements ITradeStation, IInven
         markDirty();
 
         return EnumDeliveryState.OK;
+    }
+
+    /// Loads the storages a trade with `letter` delivers to: the sender's, and the owner's post box when the trade
+    /// sends an owner notice.
+    void loadTradeTargets(World world, ILetter letter, boolean doLodge) {
+        PostRegistry.loadMailStorage(world, letter.getSender());
+        if (sendsOwnerNotice(doLodge)) {
+            PostRegistry.getPOBox(world, new MailAddress(owner));
+        }
+    }
+
+    private boolean sendsOwnerNotice(boolean doLodge) {
+        return doLodge && owner != null;
     }
 
     /* TRADE LOGIC */

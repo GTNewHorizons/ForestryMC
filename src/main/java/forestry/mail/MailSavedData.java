@@ -9,7 +9,8 @@ import forestry.core.utils.PosteaCompat;
 /// `forestry:<mapName>`.
 ///
 /// `MapStorage` swallows load exceptions and keeps the half-read storage. A storage whose migration failed is never
-/// saved. [PostRegistry] rethrows the failure instead of serving the storage.
+/// saved. [PostRegistry] rethrows the failure instead of serving the storage. A delivery loads every storage it writes
+/// to before changing any of them. A failed storage then stops the whole delivery.
 public abstract class MailSavedData extends WorldSavedData {
 
     private RuntimeException loadFailure;
