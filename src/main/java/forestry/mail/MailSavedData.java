@@ -8,8 +8,8 @@ import forestry.core.utils.PosteaCompat;
 /// A mail storage in the world's `MapStorage`, with saved item stacks migrated through Postea under the storage id
 /// `forestry:<mapName>`.
 ///
-/// `MapStorage` swallows load exceptions and keeps the half-read storage, so a storage whose migration failed is never
-/// saved and [PostRegistry] rethrows the failure instead of serving it.
+/// `MapStorage` swallows load exceptions and keeps the half-read storage. A storage whose migration failed is never
+/// saved. [PostRegistry] rethrows the failure instead of serving the storage.
 public abstract class MailSavedData extends WorldSavedData {
 
     private RuntimeException loadFailure;
