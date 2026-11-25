@@ -63,7 +63,8 @@ import forestry.plugins.PluginManager;
                 + "after:BiomesOPlenty;"
                 + "after:IC2@[2.0.140,);"
                 + "after:Natura@[2.2.0,);"
-                + "after:HardcoreEnderExpansion;")
+                + "after:HardcoreEnderExpansion;"
+                + "after:postea@[1.4.0,);")
 public class Forestry {
 
     @Mod.Instance(Constants.MOD)

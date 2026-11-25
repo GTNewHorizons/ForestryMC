@@ -57,9 +57,18 @@ public class PostRegistry implements IPostRegistry {
 
         POBox pobox = (POBox) world.loadItemData(POBox.class, POBox.SAVE_NAME + address);
         if (pobox != null) {
+            pobox.throwIfLoadFailed();
             cachedPOBoxes.put(address, pobox);
         }
         return pobox;
+    }
+
+    /// The post box or trade station at `address`, or null when none exists or the trade station is invalid.
+    static MailSavedData loadMailStorage(World world, IMailAddress address) {
+        if (address == null) return null;
+        if (address.isPlayer()) return getPOBox(world, address);
+        if (address.isTrader()) return (TradeStation) PostManager.postRegistry.getTradeStation(world, address);
+        return null;
     }
 
     public static POBox getOrCreatePOBox(World world, IMailAddress address) {
@@ -111,6 +120,9 @@ public class PostRegistry implements IPostRegistry {
         }
 
         TradeStation trade = (TradeStation) world.loadItemData(TradeStation.class, TradeStation.SAVE_NAME + address);
+        if (trade != null) {
+            trade.throwIfLoadFailed();
+        }
 
         // Only existing and valid mail orders are returned
         if (trade != null && trade.isValid()) {

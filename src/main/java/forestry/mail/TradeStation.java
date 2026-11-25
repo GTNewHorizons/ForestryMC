@@ -16,7 +16,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTUtil;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldSavedData;
 
 import com.mojang.authlib.GameProfile;
 
@@ -37,7 +36,7 @@ import forestry.mail.inventory.InventoryTradeStation;
 import forestry.mail.items.EnumStampDefinition;
 import forestry.plugins.PluginMail;
 
-public class TradeStation extends WorldSavedData implements ITradeStation, IInventoryAdapter {
+public class TradeStation extends MailSavedData implements ITradeStation, IInventoryAdapter {
 
     public static final String SAVE_NAME = "TradePO_";
     public static final short SLOT_TRADEGOOD = 0;
@@ -85,7 +84,7 @@ public class TradeStation extends WorldSavedData implements ITradeStation, IInve
 
     // / SAVING & LOADING
     @Override
-    public void readFromNBT(NBTTagCompound nbttagcompound) {
+    protected void readData(NBTTagCompound nbttagcompound) {
         if (nbttagcompound.hasKey("owner")) {
             owner = NBTUtil.func_152459_a(nbttagcompound.getCompoundTag("owner"));
         }
@@ -100,7 +99,7 @@ public class TradeStation extends WorldSavedData implements ITradeStation, IInve
     }
 
     @Override
-    public void writeToNBT(NBTTagCompound nbttagcompound) {
+    protected void writeData(NBTTagCompound nbttagcompound) {
         if (owner != null) {
             NBTTagCompound nbt = new NBTTagCompound();
             NBTUtil.func_152460_a(nbt, owner);
@@ -172,9 +171,10 @@ public class TradeStation extends WorldSavedData implements ITradeStation, IInve
     @Override
     public IPostalState handleLetter(World world, IMailAddress recipient, ItemStack letterstack, boolean doLodge) {
 
-        boolean sendOwnerNotice = doLodge && owner != null;
+        boolean sendOwnerNotice = sendsOwnerNotice(doLodge);
 
         ILetter letter = PostManager.postRegistry.getLetter(letterstack);
+        loadTradeTargets(world, letter, doLodge);
 
         if (!isVirtual() && !hasPaper(sendOwnerNotice ? 2 : 1)) {
             return EnumStationState.INSUFFICIENT_PAPER;
@@ -308,6 +308,19 @@ public class TradeStation extends WorldSavedData implements ITradeStation, IInve
         markDirty();
 
         return EnumDeliveryState.OK;
+    }
+
+    /// Loads the storages a trade with `letter` delivers to: the sender's, and the owner's post box when the trade
+    /// sends an owner notice.
+    void loadTradeTargets(World world, ILetter letter, boolean doLodge) {
+        PostRegistry.loadMailStorage(world, letter.getSender());
+        if (sendsOwnerNotice(doLodge)) {
+            PostRegistry.getPOBox(world, new MailAddress(owner));
+        }
+    }
+
+    private boolean sendsOwnerNotice(boolean doLodge) {
+        return doLodge && owner != null;
     }
 
     /* TRADE LOGIC */
